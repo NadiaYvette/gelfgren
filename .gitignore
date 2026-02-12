@@ -1,0 +1,34 @@
+# Rust
+/target
+**/*.rs.bk
+Cargo.lock
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Generated files
+/include/*.h
+
+# Language-specific
+bindings/python/**/*.so
+bindings/python/**/*.dylib
+bindings/python/**/*.dll
+bindings/python/build/
+bindings/python/dist/
+bindings/python/**/*.egg-info/
+bindings/java/target/
+bindings/r/.Rhistory
+bindings/r/src/*.o
+bindings/r/src/*.so
+bindings/ruby/pkg/
+bindings/ruby/tmp/
+bindings/haskell/dist/
+bindings/haskell/dist-newstyle/

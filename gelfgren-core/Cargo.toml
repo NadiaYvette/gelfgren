@@ -1,0 +1,27 @@
+[package]
+name = "gelfgren-core"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+homepage.workspace = true
+documentation.workspace = true
+description = "Core numerical computing library for Gelfgren"
+
+[lib]
+name = "gelfgren_core"
+crate-type = ["rlib"]
+
+[dependencies]
+# Numerical computing
+num-traits = "0.2"
+num-complex = "0.4"
+
+[dev-dependencies]
+# Testing
+approx = "0.5"  # For floating-point comparisons
+proptest = "1.4"  # Property-based testing
+
+[features]
+default = []

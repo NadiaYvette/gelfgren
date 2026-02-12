@@ -1,0 +1,21 @@
+[workspace]
+resolver = "2"
+members = ["gelfgren-core", "gelfgren-ffi"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+authors = ["Gelfgren Contributors"]
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/yourusername/gelfgren"
+homepage = "https://github.com/yourusername/gelfgren"
+documentation = "https://docs.rs/gelfgren"
+
+[workspace.dependencies]
+# Shared dependencies across workspace
+libc = "0.2"
+
+[profile.release]
+lto = true
+opt-level = 3
+codegen-units = 1

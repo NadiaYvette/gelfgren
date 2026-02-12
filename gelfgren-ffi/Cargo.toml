@@ -1,0 +1,24 @@
+[package]
+name = "gelfgren-ffi"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+homepage.workspace = true
+documentation.workspace = true
+description = "C FFI bindings for Gelfgren numerical computing library"
+
+[lib]
+name = "gelfgren"
+crate-type = ["cdylib", "staticlib"]
+
+[dependencies]
+gelfgren-core = { path = "../gelfgren-core" }
+libc.workspace = true
+
+[build-dependencies]
+cbindgen = "0.27"
+
+[features]
+default = []
