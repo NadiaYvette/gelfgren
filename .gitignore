@@ -3,6 +3,9 @@
 **/*.rs.bk
 Cargo.lock
 
+# Research papers (not for public distribution)
+/papers/
+
 # IDE
 .vscode/
 .idea/

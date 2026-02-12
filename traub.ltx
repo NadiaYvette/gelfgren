@@ -1,0 +1,138 @@
+\documentclass{article}
+\usepackage{biblatex}
+\usepackage{hyperref}
+\usepackage{mathtools}
+\usepackage{xr}
+% \externaldocument[traub64][nocite]{traub64}[https://iiif.library.cmu.edu/file/Traub_box00027_fld00028_bdl0001_doc0001/Traub_box00027_fld00028_bdl0001_doc0001.pdf]
+\begin{document}
+\begin{align}
+S_{\nu} & \equiv
+	& S_{\nu}(x_i)
+	& = (-1)^{\nu}(\nu-1)!\sum_{r=0,r\neq i}^n\frac{1}{(x_i-x_r)^{\nu}}
+	\\
+\pi(t)  & = & (t-x_0)\cdot(t-x_1) \\
+R_i(t) & = & \frac{\pi(t)}{t-x_i}
+L_i(t) & = & \frac{R_i(t)}{R_i(x_i)} \\
+       & = & \frac{R_i(t)}{\pi'(x_i)}
+\end{align}
+wenn $n=2$ es gibt
+\begin{align}
+R_0(t)  & = & \frac{\pi(t)}{t-x_0} \\
+        & = & t-x_1 \\
+L_0(t)  & = & t-x_1 \\
+S_{\nu,0} & \equiv
+	  & (-1)^\nu (\nu-1)!\frac{1}{(x_0-x_1)^\nu}
+	  \\ & & \frac{(\nu-1)!}{(x_1-x_0)^\nu}
+	  \\ & & \frac{(\nu-1)!}{\Delta x_0^\nu}
+	  \\
+R_1(t)  & = & \frac{\pi(t)}{t-x_1} \\
+        & = & t-x_0 \\
+L_1(t)  & = & t-x_0 \\
+S_{\nu,1} & \equiv
+	  & (-1)^\nu (\nu-1)!\frac{1}{(x_1-x_0)^\nu}
+	  \\ & & \frac{(\nu-1)!}{(x_1-x_0)^\nu}(-1)^\nu
+	  \\ & & \frac{(\nu-1)!}{\Delta x_0^\nu}(-1)^\nu
+\end{align}
+dann
+\begin{align}
+G_{p,i,m} & = & \sum_{\nu=0}^{p-1-m}\frac{(t-x_i)^\nu}{\nu !}
+	                     \cdot B_\nu(p;S_1,\dots,S_\nu) \\
+G_{p,0,m} & = & 1+\sum_{\nu=1}^{p-1-m}\frac{(t-x_0)^\nu}{\nu !}
+                             \cdot\frac{(\nu-1)!}{\Delta x_0^\nu} \\
+	  & = & 1+\sum_{\nu=1}^{p-1-m}\frac{1}{\nu}
+                             \cdot\left(\frac{t-x_0}{\Delta x_0}\right)^\nu \\
+	  & = & 1+\left(\frac{t-x_0}{\Delta x_0}\right)^{p-m}
+                    \cdot\Phi\left(\frac{t-x_0}{\Delta x_0},1,p-m\right)
+			-\log\left(1-\frac{t-x_0}{\Delta x_0}\right) \\
+	  & = & 1+\left(\frac{t-x_0}{\Delta x_0}\right)^{p-m}
+                    \cdot\Phi\left(\frac{t-x_0}{\Delta x_0},1,p-m\right)
+			-\log\left(\frac{x_1-t}{\Delta x_0}\right) \\
+%         & = & 1+\frac{1}{\Delta x_0}\int\left(
+%                    \sum_{\nu=1}^{p-1-m}
+%                        \left(\frac{t-x_0}{\Delta x_0}\right)^{\nu-1}
+%                            \right)dt \\
+%         & = & 1+\frac{1}{\Delta x_0}\int\left(
+%                    \frac{\left(\frac{t-x_0}{\Delta x_0}\right)^{p-1-m}-1}{
+%                          \frac{t-x_0}{\Delta x_0}-1}
+%                            \right)dt \\
+G_{p,1,m} & = & 1+\sum_{\nu=1}^{p-1-m}\frac{(t-x_1)^\nu}{\nu !}
+				\cdot\frac{(\nu-1)!}{\Delta x_0^\nu}(-1)^\nu \\
+	  & = & 1+\sum_{\nu=1}^{p-1-m}\frac{(-1)^\nu}{\nu}
+                             \cdot\left(\frac{t-x_1}{\Delta x_0}\right)^\nu \\
+	  & = & 1+\sum_{\nu=1}^{p-1-m}\frac{1}{\nu}
+                             \cdot\left(\frac{x_1-t}{\Delta x_0}\right)^\nu \\
+	  & = & 1+\left(\frac{x_1-t}{\Delta x_0}\right)^{p-m}
+                    \cdot\Phi\left(\frac{x_1-t}{\Delta x_0},1,p-m\right)
+			-\log\left(1-\frac{x_1-t}{\Delta x_0}\right) \\
+	  & = & 1+\left(\frac{x_1-t}{\Delta x_0}\right)^{p-m}
+                    \cdot\Phi\left(\frac{x_1-t}{\Delta x_0},1,p-m\right)
+			-\log\left(\frac{t-x_0}{\Delta x_0}\right)
+\end{align}
+hier $\Phi$ ist die Lerchsche Transzendente. Dahin geht es um
+\begin{equation}
+\begin{aligned}
+P_{1,p} = L_0^p(t)\sum_{m=0}^{p-1}\frac{(t-x_0)^m}{m!}y_0^{(m)}G_{p,0,m}
+	+ L_1^p(t)\sum_{m=0}^{p-1}\frac{(t-x_1)^m}{m!}y_1^{(m)}G_{p,1,m} & & & \\
+        \begin{split}
+            \begin{split}
+        & = & L_0^p(t)\sum_{m=0}^{p-1}\frac{(t-x_0)^m}{m!}\cdot y_0^{(m)} & \\
+        &   & & \cdot\left(
+	  1+\left(\frac{t-x_0}{\Delta x_0}\right)^{p-m}
+                    \cdot\Phi\left(\frac{t-x_0}{\Delta x_0},1,p-m\right)
+			-\log\left(\frac{x_1-t}{\Delta x_0}\right)
+                  \right)
+             \end{split} \\
+            \begin{split}
+	&   & + L_1^p(t)\sum_{m=0}^{p-1}\frac{(t-x_1)^m}{m!}\cdot y_1^{(m)} & \\
+        &   & & \cdot\left(
+	  1+\left(\frac{x_1-t}{\Delta x_0}\right)^{p-m}
+                    \cdot\Phi\left(\frac{x_1-t}{\Delta x_0},1,p-m\right)
+			-\log\left(\frac{t-x_0}{\Delta x_0}\right)
+                  \right)
+            \end{split}
+        \end{split} \\
+        \begin{split}
+            \begin{split}
+	& = & (t-x_1)^p\sum_{m=0}^{p-1}\frac{(t-x_0)^m}{m!}\cdot y_0^{(m)} & \\
+        &   & & \cdot\left(
+	  1+\left(\frac{t-x_0}{\Delta x_0}\right)^{p-m}
+                    \cdot\Phi\left(\frac{t-x_0}{\Delta x_0},1,p-m\right)
+			-\log\left(\frac{x_1-t}{\Delta x_0}\right)
+                  \right)
+            \end{split} \\
+            \begin{split}
+	&   & + (t-x_0)^p\sum_{m=0}^{p-1}\frac{(t-x_1)^m}{m!}\cdot y_1^{(m)} &\\
+        &   & & \cdot\left(
+	  1+\left(\frac{x_1-t}{\Delta x_0}\right)^{p-m}
+                    \cdot\Phi\left(\frac{x_1-t}{\Delta x_0},1,p-m\right)
+			-\log\left(\frac{t-x_0}{\Delta x_0}\right)
+                  \right)
+            \end{split}
+        \end{split} \\
+        \begin{split}
+            \begin{split}
+	& = & (t-x_1)^p\sum_{m=0}^{p-1}\frac{\left(\Delta x_0\right)^m}{m!}
+                    \cdot y_0^{(m)} & \\
+        &   & & \cdot\left(
+	  \left(\frac{t-x_0}{\Delta x_0}\right)^p
+                    \cdot\Phi\left(\frac{t-x_0}{\Delta x_0},1,p-m\right)
+			+ \left(\frac{t-x_0}{\Delta x_0}\right)^m
+			\cdot\left(1-\log\left(\frac{x_1-t}{\Delta x_0}\right)
+			\right)
+                  \right)
+            \end{split} \\
+            \begin{split}
+	&   & + (t-x_0)^p\sum_{m=0}^{p-1}\frac{(-\Delta x_0)^m}{m!}
+                    \cdot y_1^{(m)} & \\
+        &   & & \cdot\left(
+	  \left(\frac{x_1-t}{\Delta x_0}\right)^p
+                    \cdot\Phi\left(\frac{x_1-t}{\Delta x_0},1,p-m\right)
+		  +\left(\frac{x_1-t}{\Delta x_0}\right)^m
+              \cdot\left(1-\log\left(\frac{t-x_0}{\Delta x_0}\right)
+                     \right)
+                  \right)
+            \end{split}
+        \end{split}
+\end{aligned}
+\end{equation}
+\end{document}
