@@ -1,0 +1,9 @@
+(library
+ (name gelfgren)
+ (public_name gelfgren)
+ (libraries ctypes ctypes.foreign)
+ (foreign_stubs
+  (language c)
+  (flags -I../../../include)
+  (names))
+ (c_library_flags -L../../../target/release -lgelfgren))

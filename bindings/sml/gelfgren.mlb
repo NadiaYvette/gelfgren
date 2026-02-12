@@ -1,0 +1,10 @@
+(* ML Basis file for Gelfgren *)
+
+$(SML_LIB)/basis/basis.mlb
+$(SML_LIB)/basis/mlton.mlb
+
+local
+    src/gelfgren.sml
+in
+    structure Gelfgren
+end

@@ -1,0 +1,21 @@
+(lang dune 3.0)
+(name gelfgren)
+(version 0.1.0)
+
+(generate_opam_files true)
+
+(source (github yourusername/gelfgren))
+(license "MIT OR Apache-2.0")
+(authors "Nadia Chambers <nadia.chambers@iohk.io>")
+(maintainers "Nadia Chambers <nadia.chambers@iohk.io>")
+
+(package
+ (name gelfgren)
+ (synopsis "OCaml bindings for Gelfgren piecewise rational interpolation library")
+ (description "OCaml bindings for the Gelfgren numerical computing library implementing piecewise rational interpolation methods based on Jan Gelfgren's 1975 research.")
+ (depends
+  (ocaml (>= 4.14.0))
+  (dune (>= 3.0))
+  (ctypes (>= 0.20.0))
+  (ctypes-foreign (>= 0.18.0))
+  (ounit2 :with-test)))
