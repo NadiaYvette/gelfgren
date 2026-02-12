@@ -1,0 +1,34 @@
+Source: gelfgren
+Section: libs
+Priority: optional
+Maintainer: Nadia Chambers <nadia.chambers@iohk.io>
+Build-Depends: debhelper-compat (= 13),
+               cargo (>= 1.70),
+               rustc (>= 1.70),
+               cbindgen
+Standards-Version: 4.6.0
+Homepage: https://github.com/yourusername/gelfgren
+Vcs-Git: https://github.com/yourusername/gelfgren.git
+Vcs-Browser: https://github.com/yourusername/gelfgren
+Rules-Requires-Root: no
+
+Package: libgelfgren0
+Architecture: any
+Multi-Arch: same
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Piecewise rational interpolation library
+ Gelfgren is a high-performance numerical computing library implementing
+ piecewise rational interpolation methods based on Jan Gelfgren's 1975 research.
+ .
+ This package contains the shared library.
+
+Package: libgelfgren-dev
+Section: libdevel
+Architecture: any
+Multi-Arch: same
+Depends: libgelfgren0 (= ${binary:Version}), ${misc:Depends}
+Description: Development files for Gelfgren
+ Gelfgren is a high-performance numerical computing library implementing
+ piecewise rational interpolation methods.
+ .
+ This package contains the development files including headers and pkg-config.

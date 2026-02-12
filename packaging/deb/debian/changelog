@@ -1,0 +1,8 @@
+gelfgren (0.1.0-1) unstable; urgency=medium
+
+  * Initial release
+  * Support for Bernstein polynomials, rational functions, and Padé approximants
+  * Bindings for 17 programming languages
+  * Comprehensive CI/CD and testing infrastructure
+
+ -- Nadia Chambers <nadia.chambers@iohk.io>  Wed, 13 Feb 2026 12:00:00 +0000

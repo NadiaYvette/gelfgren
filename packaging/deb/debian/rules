@@ -1,0 +1,23 @@
+#!/usr/bin/make -f
+
+export DH_VERBOSE = 1
+export CARGO_HOME = $(CURDIR)/debian/cargo
+
+%:
+	dh $@
+
+override_dh_auto_build:
+	cargo build --release --manifest-path gelfgren-core/Cargo.toml
+	cargo build --release --manifest-path gelfgren-ffi/Cargo.toml
+	cd gelfgren-ffi && cbindgen --config cbindgen.toml --output ../include/gelfgren.h
+
+override_dh_auto_install:
+	install -D -m 755 target/release/libgelfgren.so debian/libgelfgren0/usr/lib/$(DEB_HOST_MULTIARCH)/libgelfgren.so.0.1.0
+	ln -s libgelfgren.so.0.1.0 debian/libgelfgren0/usr/lib/$(DEB_HOST_MULTIARCH)/libgelfgren.so.0
+	install -D -m 644 include/gelfgren.h debian/libgelfgren-dev/usr/include/gelfgren.h
+	ln -s libgelfgren.so.0 debian/libgelfgren-dev/usr/lib/$(DEB_HOST_MULTIARCH)/libgelfgren.so
+	install -D -m 644 debian/gelfgren.pc debian/libgelfgren-dev/usr/lib/$(DEB_HOST_MULTIARCH)/pkgconfig/gelfgren.pc
+
+override_dh_auto_clean:
+	cargo clean || true
+	rm -rf debian/cargo
