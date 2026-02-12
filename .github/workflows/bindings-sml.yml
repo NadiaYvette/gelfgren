@@ -1,0 +1,38 @@
+name: Standard ML Bindings CI
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths:
+      - 'bindings/sml/**'
+      - 'gelfgren-core/**'
+      - 'gelfgren-ffi/**'
+      - 'include/**'
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install MLton
+        run: sudo apt-get update && sudo apt-get install -y mlton
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+      - name: Build Rust library
+        run: cargo build --release
+      - name: Generate C header
+        run: |
+          cargo install cbindgen || true
+          cd gelfgren-ffi
+          cbindgen --config cbindgen.toml --output ../include/gelfgren.h
+      - name: Compile example
+        working-directory: bindings/sml
+        run: mlton -link-opt -L../../target/release -link-opt -lgelfgren examples/basic_usage.mlb
+      - name: Run example
+        working-directory: bindings/sml
+        env:
+          LD_LIBRARY_PATH: ../../target/release
+        run: ./basic_usage

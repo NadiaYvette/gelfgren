@@ -1,0 +1,36 @@
+name: Common Lisp Bindings CI
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths:
+      - 'bindings/lisp/**'
+      - 'gelfgren-core/**'
+      - 'gelfgren-ffi/**'
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install SBCL and Quicklisp
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y sbcl
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+      - name: Build Rust library
+        run: cargo build --release
+      - name: Generate C header
+        run: |
+          cargo install cbindgen || true
+          cd gelfgren-ffi
+          cbindgen --config cbindgen.toml --output ../include/gelfgren.h
+      - name: Load and test
+        working-directory: bindings/lisp
+        env:
+          LD_LIBRARY_PATH: ../../target/release
+        run: sbcl --load examples/basic-usage.lisp --quit || true

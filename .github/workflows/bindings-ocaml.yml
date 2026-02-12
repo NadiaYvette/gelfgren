@@ -1,0 +1,103 @@
+name: OCaml Bindings CI
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths:
+      - 'bindings/ocaml/**'
+      - 'gelfgren-core/**'
+      - 'gelfgren-ffi/**'
+      - 'include/**'
+      - '.github/workflows/bindings-ocaml.yml'
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  test:
+    name: Test OCaml Bindings
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        ocaml-compiler: ['4.14.x', '5.0.x', '5.1.x']
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up OCaml
+        uses: ocaml/setup-ocaml@v2
+        with:
+          ocaml-compiler: ${{ matrix.ocaml-compiler }}
+          dune-cache: true
+          opam-depext: true
+          opam-depext-flags: --with-test
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - uses: Swatinem/rust-cache@v2
+
+      - name: Build Rust library
+        run: cargo build --release
+
+      - name: Generate C header
+        run: |
+          cargo install cbindgen || true
+          cd gelfgren-ffi
+          cbindgen --config cbindgen.toml --output ../include/gelfgren.h
+
+      - name: Install OCaml dependencies
+        working-directory: bindings/ocaml
+        run: |
+          opam install . --deps-only --with-test
+
+      - name: Build OCaml library
+        working-directory: bindings/ocaml
+        run: |
+          eval $(opam env)
+          dune build
+
+      - name: Run OCaml tests
+        working-directory: bindings/ocaml
+        env:
+          LD_LIBRARY_PATH: ${{ github.workspace }}/target/release
+          DYLD_LIBRARY_PATH: ${{ github.workspace }}/target/release
+        run: |
+          eval $(opam env)
+          dune test
+
+      - name: Run example
+        working-directory: bindings/ocaml
+        env:
+          LD_LIBRARY_PATH: ${{ github.workspace }}/target/release
+          DYLD_LIBRARY_PATH: ${{ github.workspace }}/target/release
+        run: |
+          eval $(opam env)
+          dune exec examples/basic_usage.exe
+
+      - name: Build documentation
+        working-directory: bindings/ocaml
+        run: |
+          eval $(opam env)
+          dune build @doc
+
+  format:
+    name: Check Formatting
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up OCaml
+        uses: ocaml/setup-ocaml@v2
+        with:
+          ocaml-compiler: '5.1.x'
+
+      - name: Install ocamlformat
+        run: opam install ocamlformat
+
+      - name: Check formatting
+        working-directory: bindings/ocaml
+        run: |
+          eval $(opam env)
+          dune build @fmt

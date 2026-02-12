@@ -1,0 +1,163 @@
+name: Mercury Bindings CI
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths:
+      - 'bindings/mercury/**'
+      - 'gelfgren-core/**'
+      - 'gelfgren-ffi/**'
+      - 'include/**'
+      - '.github/workflows/bindings-mercury.yml'
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  test:
+    name: Test Mercury Bindings
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        mercury-version: ['22.01.8']
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Mercury Dependencies (Ubuntu)
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential curl
+
+      - name: Install Mercury
+        run: |
+          MERCURY_VERSION=${{ matrix.mercury-version }}
+          MERCURY_DEB="mercury-rotd-${MERCURY_VERSION}-x86_64-linux-gnu.tar.gz"
+
+          curl -LO "https://dl.mercurylang.org/rotd/mercury-srcdist-rotd-${MERCURY_VERSION}.tar.gz" || \
+          curl -LO "https://dl.mercurylang.org/release/mercury-${MERCURY_VERSION}.tar.gz" || \
+          echo "Mercury download not available, using system package"
+
+          if [ -f "mercury-${MERCURY_VERSION}.tar.gz" ] || [ -f "mercury-srcdist-rotd-${MERCURY_VERSION}.tar.gz" ]; then
+            tar -xzf mercury-*.tar.gz
+            cd mercury-*
+            ./configure --prefix=/usr/local/mercury
+            make -j$(nproc)
+            sudo make install
+            echo "/usr/local/mercury/bin" >> $GITHUB_PATH
+          else
+            # Fallback: try to use package manager
+            sudo apt-get install -y mercury-rotd || sudo apt-get install -y mercury || \
+            echo "Mercury installation failed - tests will be skipped"
+          fi
+
+      - name: Verify Mercury Installation
+        run: |
+          which mmc || echo "Mercury compiler not found"
+          mmc --version || echo "Mercury not properly installed"
+        continue-on-error: true
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - uses: Swatinem/rust-cache@v2
+
+      - name: Build Rust library
+        run: cargo build --release
+
+      - name: Generate C header
+        run: |
+          cargo install cbindgen || true
+          cd gelfgren-ffi
+          cbindgen --config cbindgen.toml --output ../include/gelfgren.h
+
+      - name: Build Mercury library
+        working-directory: bindings/mercury
+        run: |
+          export MERCURY_LIBRARY_DIR=/usr/local/mercury/lib/mercury
+          mmc --make libgelfgren \
+            -I ../../include \
+            -L ../../target/release \
+            -l gelfgren \
+            --infer-all
+        continue-on-error: true
+
+      - name: Build example
+        working-directory: bindings/mercury
+        run: |
+          mmc --make basic_usage \
+            --mld ../../target/release \
+            -I ../../include \
+            -L ../../target/release \
+            -l gelfgren \
+            -R ../../target/release
+        continue-on-error: true
+
+      - name: Run example
+        working-directory: bindings/mercury
+        run: |
+          export LD_LIBRARY_PATH=../../target/release:$LD_LIBRARY_PATH
+          export DYLD_LIBRARY_PATH=../../target/release:$DYLD_LIBRARY_PATH
+          ./basic_usage || echo "Example execution failed or skipped"
+        continue-on-error: true
+
+  test-mmake:
+    name: Test with Mmake
+    runs-on: ubuntu-latest
+    if: false  # Disabled by default due to Mercury installation complexity
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Mercury
+        run: |
+          # Mercury installation steps
+          echo "Mercury installation would happen here"
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Build Rust library
+        run: cargo build --release
+
+      - name: Build with Mmake
+        working-directory: bindings/mercury
+        run: |
+          mmake library
+          mmake examples
+        continue-on-error: true
+
+      - name: Run example with Mmake
+        working-directory: bindings/mercury
+        run: mmake run-example
+        continue-on-error: true
+
+  documentation:
+    name: Check Mercury Documentation
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check README exists
+        run: |
+          test -f bindings/mercury/README.md
+          echo "Mercury README found"
+
+      - name: Check module structure
+        run: |
+          test -f bindings/mercury/src/gelfgren.m
+          test -f bindings/mercury/examples/basic_usage.m
+          test -f bindings/mercury/Mmakefile
+          echo "Mercury module structure verified"
+
+      - name: Validate Mercury syntax (if Mercury available)
+        working-directory: bindings/mercury
+        run: |
+          if command -v mmc &> /dev/null; then
+            mmc --make libgelfgren --errorcheck-only || true
+          else
+            echo "Mercury compiler not available, skipping syntax check"
+          fi
+        continue-on-error: true

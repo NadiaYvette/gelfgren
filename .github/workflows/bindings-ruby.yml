@@ -1,0 +1,132 @@
+name: Ruby Bindings CI
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths:
+      - 'bindings/ruby/**'
+      - 'gelfgren-core/**'
+      - '.github/workflows/bindings-ruby.yml'
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  test:
+    name: Test Ruby ${{ matrix.ruby-version }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        ruby-version: ['3.0', '3.1', '3.2', '3.3']
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby-version }}
+          bundler-cache: false
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - uses: Swatinem/rust-cache@v2
+
+      - name: Install dependencies
+        working-directory: bindings/ruby
+        run: |
+          gem install bundler
+          bundle install
+
+      - name: Build extension
+        working-directory: bindings/ruby
+        run: rake compile
+
+      - name: Run tests
+        working-directory: bindings/ruby
+        run: rake spec
+
+      - name: Run examples
+        working-directory: bindings/ruby
+        run: rake examples
+        continue-on-error: true
+
+      - name: Run RuboCop
+        working-directory: bindings/ruby
+        run: rake rubocop
+        continue-on-error: true
+
+  build-gem:
+    name: Build Gem on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Install dependencies
+        working-directory: bindings/ruby
+        run: |
+          gem install bundler
+          bundle install
+
+      - name: Build gem
+        working-directory: bindings/ruby
+        run: rake build
+
+      - name: Upload gem artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: gem-${{ matrix.os }}
+          path: bindings/ruby/pkg/*.gem
+
+  publish:
+    name: Publish to RubyGems
+    runs-on: ubuntu-latest
+    needs: [test, build-gem]
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Install dependencies
+        working-directory: bindings/ruby
+        run: |
+          gem install bundler
+          bundle install
+
+      - name: Build gem
+        working-directory: bindings/ruby
+        run: rake build
+
+      - name: Publish to RubyGems
+        working-directory: bindings/ruby
+        run: |
+          mkdir -p ~/.gem
+          cat << EOF > ~/.gem/credentials
+          ---
+          :rubygems_api_key: ${{ secrets.RUBYGEMS_API_KEY }}
+          EOF
+          chmod 0600 ~/.gem/credentials
+          gem push pkg/*.gem
+        env:
+          RUBYGEMS_API_KEY: ${{ secrets.RUBYGEMS_API_KEY }}

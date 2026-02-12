@@ -1,0 +1,73 @@
+name: Go Bindings CI
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths:
+      - 'bindings/go/**'
+      - 'gelfgren-core/**'
+      - 'gelfgren-ffi/**'
+      - 'include/**'
+      - '.github/workflows/bindings-go.yml'
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  test:
+    name: Test Go Bindings
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        go-version: ['1.21', '1.22']
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: ${{ matrix.go-version }}
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - uses: Swatinem/rust-cache@v2
+
+      - name: Build Rust library
+        run: cargo build --release
+
+      - name: Generate C header
+        run: |
+          cargo install cbindgen || true
+          cd gelfgren-ffi
+          cbindgen --config cbindgen.toml --output ../include/gelfgren.h
+
+      - name: Set library path (Linux)
+        if: runner.os == 'Linux'
+        run: echo "LD_LIBRARY_PATH=${{ github.workspace }}/target/release:$LD_LIBRARY_PATH" >> $GITHUB_ENV
+
+      - name: Set library path (macOS)
+        if: runner.os == 'macOS'
+        run: echo "DYLD_LIBRARY_PATH=${{ github.workspace }}/target/release:$DYLD_LIBRARY_PATH" >> $GITHUB_ENV
+
+      - name: Set CGO flags
+        run: |
+          echo "CGO_CFLAGS=-I${{ github.workspace }}/include" >> $GITHUB_ENV
+          echo "CGO_LDFLAGS=-L${{ github.workspace }}/target/release -lgelfgren" >> $GITHUB_ENV
+
+      - name: Build Go package
+        working-directory: bindings/go
+        run: go build ./gelfgren
+
+      - name: Run tests
+        working-directory: bindings/go
+        run: go test -v ./gelfgren
+
+      - name: Run benchmarks
+        working-directory: bindings/go
+        run: go test -bench=. ./gelfgren
+
+      - name: Run example
+        working-directory: bindings/go/examples/basic
+        run: go run main.go

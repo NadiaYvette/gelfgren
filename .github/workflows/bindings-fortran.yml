@@ -1,0 +1,164 @@
+name: Fortran Bindings CI
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths:
+      - 'bindings/fortran/**'
+      - 'gelfgren-core/**'
+      - 'gelfgren-ffi/**'
+      - 'include/**'
+      - '.github/workflows/bindings-fortran.yml'
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  test:
+    name: Test Fortran with ${{ matrix.compiler }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        compiler: [gfortran]
+        include:
+          - os: ubuntu-latest
+            compiler: gfortran
+            fc: gfortran-12
+          - os: macos-latest
+            compiler: gfortran
+            fc: gfortran-13
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Fortran compiler (Ubuntu)
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gfortran-12
+
+      - name: Install Fortran compiler (macOS)
+        if: runner.os == 'macOS'
+        run: |
+          brew install gcc@13
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - uses: Swatinem/rust-cache@v2
+
+      - name: Build Rust library
+        run: cargo build --release
+
+      - name: Generate C header
+        run: |
+          cargo install cbindgen || true
+          cd gelfgren-ffi
+          cbindgen --config cbindgen.toml --output ../include/gelfgren.h
+
+      - name: Build Fortran module
+        working-directory: bindings/fortran
+        run: |
+          mkdir -p build
+          ${{ matrix.fc }} -c src/gelfgren_mod.f90 -o build/gelfgren_mod.o -Jbuild
+        env:
+          FC: ${{ matrix.fc }}
+
+      - name: Build example
+        working-directory: bindings/fortran
+        run: |
+          ${{ matrix.fc }} -Ibuild example/basic_usage.f90 build/gelfgren_mod.o \
+            -L../../target/release -lgelfgren -o build/basic_usage
+        env:
+          FC: ${{ matrix.fc }}
+
+      - name: Build test
+        working-directory: bindings/fortran
+        run: |
+          ${{ matrix.fc }} -Ibuild test/test_bernstein.f90 build/gelfgren_mod.o \
+            -L../../target/release -lgelfgren -o build/test_bernstein
+        env:
+          FC: ${{ matrix.fc }}
+
+      - name: Run example
+        working-directory: bindings/fortran
+        run: |
+          export LD_LIBRARY_PATH=../../target/release:$LD_LIBRARY_PATH
+          export DYLD_LIBRARY_PATH=../../target/release:$DYLD_LIBRARY_PATH
+          ./build/basic_usage
+        continue-on-error: false
+
+      - name: Run tests
+        working-directory: bindings/fortran
+        run: |
+          export LD_LIBRARY_PATH=../../target/release:$LD_LIBRARY_PATH
+          export DYLD_LIBRARY_PATH=../../target/release:$DYLD_LIBRARY_PATH
+          ./build/test_bernstein
+        continue-on-error: false
+
+  test-fpm:
+    name: Test with FPM
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Fortran compiler
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gfortran-12
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - uses: Swatinem/rust-cache@v2
+
+      - name: Install FPM
+        run: |
+          curl -LO https://github.com/fortran-lang/fpm/releases/download/v0.9.0/fpm-0.9.0-linux-x86_64
+          chmod +x fpm-0.9.0-linux-x86_64
+          sudo mv fpm-0.9.0-linux-x86_64 /usr/local/bin/fpm
+
+      - name: Build Rust library
+        run: cargo build --release
+
+      - name: Build with FPM
+        working-directory: bindings/fortran
+        run: |
+          export LD_LIBRARY_PATH=../../target/release:$LD_LIBRARY_PATH
+          fpm build --profile release
+        continue-on-error: true
+
+      - name: Test with FPM
+        working-directory: bindings/fortran
+        run: |
+          export LD_LIBRARY_PATH=../../target/release:$LD_LIBRARY_PATH
+          fpm test
+        continue-on-error: true
+
+  test-intel:
+    name: Test with Intel Fortran
+    runs-on: ubuntu-latest
+    if: false  # Disabled by default, enable if Intel Fortran license available
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Intel Fortran
+        run: |
+          wget https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB
+          sudo apt-key add GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB
+          sudo add-apt-repository "deb https://apt.repos.intel.com/oneapi all main"
+          sudo apt-get update
+          sudo apt-get install -y intel-oneapi-compiler-fortran
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Build and test
+        run: |
+          source /opt/intel/oneapi/setvars.sh
+          cargo build --release
+          cd bindings/fortran
+          make FC=ifort
+          make run-test FC=ifort

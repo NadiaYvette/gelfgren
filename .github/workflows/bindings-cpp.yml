@@ -1,0 +1,85 @@
+name: C++ Bindings CI
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths:
+      - 'bindings/cpp/**'
+      - 'include/**'
+      - 'gelfgren-ffi/**'
+      - '.github/workflows/bindings-cpp.yml'
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  build-and-test:
+    name: Build and Test C++
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        compiler: [gcc, clang]
+        exclude:
+          - os: windows-latest
+            compiler: gcc
+        include:
+          - os: windows-latest
+            compiler: msvc
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - uses: Swatinem/rust-cache@v2
+
+      - name: Set up CMake
+        uses: lukka/get-cmake@latest
+
+      - name: Build Rust library
+        run: cargo build --release -p gelfgren-ffi
+
+      - name: Generate C header
+        run: |
+          cargo install cbindgen || true
+          cd gelfgren-ffi
+          cbindgen --config cbindgen.toml --output ../include/gelfgren.h || true
+
+      - name: Configure CMake (Unix)
+        if: runner.os != 'Windows'
+        working-directory: bindings/cpp
+        run: |
+          mkdir -p build
+          cd build
+          cmake .. -DCMAKE_BUILD_TYPE=Release
+
+      - name: Configure CMake (Windows)
+        if: runner.os == 'Windows'
+        working-directory: bindings/cpp
+        run: |
+          mkdir build
+          cd build
+          cmake .. -G "Visual Studio 17 2022"
+
+      - name: Build C++ example
+        working-directory: bindings/cpp/build
+        run: cmake --build . --config Release
+
+      - name: Run C++ example
+        working-directory: bindings/cpp/build
+        run: |
+          if [ "$RUNNER_OS" == "Windows" ]; then
+            ./Release/cpp_example.exe
+          else
+            ./cpp_example
+          fi
+        shell: bash
+
+      - name: Check for memory leaks (Linux only)
+        if: runner.os == 'Linux' && matrix.compiler == 'gcc'
+        working-directory: bindings/cpp/build
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y valgrind
+          valgrind --leak-check=full --error-exitcode=1 ./cpp_example || echo "Valgrind check completed"

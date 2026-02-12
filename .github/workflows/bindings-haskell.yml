@@ -1,0 +1,156 @@
+name: Haskell Bindings CI
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths:
+      - 'bindings/haskell/**'
+      - 'gelfgren-core/**'
+      - 'gelfgren-ffi/**'
+      - 'include/**'
+      - '.github/workflows/bindings-haskell.yml'
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  test:
+    name: Test Haskell with GHC ${{ matrix.ghc }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        ghc: ['9.2.8', '9.4.8', '9.6.3']
+        cabal: ['3.10']
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Haskell
+        uses: haskell-actions/setup@v2
+        with:
+          ghc-version: ${{ matrix.ghc }}
+          cabal-version: ${{ matrix.cabal }}
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - uses: Swatinem/rust-cache@v2
+
+      - name: Build Rust library
+        run: cargo build --release
+
+      - name: Generate C header
+        run: |
+          cargo install cbindgen || true
+          cd gelfgren-ffi
+          cbindgen --config cbindgen.toml --output ../include/gelfgren.h
+
+      - name: Cache Cabal packages
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cabal/packages
+            ~/.cabal/store
+            bindings/haskell/dist-newstyle
+          key: ${{ runner.os }}-ghc-${{ matrix.ghc }}-cabal-${{ hashFiles('bindings/haskell/**/*.cabal', 'bindings/haskell/cabal.project') }}
+          restore-keys: |
+            ${{ runner.os }}-ghc-${{ matrix.ghc }}-cabal-
+            ${{ runner.os }}-ghc-${{ matrix.ghc }}-
+
+      - name: Update Cabal package list
+        working-directory: bindings/haskell
+        run: cabal update
+
+      - name: Build dependencies
+        working-directory: bindings/haskell
+        run: cabal build --only-dependencies --enable-tests
+
+      - name: Build library
+        working-directory: bindings/haskell
+        run: cabal build
+
+      - name: Run tests
+        working-directory: bindings/haskell
+        run: |
+          export LD_LIBRARY_PATH=../../target/release:$LD_LIBRARY_PATH
+          export DYLD_LIBRARY_PATH=../../target/release:$DYLD_LIBRARY_PATH
+          cabal test --test-show-details=direct
+        continue-on-error: false
+
+      - name: Run example
+        working-directory: bindings/haskell
+        run: |
+          export LD_LIBRARY_PATH=../../target/release:$LD_LIBRARY_PATH
+          export DYLD_LIBRARY_PATH=../../target/release:$DYLD_LIBRARY_PATH
+          cabal run gelfgren-example
+        continue-on-error: false
+
+      - name: Generate documentation
+        working-directory: bindings/haskell
+        run: cabal haddock --haddock-html --haddock-hoogle
+        continue-on-error: true
+
+  build-docs:
+    name: Build and Deploy Documentation
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Haskell
+        uses: haskell-actions/setup@v2
+        with:
+          ghc-version: '9.6.3'
+          cabal-version: '3.10'
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Build Rust library
+        run: cargo build --release
+
+      - name: Build Haskell library
+        working-directory: bindings/haskell
+        run: |
+          cabal update
+          cabal build
+
+      - name: Generate Haddock documentation
+        working-directory: bindings/haskell
+        run: |
+          cabal haddock --haddock-html --haddock-hyperlink-source
+          mkdir -p ../../docs/haskell
+          cp -r dist-newstyle/build/*/ghc-*/gelfgren-*/doc/html/gelfgren/* ../../docs/haskell/ || true
+
+      - name: Upload documentation artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: haskell-docs
+          path: docs/haskell/
+
+  check-warnings:
+    name: Check for Warnings
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Haskell
+        uses: haskell-actions/setup@v2
+        with:
+          ghc-version: '9.6.3'
+          cabal-version: '3.10'
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Build Rust library
+        run: cargo build --release
+
+      - name: Check for warnings
+        working-directory: bindings/haskell
+        run: |
+          cabal update
+          cabal build --ghc-options="-Wall -Werror"
+        continue-on-error: true

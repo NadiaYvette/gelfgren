@@ -1,0 +1,34 @@
+name: Scheme Bindings CI
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths:
+      - 'bindings/scheme/**'
+      - 'gelfgren-core/**'
+      - 'gelfgren-ffi/**'
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Guile
+        run: sudo apt-get update && sudo apt-get install -y guile-3.0
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+      - name: Build Rust library
+        run: cargo build --release
+      - name: Generate C header
+        run: |
+          cargo install cbindgen || true
+          cd gelfgren-ffi
+          cbindgen --config cbindgen.toml --output ../include/gelfgren.h
+      - name: Run example
+        working-directory: bindings/scheme
+        env:
+          LD_LIBRARY_PATH: ../../target/release
+        run: guile -L src examples/basic-usage.scm
