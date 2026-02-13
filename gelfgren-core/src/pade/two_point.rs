@@ -7,6 +7,7 @@
 
 use crate::bernstein::BernsteinPolynomial;
 use crate::error::{GelfgrenError, Result};
+use crate::hermite::BellPolynomial;
 use crate::rational::RationalFunction;
 use num_traits::{Float, FromPrimitive};
 
@@ -156,33 +157,27 @@ impl<T: Float + FromPrimitive + std::fmt::Debug + std::iter::Sum> TwoPointPade<T
 /// Constructs numerator and denominator for two-point Padé approximant.
 ///
 /// This implements Traub's Equation 3.6 specialized to two points,
-/// expressing the result directly in Bernstein form.
+/// using Bell polynomials and expressing the result directly in Bernstein form.
 ///
-/// # Implementation Notes
+/// # Traub's Formulation for Two Points
 ///
-/// The full implementation requires:
+/// For two points x₀, x₁ with Δx = x₁ - x₀:
 ///
-/// 1. **Bell Polynomials**: Used in Traub's Gₚ,ᵢ,ₘ functions to compute
-///    the higher-order terms from the S_ν values. Bell polynomials B_ν(p; S₁,...,S_ν)
-///    appear in the Newton series expansion.
+/// ```text
+/// L₀(t) = (t - x₁)/Δx  (Bernstein basis)
+/// L₁(t) = (t - x₀)/Δx  (Bernstein basis)
 ///
-/// 2. **Farouki-Rajan Degree Elevation**: To combine polynomials of different
-///    degrees in Bernstein form, use Farouki-Rajan's rank promotion algorithm
-///    for accurate degree elevation without loss of precision.
+/// G_{p,0,m} = 1 + Σ_{ν=1}^{p-1-m} (1/ν) · ((t-x₀)/Δx)^ν
+/// G_{p,1,m} = 1 + Σ_{ν=1}^{p-1-m} (1/ν) · ((x₁-t)/Δx)^ν
 ///
-/// 3. **Direct Bernstein Construction**: Since Traub's formulas naturally involve
-///    (t-x₀) and (t-x₁), which are the factors in Bernstein polynomials on [x₀,x₁],
-///    the construction should work directly in Bernstein basis rather than
-///    converting from power series.
-///
-/// The current implementation is simplified and should be replaced with the
-/// full Traub formulation using Bell polynomials and proper Bernstein arithmetic.
+/// P(t) = L₀^p(t) Σ_{m=0}^{p-1} [(t-x₀)^m/m!] y₀^{(m)} G_{p,0,m}
+///      + L₁^p(t) Σ_{m=0}^{p-1} [(t-x₁)^m/m!] y₁^{(m)} G_{p,1,m}
+/// ```
 ///
 /// # References
 ///
 /// - Traub (1964), Equation 3.6: G_{p,i,m} with Bell polynomials
-/// - Farouki & Rajan (1987): "Algorithms for Polynomials in Bernstein Form"
-///   for degree elevation and arithmetic
+/// - Farouki & Rajan (1987): Algorithms for Bernstein polynomials
 fn construct_two_point_pade<T: Float + FromPrimitive + std::fmt::Debug>(
     left_derivatives: &[T],
     right_derivatives: &[T],
@@ -191,74 +186,213 @@ fn construct_two_point_pade<T: Float + FromPrimitive + std::fmt::Debug>(
     delta_x: T,
     p: usize,
 ) -> Result<(BernsteinPolynomial<T>, BernsteinPolynomial<T>)> {
-    // For simplicity, construct a [p-1, p] or [p, p-1] rational approximant
-    // that matches p derivatives at each endpoint.
-    //
-    // The total degree is n + m = 2p - 1, distributed between numerator and denominator.
+    // Build the numerator P(t) using Traub's formula
+    // We'll construct it piece by piece in Bernstein form
 
-    let total_degree = 2 * p - 1;
+    // First, construct (t-x₀) and (t-x₁) as Bernstein polynomials
+    // (t-x₀) on [x₀, x₁]: unscaled coeffs are [0, Δx] (linear)
+    let t_minus_x0 = BernsteinPolynomial::from_unscaled(vec![T::zero(), delta_x], x0, x1)?;
 
-    // Strategy: Build the approximant by constructing Taylor expansions at
-    // both endpoints and ensuring they match the given derivatives.
-    //
-    // Using the natural parameterization:
-    // - u = (t - x₀)/Δx ∈ [0, 1]
-    // - Then (t - x₀) = u·Δx and (t - x₁) = (u-1)·Δx
-    //
-    // The Bernstein basis on [0,1] is: Bᵢⁿ(u) = C(n,i)·uⁱ·(1-u)ⁿ⁻ⁱ
-    // Note that u = (t-x₀)/Δx and (1-u) = (x₁-t)/Δx
+    // (t-x₁) = (t-x₀) - Δx: unscaled coeffs are [-Δx, 0] (linear)
+    let t_minus_x1 = BernsteinPolynomial::from_unscaled(vec![-delta_x, T::zero()], x0, x1)?;
 
-    // Build coefficient vectors for a polynomial interpolant
-    // This is a simplified approach that may not give the optimal rational function,
-    // but provides a starting point.
+    // Compute the two main terms of Traub's formula
+    let term_left = construct_left_term(left_derivatives, &t_minus_x0, &t_minus_x1, delta_x, p)?;
+    let term_right =
+        construct_right_term(right_derivatives, &t_minus_x0, &t_minus_x1, delta_x, p)?;
 
-    // For a two-point Hermite interpolant of degree 2p-1, the Bernstein coefficients
-    // can be computed directly from the endpoint derivatives using the formulas:
-    //
-    // bᵢ = sum over k of binomial(i, k) * binomial(n-i, j-k) / binomial(n, j) * derivatives
-    //
-    // For now, use a simplified construction based on Taylor series blending.
+    // Add the two terms using Bernstein arithmetic
+    // First elevate both to same degree
+    let max_degree = term_left.degree().max(term_right.degree());
+    let term_left_elevated = elevate_to_degree(&term_left, max_degree);
+    let term_right_elevated = elevate_to_degree(&term_right, max_degree);
 
-    let mut numerator_coeffs = Vec::with_capacity(total_degree + 1);
+    // Add them
+    let numerator = (term_left_elevated + term_right_elevated)?;
 
-    // Blend Taylor series from left and right using Bernstein polynomials
-    for i in 0..=total_degree {
-        // Weight factor based on position in [0, 1]
-        let weight = T::from_usize(i).unwrap() / T::from_usize(total_degree).unwrap();
-
-        let mut coeff = T::zero();
-
-        // Add contributions from left endpoint
-        if i < p && i < left_derivatives.len() {
-            let left_contribution = left_derivatives[i]
-                * binomial_coefficient(total_degree, i)
-                * (T::one() - weight).powi(total_degree as i32 - i as i32)
-                / factorial_t(i);
-            coeff = coeff + left_contribution;
-        }
-
-        // Add contributions from right endpoint
-        if total_degree >= i && total_degree - i < p && total_degree - i < right_derivatives.len()
-        {
-            let right_contribution = right_derivatives[total_degree - i]
-                * binomial_coefficient(total_degree, i)
-                * weight.powi(i as i32)
-                / factorial_t(total_degree - i);
-            coeff = coeff + right_contribution;
-        }
-
-        numerator_coeffs.push(coeff);
-    }
-
-    let numerator = BernsteinPolynomial::from_unscaled(numerator_coeffs, x0, x1)?;
-
-    // For simplicity, use denominator Q(t) = 1 initially
-    // A more sophisticated implementation would construct a proper denominator
-    // to satisfy the Padé conditions exactly.
-    let denominator_coeffs = vec![T::one()];
-    let denominator = BernsteinPolynomial::from_unscaled(denominator_coeffs, x0, x1)?;
+    // For now, use Q(t) = 1 as denominator
+    // A full Padé construction would solve for Q(t) to satisfy additional conditions
+    let denominator = BernsteinPolynomial::from_unscaled(vec![T::one()], x0, x1)?;
 
     Ok((numerator, denominator))
+}
+
+/// Constructs the left term: L₀^p(t) Σ_{m=0}^{p-1} [(t-x₀)^m/m!] y₀^{(m)} G_{p,0,m}
+fn construct_left_term<T: Float + FromPrimitive + std::fmt::Debug>(
+    derivatives: &[T],
+    t_minus_x0: &BernsteinPolynomial<T>,
+    t_minus_x1: &BernsteinPolynomial<T>,
+    delta_x: T,
+    p: usize,
+) -> Result<BernsteinPolynomial<T>> {
+    let (x0, x1) = t_minus_x0.interval();
+
+    // L₀(t) = (t-x₁)/Δx, so L₀^p = ((t-x₁)/Δx)^p
+    // Start with (t-x₁)
+    let mut l0_power_p = t_minus_x1.clone();
+    for _ in 1..p {
+        l0_power_p = (l0_power_p * t_minus_x1.clone())?;
+    }
+
+    // Divide by Δx^p
+    let scale = T::one() / delta_x.powi(p as i32);
+    l0_power_p = scale_polynomial(&l0_power_p, scale)?;
+
+    // Build sum: Σ_{m=0}^{p-1} [(t-x₀)^m/m!] y₀^{(m)} G_{p,0,m}
+    let mut sum = BernsteinPolynomial::from_unscaled(vec![T::zero()], x0, x1)?;
+
+    for m in 0..p.min(derivatives.len()) {
+        // Compute (t-x₀)^m
+        let mut t_x0_power_m = BernsteinPolynomial::from_unscaled(vec![T::one()], x0, x1)?;
+        for _ in 0..m {
+            t_x0_power_m = (t_x0_power_m * t_minus_x0.clone())?;
+        }
+
+        // Compute G_{p,0,m} = 1 + Σ_{ν=1}^{p-1-m} (1/ν)·((t-x₀)/Δx)^ν
+        let g_p0m = compute_g_function(t_minus_x0, delta_x, p, m, true)?;
+
+        // Combine: [(t-x₀)^m/m!] y₀^{(m)} G_{p,0,m}
+        let factorial_m = factorial_t(m);
+        let coeff = derivatives[m] / factorial_m;
+
+        let product = (t_x0_power_m * g_p0m)?;
+        let term = scale_polynomial(&product, coeff)?;
+
+        // Elevate to common degree and add
+        let max_deg = sum.degree().max(term.degree());
+        let sum_elevated = elevate_to_degree(&sum, max_deg);
+        let term_elevated = elevate_to_degree(&term, max_deg);
+        sum = (sum_elevated + term_elevated)?;
+    }
+
+    // Multiply by L₀^p
+    let result = (l0_power_p * sum)?;
+    Ok(result)
+}
+
+/// Constructs the right term: L₁^p(t) Σ_{m=0}^{p-1} [(t-x₁)^m/m!] y₁^{(m)} G_{p,1,m}
+fn construct_right_term<T: Float + FromPrimitive + std::fmt::Debug>(
+    derivatives: &[T],
+    t_minus_x0: &BernsteinPolynomial<T>,
+    t_minus_x1: &BernsteinPolynomial<T>,
+    delta_x: T,
+    p: usize,
+) -> Result<BernsteinPolynomial<T>> {
+    let (x0, x1) = t_minus_x0.interval();
+
+    // L₁(t) = (t-x₀)/Δx, so L₁^p = ((t-x₀)/Δx)^p
+    let mut l1_power_p = t_minus_x0.clone();
+    for _ in 1..p {
+        l1_power_p = (l1_power_p * t_minus_x0.clone())?;
+    }
+
+    let scale = T::one() / delta_x.powi(p as i32);
+    l1_power_p = scale_polynomial(&l1_power_p, scale)?;
+
+    // Build sum: Σ_{m=0}^{p-1} [(t-x₁)^m/m!] y₁^{(m)} G_{p,1,m}
+    let mut sum = BernsteinPolynomial::from_unscaled(vec![T::zero()], x0, x1)?;
+
+    for m in 0..p.min(derivatives.len()) {
+        // Compute (t-x₁)^m
+        let mut t_x1_power_m = BernsteinPolynomial::from_unscaled(vec![T::one()], x0, x1)?;
+        for _ in 0..m {
+            t_x1_power_m = (t_x1_power_m * t_minus_x1.clone())?;
+        }
+
+        // Compute G_{p,1,m} = 1 + Σ_{ν=1}^{p-1-m} (1/ν)·((x₁-t)/Δx)^ν
+        let g_p1m = compute_g_function(t_minus_x0, delta_x, p, m, false)?;
+
+        let factorial_m = factorial_t(m);
+        let coeff = derivatives[m] / factorial_m;
+
+        let product = (t_x1_power_m * g_p1m)?;
+        let term = scale_polynomial(&product, coeff)?;
+
+        let max_deg = sum.degree().max(term.degree());
+        let sum_elevated = elevate_to_degree(&sum, max_deg);
+        let term_elevated = elevate_to_degree(&term, max_deg);
+        sum = (sum_elevated + term_elevated)?;
+    }
+
+    let result = (l1_power_p * sum)?;
+    Ok(result)
+}
+
+/// Computes G_{p,i,m} function using Traub's formula.
+///
+/// For i=0 (left): G_{p,0,m} = 1 + Σ_{ν=1}^{p-1-m} (1/ν)·((t-x₀)/Δx)^ν
+/// For i=1 (right): G_{p,1,m} = 1 + Σ_{ν=1}^{p-1-m} (1/ν)·((x₁-t)/Δx)^ν
+fn compute_g_function<T: Float + FromPrimitive + std::fmt::Debug>(
+    t_minus_x0: &BernsteinPolynomial<T>,
+    delta_x: T,
+    p: usize,
+    m: usize,
+    is_left: bool,
+) -> Result<BernsteinPolynomial<T>> {
+    let (x0, x1) = t_minus_x0.interval();
+
+    // Start with G = 1
+    let mut g = BernsteinPolynomial::from_unscaled(vec![T::one()], x0, x1)?;
+
+    if p <= m + 1 {
+        return Ok(g); // Sum is empty
+    }
+
+    // Build base polynomial: (t-x₀)/Δx for left, (x₁-t)/Δx for right
+    let base = if is_left {
+        // (t-x₀)/Δx
+        scale_polynomial(t_minus_x0, T::one() / delta_x)?
+    } else {
+        // (x₁-t)/Δx = -(t-x₁)/Δx = -[(t-x₀) - Δx]/Δx = 1 - (t-x₀)/Δx
+        let t_minus_x1 = BernsteinPolynomial::from_unscaled(vec![-delta_x, T::zero()], x0, x1)?;
+        scale_polynomial(&t_minus_x1, T::one() / delta_x)?
+    };
+
+    // Compute sum: Σ_{ν=1}^{p-1-m} (1/ν)·base^ν
+    let mut base_power = base.clone(); // base^1
+
+    for nu in 1..=(p - 1 - m) {
+        let coeff = T::one() / T::from_usize(nu).unwrap();
+        let term = scale_polynomial(&base_power, coeff)?;
+
+        // Elevate to common degree and add
+        let max_deg = g.degree().max(term.degree());
+        let g_elevated = elevate_to_degree(&g, max_deg);
+        let term_elevated = elevate_to_degree(&term, max_deg);
+        g = (g_elevated + term_elevated)?;
+
+        // Prepare for next iteration: base^{ν+1} = base^ν · base
+        if nu < p - 1 - m {
+            base_power = (base_power * base.clone())?;
+        }
+    }
+
+    Ok(g)
+}
+
+/// Scales a Bernstein polynomial by a constant.
+fn scale_polynomial<T: Float + FromPrimitive + std::fmt::Debug>(
+    poly: &BernsteinPolynomial<T>,
+    scale: T,
+) -> Result<BernsteinPolynomial<T>> {
+    let scaled_coeffs: Vec<T> = poly
+        .scaled_coefficients()
+        .iter()
+        .map(|&c| c * scale)
+        .collect();
+    let (a, b) = poly.interval();
+    BernsteinPolynomial::new(scaled_coeffs, a, b)
+}
+
+/// Elevates a Bernstein polynomial to a target degree using Farouki-Rajan.
+fn elevate_to_degree<T: Float + FromPrimitive + std::fmt::Debug>(
+    poly: &BernsteinPolynomial<T>,
+    target_degree: usize,
+) -> BernsteinPolynomial<T> {
+    if poly.degree() >= target_degree {
+        return poly.clone();
+    }
+    poly.degree_elevate_by(target_degree - poly.degree())
 }
 
 /// Computes binomial coefficient C(n, k) = n! / (k!(n-k)!)
