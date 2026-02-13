@@ -987,30 +987,150 @@ If rational basis functions are used for BVP \emph{discretization} (not yet impl
 
 \section{Future Directions}
 
+\subsection{Rational Collocation: Three Formulations}
+
+Comprehensive theoretical analysis has identified three distinct formulations for
+rational collocation BVP solving, with varying degrees of complexity and advantages.
+Detailed documentation exists in the Gelfgren repository
+(\texttt{docs/RATIONAL\_COLLOCATION\_*.md}).
+
+\paragraph{Formulation 1: Quotient Form (Standard)}
+
+Direct differentiation of $u = P(x)/Q(x)$:
+\begin{equation}
+u'' = \frac{P''Q^2 - 2P'Q'Q - PQ''Q + 2PQ'^2}{Q^3}
+\end{equation}
+
+\textbf{Advantages:} Matches literature, well-studied convergence theory
+
+\textbf{Disadvantages:} Division by $Q^3$ causes instability if $Q \to 0$, spurious poles possible
+
+\paragraph{Formulation 2: Cleared Form (Recommended for Stability)}
+
+Multiply by $Q^2$ before differentiating to eliminate quotients:
+\begin{equation}
+Q^2 \cdot P'' - 2Q \cdot Q' \cdot P' + (2Q'^2 - Q \cdot Q'') \cdot P = -Q^3 \cdot f
+\end{equation}
+
+\textbf{Advantages:}
+\begin{itemize}
+\item No division operations
+\item Natural pole prevention: if $Q(x_i) \to 0$ then $P(x_i) \to 0$ (compatibility)
+\item More stable numerically
+\item Weighted residual interpretation
+\end{itemize}
+
+\textbf{Disadvantages:} Cubic nonlinearity in unknowns
+
+\paragraph{Formulation 3: Quadratic Form (Recommended for Efficiency)}
+
+Treat $u(x_i)$ and $u'(x_i)$ as explicit unknowns. From $P = Q \cdot u$:
+\begin{align}
+P(x_i) &= Q(x_i) \cdot u(x_i)\\
+P'(x_i) &= Q'(x_i) \cdot u(x_i) + Q(x_i) \cdot u'(x_i)\\
+P''(x_i) &= Q''(x_i) \cdot u(x_i) + 2Q'(x_i) \cdot u'(x_i) - Q(x_i) \cdot f(x_i)
+\end{align}
+
+\textbf{Advantages:}
+\begin{itemize}
+\item \textbf{Quadratic} nonlinearity (vs cubic for cleared form)
+\item Bilinear structure enables alternating optimization (each step linear!)
+\item Solution values $u(x_i)$ explicit (clear physical interpretation)
+\item Natural for Levenberg-Marquardt, SQP solvers
+\item Stays low-degree even for nonlinear ODEs
+\item Easy to add regularization on $u$ values
+\end{itemize}
+
+\textbf{Disadvantages:} More unknowns (adds $2k$ for $k$ collocation points)
+
+\textbf{Recommendation:} Use \textbf{quadratic formulation} as default due to:
+lowest polynomial degree, best solver compatibility, and alternating linear solve strategy.
+
+\subsection{Implementation Roadmap}
+
 \begin{enumerate}
-\item \textbf{Implement True Rational BVP Solver}:
+\item \textbf{Phase 1: Proof of Concept}
   \begin{itemize}
-  \item Rational Galerkin discretization
-  \item Rational collocation methods
-  \item Optimization-based approach using HermiteConstraints interface
+  \item Implement all three formulations for single-interval problems
+  \item Test on 1D Poisson: $-u'' = f(x)$
+  \item Compare convergence rates and computational cost
+  \item Validate against exact solutions
   \end{itemize}
 
-\item \textbf{Benchmark Genuine Rational BVP Methods}:
+\item \textbf{Phase 2: Piecewise Extension}
   \begin{itemize}
-  \item Compare rational vs polynomial basis functions for discretization
-  \item Test on problems where rationals should excel (near-singular solutions)
-  \item Measure computational cost vs accuracy trade-offs
+  \item Extend to multiple intervals with continuity conditions
+  \item Implement using HermiteConstraints interface (already available)
+  \item Handle $C^0$ and $C^1$ continuity
+  \item Test on boundary layer problems ($-\varepsilon u'' + u' = f$, small $\varepsilon$)
   \end{itemize}
 
+\item \textbf{Phase 3: Performance Optimization}
+  \begin{itemize}
+  \item Implement bilinear alternating solver (quadratic formulation)
+  \item Optimize for sparse systems
+  \item Parallel evaluation at collocation points
+  \item Profile and optimize critical paths
+  \end{itemize}
+
+\item \textbf{Phase 4: Comprehensive Benchmarking}
+  \begin{itemize}
+  \item Compare all three formulations on standard test problems
+  \item Benchmark against polynomial collocation
+  \item Test on near-singular problems where rationals should excel
+  \item Measure: accuracy, convergence rate, computation time, robustness
+  \item Generate convergence plots for LaTeX report
+  \end{itemize}
+
+\item \textbf{Phase 5: Production Integration}
+  \begin{itemize}
+  \item Integrate best-performing formulation into Gelfgren library
+  \item Add Python bindings
+  \item Write comprehensive documentation with examples
+  \item Add to continuous integration testing
+  \end{itemize}
+\end{enumerate}
+
+\subsection{Expected Benefits}
+
+When implemented, rational collocation should excel at:
+
+\begin{itemize}
+\item \textbf{Boundary layers}: $-\epsilon u'' + u' = 1$ with small $\epsilon$
+  \begin{itemize}
+  \item Sharp gradients near boundaries
+  \item Polynomial methods require very fine mesh
+  \item Rationals can use exponentially fewer DOF
+  \end{itemize}
+
+\item \textbf{Near-singular solutions}: $u(x) \approx 1/(1 + cx)$
+  \begin{itemize}
+  \item Exact rational representation possible
+  \item Polynomial approximation requires high degree
+  \end{itemize}
+
+\item \textbf{Nonlinear ODEs with rational structure}
+  \begin{itemize}
+  \item Quadratic formulation stays manageable
+  \item Example: $-u'' = u^2$ becomes cubic (vs degree 5+ for cleared form)
+  \end{itemize}
+\end{itemize}
+
+\subsection{Other Future Directions}
+
+\begin{enumerate}
 \item \textbf{Adaptive mesh refinement}: Automatic mesh selection based on error estimates
 
 \item \textbf{Higher dimensions}: Extension to 2D/3D problems with tensor product rationals
 
 \item \textbf{Time-dependent problems}: Parabolic PDEs with rational spatial discretization
 
-\item \textbf{Nonlinear problems}: Newton iteration with rational bases
-
 \item \textbf{Hybrid Methods}: Combine polynomial and rational bases adaptively
+  \begin{itemize}
+  \item Use rationals only where needed (boundary layers, singularities)
+  \item Polynomial elsewhere for efficiency
+  \item Automatic detection of regions requiring rationals
+  \end{itemize}
 \end{enumerate}
 
 \chapter*{Acknowledgments}
