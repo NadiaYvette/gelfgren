@@ -1,21 +1,30 @@
 # Test and Benchmark Results Summary
 
+## Major Update: Working Rational Approximants! 🎉
+
+**Full two-point Padé rational construction is now complete and functional!**
+
+Previous benchmarks used polynomial interpolation (Q=1 placeholder) incorrectly
+labeled as [2/2] rationals. Now we have true rational approximants with non-trivial
+denominators working correctly.
+
 ## Test Suite Results
 
 ### Core Library (gelfgren-core)
 **Status:** ✅ All tests passing
 
 ```
-test result: ok. 100 passed; 0 failed; 13 ignored
+test result: ok. 111 passed; 0 failed; 13 ignored
 ```
 
 **Key test areas:**
-- Bernstein polynomials: 11/11 passed
+- Bernstein polynomials: 14/14 passed (including normalization)
 - BVP (Boundary Value Problems): 8/8 passed
 - Hermite interpolation: 12/12 passed
-- Padé approximants: 15/15 passed (including new TwoPointPade)
+- **Padé approximants: 18/18 passed** (including rational [2/1] and [3/2])
+- Linear system solver: 3/3 passed
 - Piecewise construction: 7/7 passed
-- Rational functions: 17/17 passed
+- Rational functions: 19/19 passed (including new_normalized)
 - Mesh operations: 10/10 passed
 
 ### FFI Layer (gelfgren-ffi)
@@ -36,7 +45,51 @@ test result: ok. 11 passed; 0 failed; 0 ignored
 2. Discontinuous Poisson exact solution - corrected all three regions
 3. Numerical PDE verification tolerance - adjusted for finite difference accuracy
 
+## Rational Approximant Implementation
+
+### What Changed
+
+**Before:** Placeholder implementation with Q(t)=1 (polynomial interpolation only)
+**Now:** Full rational Padé with non-trivial denominators
+
+### Bugs Fixed
+
+1. **Forward difference formula** - Corrected to Σⱼ (-1)^(k-j) C(k,j) bⱼ
+2. **Backward difference formula** - Removed incorrect extra (-1)^k factor
+3. **Linear system RHS** - Critical fix: now includes full q₀=1 contribution to all derivative orders
+4. **L₀ sign error** - Added missing (-1)^p factor in Traub's formula
+
+### Rational Types Available
+
+Due to the two-point Padé constraint **n+m+1 = 2p** (must be even):
+
+✅ **[2/1] rationals**: 4N DOF
+- Numerator degree 2, denominator degree 1
+- Good for comparison with cubic splines (N+3 DOF)
+- Verified with f(x)=1/(1+x) and exp(x) tests
+
+✅ **[3/2] rationals**: 6N DOF
+- Numerator degree 3, denominator degree 2
+- Same DOF per interval as quintic polynomials
+- Enables direct efficiency comparison
+
+❌ **[2/2] rationals**: IMPOSSIBLE
+- Would require 2+2+1=5 (odd), violates constraint
+- Previous "benchmarks" were actually polynomial interpolation
+
+### Verification Results
+
+Test with exp(x) on [-0.5, 0.5] using [2/1] Padé:
+- Numerator: [0.607, 0.824, 1.184] in Bernstein form
+- Denominator: [1.0, 0.718] in Bernstein form
+- Function values: exact match at both endpoints (< 1e-10 error)
+- Derivatives: exact match at both endpoints (< 1e-9 error)
+- Midpoint: 1.0009 vs exact 1.0 (0.09% error)
+
 ## Benchmark Performance Results
+
+**Note:** Previous benchmark results used polynomial interpolation only.
+New benchmarks with true rationals are needed.
 
 ### BVP Convergence Study
 
@@ -155,31 +208,54 @@ benchmarks/reports/latex/comprehensive_benchmark_report.pdf
 
 ## Next Steps
 
-1. **Python Bindings:** Resolve Python 3.14 compatibility with PyO3
-   - Current: PyO3 0.22.6 supports up to Python 3.13
-   - Need: Update to PyO3 0.23+ or use Python 3.13
+1. **Re-run Benchmarks with True Rationals** 🔥 HIGH PRIORITY
+   - Previous benchmarks used polynomial interpolation only
+   - Now run with working [2/1] and [3/2] rational approximants
+   - Compare convergence rates and efficiency
+   - Generate new plots and comprehensive report
 
-2. **Performance Optimization:** Profile and optimize hot paths
-   - Bernstein polynomial operations
-   - Degree elevation
+2. **Performance Optimization:** Profile rational construction
+   - Linear system solving (Gaussian elimination)
+   - Endpoint derivative computations
    - Rational function evaluation
 
-3. **Extended Benchmarks:** Add more challenging test cases
+3. **Extended Benchmarks:** Add more test cases
    - Singular perturbations
    - Multiple scales
    - Boundary layers
+   - Functions with known rational forms
 
-4. **Integration Testing:** Full end-to-end tests with Python bindings
-   - Once Python compatibility resolved
-   - Validate performance against SciPy/NumPy
+4. **Python Bindings:** Resolve Python 3.14 compatibility
+   - Current: PyO3 0.22.6 supports up to Python 3.13
+   - Need: Update to PyO3 0.23+ or use Python 3.13
+
+5. **Integration Testing:** Full end-to-end tests with Python bindings
+   - Validate performance against SciPy/NumPy rational approximants
 
 ## Summary
 
-The TwoPointPade implementation using Traub's Equation 3.6 is:
-- ✅ Mathematically correct (verified by tests)
-- ✅ Properly integrated into piecewise construction
-- ✅ Performing as expected in benchmarks
-- ✅ Well-documented with complete derivations
-- ✅ Ready for production use
+The TwoPointPade implementation is now **complete with working rational approximants**:
 
-All tests pass, benchmarks show excellent convergence, and the implementation is ready for deployment.
+### Core Achievements
+- ✅ True rational construction with non-trivial denominators
+- ✅ Linear system solver with Gaussian elimination + partial pivoting
+- ✅ Correct endpoint derivative formulas for Bernstein polynomials
+- ✅ All matching conditions satisfied (function + derivatives at both endpoints)
+- ✅ [2/1] and [3/2] configurations available and tested
+- ✅ 111 tests passing (up from 100)
+
+### Mathematical Correctness
+- ✅ Verified with f(x) = 1/(1+x) (natural [0/1] rational)
+- ✅ Verified with exp(x) interpolation
+- ✅ Endpoint matching: < 1e-10 error for function values
+- ✅ Derivative matching: < 1e-9 error for derivatives
+- ✅ Excellent midpoint accuracy (< 0.1% error)
+
+### Production Readiness
+- ✅ Well-documented with complete derivation
+- ✅ Integrated into piecewise construction
+- ✅ Ready for benchmark studies
+- 🔥 **Next: Run full benchmark suite with true rationals**
+
+The implementation represents a major breakthrough - moving from placeholder
+polynomial interpolation to full working rational Padé approximants!
