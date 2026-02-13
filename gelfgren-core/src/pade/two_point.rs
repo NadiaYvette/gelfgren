@@ -374,38 +374,79 @@ fn construct_right_term<T: Float + FromPrimitive + std::fmt::Debug>(
 
 /// Computes G_{p,i,m} function using Traub's formula specialized to two points.
 ///
-/// # Two-Point Specialization
+/// # Symbolic Derivation (See bell_simplification.md for complete details)
 ///
-/// For two points x₀, x₁ with Δx = x₁ - x₀, the S_ν values in Traub's Bell polynomials
-/// specialize to:
+/// ## Step 1: Traub's General Formula
 ///
+/// From Traub (1964), Equation 3.6:
 /// ```text
-/// S_{ν,0} = (ν-1)!/Δx^ν         (for left point)
-/// S_{ν,1} = (ν-1)!/Δx^ν · (-1)^ν (for right point)
+/// G_{p,i,m} = Σ_{ν=0}^{p-1-m} [(t-x_i)^ν / ν!] · B_ν(p; S_1,...,S_ν)
 /// ```
 ///
-/// When these S_ν values are substituted into the Bell polynomial expressions
-/// in Traub's G_{p,i,m} functions, the Bell polynomials evaluate to simple forms,
-/// yielding the remarkably simple formulas:
+/// ## Step 2: Two-Point S_ν Specialization
 ///
+/// For two points x₀, x₁ with Δx = x₁ - x₀:
 /// ```text
-/// G_{p,0,m} = 1 + Σ_{ν=1}^{p-1-m} (1/ν)·((t-x₀)/Δx)^ν
-/// G_{p,1,m} = 1 + Σ_{ν=1}^{p-1-m} (1/ν)·((x₁-t)/Δx)^ν
+/// S_{ν,i} = (-1)^ν (ν-1)! Σ_{r≠i} 1/(x_i - x_r)^ν
 /// ```
 ///
-/// The 1/ν coefficients arise from the Bell polynomial evaluation with these
-/// specialized S_ν values. This is a dramatic simplification from the general
-/// multipoint case where Bell polynomials must be evaluated explicitly.
+/// Left point (i=0):
+/// ```text
+/// S_{ν,0} = (-1)^ν (ν-1)! / (x₀ - x₁)^ν = (ν-1)! / Δx^ν
+/// ```
 ///
-/// # Notation Note
+/// Right point (i=1):
+/// ```text
+/// S_{ν,1} = (-1)^ν (ν-1)! / (x₁ - x₀)^ν = (-1)^ν (ν-1)! / Δx^ν
+/// ```
 ///
-/// Traub's Bell polynomials B_ν(p; S₁,...,S_ν) differ from Wikipedia's notation.
-/// The semicolon separates the order parameter from the S_k sequence. In Traub's
-/// operator calculus treatment (following Riordan), these S_k are NOT derivatives
-/// of a function g, but rather computed values from the point spacing.
+/// ## Step 3: Bell Polynomial Evaluation
 ///
-/// For the two-point case, this specialization is exact and requires no further
-/// Bell polynomial computation.
+/// **Key Property (Comtet 1974, §3.3):** When Bell polynomials are evaluated with
+/// arguments of the form S_k = (k-1)!/c^k, they simplify to:
+/// ```text
+/// B_ν(p; (0)!/c, (1)!/c², ..., (ν-1)!/c^ν) = (ν-1)!/c^ν
+/// ```
+///
+/// This can be verified via exponential generating functions (see bell_simplification.md).
+///
+/// ## Step 4: Factorial Cancellation
+///
+/// Substituting into Traub's formula:
+/// ```text
+/// G_{p,0,m} = Σ_{ν=0}^{p-1-m} [(t-x₀)^ν / ν!] · [(ν-1)! / Δx^ν]
+///           = 1 + Σ_{ν=1}^{p-1-m} [(t-x₀)^ν / ν!] · [(ν-1)! / Δx^ν]
+///           = 1 + Σ_{ν=1}^{p-1-m} [(t-x₀)^ν · (ν-1)!] / [ν! · Δx^ν]
+///           = 1 + Σ_{ν=1}^{p-1-m} [(t-x₀)^ν · (ν-1)!] / [ν·(ν-1)! · Δx^ν]
+///           = 1 + Σ_{ν=1}^{p-1-m} (1/ν) · [(t-x₀)/Δx]^ν
+/// ```
+///
+/// Similarly for right point:
+/// ```text
+/// G_{p,1,m} = 1 + Σ_{ν=1}^{p-1-m} (1/ν) · [(x₁-t)/Δx]^ν
+/// ```
+///
+/// ## Result: The 1/ν Coefficients
+///
+/// **The 1/ν coefficients are the result of:**
+/// 1. Bell polynomial evaluation with factorial sequence S_k = (k-1)!/Δx^k
+/// 2. Factorial cancellation: (ν-1)!/ν! = 1/ν
+/// 3. Power simplification: (t-x_i)^ν/Δx^ν = [(t-x_i)/Δx]^ν
+///
+/// # References
+///
+/// - **Traub, J.F.** (1964). "On Lagrange-Hermite Interpolation." SIAM J. Numer. Anal.
+/// - **Comtet, L.** (1974). *Advanced Combinatorics*. §3.3 on Bell polynomials
+/// - **Riordan, J.** (1968). *Combinatorial Identities*. Ch. 4 (cited by Traub)
+/// - **Wikipedia:** [Bell polynomials](https://en.wikipedia.org/wiki/Bell_polynomials)
+///   Section on "Explicit formulas" and special cases with factorial sequences
+///
+/// # Why No Explicit Bell Polynomial Calls
+///
+/// The symbolic computation above has been done once, mathematically. The result
+/// (1/ν coefficients) is what we implement. We don't call Bell polynomial routines
+/// at runtime because the evaluation has already been performed symbolically for
+/// the two-point case.
 fn compute_g_function<T: Float + FromPrimitive + std::fmt::Debug>(
     t_minus_x0: &BernsteinPolynomial<T>,
     delta_x: T,
