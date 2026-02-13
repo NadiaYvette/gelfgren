@@ -52,21 +52,34 @@
 \contentsline {subsection}{\numberline {6.3.3}Convergence Plots}{17}{subsection.6.3.3}%
 \contentsline {chapter}{\numberline {7}Special Function Approximations}{18}{chapter.7}%
 \contentsline {chapter}{\numberline {8}Analysis and Conclusions}{19}{chapter.8}%
-\contentsline {section}{\numberline {8.1}Summary of Results}{19}{section.8.1}%
-\contentsline {subsection}{\numberline {8.1.1}Smooth Problems}{19}{subsection.8.1.1}%
-\contentsline {subsection}{\numberline {8.1.2}Non-Smooth Problems}{19}{subsection.8.1.2}%
-\contentsline {subsection}{\numberline {8.1.3}Oscillatory Problems}{19}{subsection.8.1.3}%
-\contentsline {section}{\numberline {8.2}Recommendations}{20}{section.8.2}%
-\contentsline {subsection}{\numberline {8.2.1}When to Use Polynomial Splines}{20}{subsection.8.2.1}%
-\contentsline {subsection}{\numberline {8.2.2}When to Use Rational Approximants}{20}{subsection.8.2.2}%
-\contentsline {subsection}{\numberline {8.2.3}Hybrid Approaches}{20}{subsection.8.2.3}%
-\contentsline {section}{\numberline {8.3}Future Directions}{20}{section.8.3}%
-\contentsline {chapter}{Acknowledgments}{21}{chapter*.11}%
-\contentsline {chapter}{\numberline {A}Implementation Details}{22}{appendix.A}%
-\contentsline {section}{\numberline {A.1}Polynomial Spline Solver}{22}{section.A.1}%
-\contentsline {section}{\numberline {A.2}Rational Approximant Construction}{22}{section.A.2}%
-\contentsline {section}{\numberline {A.3}Error Computation}{23}{section.A.3}%
-\contentsline {chapter}{\numberline {B}Software Information}{24}{appendix.B}%
-\contentsline {section}{\numberline {B.1}Gelfgren Library}{24}{section.B.1}%
-\contentsline {section}{\numberline {B.2}Dependencies}{24}{section.B.2}%
-\contentsline {section}{\numberline {B.3}Reproducibility}{24}{section.B.3}%
+\contentsline {section}{\numberline {8.1}How to Interpret the Results}{19}{section.8.1}%
+\contentsline {subsection}{\numberline {8.1.1}Understanding the Convergence Tables}{19}{subsection.8.1.1}%
+\contentsline {paragraph}{Reading a table row:}{20}{section*.11}%
+\contentsline {subsection}{\numberline {8.1.2}Understanding the Convergence Plots}{20}{subsection.8.1.2}%
+\contentsline {paragraph}{Panel 1: L² Error vs Mesh Size (log-log)}{20}{section*.12}%
+\contentsline {paragraph}{Panel 2: Relative L² Error vs Mesh Size}{21}{section*.13}%
+\contentsline {paragraph}{Panel 3: L² Error vs Degrees of Freedom}{21}{section*.14}%
+\contentsline {paragraph}{Panel 4: Convergence Rates}{21}{section*.15}%
+\contentsline {subsection}{\numberline {8.1.3}Comparing Polynomial vs Rational Methods}{22}{subsection.8.1.3}%
+\contentsline {subsection}{\numberline {8.1.4}Special Considerations}{22}{subsection.8.1.4}%
+\contentsline {paragraph}{Discontinuous problems:}{22}{section*.16}%
+\contentsline {paragraph}{Near-pole problems:}{22}{section*.17}%
+\contentsline {paragraph}{Oscillatory problems:}{22}{section*.18}%
+\contentsline {section}{\numberline {8.2}Summary of Results}{22}{section.8.2}%
+\contentsline {subsection}{\numberline {8.2.1}Smooth Problems}{22}{subsection.8.2.1}%
+\contentsline {subsection}{\numberline {8.2.2}Non-Smooth Problems}{23}{subsection.8.2.2}%
+\contentsline {subsection}{\numberline {8.2.3}Oscillatory Problems}{23}{subsection.8.2.3}%
+\contentsline {section}{\numberline {8.3}Recommendations}{23}{section.8.3}%
+\contentsline {subsection}{\numberline {8.3.1}When to Use Polynomial Splines}{23}{subsection.8.3.1}%
+\contentsline {subsection}{\numberline {8.3.2}When to Use Rational Approximants}{23}{subsection.8.3.2}%
+\contentsline {subsection}{\numberline {8.3.3}Hybrid Approaches}{23}{subsection.8.3.3}%
+\contentsline {section}{\numberline {8.4}Future Directions}{24}{section.8.4}%
+\contentsline {chapter}{Acknowledgments}{25}{chapter*.19}%
+\contentsline {chapter}{\numberline {A}Implementation Details}{26}{appendix.A}%
+\contentsline {section}{\numberline {A.1}Polynomial Spline Solver}{26}{section.A.1}%
+\contentsline {section}{\numberline {A.2}Rational Approximant Construction}{26}{section.A.2}%
+\contentsline {section}{\numberline {A.3}Error Computation}{27}{section.A.3}%
+\contentsline {chapter}{\numberline {B}Software Information}{28}{appendix.B}%
+\contentsline {section}{\numberline {B.1}Gelfgren Library}{28}{section.B.1}%
+\contentsline {section}{\numberline {B.2}Dependencies}{28}{section.B.2}%
+\contentsline {section}{\numberline {B.3}Reproducibility}{28}{section.B.3}%

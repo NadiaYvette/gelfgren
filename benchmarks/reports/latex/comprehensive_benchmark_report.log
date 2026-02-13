@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2026.2.13)  13 FEB 2026 01:12
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2026.2.13)  13 FEB 2026 01:31
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -945,7 +945,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.23 ...ine {3.3.2}L∞ Norm}{7}{subsection.3.3.2}
+l.23 ...ine {3.3.2}L∞ Norm}{9}{subsection.3.3.2}
                                                   %
 You may provide a definition with
 \DeclareUnicodeCharacter 
@@ -955,7 +955,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.32 ....1}Problem Statement}{8}{subsection.4.2.1}
+l.32 ...1}Problem Statement}{10}{subsection.4.2.1}
                                                   % [1
 
 
@@ -968,7 +968,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.45 ...latory Poisson (ω=10.0)}{13}{section.6.2}
+l.45 ...latory Poisson (ω=10.0)}{15}{section.6.2}
                                                   %
 You may provide a definition with
 \DeclareUnicodeCharacter 
@@ -1020,7 +1020,7 @@ Chapter 5.
 
 ]
 Chapter 6.
-<../figures/Discontinuous_Poisson.pdf, id=488, 860.70522pt x 352.39017pt>
+<../figures/Discontinuous_Poisson.pdf, id=513, 860.70522pt x 352.39017pt>
 File: ../figures/Discontinuous_Poisson.pdf Graphic file (type pdf)
 <use ../figures/Discontinuous_Poisson.pdf>
 Package pdftex.def Info: ../figures/Discontinuous_Poisson.pdf  used on input li
@@ -1094,7 +1094,7 @@ l.508 ... rates for Oscillatory Poisson (ω=10.0)}
 You may provide a definition with
 \DeclareUnicodeCharacter 
 
-<../figures/Oscillatory_Poisson_ω=10.0.pdf, id=558, 860.84073pt x 352.39017pt>
+<../figures/Oscillatory_Poisson_ω=10.0.pdf, id=583, 860.84073pt x 352.39017pt>
 
 File: ../figures/Oscillatory_Poisson_ω=10.0.pdf Graphic file (type pdf)
 <use ../figures/Oscillatory_Poisson_ω=10.0.pdf>
@@ -1128,7 +1128,7 @@ You may provide a definition with
 \DeclareUnicodeCharacter 
 
 [15]
-<../figures/Smooth_Poisson_sin.pdf, id=565, 860.70522pt x 352.39017pt>
+<../figures/Smooth_Poisson_sin.pdf, id=590, 860.70522pt x 352.39017pt>
 File: ../figures/Smooth_Poisson_sin.pdf Graphic file (type pdf)
 <use ../figures/Smooth_Poisson_sin.pdf>
 Package pdftex.def Info: ../figures/Smooth_Poisson_sin.pdf  used on input line 
@@ -1143,38 +1143,42 @@ Chapter 7.
 Chapter 8.
 [19
 
-] [20] [21
+] [20] [21]
+Overfull \hbox (3.96014pt too wide) in paragraph at lines 752--755
+ []\OT1/cmr/bx/n/10.95 Discontinuous prob-lems:[] \OT1/cmr/m/n/10.95 Ex-pect re
+-duced con-ver-gence rates (of-ten $\OML/cmm/m/it/10.95 O\OT1/cmr/m/n/10.95 (\O
+ML/cmm/m/it/10.95 h[]\OT1/cmr/m/n/10.95 )$
+ []
+
+[22] [23] [24] [25
 
 ]
 Appendix A.
-[22
+[26
 
-] [23]
+] [27]
 Appendix B.
-[24
+[28
 
 ]
-Overfull \hbox (59.6542pt too wide) in paragraph at lines 749--749
+Overfull \hbox (59.6542pt too wide) in paragraph at lines 907--907
 []\OT1/cmtt/m/n/10.95 pdflatex comprehensive_benchmark_report.tex  # Second pas
 s for references[] 
  []
 
-[25] [26
+[29] [30
 
 ] (./comprehensive_benchmark_report.aux)
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
 Package rerunfilecheck Info: File `comprehensive_benchmark_report.out' has not 
 changed.
-(rerunfilecheck)             Checksum: F1FCDBFA6B71899AD39893DD4DADBE2E;11097.
+(rerunfilecheck)             Checksum: 8E2995FB77B45642DA7B1FECABF10D0C;12250.
  ) 
 Here is how much of TeX's memory you used:
- 37510 strings out of 476041
- 902101 string characters out of 5793174
+ 37539 strings out of 476041
+ 902449 string characters out of 5793174
  1869388 words of memory out of 6000000
- 57275 multiletter control sequences out of 15000+600000
- 523221 words of font info for 73 fonts, out of 8000000 for 9000
+ 57282 multiletter control sequences out of 15000+600000
+ 523566 words of font info for 74 fonts, out of 8000000 for 9000
  1137 hyphenation exceptions out of 8191
  84i,13n,89p,809b,1032s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
@@ -1195,12 +1199,13 @@ texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texlive/texmf-
 dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/share/texlive/texmf-dist/f
 onts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texlive/texmf-dist/fo
 nts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texlive/texmf-dist/fon
-ts/type1/public/cm-super/sfbx1200.pfb></usr/share/texlive/texmf-dist/fonts/type
-1/public/cm-super/sfrm1095.pfb>
-Output written on comprehensive_benchmark_report.pdf (29 pages, 354957 bytes).
+ts/type1/public/cm-super/sfbx1095.pfb></usr/share/texlive/texmf-dist/fonts/type
+1/public/cm-super/sfbx1200.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
+c/cm-super/sfrm1095.pfb>
+Output written on comprehensive_benchmark_report.pdf (33 pages, 384240 bytes).
 PDF statistics:
- 873 PDF objects out of 1000 (max. 8388607)
- 638 compressed objects within 7 object streams
- 165 named destinations out of 1000 (max. 500000)
- 604 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 936 PDF objects out of 1000 (max. 8388607)
+ 695 compressed objects within 7 object streams
+ 186 named destinations out of 1000 (max. 500000)
+ 644 words of extra memory for PDF output out of 10000 (max. 10000000)
 

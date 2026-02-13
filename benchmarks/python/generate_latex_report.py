@@ -585,6 +585,164 @@ Refinement & \multicolumn{2}{c}{$L^2$ rate} & \multicolumn{2}{c}{$L^\infty$ rate
     def _analysis_and_conclusions(self) -> str:
         return r'''\chapter{Analysis and Conclusions}
 
+\section{How to Interpret the Results}
+
+This section provides guidance on reading and interpreting the convergence tables
+and plots presented in the previous chapters.
+
+\subsection{Understanding the Convergence Tables}
+
+Each convergence table shows error metrics for successive mesh refinements:
+
+\begin{description}
+\item[$N$] Number of intervals in the mesh. We refine by factors of 2: 4, 8, 16, 32, 64, 128.
+
+\item[$h$] Mesh size = $1/N$ (for unit interval). Smaller $h$ means finer mesh.
+
+\item[DOF] Degrees of freedom:
+  \begin{itemize}
+  \item Polynomial (cubic spline): $N + 3$
+  \item Rational ([2/2] Padé): $6N$
+  \item Rationals use $\approx 6\times$ more DOF per interval
+  \end{itemize}
+
+\item[L² Error] Root-mean-square error: $\sqrt{\int |u - u_h|^2 dx}$
+  \begin{itemize}
+  \item Most commonly used metric
+  \item Gives overall approximation quality
+  \item Should decrease as $h \to 0$
+  \end{itemize}
+
+\item[L$^\infty$ Error] Maximum absolute error: $\max |u(x) - u_h(x)|$
+  \begin{itemize}
+  \item Worst-case error at any point
+  \item More sensitive to local features
+  \item Often larger than L² error
+  \end{itemize}
+
+\item[H¹ Error] Error in derivative: $\sqrt{\int |u' - u_h'|^2 dx}$
+  \begin{itemize}
+  \item Measures gradient approximation quality
+  \item Important for problems involving derivatives
+  \item May converge slower than function values
+  \end{itemize}
+
+\item[Rate] Convergence rate $\alpha$ where error $\sim h^\alpha$
+  \begin{itemize}
+  \item Computed from successive refinements: $\alpha \approx \log(e_i/e_{i+1}) / \log(2)$
+  \item Cubic splines: expect $\alpha \approx 4$ for smooth problems
+  \item Higher rate = faster convergence
+  \item Rate $< 4$ indicates limited smoothness or regularity
+  \end{itemize}
+\end{description}
+
+\paragraph{Reading a table row:} For example, if the L² error row shows:
+\begin{center}
+\begin{tabular}{cccc}
+$N=16$ & $N=32$ & $N=64$ & Rate \\
+\hline
+$2.28\times10^{-3}$ & $5.68\times10^{-4}$ & $1.42\times10^{-4}$ & $4.0$ \\
+\end{tabular}
+\end{center}
+
+This means: at $N=16$ intervals, error is $2.28\times10^{-3}$. Doubling to $N=32$
+reduces error by factor of 4, and again to $N=64$ by another factor of 4.
+The rate of 4.0 indicates $O(h^4)$ convergence: halving $h$ reduces error by $2^4=16$.
+
+\subsection{Understanding the Convergence Plots}
+
+Each benchmark includes a figure with four panels:
+
+\paragraph{Panel 1: L² Error vs Mesh Size (log-log)}
+\begin{itemize}
+\item \textbf{X-axis}: Mesh size $h$ (logarithmic scale, right to left means refinement)
+\item \textbf{Y-axis}: L² error (logarithmic scale)
+\item \textbf{Lines}:
+  \begin{itemize}
+  \item Circles ($\circ$): Polynomial spline
+  \item Squares ($\square$): Rational approximant
+  \item Dashed lines: Reference slopes $O(h^2)$ and $O(h^4)$
+  \end{itemize}
+\item \textbf{Interpretation}: On a log-log plot, a straight line indicates power-law convergence.
+  The slope of the line equals the convergence rate. A line parallel to the $O(h^4)$
+  reference means fourth-order convergence. Steeper = faster convergence.
+\item \textbf{What to look for}:
+  \begin{itemize}
+  \item Straight lines = consistent convergence rate
+  \item Polynomial and rational lines parallel = same convergence order
+  \item Lower line (at same $h$) = better accuracy
+  \item Line flattening = convergence stagnation (round-off or regularity limit)
+  \end{itemize}
+\end{itemize}
+
+\paragraph{Panel 2: Relative L² Error vs Mesh Size}
+\begin{itemize}
+\item Same as Panel 1, but error normalized by exact solution norm
+\item Useful when absolute error magnitude varies between problems
+\item Relative error $< 10^{-6}$ often considered excellent
+\end{itemize}
+
+\paragraph{Panel 3: L² Error vs Degrees of Freedom}
+\begin{itemize}
+\item \textbf{X-axis}: Total degrees of freedom (DOF)
+\item \textbf{Y-axis}: L² error (logarithmic)
+\item \textbf{Purpose}: Compares efficiency - accuracy achieved per DOF
+\item \textbf{Interpretation}: Lower curve at same DOF = more efficient method
+\item \textbf{Key insight}: Since rationals use $6\times$ more DOF per interval,
+  they appear further right on this plot. If the rational curve is significantly
+  below the polynomial curve, rationals achieve better accuracy despite using more DOF.
+  If curves are similar or polynomial is lower, polynomial splines are more efficient.
+\end{itemize}
+
+\paragraph{Panel 4: Convergence Rates}
+\begin{itemize}
+\item \textbf{X-axis}: Refinement level (1 = 4→8 intervals, 2 = 8→16, etc.)
+\item \textbf{Y-axis}: Computed convergence rate $\alpha$
+\item \textbf{Horizontal lines}: Expected rates (2 and 4)
+\item \textbf{Interpretation}: Shows if convergence rate is consistent across refinements
+\item \textbf{What to look for}:
+  \begin{itemize}
+  \item Horizontal line near 4.0 = consistent $O(h^4)$ convergence (ideal for smooth problems)
+  \item Rate increasing with refinement = method reaching asymptotic regime
+  \item Rate decreasing = hitting regularity limit or round-off errors
+  \item Oscillating rates = non-uniform convergence behavior
+  \end{itemize}
+\end{itemize}
+
+\subsection{Comparing Polynomial vs Rational Methods}
+
+When comparing the two methods, focus on:
+
+\begin{enumerate}
+\item \textbf{Absolute accuracy} (Panel 1): At the same mesh size $h$, which method
+  achieves lower error? This answers: "Which is more accurate for the same computational mesh?"
+
+\item \textbf{Efficiency} (Panel 3): At the same DOF, which achieves lower error?
+  This answers: "Which gives better accuracy per degree of freedom?"
+
+\item \textbf{Convergence rate} (Panel 4): Which achieves higher/more consistent rates?
+  This answers: "Which improves faster with mesh refinement?"
+
+\item \textbf{Coarse mesh hypothesis}: Can rationals achieve target accuracy with
+  coarser meshes? Look at Panel 1: find the error level achieved by polynomials
+  at $h=h_{\text{poly}}$, then check if rationals achieve the same error at
+  $h_{\text{rat}} > h_{\text{poly}}$ (fewer intervals).
+\end{enumerate}
+
+\subsection{Special Considerations}
+
+\paragraph{Discontinuous problems:} Expect reduced convergence rates (often $O(h^2)$
+or less) near discontinuities. Neither method can achieve high-order convergence
+when the solution lacks smoothness.
+
+\paragraph{Near-pole problems:} Rational approximants should excel when approximating
+functions with poles or near-poles (e.g., $1/(1+25x^2)$, $\tan(x)$ near $\pm\pi/2$).
+Look for rationals achieving much lower error than polynomials at same $h$.
+
+\paragraph{Oscillatory problems:} Both methods require $h$ small enough to resolve
+the oscillations (rule of thumb: $\approx 10$ points per wavelength). Before this
+threshold, errors may be erratic.
+
 \section{Summary of Results}
 
 \subsection{Smooth Problems}
