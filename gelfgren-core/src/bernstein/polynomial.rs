@@ -106,37 +106,38 @@ impl<T: Float + FromPrimitive + fmt::Debug> BernsteinPolynomial<T> {
             .collect()
     }
 
-    /// Returns the sum of unscaled Bernstein coefficients.
+    /// Returns the sum of endpoint coefficients: b₀ + bₙ.
     ///
-    /// For P(x) = Σᵢ bᵢ Bᵢⁿ(x), returns Σᵢ bᵢ.
-    pub fn coefficient_sum(&self) -> T
-    where
-        T: std::iter::Sum,
-    {
-        self.unscaled_coefficients().iter().copied().sum()
+    /// For P(x) = Σᵢ bᵢ Bᵢⁿ(x) on [a,b], returns b₀ + bₙ = P(a) + P(b).
+    ///
+    /// This is an O(1) operation, much more efficient than summing all coefficients.
+    pub fn endpoint_coefficient_sum(&self) -> T {
+        let unscaled = self.unscaled_coefficients();
+        unscaled[0] + unscaled[unscaled.len() - 1]
     }
 
-    /// Normalizes the polynomial so the sum of unscaled coefficients equals 1.
+    /// Normalizes the polynomial so b₀ + bₙ = 1 (endpoint coefficient sum).
     ///
-    /// Returns a new polynomial Q(x) = P(x) / Σᵢ bᵢ where P(x) = Σᵢ bᵢ Bᵢⁿ(x).
+    /// Returns Q(x) = P(x) / (b₀ + bₙ) where P(x) = Σᵢ bᵢ Bᵢⁿ(x).
     ///
-    /// This normalization is particularly useful for rational function denominators,
-    /// as it removes the scalar multiplication ambiguity while working entirely
-    /// in Bernstein form without requiring basis conversions.
+    /// This normalization:
+    /// - Removes scalar multiplication ambiguity
+    /// - Works entirely in Bernstein form (no basis conversions)
+    /// - Is O(1) efficient (only checks two coefficients)
+    /// - Has geometric meaning: Q(a) + Q(b) = 1
+    ///
+    /// Particularly useful for rational function denominators.
     ///
     /// # Errors
     ///
-    /// Returns error if the coefficient sum is too close to zero.
-    pub fn normalize_coefficient_sum(&self) -> Result<Self>
-    where
-        T: std::iter::Sum,
-    {
-        let sum = self.coefficient_sum();
+    /// Returns error if b₀ + bₙ is too close to zero.
+    pub fn normalize_endpoint_sum(&self) -> Result<Self> {
+        let sum = self.endpoint_coefficient_sum();
         let tol = T::from_f64(1e-14).unwrap();
 
         if sum.abs() < tol {
             return Err(GelfgrenError::InvalidArgument(
-                "Cannot normalize: coefficient sum is too close to zero".to_string(),
+                "Cannot normalize: endpoint coefficient sum is too close to zero".to_string(),
             ));
         }
 
@@ -500,28 +501,35 @@ mod tests {
     }
 
     #[test]
-    fn test_coefficient_sum() {
-        // Constant: b_0 = 5, sum = 5
+    fn test_endpoint_coefficient_sum() {
+        // Constant: b_0 = 5, b_0 + b_0 = 10
         let p = BernsteinPolynomial::from_unscaled(vec![5.0], 0.0, 1.0).unwrap();
-        assert_relative_eq!(p.coefficient_sum(), 5.0, epsilon = 1e-10);
+        assert_relative_eq!(p.endpoint_coefficient_sum(), 10.0, epsilon = 1e-10);
 
-        // Linear: b_0 = 1, b_1 = 3, sum = 4
+        // Linear: b_0 = 1, b_1 = 3, sum = 1 + 3 = 4
         let p = BernsteinPolynomial::from_unscaled(vec![1.0, 3.0], 0.0, 1.0).unwrap();
-        assert_relative_eq!(p.coefficient_sum(), 4.0, epsilon = 1e-10);
+        assert_relative_eq!(p.endpoint_coefficient_sum(), 4.0, epsilon = 1e-10);
 
-        // Quadratic: b_0 = 0, b_1 = 2, b_2 = 4, sum = 6
+        // Quadratic: b_0 = 0, b_1 = 2, b_2 = 4, endpoint sum = 0 + 4 = 4
         let p = BernsteinPolynomial::from_unscaled(vec![0.0, 2.0, 4.0], 0.0, 1.0).unwrap();
-        assert_relative_eq!(p.coefficient_sum(), 6.0, epsilon = 1e-10);
+        assert_relative_eq!(p.endpoint_coefficient_sum(), 4.0, epsilon = 1e-10);
+
+        // Also equals P(a) + P(b)
+        assert_relative_eq!(
+            p.endpoint_coefficient_sum(),
+            p.evaluate(0.0) + p.evaluate(1.0),
+            epsilon = 1e-10
+        );
     }
 
     #[test]
-    fn test_normalize_coefficient_sum() {
-        // Polynomial with coefficient sum = 4
+    fn test_normalize_endpoint_sum() {
+        // Polynomial: b_0 = 1, b_1 = 3, endpoint sum = 4
         let p = BernsteinPolynomial::from_unscaled(vec![1.0, 3.0], 0.0, 1.0).unwrap();
-        let normalized = p.normalize_coefficient_sum().unwrap();
+        let normalized = p.normalize_endpoint_sum().unwrap();
 
-        // Check sum is now 1
-        assert_relative_eq!(normalized.coefficient_sum(), 1.0, epsilon = 1e-10);
+        // Check endpoint sum is now 1
+        assert_relative_eq!(normalized.endpoint_coefficient_sum(), 1.0, epsilon = 1e-10);
 
         // Check it represents p(x) / 4
         for x in [0.0, 0.25, 0.5, 0.75, 1.0] {
@@ -531,18 +539,25 @@ mod tests {
                 epsilon = 1e-10
             );
         }
+
+        // Verify Q(a) + Q(b) = 1
+        assert_relative_eq!(
+            normalized.evaluate(0.0) + normalized.evaluate(1.0),
+            1.0,
+            epsilon = 1e-10
+        );
     }
 
     #[test]
     fn test_normalize_already_normalized() {
-        // Already has sum = 1
+        // Already has b_0 + b_1 = 1
         let p = BernsteinPolynomial::from_unscaled(vec![0.25, 0.75], 0.0, 1.0).unwrap();
-        assert_relative_eq!(p.coefficient_sum(), 1.0, epsilon = 1e-10);
+        assert_relative_eq!(p.endpoint_coefficient_sum(), 1.0, epsilon = 1e-10);
 
-        let normalized = p.normalize_coefficient_sum().unwrap();
+        let normalized = p.normalize_endpoint_sum().unwrap();
 
         // Should be essentially unchanged
-        assert_relative_eq!(normalized.coefficient_sum(), 1.0, epsilon = 1e-10);
+        assert_relative_eq!(normalized.endpoint_coefficient_sum(), 1.0, epsilon = 1e-10);
         for x in [0.0, 0.5, 1.0] {
             assert_relative_eq!(p.evaluate(x), normalized.evaluate(x), epsilon = 1e-10);
         }
