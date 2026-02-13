@@ -442,20 +442,36 @@ pub struct ApproximationConfig {
 }
 
 impl ApproximationConfig {
-    /// Create convergence sequence for approximation study
+    /// Create convergence sequence for approximation study with [2/1] rationals
+    /// [2/1] gives 4N DOF, suitable for comparing with cubic splines
     pub fn convergence_sequence(max_intervals: usize) -> Vec<Self> {
+        Self::convergence_sequence_rational(max_intervals, 2, 1)
+    }
+
+    /// Create convergence sequence with specific rational degrees [n/m]
+    /// Note: Must satisfy n+m+1 = 2p (even) for two-point Padé
+    pub fn convergence_sequence_rational(
+        max_intervals: usize,
+        numerator_deg: usize,
+        denominator_deg: usize,
+    ) -> Vec<Self> {
         let mut configs = Vec::new();
         let mut n = 4;
         while n <= max_intervals {
             configs.push(ApproximationConfig {
                 num_intervals: n,
                 polynomial_degree: 3, // Cubic splines
-                rational_numerator_degree: 2,
-                rational_denominator_degree: 2, // [2/2] Padé
+                rational_numerator_degree: numerator_deg,
+                rational_denominator_degree: denominator_deg,
             });
             n *= 2;
         }
         configs
+    }
+
+    /// Create [3/2] rational sequence (6N DOF - comparable to quintic splines)
+    pub fn convergence_sequence_32(max_intervals: usize) -> Vec<Self> {
+        Self::convergence_sequence_rational(max_intervals, 3, 2)
     }
 
     /// Degrees of freedom for polynomial spline

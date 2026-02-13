@@ -129,20 +129,36 @@ pub struct MeshConfig {
 }
 
 impl MeshConfig {
-    /// Create uniform mesh configurations for convergence study
+    /// Create uniform mesh configurations for convergence study with [2/1] rationals
+    /// [2/1] gives 4N DOF, suitable for comparing with cubic splines
     pub fn convergence_sequence(max_intervals: usize) -> Vec<Self> {
+        Self::convergence_sequence_rational(max_intervals, 2, 1)
+    }
+
+    /// Create convergence sequence with specific rational degrees [n/m]
+    /// Note: Must satisfy n+m+1 = 2p (even) for two-point Padé
+    pub fn convergence_sequence_rational(
+        max_intervals: usize,
+        numerator_deg: usize,
+        denominator_deg: usize,
+    ) -> Vec<Self> {
         let mut configs = Vec::new();
         let mut n = 4;
         while n <= max_intervals {
             configs.push(MeshConfig {
                 num_intervals: n,
                 polynomial_degree: 3, // Cubic splines
-                rational_numerator_degree: 2,
-                rational_denominator_degree: 2, // [2/2] rational
+                rational_numerator_degree: numerator_deg,
+                rational_denominator_degree: denominator_deg,
             });
             n *= 2;
         }
         configs
+    }
+
+    /// Create [3/2] rational sequence (6N DOF - comparable to quintic splines)
+    pub fn convergence_sequence_32(max_intervals: usize) -> Vec<Self> {
+        Self::convergence_sequence_rational(max_intervals, 3, 2)
     }
 
     /// Degrees of freedom for polynomial spline
@@ -284,17 +300,29 @@ mod tests {
 
     #[test]
     fn test_mesh_config_dof() {
-        let config = MeshConfig {
+        // Test [2/1] rational
+        let config_21 = MeshConfig {
             num_intervals: 10,
             polynomial_degree: 3,
             rational_numerator_degree: 2,
+            rational_denominator_degree: 1,
+        };
+
+        let poly_dof = config_21.polynomial_dof();
+        let rat_dof_21 = config_21.rational_dof();
+
+        assert_eq!(poly_dof, 13); // 10 + 3
+        assert_eq!(rat_dof_21, 40);  // 10 * (2 + 1 + 1) = 10 * 4
+
+        // Test [3/2] rational
+        let config_32 = MeshConfig {
+            num_intervals: 10,
+            polynomial_degree: 3,
+            rational_numerator_degree: 3,
             rational_denominator_degree: 2,
         };
 
-        let poly_dof = config.polynomial_dof();
-        let rat_dof = config.rational_dof();
-
-        assert_eq!(poly_dof, 13); // 10 + 3
-        assert_eq!(rat_dof, 50);  // 10 * (2 + 2 + 1) accounting for normalization
+        let rat_dof_32 = config_32.rational_dof();
+        assert_eq!(rat_dof_32, 60);  // 10 * (3 + 2 + 1) = 10 * 6
     }
 }

@@ -241,7 +241,7 @@ def run_convergence_study(problem: PoissonProblem1D, mesh_sizes: List[int]) -> C
             l_inf_error=linf,
             h1_seminorm_error=h1,
             num_intervals=n,
-            dof=n * 5,  # [2/2] rational DOF (with normalization: 2+2+1)
+            dof=n * 4,  # [2/1] rational DOF (with normalization: 2+1+1)
             mesh_size=h,
             method='rational'
         )
