@@ -9,12 +9,13 @@ description = "Comprehensive benchmarks for Gelfgren piecewise rational interpol
 [dependencies]
 gelfgren-core = { path = "../gelfgren-core" }
 
-[[bench]]
-name = "poisson_1d"
-harness = false
+# Benchmarks are run via Python scripts
+# [[bench]]
+# name = "poisson_1d"
+# harness = false
 
-[dev-dependencies]
-criterion = "0.5"
+# [dev-dependencies]
+# criterion = "0.5"
 
 [lib]
 name = "gelfgren_benchmarks"

@@ -18,14 +18,28 @@
 //! 1. **From power series**: Given coefficients {a₀, a₁, ..., aₙ₊ₘ}
 //! 2. **From derivatives**: Given f(x₀), f'(x₀), ..., f^(n+m)(x₀)
 //! 3. **Symmetric**: Two-point approximation at x₀ and x₁ (Gelfgren's method)
+//! 4. **Two-point (Traub)**: Traub's Equation 3.6 specialized to two points,
+//!    expressed directly in Bernstein basis
+//!
+//! # Bernstein Representation
+//!
+//! For two-point Padé approximants on [x₀, x₁], the natural basis functions are:
+//! - L₀(t) = (t - x₁)/(x₀ - x₁) = -(t - x₁)/Δx
+//! - L₁(t) = (t - x₀)/(x₁ - x₀) = (t - x₀)/Δx
+//!
+//! These are the linear Bernstein basis functions, and all terms in Traub's
+//! formulas are naturally expressed using (t-x₀) and (t-x₁).
 //!
 //! # References
 //!
+//! - Traub (1964): "On Lagrange-Hermite Interpolation" (Equation 3.6)
 //! - Gelfgren (1975): Symmetric Padé approximants on intervals
 //! - Baker & Graves-Morris: "Padé Approximants" (standard reference)
 
 mod approximant;
 mod symmetric;
+mod two_point;
 
 pub use approximant::PadeApproximant;
 pub use symmetric::SymmetricPade;
+pub use two_point::TwoPointPade;
