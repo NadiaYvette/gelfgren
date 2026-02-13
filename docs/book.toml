@@ -1,0 +1,31 @@
+[book]
+title = "Gelfgren Documentation"
+authors = ["Gelfgren Contributors"]
+language = "en"
+multilingual = false
+src = "."
+
+[build]
+build-dir = "../target/doc/book"
+
+[output.html]
+mathjax-support = true
+git-repository-url = "https://github.com/yourusername/gelfgren"
+git-repository-icon = "fa-github"
+edit-url-template = "https://github.com/yourusername/gelfgren/edit/main/docs/{path}"
+site-url = "/gelfgren/"
+
+[output.html.fold]
+enable = true
+level = 1
+
+[output.html.search]
+enable = true
+
+[output.html.playground]
+editable = true
+line-numbers = true
+
+[preprocessor.links]
+
+[preprocessor.index]

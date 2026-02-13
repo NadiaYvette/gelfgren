@@ -1,0 +1,118 @@
+cabal-version:      3.0
+name:               gelfgren
+version:            0.1.0.0
+synopsis:           Haskell bindings for Gelfgren numerical computing library
+description:
+    Gelfgren provides high-performance piecewise rational interpolation methods
+    based on Jan Gelfgren's 1975 research. This package provides Haskell bindings
+    to the Rust-based C library, offering Bernstein polynomials, rational functions,
+    and Padé approximants with a safe, idiomatic Haskell interface.
+homepage:           https://github.com/yourusername/gelfgren
+bug-reports:        https://github.com/yourusername/gelfgren/issues
+license:            MIT OR Apache-2.0
+license-file:       LICENSE
+author:             Gelfgren Contributors
+maintainer:         your.email@example.com
+copyright:          2024 Gelfgren Contributors
+category:           Math, Numerical
+build-type:         Simple
+extra-source-files:
+    README.md
+    CHANGELOG.md
+
+tested-with:
+    GHC == 9.2.8
+  , GHC == 9.4.8
+  , GHC == 9.6.3
+
+common common-options
+    default-language: Haskell2010
+    default-extensions:
+        BangPatterns
+        ConstraintKinds
+        DataKinds
+        DeriveDataTypeable
+        DeriveFunctor
+        DeriveGeneric
+        FlexibleContexts
+        FlexibleInstances
+        FunctionalDependencies
+        GADTs
+        GeneralizedNewtypeDeriving
+        LambdaCase
+        MultiParamTypeClasses
+        OverloadedStrings
+        PatternSynonyms
+        RankNTypes
+        ScopedTypeVariables
+        StandaloneDeriving
+        TupleSections
+        TypeApplications
+        TypeFamilies
+        TypeOperators
+        ViewPatterns
+
+    ghc-options:
+        -Wall
+        -Wcompat
+        -Widentities
+        -Wincomplete-record-updates
+        -Wincomplete-uni-patterns
+        -Wmissing-home-modules
+        -Wpartial-fields
+        -Wredundant-constraints
+
+    build-depends:
+        base >= 4.16 && < 5
+
+library
+    import:           common-options
+    hs-source-dirs:   src
+    exposed-modules:
+        Gelfgren
+        Gelfgren.FFI
+
+    build-depends:
+        base >= 4.16 && < 5
+
+    -- Link against the Gelfgren C library
+    extra-libraries:  gelfgren
+    -- Add library search paths
+    extra-lib-dirs:   ../../target/release
+    -- Add header include paths
+    include-dirs:     ../../include
+
+executable gelfgren-example
+    import:           common-options
+    main-is:          Main.hs
+    hs-source-dirs:   app
+    build-depends:
+        base >= 4.16 && < 5
+      , gelfgren
+
+    ghc-options:
+        -threaded
+        -rtsopts
+        -with-rtsopts=-N
+
+test-suite gelfgren-test
+    import:           common-options
+    type:             exitcode-stdio-1.0
+    main-is:          Main.hs
+    hs-source-dirs:   test
+    other-modules:
+        Test.Gelfgren
+
+    build-depends:
+        base >= 4.16 && < 5
+      , gelfgren
+      , hspec >= 2.10
+      , QuickCheck >= 2.14
+
+    ghc-options:
+        -threaded
+        -rtsopts
+        -with-rtsopts=-N
+
+    build-tool-depends:
+        hspec-discover:hspec-discover >= 2.10

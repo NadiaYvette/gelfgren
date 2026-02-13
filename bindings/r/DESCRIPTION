@@ -1,0 +1,25 @@
+Package: gelfgren
+Type: Package
+Title: Piecewise Rational Interpolation and Approximation
+Version: 0.1.0
+Authors@R: c(
+    person("Gelfgren", "Contributors", role = c("aut", "cre"),
+           email = "gelfgren@example.com"))
+Description: High-performance piecewise rational interpolation and approximation
+    library implementing algorithms from Jan Gelfgren's 1975 paper. Provides
+    Bernstein polynomial representation, rational functions, Padé approximants,
+    and Lagrange-Hermite interpolation with applications to boundary value problems.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
+SystemRequirements: Cargo (Rust's package manager), rustc >= 1.70
+Imports:
+    methods
+Suggests:
+    testthat (>= 3.0.0),
+    knitr,
+    rmarkdown
+Config/rextendr/version: 0.3.1
+VignetteBuilder: knitr

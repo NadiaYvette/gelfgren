@@ -1,0 +1,3 @@
+/home/nyc/src/gelfgren/bindings/c/build/CMakeFiles/basic_usage.dir
+/home/nyc/src/gelfgren/bindings/c/build/CMakeFiles/edit_cache.dir
+/home/nyc/src/gelfgren/bindings/c/build/CMakeFiles/rebuild_cache.dir

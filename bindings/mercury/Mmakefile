@@ -1,0 +1,93 @@
+#-----------------------------------------------------------------------------#
+# vim: ts=8 sw=8 noexpandtab
+#-----------------------------------------------------------------------------#
+# Mmakefile for Gelfgren Mercury bindings
+#-----------------------------------------------------------------------------#
+
+# Module name
+MAIN_TARGET = libgelfgren
+
+# Source directories
+MERCURY_MAIN_MODULES = gelfgren
+VPATH = src:examples
+
+# C library configuration
+GELFGREN_LIB_DIR = ../../target/release
+GELFGREN_INCLUDE_DIR = ../../include
+
+# Compiler flags
+MCFLAGS += --infer-all
+MCFLAGS += --warn-unused-imports
+MCFLAGS += --halt-at-warn
+
+# C compiler flags
+CFLAGS += -I$(GELFGREN_INCLUDE_DIR)
+MGNUCFLAGS += -I$(GELFGREN_INCLUDE_DIR)
+
+# Linker flags
+MLLIBS += -L$(GELFGREN_LIB_DIR) -lgelfgren
+LDFLAGS += -L$(GELFGREN_LIB_DIR)
+LD_LIBFLAGS += -L$(GELFGREN_LIB_DIR)
+
+# Runtime library path
+RPATH_OPT = -Wl,-rpath,$(GELFGREN_LIB_DIR)
+MLLIBS += $(RPATH_OPT)
+
+# Grade
+GRADE = asm_fast.gc
+
+#-----------------------------------------------------------------------------#
+
+# Default target
+.DEFAULT_GOAL := library
+
+# Build library
+.PHONY: library
+library: $(MAIN_TARGET).so
+
+# Build examples
+.PHONY: examples
+examples: basic_usage
+
+basic_usage: basic_usage.m gelfgren.so
+	mmc --make $@ $(MCFLAGS) $(MLLIBS)
+
+# Run example
+.PHONY: run-example
+run-example: basic_usage
+	@echo "Running example..."
+	@LD_LIBRARY_PATH=$(GELFGREN_LIB_DIR):$$LD_LIBRARY_PATH \
+	 DYLD_LIBRARY_PATH=$(GELFGREN_LIB_DIR):$$DYLD_LIBRARY_PATH \
+	 ./basic_usage
+
+# Clean
+.PHONY: clean
+clean:
+	mmc --make $(MAIN_TARGET).clean
+	mmc --make basic_usage.clean
+	rm -f *.mh *.err *.d *.c *.o *.so *.a
+	rm -rf Mercury
+
+# Very clean
+.PHONY: realclean
+realclean: clean
+	rm -f basic_usage
+
+# Help
+.PHONY: help
+help:
+	@echo "Gelfgren Mercury Bindings Makefile"
+	@echo ""
+	@echo "Targets:"
+	@echo "  library      - Build the Gelfgren library (default)"
+	@echo "  examples     - Build example programs"
+	@echo "  run-example  - Run the example program"
+	@echo "  clean        - Remove build artifacts"
+	@echo "  realclean    - Remove all generated files"
+	@echo "  help         - Show this help message"
+	@echo ""
+	@echo "Prerequisites:"
+	@echo "  - Mercury compiler (mmc)"
+	@echo "  - Gelfgren C library built (cargo build --release in root)"
+
+#-----------------------------------------------------------------------------#

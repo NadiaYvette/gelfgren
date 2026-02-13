@@ -1,0 +1,18 @@
+[package]
+name = "gelfgren-python"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+
+[lib]
+name = "gelfgren"
+crate-type = ["cdylib"]
+
+[dependencies]
+gelfgren-core = { path = "../../gelfgren-core" }
+pyo3 = { version = "0.22", features = ["extension-module"] }
+numpy = "0.22"
+
+[build-dependencies]
+pyo3-build-config = "0.22"

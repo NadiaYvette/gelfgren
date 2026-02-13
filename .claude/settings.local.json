@@ -7,7 +7,21 @@
       "Bash(git init:*)",
       "Bash(git add:*)",
       "Bash(git commit:*)",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "Bash(grep:*)",
+      "Bash(cbindgen:*)",
+      "Bash(cargo clean:*)",
+      "Bash(make clean:*)",
+      "Bash(make:*)",
+      "Bash(gcc:*)",
+      "Bash(cmake:*)",
+      "Bash(./basic_usage:*)",
+      "Bash(./cpp_example:*)",
+      "Bash(cargo check:*)",
+      "Bash(PYO3_USE_ABI3_FORWARD_COMPATIBILITY=1 cargo check:*)",
+      "Bash(git config:*)",
+      "Bash(python3:*)",
+      "Bash(the Results\" section that explains:\n\n1. Understanding Convergence Tables:\n   - Detailed explanation of each column: N, h, DOF, L² error, L∞ error, H¹ error\n   - What convergence rates mean and how to read them\n   - Concrete example showing how to interpret a table row\n   - Expected values for different problem types\n\n2. Understanding Convergence Plots \\(4-panel explanation\\):\n   - Panel 1: L² error vs mesh size \\(log-log\\)\n     * How to read log-log plots\n     * What slopes indicate \\(convergence rates\\)\n     * Reference lines and their meaning\n     * What to look for: straight lines, relative positions, stagnation\n   \n   - Panel 2: Relative L² error vs mesh size\n     * Normalization and when it''s useful\n     * Interpreting relative error magnitudes\n   \n   - Panel 3: Error vs degrees of freedom \\(efficiency\\)\n     * Why this matters for comparing methods with different DOF\n     * How to determine which method is more efficient\n     * Accounting for 6× DOF difference between methods\n   \n   - Panel 4: Convergence rates over refinements\n     * What rate consistency means\n     * Interpreting increasing/decreasing/oscillating rates\n     * Expected values and what deviations indicate\n\n3. Comparing Polynomial vs Rational Methods:\n   - Framework for systematic comparison\n   - Four key questions to ask when comparing results\n   - How to test the \"coarse mesh hypothesis\"\n\n4. Special Considerations:\n   - Discontinuous problems: why rates are limited\n   - Near-pole problems: where rationals should excel\n   - Oscillatory problems: resolution requirements\n\nThe guide provides readers with a complete framework for understanding\nthe numerical results and making informed decisions about which approximation\nmethod to use for their specific problem.\n\nCo-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>\nEOF\n\\)\")"
     ]
   }
 }

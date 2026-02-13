@@ -1,0 +1,3 @@
+/home/nyc/src/gelfgren/bindings/cpp/build/CMakeFiles/cpp_example.dir
+/home/nyc/src/gelfgren/bindings/cpp/build/CMakeFiles/edit_cache.dir
+/home/nyc/src/gelfgren/bindings/cpp/build/CMakeFiles/rebuild_cache.dir

@@ -1,0 +1,44 @@
+# frozen_string_literal: true
+
+require "bundler/gem_tasks"
+require "rake/extensiontask"
+require "rspec/core/rake_task"
+require "rubocop/rake_task"
+
+Rake::ExtensionTask.new("gelfgren") do |ext|
+  ext.lib_dir = "lib/gelfgren"
+  ext.ext_dir = "ext/gelfgren"
+end
+
+RSpec::Core::RakeTask.new(:spec)
+
+RuboCop::RakeTask.new
+
+task default: [:compile, :spec, :rubocop]
+task test: :spec
+
+# Add a compile task that depends on the extension
+task compile: "compile:gelfgren"
+
+desc "Run examples"
+task :examples => :compile do
+  Dir.glob("examples/*.rb").each do |example|
+    puts "Running #{example}..."
+    system("ruby #{example}") || abort("Example failed!")
+  end
+end
+
+desc "Build and install gem locally"
+task :install_local => [:build] do
+  gem_file = Dir["pkg/gelfgren-*.gem"].first
+  system("gem install #{gem_file}") || abort("Installation failed!")
+end
+
+desc "Clean build artifacts"
+task :clean do
+  rm_rf "pkg"
+  rm_rf "tmp"
+  rm_rf "lib/gelfgren/gelfgren.bundle"
+  rm_rf "lib/gelfgren/gelfgren.so"
+  rm_rf "ext/gelfgren/target"
+end

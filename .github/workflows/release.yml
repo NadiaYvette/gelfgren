@@ -1,0 +1,146 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  create-release:
+    name: Create Release
+    runs-on: ubuntu-latest
+    outputs:
+      upload_url: ${{ steps.create_release.outputs.upload_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Extract version from tag
+        id: get_version
+        run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ steps.get_version.outputs.VERSION }}
+          body: |
+            ## Gelfgren ${{ steps.get_version.outputs.VERSION }}
+
+            ### Changes
+            See [CHANGELOG.md](https://github.com/${{ github.repository }}/blob/main/CHANGELOG.md) for details.
+
+            ### Downloads
+            - **Rust crate**: `cargo add gelfgren-core`
+            - **C/C++**: Download `libgelfgren-<platform>.tar.gz` below
+            - **Python**: `pip install gelfgren`
+            - **Java**: See Maven Central
+            - **R**: `install.packages("gelfgren")`
+
+            ### Documentation
+            - [Rust API docs](https://docs.rs/gelfgren-core)
+            - [Online documentation](https://${{ github.repository_owner }}.github.io/gelfgren)
+          draft: false
+          prerelease: false
+
+  build-native-libraries:
+    name: Build Native Library (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    needs: create-release
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+            target: x86_64-unknown-linux-gnu
+            artifact_name: libgelfgren.so
+            asset_name: libgelfgren-linux-x64.tar.gz
+          - os: macos-latest
+            target: x86_64-apple-darwin
+            artifact_name: libgelfgren.dylib
+            asset_name: libgelfgren-macos-x64.tar.gz
+          - os: macos-latest
+            target: aarch64-apple-darwin
+            artifact_name: libgelfgren.dylib
+            asset_name: libgelfgren-macos-arm64.tar.gz
+          - os: windows-latest
+            target: x86_64-pc-windows-msvc
+            artifact_name: gelfgren.dll
+            asset_name: libgelfgren-windows-x64.zip
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.target }}
+
+      - uses: Swatinem/rust-cache@v2
+
+      - name: Build
+        run: cargo build --release --target ${{ matrix.target }} -p gelfgren-ffi
+
+      - name: Generate header
+        run: |
+          cargo install cbindgen || true
+          cd gelfgren-ffi
+          cbindgen --config cbindgen.toml --output ../include/gelfgren.h || true
+
+      - name: Package (Unix)
+        if: runner.os != 'Windows'
+        run: |
+          mkdir -p release/lib release/include
+          cp target/${{ matrix.target }}/release/${{ matrix.artifact_name }} release/lib/
+          cp include/gelfgren.h release/include/
+          cd release
+          tar czf ../${{ matrix.asset_name }} *
+
+      - name: Package (Windows)
+        if: runner.os == 'Windows'
+        run: |
+          mkdir release\lib release\include
+          copy target\${{ matrix.target }}\release\${{ matrix.artifact_name }} release\lib\
+          copy include\gelfgren.h release\include\
+          cd release
+          powershell Compress-Archive -Path * -DestinationPath ..\${{ matrix.asset_name }}
+
+      - name: Upload Release Asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ needs.create-release.outputs.upload_url }}
+          asset_path: ./${{ matrix.asset_name }}
+          asset_name: ${{ matrix.asset_name }}
+          asset_content_type: application/gzip
+
+  publish-crate:
+    name: Publish to crates.io
+    runs-on: ubuntu-latest
+    needs: create-release
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - name: Publish gelfgren-core
+        run: cargo publish -p gelfgren-core --token ${{ secrets.CARGO_TOKEN }}
+      - name: Wait for crates.io
+        run: sleep 60
+      - name: Publish gelfgren-ffi
+        run: cargo publish -p gelfgren-ffi --token ${{ secrets.CARGO_TOKEN }}
+
+  trigger-language-releases:
+    name: Trigger Language-Specific Releases
+    runs-on: ubuntu-latest
+    needs: [create-release, build-native-libraries]
+    steps:
+      - name: Trigger Python release
+        run: echo "Python wheel publishing handled by bindings-python.yml"
+      - name: Trigger Java release
+        run: echo "Maven Central publishing handled by bindings-java.yml"
+      - name: Trigger R release
+        run: echo "CRAN submission handled by bindings-r.yml"

@@ -1,0 +1,1 @@
+/usr/bin/c++ -Wl,--dependency-file=CMakeFiles/cpp_example.dir/link.d CMakeFiles/cpp_example.dir/example.cpp.o -o cpp_example   -L/home/nyc/src/gelfgren/bindings/cpp/../../target/release  -Wl,-rpath,/home/nyc/src/gelfgren/bindings/cpp/../../target/release -lgelfgren -lm -lpthread -ldl

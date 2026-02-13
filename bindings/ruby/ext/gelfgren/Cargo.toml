@@ -1,0 +1,19 @@
+[package]
+name = "gelfgren-ruby"
+version = "0.1.0"
+edition = "2021"
+authors = ["Gelfgren Contributors"]
+license = "MIT OR Apache-2.0"
+description = "Ruby bindings for Gelfgren numerical computing library"
+repository = "https://github.com/yourusername/gelfgren"
+
+[lib]
+crate-type = ["cdylib"]
+name = "gelfgren"
+
+[dependencies]
+gelfgren-core = { path = "../../../../gelfgren-core" }
+magnus = { version = "0.6", features = ["rb-sys-interop"] }
+
+[build-dependencies]
+rb-sys = "0.9"

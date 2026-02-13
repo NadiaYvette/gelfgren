@@ -1,0 +1,20 @@
+packages: .
+
+-- Configuration for local development
+package gelfgren
+  extra-lib-dirs: ../../target/release
+  extra-include-dirs: ../../include
+
+-- GHC options
+package *
+  ghc-options: -j4
+
+-- Test options
+tests: True
+benchmarks: False
+
+-- Documentation
+documentation: True
+
+-- Index state
+index-state: 2024-01-01T00:00:00Z

@@ -1,0 +1,32 @@
+name = "gelfgren"
+version = "0.1.0"
+license = "MIT OR Apache-2.0"
+author = "Gelfgren Contributors"
+maintainer = "your.email@example.com"
+copyright = "2024 Gelfgren Contributors"
+
+[build]
+auto-executables = true
+auto-tests = true
+auto-examples = true
+link = ["gelfgren"]
+
+[library]
+source-dir = "src"
+
+[dependencies]
+
+[dev-dependencies]
+
+[install]
+library = true
+
+[[executable]]
+name = "basic_usage"
+source-dir = "example"
+main = "basic_usage.f90"
+
+[[test]]
+name = "test_bernstein"
+source-dir = "test"
+main = "test_bernstein.f90"
