@@ -303,7 +303,7 @@ def run_convergence_study(problem: SpecialFunctionApproximation,
             relative_l2_error=rel_l2,
             relative_l_inf_error=rel_linf,
             num_intervals=n,
-            dof=n * 6,  # [2/2] rational DOF
+            dof=n * 5,  # [2/2] rational DOF (with normalization: 2+2+1)
             mesh_size=h,
             method='rational'
         )

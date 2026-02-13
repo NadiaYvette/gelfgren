@@ -466,8 +466,10 @@ impl ApproximationConfig {
 
     /// Degrees of freedom for rational approximant
     pub fn rational_dof(&self) -> usize {
-        // [m/n] rational on each interval
-        self.num_intervals * (self.rational_numerator_degree + self.rational_denominator_degree + 2)
+        // For [m/n] rational on each interval:
+        // Numerator: m+1 coefficients, Denominator: n coefficients (after normalization)
+        // Total: m + n + 1 per interval
+        self.num_intervals * (self.rational_numerator_degree + self.rational_denominator_degree + 1)
     }
 }
 

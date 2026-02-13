@@ -155,9 +155,10 @@ For each method (polynomial splines vs piecewise rational approximants), we:
 ### Degrees of Freedom
 
 - **Polynomial (cubic spline)**: DOF = $n + 3$ (for $n$ intervals)
-- **Rational ([2/2] Padé per interval)**: DOF = $6n$
+- **Rational ([2/2] Padé per interval)**: DOF = $5n$ (accounting for normalization constraint)
+- **Rational ([3/2] Padé per interval)**: DOF = $6n$ (same as quintic splines per interval)
 
-Rational approximants use more DOF per interval but may achieve target accuracy with fewer intervals (coarser mesh).
+Rational approximants use more DOF per interval but may achieve target accuracy with fewer intervals (coarser mesh). The [3/2] rational has the same DOF per interval as quintic polynomials but with different approximation properties.
 
 ## Key Questions
 

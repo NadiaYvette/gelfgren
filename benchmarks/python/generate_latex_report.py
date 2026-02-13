@@ -279,10 +279,11 @@ where each $R_i$ is a \pade{m}{n} approximant to the local solution.
 
 \begin{itemize}
 \item Polynomial splines (cubic, $C^1$): $N + 3$ DOF
-\item Piecewise rational \pade{m}{n}: $N \times (m+n+2)$ DOF
+\item Piecewise rational \pade{m}{n}: $N \times (m+n+1)$ DOF (accounting for normalization)
 \end{itemize}
 
-For \pade{2}{2}: $6N$ vs $N+3$, so rationals use $\approx 6\times$ more DOF.
+For \pade{2}{2}: $5N$ vs $N+3$, so rationals use $\approx 5\times$ more DOF.
+For \pade{3}{2}: $6N$ vs $N+3$, comparable to quintic splines per interval.
 
 \textbf{Key question:} Can rationals achieve better accuracy per DOF?
 
@@ -602,8 +603,9 @@ Each convergence table shows error metrics for successive mesh refinements:
 \item[DOF] Degrees of freedom:
   \begin{itemize}
   \item Polynomial (cubic spline): $N + 3$
-  \item Rational ([2/2] Padé): $6N$
-  \item Rationals use $\approx 6\times$ more DOF per interval
+  \item Rational ([2/2] Padé): $5N$ (with normalization)
+  \item Rational ([3/2] Padé): $6N$
+  \item Rationals use $\approx 5\times$ ([2/2]) or $6\times$ ([3/2]) more DOF per interval
   \end{itemize}
 
 \item[L² Error] Root-mean-square error: $\sqrt{\int |u - u_h|^2 dx}$
@@ -688,10 +690,11 @@ Each benchmark includes a figure with four panels:
 \item \textbf{Y-axis}: L² error (logarithmic)
 \item \textbf{Purpose}: Compares efficiency - accuracy achieved per DOF
 \item \textbf{Interpretation}: Lower curve at same DOF = more efficient method
-\item \textbf{Key insight}: Since rationals use $6\times$ more DOF per interval,
+\item \textbf{Key insight}: Since [2/2] rationals use $5\times$ more DOF per interval,
   they appear further right on this plot. If the rational curve is significantly
   below the polynomial curve, rationals achieve better accuracy despite using more DOF.
   If curves are similar or polynomial is lower, polynomial splines are more efficient.
+  The [3/2] rational provides another comparison point with $6\times$ more DOF per interval.
 \end{itemize}
 
 \paragraph{Panel 4: Convergence Rates}
@@ -751,7 +754,7 @@ For smooth problems (Problem 1), both methods achieved excellent convergence:
 \begin{itemize}
 \item Polynomial splines: Consistent $O(h^4)$ convergence
 \item Rational approximants: Similar or slightly better rates
-\item Efficiency: Rationals require $\approx 6\times$ more DOF
+\item Efficiency: [2/2] rationals require $\approx 5\times$ more DOF
 \end{itemize}
 
 \textbf{Conclusion:} Polynomial splines more efficient for smooth problems.

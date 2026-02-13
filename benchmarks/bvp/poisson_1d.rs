@@ -154,8 +154,12 @@ impl MeshConfig {
 
     /// Degrees of freedom for rational approximant
     pub fn rational_dof(&self) -> usize {
-        // For piecewise rational [m/n] on each interval
-        self.num_intervals * (self.rational_numerator_degree + self.rational_denominator_degree + 2)
+        // For piecewise rational [m/n] on each interval:
+        // Numerator: m+1 coefficients (all free)
+        // Denominator: n+1 coefficients with normalization constraint (b₀ + bₙ = 1)
+        // This removes one DOF, leaving n free parameters
+        // Total per interval: (m+1) + n = m + n + 1
+        self.num_intervals * (self.rational_numerator_degree + self.rational_denominator_degree + 1)
     }
 }
 
@@ -291,6 +295,6 @@ mod tests {
         let rat_dof = config.rational_dof();
 
         assert_eq!(poly_dof, 13); // 10 + 3
-        assert_eq!(rat_dof, 60);  // 10 * (2 + 2 + 2)
+        assert_eq!(rat_dof, 50);  // 10 * (2 + 2 + 1) accounting for normalization
     }
 }
