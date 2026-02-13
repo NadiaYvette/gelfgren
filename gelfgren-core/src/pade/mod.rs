@@ -37,6 +37,7 @@
 //! - Baker & Graves-Morris: "Padé Approximants" (standard reference)
 
 mod approximant;
+mod linear_system;
 mod symmetric;
 mod two_point;
 
