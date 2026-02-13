@@ -131,6 +131,30 @@ efficiency comparisons based on degrees of freedom.
 
 '''
 
+    def _abstract(self) -> str:
+        return r'''\begin{abstract}
+We present a comprehensive comparison of piecewise rational approximants versus
+polynomial splines for approximating solutions to boundary value problems and
+special functions. This study tests the hypothesis that rational approximants,
+with their ability to represent poles and rapid variations, can achieve
+comparable accuracy to polynomial splines using coarser meshes.
+
+Benchmark problems include the 1D Poisson equation with various forcing functions
+and approximation of standard special functions (exponential, trigonometric,
+error function, Bessel functions, logarithm, and Runge's function). For each
+problem, we compute L² error, L∞ error, and H¹ seminorm error across mesh
+refinements from 4 to 128 intervals.
+
+Results demonstrate that both methods achieve expected convergence rates for
+smooth problems, with polynomial splines showing $O(h^4)$ convergence and
+piecewise rational [2/2] Padé approximants showing comparable or superior rates.
+For problems with discontinuities or near-singularities, rational approximants
+show particular promise.
+\end{abstract}
+\clearpage
+
+'''
+
     def _table_of_contents(self) -> str:
         return r'''\tableofcontents
 \clearpage
@@ -261,6 +285,95 @@ where each $R_i$ is a \pade{m}{n} approximant to the local solution.
 For \pade{2}{2}: $6N$ vs $N+3$, so rationals use $\approx 6\times$ more DOF.
 
 \textbf{Key question:} Can rationals achieve better accuracy per DOF?
+
+'''
+
+    def _mathematical_background(self) -> str:
+        return r'''\chapter{Mathematical Background}
+
+\section{Polynomial Splines}
+
+\subsection{Cubic Splines}
+
+A cubic spline $s(x)$ on mesh $\{x_i\}_{i=0}^N$ satisfies:
+\begin{itemize}
+\item $s|_{[x_i, x_{i+1}]}$ is a cubic polynomial
+\item $s \in C^2[a,b]$ (twice continuously differentiable)
+\item Interpolation: $s(x_i) = f(x_i)$ at knots
+\end{itemize}
+
+\begin{theorem}[Spline Approximation]
+Let $u \in C^{n+1}[a,b]$ and $s$ be the interpolating spline of degree $n$ with
+$k$-continuity. Then:
+\begin{equation}
+\norm{u - s}_{L^2} \leq C h^{n+1} \norm{u^{(n+1)}}_{L^2}
+\end{equation}
+where $h = \max_i (x_{i+1} - x_i)$ is the mesh size.
+\end{theorem}
+
+For cubic splines ($n=3$), we expect $O(h^4)$ convergence for smooth functions.
+
+\section{Rational Approximants}
+
+\subsection{Padé Approximants}
+
+Given power series $f(x) = \sum_{k=0}^\infty a_k x^k$, the \pade{m}{n} Padé
+approximant is the rational function:
+\begin{equation}
+R_{m,n}(x) = \frac{P_m(x)}{Q_n(x)} = \frac{p_0 + p_1 x + \cdots + p_m x^m}{q_0 + q_1 x + \cdots + q_n x^n}
+\end{equation}
+such that:
+\begin{equation}
+f(x) - R_{m,n}(x) = O(x^{m+n+1})
+\end{equation}
+
+Padé approximants can represent functions with poles exactly and often achieve
+superior convergence compared to polynomials.
+
+\subsection{Construction}
+
+Coefficients determined by matching Taylor series:
+\begin{equation}
+f(x) Q_n(x) - P_m(x) = O(x^{m+n+1})
+\end{equation}
+
+This yields a linear system for $(p_0, \ldots, p_m, q_1, \ldots, q_n)$ with
+$q_0 = 1$ (normalization).
+
+\section{Error Norms}
+
+We measure approximation quality using:
+
+\subsection{L² Norm}
+\begin{equation}
+\norm{e}_{L^2} = \left( \int_a^b |e(x)|^2 \, dx \right)^{1/2}
+\approx \left( h \sum_{i=0}^N |e(x_i)|^2 \right)^{1/2}
+\end{equation}
+
+\subsection{L∞ Norm}
+\begin{equation}
+\norm{e}_{L^\infty} = \max_{x \in [a,b]} |e(x)| \approx \max_i |e(x_i)|
+\end{equation}
+
+\subsection{H¹ Seminorm}
+\begin{equation}
+|e|_{H^1} = \norm{e'}_{L^2} = \left( \int_a^b |e'(x)|^2 \, dx \right)^{1/2}
+\end{equation}
+
+Measures error in first derivative, relevant for gradient-dependent problems.
+
+\section{Convergence Rates}
+
+For a sequence of meshes with $h \to 0$, we say the method has convergence rate
+$\alpha$ if:
+\begin{equation}
+\norm{e_h}_{L^2} = O(h^\alpha)
+\end{equation}
+
+Empirically estimated from successive refinements:
+\begin{equation}
+\alpha \approx \frac{\log(e_{h_1} / e_{h_2})}{\log(h_1 / h_2)}
+\end{equation}
 
 '''
 

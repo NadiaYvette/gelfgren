@@ -1,0 +1,145 @@
+{
+  "problem_name": "Smooth Poisson (sin)",
+  "polynomial_errors": [
+    {
+      "l2_error": 0.03749736882492497,
+      "l_inf_error": 0.05302928754551495,
+      "h1_seminorm_error": 0.11479697445265558,
+      "num_intervals": 4,
+      "dof": 5,
+      "mesh_size": 0.25,
+      "method": "polynomial"
+    },
+    {
+      "l2_error": 0.009157560828470045,
+      "l_inf_error": 0.012950746721879014,
+      "h1_seminorm_error": 0.028584823854536978,
+      "num_intervals": 8,
+      "dof": 9,
+      "mesh_size": 0.125,
+      "method": "polynomial"
+    },
+    {
+      "l2_error": 0.002276151583978604,
+      "l_inf_error": 0.0032189644400797413,
+      "h1_seminorm_error": 0.00713925981498301,
+      "num_intervals": 16,
+      "dof": 17,
+      "mesh_size": 0.0625,
+      "method": "polynomial"
+    },
+    {
+      "l2_error": 0.0005682152262952964,
+      "l_inf_error": 0.0008035776793731131,
+      "h1_seminorm_error": 0.00178438397898602,
+      "num_intervals": 32,
+      "dof": 33,
+      "mesh_size": 0.03125,
+      "method": "polynomial"
+    },
+    {
+      "l2_error": 0.00014200246345797275,
+      "l_inf_error": 0.00020082180971003893,
+      "h1_seminorm_error": 0.0004460691080076099,
+      "num_intervals": 64,
+      "dof": 65,
+      "mesh_size": 0.015625,
+      "method": "polynomial"
+    },
+    {
+      "l2_error": 3.549740807576602e-05,
+      "l_inf_error": 5.020091592577991e-05,
+      "h1_seminorm_error": 0.00011151559733271631,
+      "num_intervals": 128,
+      "dof": 129,
+      "mesh_size": 0.0078125,
+      "method": "polynomial"
+    }
+  ],
+  "rational_errors": [
+    {
+      "l2_error": 0.03749736882492497,
+      "l_inf_error": 0.05302928754551495,
+      "h1_seminorm_error": 0.11479697445265558,
+      "num_intervals": 4,
+      "dof": 24,
+      "mesh_size": 0.25,
+      "method": "rational"
+    },
+    {
+      "l2_error": 0.009157560828470045,
+      "l_inf_error": 0.012950746721879014,
+      "h1_seminorm_error": 0.028584823854536978,
+      "num_intervals": 8,
+      "dof": 48,
+      "mesh_size": 0.125,
+      "method": "rational"
+    },
+    {
+      "l2_error": 0.002276151583978604,
+      "l_inf_error": 0.0032189644400797413,
+      "h1_seminorm_error": 0.00713925981498301,
+      "num_intervals": 16,
+      "dof": 96,
+      "mesh_size": 0.0625,
+      "method": "rational"
+    },
+    {
+      "l2_error": 0.0005682152262952964,
+      "l_inf_error": 0.0008035776793731131,
+      "h1_seminorm_error": 0.00178438397898602,
+      "num_intervals": 32,
+      "dof": 192,
+      "mesh_size": 0.03125,
+      "method": "rational"
+    },
+    {
+      "l2_error": 0.00014200246345797275,
+      "l_inf_error": 0.00020082180971003893,
+      "h1_seminorm_error": 0.0004460691080076099,
+      "num_intervals": 64,
+      "dof": 384,
+      "mesh_size": 0.015625,
+      "method": "rational"
+    },
+    {
+      "l2_error": 3.549740807576602e-05,
+      "l_inf_error": 5.020091592577991e-05,
+      "h1_seminorm_error": 0.00011151559733271631,
+      "num_intervals": 128,
+      "dof": 768,
+      "mesh_size": 0.0078125,
+      "method": "rational"
+    }
+  ],
+  "convergence_rates": {
+    "polynomial_l2": [
+      2.0337540817563577,
+      2.008366739526161,
+      2.00208724281219,
+      2.000521533704719,
+      2.000130365906971
+    ],
+    "polynomial_linf": [
+      2.0337540817563475,
+      2.008366739526082,
+      2.0020872428133414,
+      2.0005215337224485,
+      2.000130366004874
+    ],
+    "rational_l2": [
+      2.0337540817563577,
+      2.008366739526161,
+      2.00208724281219,
+      2.000521533704719,
+      2.000130365906971
+    ],
+    "rational_linf": [
+      2.0337540817563475,
+      2.008366739526082,
+      2.0020872428133414,
+      2.0005215337224485,
+      2.000130366004874
+    ]
+  }
+}

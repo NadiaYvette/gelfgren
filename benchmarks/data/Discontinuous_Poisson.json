@@ -1,0 +1,145 @@
+{
+  "problem_name": "Discontinuous Poisson",
+  "polynomial_errors": [
+    {
+      "l2_error": 0.2096313728906053,
+      "l_inf_error": 0.3125,
+      "h1_seminorm_error": 0.6846531968814576,
+      "num_intervals": 4,
+      "dof": 5,
+      "mesh_size": 0.25,
+      "method": "polynomial"
+    },
+    {
+      "l2_error": 0.19437273913476139,
+      "l_inf_error": 0.28125,
+      "h1_seminorm_error": 0.7551903733496608,
+      "num_intervals": 8,
+      "dof": 9,
+      "mesh_size": 0.125,
+      "method": "polynomial"
+    },
+    {
+      "l2_error": 0.1883019147114133,
+      "l_inf_error": 0.2734375,
+      "h1_seminorm_error": 0.9238590936934051,
+      "num_intervals": 16,
+      "dof": 17,
+      "mesh_size": 0.0625,
+      "method": "polynomial"
+    },
+    {
+      "l2_error": 0.18554623252355873,
+      "l_inf_error": 0.265625,
+      "h1_seminorm_error": 1.2097019906778694,
+      "num_intervals": 32,
+      "dof": 33,
+      "mesh_size": 0.03125,
+      "method": "polynomial"
+    },
+    {
+      "l2_error": 0.18422311086888346,
+      "l_inf_error": 0.26171875,
+      "h1_seminorm_error": 1.644897710060568,
+      "num_intervals": 64,
+      "dof": 65,
+      "mesh_size": 0.015625,
+      "method": "polynomial"
+    },
+    {
+      "l2_error": 0.18357325246706568,
+      "l_inf_error": 0.259765625,
+      "h1_seminorm_error": 2.2807482860106734,
+      "num_intervals": 128,
+      "dof": 129,
+      "mesh_size": 0.0078125,
+      "method": "polynomial"
+    }
+  ],
+  "rational_errors": [
+    {
+      "l2_error": 0.2096313728906053,
+      "l_inf_error": 0.3125,
+      "h1_seminorm_error": 0.6846531968814576,
+      "num_intervals": 4,
+      "dof": 24,
+      "mesh_size": 0.25,
+      "method": "rational"
+    },
+    {
+      "l2_error": 0.19437273913476139,
+      "l_inf_error": 0.28125,
+      "h1_seminorm_error": 0.7551903733496608,
+      "num_intervals": 8,
+      "dof": 48,
+      "mesh_size": 0.125,
+      "method": "rational"
+    },
+    {
+      "l2_error": 0.1883019147114133,
+      "l_inf_error": 0.2734375,
+      "h1_seminorm_error": 0.9238590936934051,
+      "num_intervals": 16,
+      "dof": 96,
+      "mesh_size": 0.0625,
+      "method": "rational"
+    },
+    {
+      "l2_error": 0.18554623252355873,
+      "l_inf_error": 0.265625,
+      "h1_seminorm_error": 1.2097019906778694,
+      "num_intervals": 32,
+      "dof": 192,
+      "mesh_size": 0.03125,
+      "method": "rational"
+    },
+    {
+      "l2_error": 0.18422311086888346,
+      "l_inf_error": 0.26171875,
+      "h1_seminorm_error": 1.644897710060568,
+      "num_intervals": 64,
+      "dof": 384,
+      "mesh_size": 0.015625,
+      "method": "rational"
+    },
+    {
+      "l2_error": 0.18357325246706568,
+      "l_inf_error": 0.259765625,
+      "h1_seminorm_error": 2.2807482860106734,
+      "num_intervals": 128,
+      "dof": 768,
+      "mesh_size": 0.0078125,
+      "method": "rational"
+    }
+  ],
+  "convergence_rates": {
+    "polynomial_l2": [
+      0.10902874855770504,
+      0.04577822470371058,
+      0.021268962071215085,
+      0.010324648220498833,
+      0.005098193254180269
+    ],
+    "polynomial_linf": [
+      0.15200309344505006,
+      0.04064198449734577,
+      0.0418201756946269,
+      0.021373650792567037,
+      0.010806754956582912
+    ],
+    "rational_l2": [
+      0.10902874855770504,
+      0.04577822470371058,
+      0.021268962071215085,
+      0.010324648220498833,
+      0.005098193254180269
+    ],
+    "rational_linf": [
+      0.15200309344505006,
+      0.04064198449734577,
+      0.0418201756946269,
+      0.021373650792567037,
+      0.010806754956582912
+    ]
+  }
+}

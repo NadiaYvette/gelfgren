@@ -1,0 +1,72 @@
+\contentsline {chapter}{\numberline {1}Introduction}{4}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Motivation}{4}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Scope}{4}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Methodology}{5}{section.1.3}%
+\contentsline {chapter}{\numberline {2}Mathematical Background}{6}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Polynomial Splines}{6}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Definition}{6}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}Approximation Theory}{6}{subsection.2.1.2}%
+\contentsline {section}{\numberline {2.2}Rational Approximants}{6}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Padé Approximants}{6}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}Construction}{7}{subsection.2.2.2}%
+\contentsline {subsection}{\numberline {2.2.3}Approximation Properties}{7}{subsection.2.2.3}%
+\contentsline {section}{\numberline {2.3}Piecewise Rational Approximants}{7}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Degrees of Freedom}{7}{subsection.2.3.1}%
+\contentsline {chapter}{\numberline {3}Mathematical Background}{8}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Polynomial Splines}{8}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Cubic Splines}{8}{subsection.3.1.1}%
+\contentsline {section}{\numberline {3.2}Rational Approximants}{8}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Padé Approximants}{8}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}Construction}{9}{subsection.3.2.2}%
+\contentsline {section}{\numberline {3.3}Error Norms}{9}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}L² Norm}{9}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}L∞ Norm}{9}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.3}H¹ Seminorm}{9}{subsection.3.3.3}%
+\contentsline {section}{\numberline {3.4}Convergence Rates}{9}{section.3.4}%
+\contentsline {chapter}{\numberline {4}Benchmark Problems}{10}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Problem 1: Smooth Poisson Equation}{10}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}Problem Statement}{10}{subsection.4.1.1}%
+\contentsline {subsection}{\numberline {4.1.2}Exact Solution}{10}{subsection.4.1.2}%
+\contentsline {subsection}{\numberline {4.1.3}Theoretical Convergence}{10}{subsection.4.1.3}%
+\contentsline {section}{\numberline {4.2}Problem 2: Discontinuous Forcing}{10}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Problem Statement}{10}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Exact Solution}{11}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}Expected Behavior}{11}{subsection.4.2.3}%
+\contentsline {section}{\numberline {4.3}Problem 3: Oscillatory Forcing}{11}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Problem Statement}{11}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}Exact Solution}{11}{subsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.3.3}Challenge}{11}{subsection.4.3.3}%
+\contentsline {chapter}{\numberline {5}Boundary Value Problem Convergence Studies}{12}{chapter.5}%
+\contentsline {chapter}{\numberline {6}Convergence Studies}{13}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Discontinuous Poisson}{13}{section.6.1}%
+\contentsline {subsection}{\numberline {6.1.1}Error Measurements}{13}{subsection.6.1.1}%
+\contentsline {subsection}{\numberline {6.1.2}Convergence Rates}{13}{subsection.6.1.2}%
+\contentsline {subsection}{\numberline {6.1.3}Convergence Plots}{15}{subsection.6.1.3}%
+\contentsline {section}{\numberline {6.2}Oscillatory Poisson (ω=10.0)}{15}{section.6.2}%
+\contentsline {subsection}{\numberline {6.2.1}Error Measurements}{15}{subsection.6.2.1}%
+\contentsline {subsection}{\numberline {6.2.2}Convergence Rates}{15}{subsection.6.2.2}%
+\contentsline {subsection}{\numberline {6.2.3}Convergence Plots}{16}{subsection.6.2.3}%
+\contentsline {section}{\numberline {6.3}Smooth Poisson (sin)}{16}{section.6.3}%
+\contentsline {subsection}{\numberline {6.3.1}Error Measurements}{16}{subsection.6.3.1}%
+\contentsline {subsection}{\numberline {6.3.2}Convergence Rates}{16}{subsection.6.3.2}%
+\contentsline {subsection}{\numberline {6.3.3}Convergence Plots}{17}{subsection.6.3.3}%
+\contentsline {chapter}{\numberline {7}Special Function Approximations}{18}{chapter.7}%
+\contentsline {chapter}{\numberline {8}Analysis and Conclusions}{19}{chapter.8}%
+\contentsline {section}{\numberline {8.1}Summary of Results}{19}{section.8.1}%
+\contentsline {subsection}{\numberline {8.1.1}Smooth Problems}{19}{subsection.8.1.1}%
+\contentsline {subsection}{\numberline {8.1.2}Non-Smooth Problems}{19}{subsection.8.1.2}%
+\contentsline {subsection}{\numberline {8.1.3}Oscillatory Problems}{19}{subsection.8.1.3}%
+\contentsline {section}{\numberline {8.2}Recommendations}{20}{section.8.2}%
+\contentsline {subsection}{\numberline {8.2.1}When to Use Polynomial Splines}{20}{subsection.8.2.1}%
+\contentsline {subsection}{\numberline {8.2.2}When to Use Rational Approximants}{20}{subsection.8.2.2}%
+\contentsline {subsection}{\numberline {8.2.3}Hybrid Approaches}{20}{subsection.8.2.3}%
+\contentsline {section}{\numberline {8.3}Future Directions}{20}{section.8.3}%
+\contentsline {chapter}{Acknowledgments}{21}{chapter*.11}%
+\contentsline {chapter}{\numberline {A}Implementation Details}{22}{appendix.A}%
+\contentsline {section}{\numberline {A.1}Polynomial Spline Solver}{22}{section.A.1}%
+\contentsline {section}{\numberline {A.2}Rational Approximant Construction}{22}{section.A.2}%
+\contentsline {section}{\numberline {A.3}Error Computation}{23}{section.A.3}%
+\contentsline {chapter}{\numberline {B}Software Information}{24}{appendix.B}%
+\contentsline {section}{\numberline {B.1}Gelfgren Library}{24}{section.B.1}%
+\contentsline {section}{\numberline {B.2}Dependencies}{24}{section.B.2}%
+\contentsline {section}{\numberline {B.3}Reproducibility}{24}{section.B.3}%

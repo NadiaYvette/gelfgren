@@ -368,12 +368,30 @@ def compute_convergence_rates(poly_errors: List[ErrorMetrics],
     return rates
 
 
+def sanitize_filename(name: str) -> str:
+    """Sanitize a string to be used as a filename"""
+    # Replace problematic characters
+    replacements = {
+        ' ': '_',
+        '(': '',
+        ')': '',
+        '/': '_over_',
+        '+': 'plus',
+        '²': '2',
+        '^': '',
+        "'": '',
+    }
+    for old, new in replacements.items():
+        name = name.replace(old, new)
+    return name
+
+
 def save_results(results: List[ConvergenceResult], output_dir: str):
     """Save results to JSON for LaTeX report generation"""
     os.makedirs(output_dir, exist_ok=True)
 
     for result in results:
-        filename = result.function_name.replace(' ', '_').replace('(', '').replace(')', '') + '.json'
+        filename = sanitize_filename(result.function_name) + '.json'
         filepath = os.path.join(output_dir, filename)
 
         data = {
@@ -460,7 +478,7 @@ def plot_convergence(results: List[ConvergenceResult], output_dir: str):
 
         plt.tight_layout()
 
-        filename = result.function_name.replace(' ', '_').replace('(', '').replace(')', '') + '.pdf'
+        filename = sanitize_filename(result.function_name) + '.pdf'
         filepath = os.path.join(output_dir, filename)
         plt.savefig(filepath, dpi=300, bbox_inches='tight')
         print(f"Saved plot to {filepath}")
