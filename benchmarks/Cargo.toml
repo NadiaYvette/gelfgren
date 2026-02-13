@@ -1,0 +1,29 @@
+[package]
+name = "gelfgren-benchmarks"
+version = "0.1.0"
+edition = "2021"
+authors = ["Nadia Chambers <nadia.chambers@iohk.io>", "Claude AI <noreply@anthropic.com>"]
+license = "MIT OR Apache-2.0"
+description = "Comprehensive benchmarks for Gelfgren piecewise rational interpolation"
+
+[dependencies]
+gelfgren-core = { path = "../gelfgren-core" }
+
+[[bench]]
+name = "poisson_1d"
+harness = false
+
+[dev-dependencies]
+criterion = "0.5"
+
+[lib]
+name = "gelfgren_benchmarks"
+path = "lib.rs"
+
+[[bin]]
+name = "bvp_benchmark"
+path = "bin/bvp_benchmark.rs"
+
+[[bin]]
+name = "special_functions_benchmark"
+path = "bin/special_functions_benchmark.rs"

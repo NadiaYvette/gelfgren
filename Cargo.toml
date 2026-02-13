@@ -1,6 +1,6 @@
 [workspace]
 resolver = "2"
-members = ["gelfgren-core", "gelfgren-ffi"]
+members = ["gelfgren-core", "gelfgren-ffi", "bindings/python", "benchmarks"]
 
 [workspace.package]
 version = "0.1.0"
