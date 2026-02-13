@@ -385,16 +385,16 @@ fn construct_rational_pade<T: Float + FromPrimitive + std::fmt::Debug>(
 
     // Helper: compute k-th derivative coefficient at left endpoint (t=x₀)
     // For B(t) = Σᵢ bᵢ Bᵢⁿ(t), we have B^(k)(x₀) = (n!/(n-k)!) / Δx^k · Δ^k b₀
-    // where Δ^k b₀ is the k-th forward difference
+    // where Δ^k b₀ = Σⱼ₌₀^k (-1)^(k-j) C(k,j) bⱼ is the k-th forward difference
     let deriv_at_left = |coeffs: &[T], degree: usize, order: usize| -> T {
         if order > degree {
             return T::zero();
         }
 
-        // Compute k-th forward difference at index 0
-        let mut diff = coeffs[0];
-        for j in 1..=order {
-            let sign = if j % 2 == 0 { T::one() } else { -T::one() };
+        // Compute k-th forward difference: Σⱼ₌₀^k (-1)^(k-j) C(k,j) bⱼ
+        let mut diff = T::zero();
+        for j in 0..=order {
+            let sign = if (order - j) % 2 == 0 { T::one() } else { -T::one() };
             diff = diff + sign * binomial(order, j) * coeffs[j];
         }
 
@@ -404,7 +404,9 @@ fn construct_rational_pade<T: Float + FromPrimitive + std::fmt::Debug>(
     };
 
     // Helper: compute k-th derivative coefficient at right endpoint (t=x₁)
-    // B^(k)(x₁) = (n!/(n-k)!) / Δx^k · (-1)^k Δ^k bₙ (backward difference)
+    // B^(k)(x₁) = (n!/(n-k)!) / Δx^k · ∇^k bₙ
+    // where ∇^k bₙ = Σⱼ₌₀^k (-1)^j C(k,j) bₙ₋ⱼ is the k-th backward difference
+    // Note: The alternating signs are already in the backward difference definition
     let deriv_at_right = |coeffs: &[T], degree: usize, order: usize| -> T {
         if order > degree {
             return T::zero();
@@ -412,17 +414,16 @@ fn construct_rational_pade<T: Float + FromPrimitive + std::fmt::Debug>(
 
         let last_idx = degree;
 
-        // Compute k-th backward difference at last index
-        let mut diff = coeffs[last_idx];
-        for j in 1..=order {
+        // Compute k-th backward difference: Σⱼ₌₀^k (-1)^j C(k,j) bₙ₋ⱼ
+        let mut diff = T::zero();
+        for j in 0..=order {
             let sign = if j % 2 == 0 { T::one() } else { -T::one() };
             diff = diff + sign * binomial(order, j) * coeffs[last_idx - j];
         }
 
-        // Scale by n!/(n-k)! / Δx^k · (-1)^k
+        // Scale by n!/(n-k)! / Δx^k
         let scale = falling_factorial(degree, order) / delta_x.powi(order as i32);
-        let sign = if order % 2 == 0 { T::one() } else { -T::one() };
-        scale * sign * diff
+        scale * diff
     };
 
     // Fill in the equations
@@ -460,13 +461,21 @@ fn construct_rational_pade<T: Float + FromPrimitive + std::fmt::Debug>(
             matrix_a[row * num_unknowns + (n + 1) + (j - 1)] = -sum;
         }
 
-        // Right-hand side: Σⱼ₌₀ᵏ C(k,j) f^(j)(x₀) q₀^{(k-j)}(x₀) with q₀ = 1
-        // Only the j=k term survives (since derivatives of constant 1 are 0)
-        vector_b[row] = if k == 0 {
-            left_derivatives[0] // f(x₀) · 1
-        } else {
-            T::zero() // All derivatives of q₀=1 are zero
-        };
+        // Right-hand side: contribution from q₀ = 1
+        // Compute Σⱼ₌₀ᵏ C(k,j) f^(j)(x₀) · Q^(k-j)(x₀) where Q has coeffs [1,0,0,...]
+        let mut rhs = T::zero();
+        let mut q0_contrib = vec![T::one()];
+        q0_contrib.extend(vec![T::zero(); m]);
+
+        for nu in 0..=k {
+            let f_deriv = left_derivatives[nu];
+            let q_deriv_order = k - nu;
+            if q_deriv_order <= m {
+                let q_deriv = deriv_at_left(&q0_contrib, m, q_deriv_order);
+                rhs = rhs + binomial(k, nu) * f_deriv * q_deriv;
+            }
+        }
+        vector_b[row] = rhs;
 
         row += 1;
     }
@@ -502,12 +511,20 @@ fn construct_rational_pade<T: Float + FromPrimitive + std::fmt::Debug>(
             matrix_a[row * num_unknowns + (n + 1) + (j - 1)] = -sum;
         }
 
-        // Right-hand side
-        vector_b[row] = if k == 0 {
-            right_derivatives[0]
-        } else {
-            T::zero()
-        };
+        // Right-hand side: contribution from q₀ = 1
+        let mut rhs = T::zero();
+        let mut q0_contrib = vec![T::one()];
+        q0_contrib.extend(vec![T::zero(); m]);
+
+        for nu in 0..=k {
+            let f_deriv = right_derivatives[nu];
+            let q_deriv_order = k - nu;
+            if q_deriv_order <= m {
+                let q_deriv = deriv_at_right(&q0_contrib, m, q_deriv_order);
+                rhs = rhs + binomial(k, nu) * f_deriv * q_deriv;
+            }
+        }
+        vector_b[row] = rhs;
 
         row += 1;
     }
@@ -938,6 +955,28 @@ mod tests {
     }
 
     #[test]
+    fn test_simple_rational() {
+        use approx::assert_relative_eq;
+
+        // Test with f(x) = 1/(1+x) on [0, 1], which is naturally a [0/1] rational
+        let x0 = 0.0;
+        let x1 = 1.0;
+
+        let f = |x: f64| 1.0 / (1.0 + x);
+        let fp = |x: f64| -1.0 / (1.0 + x).powi(2);
+
+        // With p=2: [2/1] approximant
+        let left_derivs = vec![f(x0), fp(x0)];
+        let right_derivs = vec![f(x1), fp(x1)];
+
+        let pade = TwoPointPade::from_derivatives(&left_derivs, &right_derivs, x0, x1).unwrap();
+
+        // Check endpoints
+        assert_relative_eq!(pade.evaluate(x0).unwrap(), f(x0), epsilon = 1e-10);
+        assert_relative_eq!(pade.evaluate(x1).unwrap(), f(x1), epsilon = 1e-10);
+    }
+
+    #[test]
     fn test_rational_pade_construction() {
         use approx::assert_relative_eq;
 
@@ -958,36 +997,35 @@ mod tests {
         assert_relative_eq!(pade.evaluate(x0).unwrap(), x0.exp(), epsilon = 1e-10);
         assert_relative_eq!(pade.evaluate(x1).unwrap(), x1.exp(), epsilon = 1e-10);
 
-        // TODO: Enable rational tests after fixing construct_rational_pade
-        // For a real rational test, we need p=2 (2 derivatives at each endpoint)
+        // Test [2/1] rational Padé approximant
         // This gives [2/1] Padé with n+m+1=4, so 2p=4, p=2
-        // let left_derivs_2 = vec![x0.exp(), x0.exp()]; // f, f' at x0
-        // let right_derivs_2 = vec![x1.exp(), x1.exp()]; // f, f' at x1
-        //
-        // let pade_2 = TwoPointPade::from_derivatives(&left_derivs_2, &right_derivs_2, x0, x1).unwrap();
-        //
-        // // Check interpolation at endpoints
-        // assert_relative_eq!(pade_2.evaluate(x0).unwrap(), x0.exp(), epsilon = 1e-10);
-        // assert_relative_eq!(pade_2.evaluate(x1).unwrap(), x1.exp(), epsilon = 1e-10);
-        //
-        // // Check derivative matching at endpoints
-        // assert_relative_eq!(
-        //     pade_2.evaluate_derivative(x0).unwrap(),
-        //     x0.exp(),
-        //     epsilon = 1e-9
-        // );
-        // assert_relative_eq!(
-        //     pade_2.evaluate_derivative(x1).unwrap(),
-        //     x1.exp(),
-        //     epsilon = 1e-9
-        // );
-        //
-        // // Check that we got a true rational (non-constant denominator)
-        // let denom = pade_2.rational().denominator();
-        // assert!(denom.degree() > 0, "Denominator should be non-constant for rational approximant");
-        //
-        // // Test evaluation at midpoint - should be close to exp(0) = 1
-        // let mid_val = pade_2.evaluate(0.0).unwrap();
-        // assert_relative_eq!(mid_val, 1.0_f64.exp(), epsilon = 1e-3);
+        let left_derivs_2 = vec![x0.exp(), x0.exp()]; // f, f' at x0
+        let right_derivs_2 = vec![x1.exp(), x1.exp()]; // f, f' at x1
+
+        let pade_2 = TwoPointPade::from_derivatives(&left_derivs_2, &right_derivs_2, x0, x1).unwrap();
+
+        // Check interpolation at endpoints
+        assert_relative_eq!(pade_2.evaluate(x0).unwrap(), x0.exp(), epsilon = 1e-10);
+        assert_relative_eq!(pade_2.evaluate(x1).unwrap(), x1.exp(), epsilon = 1e-10);
+
+        // Check derivative matching at endpoints
+        assert_relative_eq!(
+            pade_2.evaluate_derivative(x0).unwrap(),
+            x0.exp(),
+            epsilon = 1e-9
+        );
+        assert_relative_eq!(
+            pade_2.evaluate_derivative(x1).unwrap(),
+            x1.exp(),
+            epsilon = 1e-9
+        );
+
+        // Check that we got a true rational (non-constant denominator)
+        let denom = pade_2.rational().denominator();
+        assert!(denom.degree() > 0, "Denominator should be non-constant for rational approximant");
+
+        // Test evaluation at midpoint - should be close to exp(0) = 1
+        let mid_val = pade_2.evaluate(0.0).unwrap();
+        assert_relative_eq!(mid_val, 0.0_f64.exp(), epsilon = 1e-3);
     }
 }
