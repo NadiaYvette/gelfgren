@@ -1,4 +1,5 @@
 \documentclass[11pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{graphicx}
 \usepackage{booktabs}
@@ -10,6 +11,7 @@
 \usepackage{subcaption}
 \usepackage{tikz}
 \usepackage{pgfplots}
+\usepackage{tcolorbox}
 \pgfplotsset{compat=1.18}
 
 % Theorem environments
@@ -46,42 +48,73 @@ with Claude Sonnet 4.5}
 \maketitle
 
 \begin{abstract}
-We present a comprehensive convergence study comparing piecewise rational approximants
-with classical polynomial splines for solving boundary value problems. The study focuses
-on one-dimensional problems including the Poisson equation with various forcing functions,
-demonstrating that rational approximants can achieve comparable or superior accuracy with
-coarser meshes. We provide rigorous error analysis, convergence rate computations, and
-efficiency comparisons based on degrees of freedom.
+We present a comprehensive study of piecewise rational approximants for boundary value
+problems and special function approximation. This report benchmarks both interpolation
+quality and convergence behavior across diverse problem types.
 
-\textbf{Key findings:}
+\textbf{Important Methodological Note:} The BVP benchmarks in this report test
+\emph{interpolation} rather than true rational BVP discretization. Both polynomial
+and "rational" methods use identical finite difference discretizations; the rational
+method then interpolates the polynomial solution. Consequently, BVP errors are
+identical between methods. This demonstrates that rational interpolation faithfully
+represents finite difference solutions without additional error, but does not compare
+rational vs polynomial basis functions for BVP solving.
+
+\textbf{Key findings for BVP interpolation:}
 \begin{itemize}
-\item Rational approximants achieve O($h^4$) convergence for smooth problems
-\item For discontinuous forcing, rationals better capture sharp transitions
-\item Rational methods require fewer DOF for equivalent accuracy on oscillatory problems
-\item Both methods show robust performance across diverse problem types
+\item Piecewise rational interpolation introduces no measurable error when approximating
+      finite difference solutions
+\item Convergence rates are determined by the underlying discretization ($O(h^4)$ for
+      smooth problems, reduced rates for discontinuities)
+\item Both representations achieve identical accuracy by construction
 \end{itemize}
+
+\textbf{Key findings for special function approximation:}
+\begin{itemize}
+\item Rational approximants excel for functions with poles or near-singularities
+\item Polynomial splines more efficient (per DOF) for smooth, well-behaved functions
+\item Both methods achieve expected convergence rates for smooth problems
+\end{itemize}
+
+\textbf{Future work:} Implementation of genuine rational Galerkin or collocation
+methods for BVP discretization would enable meaningful comparison of basis function
+strategies.
 \end{abstract}
 
 \clearpage
 
 \begin{abstract}
-We present a comprehensive comparison of piecewise rational approximants versus
-polynomial splines for approximating solutions to boundary value problems and
-special functions. This study tests the hypothesis that rational approximants,
-with their ability to represent poles and rapid variations, can achieve
-comparable accuracy to polynomial splines using coarser meshes.
+We present a comprehensive study of piecewise rational approximants for interpolation
+and special function approximation, with critical clarification of BVP benchmark
+methodology.
+
+\textbf{Benchmark Methodology Clarification:} This report includes benchmarks for:
+\begin{enumerate}
+\item \textbf{BVP Interpolation}: Both polynomial and rational methods use identical
+  finite difference BVP discretizations. The "rational" method interpolates the
+  polynomial solution using piecewise rationals. Results show identical errors,
+  confirming that rational interpolation faithfully represents finite difference
+  solutions without degradation.
+
+\item \textbf{Special Function Approximation}: Direct approximation where methods
+  genuinely differ in approach. These benchmarks provide meaningful comparison
+  of polynomial vs rational approximation strategies.
+\end{enumerate}
 
 Benchmark problems include the 1D Poisson equation with various forcing functions
 and approximation of standard special functions (exponential, trigonometric,
-error function, Bessel functions, logarithm, and Runge's function). For each
-problem, we compute L² error, L∞ error, and H¹ seminorm error across mesh
-refinements from 4 to 128 intervals.
+error function, logarithm, and Runge's function). For each problem, we compute
+L² error, L$^\infty$ error, and H¹ seminorm error across mesh refinements from 4 to 128
+intervals.
 
-Results demonstrate that both methods achieve expected convergence rates for
-smooth problems, with polynomial splines showing $O(h^4)$ convergence and
-piecewise rational [2/2] Padé approximants showing comparable or superior rates.
-For problems with discontinuities or near-singularities, rational approximants
-show particular promise.
+\textbf{Validated Conclusions:}
+\begin{itemize}
+\item Piecewise rational interpolation preserves finite difference solution accuracy
+\item For special function approximation, rational methods excel with poles/singularities
+\item Polynomial splines more efficient for smooth, well-behaved functions
+\item True comparison of rational vs polynomial BVP discretization awaits implementation
+      of genuine rational Galerkin/collocation methods
+\end{itemize}
 \end{abstract}
 \clearpage
 
@@ -761,68 +794,223 @@ Look for rationals achieving much lower error than polynomials at same $h$.
 the oscillations (rule of thumb: $\approx 10$ points per wavelength). Before this
 threshold, errors may be erratic.
 
+\subsection{CRITICAL: Understanding the BVP Benchmark Methodology}
+
+\begin{tcolorbox}[colback=yellow!10!white,colframe=red!75!black,title=Important Implementation Note]
+\textbf{The BVP benchmarks in this report test INTERPOLATION, not true rational BVP solving.}
+
+Examining the benchmark implementation reveals:
+
+\paragraph{Polynomial Method:}
+\begin{enumerate}
+\item Discretizes the BVP using finite differences
+\item Solves the resulting linear system $Au = b$
+\item Returns nodal values $u_i$
+\end{enumerate}
+
+\paragraph{"Rational" Method (Current Implementation):}
+\begin{enumerate}
+\item \textbf{First} solves the BVP using finite differences (identical to polynomial method)
+\item \textbf{Then} uses piecewise rational approximation to interpolate the polynomial solution
+\item Evaluates on the same grid points
+\end{enumerate}
+
+\textbf{Consequence:} Both methods produce \emph{identical} errors because:
+\begin{itemize}
+\item Both use the same finite difference discretization
+\item The rational interpolation step doesn't add new information
+\item Errors are dominated by the discretization, not the approximation basis
+\end{itemize}
+
+This explains why all error tables show:
+\begin{center}
+\begin{tabular}{ccc}
+Method & $\norm{e}_{L^2}$ & $\norm{e}_{L^\infty}$ \\
+\hline
+Poly & $x.xxxe-yy$ & $x.xxxe-yy$ \\
+Rat  & $x.xxxe-yy$ & $x.xxxe-yy$ \\
+\end{tabular}
+\end{center}
+with \emph{exactly} matching values to machine precision.
+\end{tcolorbox}
+
+\paragraph{What Would a True Comparison Require?}
+
+A genuine comparison of polynomial vs rational BVP solvers would require:
+
+\begin{enumerate}
+\item \textbf{Rational Galerkin Method}: Discretize the BVP using rational basis functions
+  \begin{itemize}
+  \item Compute integrals $\int \varphi_i'(x) \varphi_j'(x) dx$ for rational bases $\varphi_i$
+  \item Assemble stiffness matrix with rational elements
+  \item Solve resulting (possibly nonlinear) system directly
+  \end{itemize}
+
+\item \textbf{Rational Collocation}: Enforce differential equation at collocation points
+  \begin{itemize}
+  \item Express solution as piecewise rational: $u(x) = \sum R_i(x)$
+  \item Require $-R''(x_k) = f(x_k)$ at collocation points
+  \item Solve for rational coefficients
+  \end{itemize}
+
+\item \textbf{Optimization-Based Approach}: Minimize PDE residual
+  \begin{itemize}
+  \item Use HermiteConstraints interface (newly implemented)
+  \item Minimize $\int |-u'' - f|^2 dx$ over rational coefficients
+  \item Enforce boundary conditions as hard constraints
+  \end{itemize}
+\end{enumerate}
+
+\textbf{Current Status:} The Gelfgren library's BVP solver (as of this writing) returns
+\texttt{NotImplemented} error. The benchmarks test \emph{interpolation quality},
+not BVP solving with different bases.
+
+\paragraph{Implications for Interpretation:}
+
+\begin{itemize}
+\item \textbf{Valid Interpretation}: These benchmarks demonstrate that piecewise rational
+  interpolation can faithfully represent solutions computed via finite differences.
+  The identical errors confirm that rational approximation introduces no additional error.
+
+\item \textbf{Invalid Interpretation}: Do NOT interpret these results as showing that
+  "rational BVP solvers perform identically to polynomial solvers." A true rational
+  BVP solver has not been implemented yet.
+
+\item \textbf{Future Work}: Implementing a genuine rational Galerkin or collocation BVP
+  solver would enable meaningful comparison of discretization strategies.
+\end{itemize}
+
 \section{Summary of Results}
 
-\subsection{Smooth Problems}
+\textbf{Important:} As explained in Section 5.3.4, the BVP benchmarks test interpolation
+quality, not true rational BVP solving. Both "methods" use identical finite difference
+discretizations, resulting in identical errors. The following summary reflects what
+can validly be concluded from these results.
 
-For smooth problems (Problem 1), both methods achieved excellent convergence:
+\subsection{BVP Interpolation Quality}
+
+For all three BVP problems tested, the results demonstrate:
+
 \begin{itemize}
-\item Polynomial splines: Consistent $O(h^4)$ convergence
-\item Rational approximants: Similar or slightly better rates
-\item Efficiency: Rationals require $\approx 6\times$ more DOF
+\item \textbf{Identical Errors}: Polynomial solution and rational interpolation of that
+  solution produce identical errors (to machine precision)
+
+\item \textbf{No Interpolation Degradation}: Piecewise rational approximation can
+  faithfully represent finite difference solutions without introducing additional error
+
+\item \textbf{Convergence Rates}: Both achieve expected rates:
+  \begin{itemize}
+  \item Smooth forcing: $O(h^4)$ convergence (limited by finite differences)
+  \item Discontinuous forcing: $O(h^{0.1})$ or less (limited by discontinuity)
+  \item Oscillatory forcing: $O(h^{2-3})$ initially, approaching $O(h^2)$ asymptotically
+  \end{itemize}
+
+\item \textbf{DOF Comparison Not Meaningful}: Since both use the same underlying
+  discretization, comparing DOF efficiency is not applicable for BVPs
 \end{itemize}
 
-\textbf{Conclusion:} Polynomial splines more efficient for smooth problems.
+\textbf{Conclusion:} Piecewise rational approximation is an accurate interpolation
+method for BVP solutions. However, these results do \emph{not} demonstrate advantages
+or disadvantages of rational basis functions for BVP discretization itself.
 
-\subsection{Non-Smooth Problems}
+\subsection{Special Function Approximations}
 
-For discontinuous forcing (Problem 2):
+For direct approximation of special functions (Chapter 6), where both methods
+genuinely differ in their approach:
+
 \begin{itemize}
-\item Polynomial splines: Reduced convergence rates near discontinuities
-\item Rational approximants: Better local adaptivity
-\item Near discontinuities, rationals maintain higher accuracy
-\end{itemize}
-
-\textbf{Conclusion:} Rationals advantageous for non-smooth features.
-
-\subsection{Oscillatory Problems}
-
-For high-frequency oscillations (Problem 3):
-\begin{itemize}
-\item Both methods require sufficient mesh resolution
-\item Rationals can capture oscillations with slightly coarser meshes
-\item Per-DOF efficiency favors polynomials for smooth oscillations
+\item Both methods achieve expected convergence rates for smooth functions
+\item Rational approximants show particular advantages for:
+  \begin{itemize}
+  \item Functions with poles (Runge's function: $1/(1+25x^2)$)
+  \item Functions with rapid variations
+  \item Near-singularity regions
+  \end{itemize}
+\item Polynomial splines more efficient (per DOF) for smooth, well-behaved functions
 \end{itemize}
 
 \section{Recommendations}
 
-\subsection{When to Use Polynomial Splines}
+\subsection{For BVP Solving (Current Implementation)}
+
+Given that the current implementation uses finite differences for BVP discretization:
 
 \begin{itemize}
-\item Smooth problems with regular features
-\item When simplicity and guaranteed convergence are priorities
-\item When minimizing degrees of freedom is critical
+\item Use standard finite difference methods for BVP solving
+\item Apply piecewise rational interpolation if:
+  \begin{itemize}
+  \item High-quality interpolation of the solution is needed
+  \item Smooth representation between mesh points is required
+  \item Derivative approximation accuracy is important
+  \end{itemize}
+\item Recognize that the choice of interpolation method doesn't affect BVP solution accuracy
 \end{itemize}
 
-\subsection{When to Use Rational Approximants}
+\subsection{For Special Function Approximation}
 
+When approximating known functions directly (not solving BVPs):
+
+\paragraph{Use Polynomial Splines When:}
 \begin{itemize}
-\item Problems with singular behavior or sharp transitions
-\item When local adaptivity is beneficial
-\item Applications where poles/asymptotes are natural
+\item Functions are smooth and well-behaved
+\item Simplicity and guaranteed convergence are priorities
+\item Minimizing degrees of freedom is critical
+\item Standard basis functions suffice
 \end{itemize}
 
-\subsection{Hybrid Approaches}
+\paragraph{Use Rational Approximants When:}
+\begin{itemize}
+\item Functions have poles or near-singularities (e.g., Runge's function)
+\item Rapid variations or sharp transitions are present
+\item Natural representation involves ratios (e.g., Padé approximants for $e^x$, $\sin(x)$)
+\item Superior local adaptivity is beneficial
+\end{itemize}
 
-Future work: Combine methods, using rationals only where needed.
+\subsection{Future: True Rational BVP Solvers}
+
+If rational basis functions are used for BVP \emph{discretization} (not yet implemented):
+
+\paragraph{Potential Advantages:}
+\begin{itemize}
+\item Better representation of solutions with singular behavior
+\item Possibly superior convergence for problems with sharp gradients
+\item Natural handling of problems with known singular structure
+\end{itemize}
+
+\paragraph{Challenges to Address:}
+\begin{itemize}
+\item Assembly of stiffness matrices with rational basis functions
+\item Potential nonlinearity in resulting systems
+\item Numerical stability of rational Galerkin methods
+\item Computational cost of evaluating rational integrals
+\end{itemize}
 
 \section{Future Directions}
 
 \begin{enumerate}
-\item \textbf{Adaptive mesh refinement}: Automatic mesh selection
-\item \textbf{Higher dimensions}: Extension to 2D/3D problems
-\item \textbf{Time-dependent problems}: Parabolic PDEs
+\item \textbf{Implement True Rational BVP Solver}:
+  \begin{itemize}
+  \item Rational Galerkin discretization
+  \item Rational collocation methods
+  \item Optimization-based approach using HermiteConstraints interface
+  \end{itemize}
+
+\item \textbf{Benchmark Genuine Rational BVP Methods}:
+  \begin{itemize}
+  \item Compare rational vs polynomial basis functions for discretization
+  \item Test on problems where rationals should excel (near-singular solutions)
+  \item Measure computational cost vs accuracy trade-offs
+  \end{itemize}
+
+\item \textbf{Adaptive mesh refinement}: Automatic mesh selection based on error estimates
+
+\item \textbf{Higher dimensions}: Extension to 2D/3D problems with tensor product rationals
+
+\item \textbf{Time-dependent problems}: Parabolic PDEs with rational spatial discretization
+
 \item \textbf{Nonlinear problems}: Newton iteration with rational bases
+
+\item \textbf{Hybrid Methods}: Combine polynomial and rational bases adaptively
 \end{enumerate}
 
 \chapter*{Acknowledgments}
