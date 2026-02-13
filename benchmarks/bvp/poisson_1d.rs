@@ -64,13 +64,15 @@ impl DiscontinuousPoisson {
     }
 
     /// Exact solution (piecewise polynomial)
+    /// Solves -u'' = f with f = -2 on [0.25, 0.75], 0 otherwise
+    /// Subject to u(0) = 0, u(1) = 0, with C¹ continuity
     pub fn exact_solution(&self, x: f64) -> f64 {
         if x < 0.25 {
-            0.5 * x
+            -0.5 * x
         } else if x <= 0.75 {
-            -x * x + 0.75 * x - 0.0625
+            x * x - x + 0.0625
         } else {
-            -0.5 * x + 0.5
+            0.5 * x - 0.5
         }
     }
 
@@ -181,9 +183,9 @@ impl ErrorMetrics {
         G: Fn(f64) -> f64,
     {
         let h = (b - a) / (num_points as f64 - 1.0);
-        let mut l2_sum = 0.0;
-        let mut l_inf = 0.0;
-        let mut h1_sum = 0.0;
+        let mut l2_sum: f64 = 0.0;
+        let mut l_inf: f64 = 0.0;
+        let mut h1_sum: f64 = 0.0;
 
         for i in 0..num_points {
             let x = a + (i as f64) * h;
@@ -236,12 +238,17 @@ mod tests {
             let u = problem.exact_solution(x);
 
             // Verify second derivative numerically
-            let h = 1e-6;
+            let h = 1e-5;  // Step size for finite difference
             let u_plus = problem.exact_solution(x + h);
             let u_minus = problem.exact_solution(x - h);
             let u_double_prime = (u_plus - 2.0 * u + u_minus) / (h * h);
 
-            assert!((f + u_double_prime).abs() < 1e-6, "PDE not satisfied at x={}", x);
+            let residual = (f + u_double_prime).abs();
+            assert!(
+                residual < 1e-3,  // Tolerance for finite difference approximation
+                "PDE not satisfied at x={}: f={}, u''={}, residual={}",
+                x, f, u_double_prime, residual
+            );
         }
     }
 

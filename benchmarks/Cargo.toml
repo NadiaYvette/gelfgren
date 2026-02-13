@@ -20,11 +20,3 @@ gelfgren-core = { path = "../gelfgren-core" }
 [lib]
 name = "gelfgren_benchmarks"
 path = "lib.rs"
-
-[[bin]]
-name = "bvp_benchmark"
-path = "bin/bvp_benchmark.rs"
-
-[[bin]]
-name = "special_functions_benchmark"
-path = "bin/special_functions_benchmark.rs"

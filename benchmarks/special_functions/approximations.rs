@@ -497,11 +497,11 @@ impl ApproximationError {
         G: Fn(f64) -> f64,
     {
         let h = (b - a) / (num_points as f64 - 1.0);
-        let mut l2_sum = 0.0;
-        let mut l_inf = 0.0;
-        let mut h1_sum = 0.0;
-        let mut exact_l2_sum = 0.0;
-        let mut exact_l_inf = 0.0;
+        let mut l2_sum: f64 = 0.0;
+        let mut l_inf: f64 = 0.0;
+        let mut h1_sum: f64 = 0.0;
+        let mut exact_l2_sum: f64 = 0.0;
+        let mut exact_l_inf: f64 = 0.0;
 
         for i in 0..num_points {
             let x = a + (i as f64) * h;
