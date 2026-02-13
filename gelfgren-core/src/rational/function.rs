@@ -54,6 +54,64 @@ impl<T: Float + FromPrimitive + fmt::Debug + std::iter::Sum> RationalFunction<T>
         })
     }
 
+    /// Creates a new rational function with normalized denominator.
+    ///
+    /// Normalizes the denominator so that the sum of its Bernstein coefficients
+    /// equals 1, removing the scalar multiplication ambiguity. This is the
+    /// recommended constructor for Padé approximants and other applications
+    /// where a canonical form is desired.
+    ///
+    /// For Q(x) = Σᵢ bᵢ Bᵢⁿ(x), enforces Σᵢ bᵢ = 1 by scaling:
+    /// Q'(x) = Q(x) / Σᵢ bᵢ  and  P'(x) = P(x) / Σᵢ bᵢ
+    ///
+    /// # Arguments
+    ///
+    /// * `numerator` - Numerator polynomial P(x)
+    /// * `denominator` - Denominator polynomial Q(x)
+    ///
+    /// # Errors
+    ///
+    /// Returns error if:
+    /// - Polynomials are on different intervals
+    /// - Denominator is the zero polynomial
+    /// - Denominator coefficient sum is too close to zero
+    pub fn new_normalized(
+        numerator: BernsteinPolynomial<T>,
+        denominator: BernsteinPolynomial<T>,
+    ) -> Result<Self> {
+        if numerator.interval() != denominator.interval() {
+            return Err(GelfgrenError::InvalidArgument(
+                "Numerator and denominator must be on the same interval".to_string(),
+            ));
+        }
+
+        let tol = T::from_f64(1e-10).unwrap();
+        if denominator.is_zero(tol) {
+            return Err(GelfgrenError::DivisionByZero);
+        }
+
+        // Normalize denominator to have coefficient sum = 1
+        let normalized_denominator = denominator.normalize_coefficient_sum()?;
+
+        // Scale numerator by the same factor to maintain the same rational function
+        let denom_sum = denominator.coefficient_sum();
+        let scale_factor = T::one() / denom_sum;
+
+        // Scale numerator coefficients
+        let num_scaled: Vec<T> = numerator.scaled_coefficients()
+            .iter()
+            .map(|&c| c * scale_factor)
+            .collect();
+
+        let (a, b) = numerator.interval();
+        let normalized_numerator = BernsteinPolynomial::new(num_scaled, a, b)?;
+
+        Ok(Self {
+            numerator: normalized_numerator,
+            denominator: normalized_denominator,
+        })
+    }
+
     /// Returns a reference to the numerator polynomial.
     #[inline]
     pub fn numerator(&self) -> &BernsteinPolynomial<T> {
@@ -315,5 +373,75 @@ mod tests {
         let p = BernsteinPolynomial::constant(1.0, 0.0, 1.0).unwrap();
         let q = BernsteinPolynomial::constant(0.0, 0.0, 1.0).unwrap();
         assert!(RationalFunction::new(p, q).is_err());
+    }
+
+    #[test]
+    fn test_new_normalized() {
+        // Create rational with denominator coefficients summing to 4
+        let p = BernsteinPolynomial::from_unscaled(vec![2.0, 6.0], 0.0, 1.0).unwrap();
+        let q = BernsteinPolynomial::from_unscaled(vec![1.0, 3.0], 0.0, 1.0).unwrap();
+
+        // Denominator sum = 1 + 3 = 4
+        assert_relative_eq!(q.coefficient_sum(), 4.0, epsilon = 1e-10);
+
+        let r = RationalFunction::new_normalized(p, q).unwrap();
+
+        // Check denominator is normalized
+        assert_relative_eq!(
+            r.denominator().coefficient_sum(),
+            1.0,
+            epsilon = 1e-10
+        );
+
+        // Check that the rational function values are unchanged
+        let p_orig = BernsteinPolynomial::from_unscaled(vec![2.0, 6.0], 0.0, 1.0).unwrap();
+        let q_orig = BernsteinPolynomial::from_unscaled(vec![1.0, 3.0], 0.0, 1.0).unwrap();
+        let r_orig = RationalFunction::new(p_orig, q_orig).unwrap();
+
+        for x in [0.0, 0.25, 0.5, 0.75, 1.0] {
+            assert_relative_eq!(
+                r.evaluate(x).unwrap(),
+                r_orig.evaluate(x).unwrap(),
+                epsilon = 1e-10
+            );
+        }
+    }
+
+    #[test]
+    fn test_new_normalized_already_normalized() {
+        // Denominator already has sum = 1
+        let p = BernsteinPolynomial::from_unscaled(vec![1.0, 2.0], 0.0, 1.0).unwrap();
+        let q = BernsteinPolynomial::from_unscaled(vec![0.25, 0.75], 0.0, 1.0).unwrap();
+
+        assert_relative_eq!(q.coefficient_sum(), 1.0, epsilon = 1e-10);
+
+        let r = RationalFunction::new_normalized(p, q).unwrap();
+
+        // Should be essentially unchanged
+        assert_relative_eq!(
+            r.denominator().coefficient_sum(),
+            1.0,
+            epsilon = 1e-10
+        );
+    }
+
+    #[test]
+    fn test_normalized_constant_denominator() {
+        // Special case: constant denominator = 5
+        let p = BernsteinPolynomial::from_unscaled(vec![10.0, 20.0], 0.0, 1.0).unwrap();
+        let q = BernsteinPolynomial::constant(5.0, 0.0, 1.0).unwrap();
+
+        let r = RationalFunction::new_normalized(p, q).unwrap();
+
+        // Denominator should now be 1
+        assert_relative_eq!(
+            r.denominator().coefficient_sum(),
+            1.0,
+            epsilon = 1e-10
+        );
+
+        // Numerator should be scaled by 1/5
+        assert_relative_eq!(r.evaluate(0.0).unwrap(), 10.0 / 5.0, epsilon = 1e-10);
+        assert_relative_eq!(r.evaluate(1.0).unwrap(), 20.0 / 5.0, epsilon = 1e-10);
     }
 }
