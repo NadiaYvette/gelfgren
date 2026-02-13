@@ -3,9 +3,7 @@
 use super::evaluation::SubintervalData;
 use super::mesh::Mesh;
 use crate::error::{GelfgrenError, Result};
-use crate::hermite::HermiteData;
-use crate::pade::SymmetricPade;
-use crate::rational::RationalFunction;
+use crate::pade::TwoPointPade;
 use num_traits::{Float, FromPrimitive};
 
 /// A piecewise rational function S_{n,m}(τ)(x) on mesh τ.
@@ -37,22 +35,28 @@ impl<T: Float + FromPrimitive + std::fmt::Debug + std::iter::Sum> PiecewiseRatio
     ///
     /// For each subinterval Δⱼ = [x_{j-1}, x_j]:
     /// 1. Extract derivative data at endpoints
-    /// 2. Construct symmetric Padé approximant
+    /// 2. Construct two-point Padé approximant using Traub's Equation 3.6
     /// 3. Store in subinterval list
+    ///
+    /// # Two-Point Padé (Traub's Method)
+    ///
+    /// Uses Traub's Lagrange-Hermite interpolation formula (Equation 3.6) specialized
+    /// to two points. The Bell polynomials simplify dramatically in the two-point case,
+    /// yielding efficient computation in Bernstein basis.
     ///
     /// # Errors
     ///
     /// Returns error if:
     /// - Mesh points lack sufficient derivative data
-    /// - Symmetric Padé construction fails
-    /// - Degrees don't satisfy n+m+1 = 2p (symmetry requirement)
+    /// - Two-point Padé construction fails
+    /// - Degrees don't satisfy n+m+1 = 2p (two-point requirement)
     pub fn from_mesh(mesh: Mesh<T>, n: usize, m: usize) -> Result<Self> {
         let p = (n + m + 1) / 2;
 
-        // Verify symmetry condition
+        // Verify two-point condition
         if (n + m + 1) % 2 != 0 {
             return Err(GelfgrenError::InvalidArgument(format!(
-                "Symmetric Padé requires n+m+1 = 2p (even), got n+m+1 = {}",
+                "Two-point Padé requires n+m+1 = 2p (even), got n+m+1 = {}",
                 n + m + 1
             )));
         }
@@ -83,8 +87,8 @@ impl<T: Float + FromPrimitive + std::fmt::Debug + std::iter::Sum> PiecewiseRatio
             let left_derivs = left_point.values[0..p].to_vec();
             let right_derivs = right_point.values[0..p].to_vec();
 
-            // Construct symmetric Padé approximant
-            let pade = SymmetricPade::from_endpoint_derivatives(
+            // Construct two-point Padé approximant using Traub's Equation 3.6
+            let pade = TwoPointPade::from_endpoint_derivatives(
                 &left_derivs,
                 &right_derivs,
                 n,

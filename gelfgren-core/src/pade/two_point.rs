@@ -48,7 +48,6 @@
 
 use crate::bernstein::BernsteinPolynomial;
 use crate::error::{GelfgrenError, Result};
-use crate::hermite::BellPolynomial;
 use crate::rational::RationalFunction;
 use num_traits::{Float, FromPrimitive};
 
@@ -169,6 +168,72 @@ impl<T: Float + FromPrimitive + std::fmt::Debug + std::iter::Sum> TwoPointPade<T
     /// Returns the order p.
     pub fn order(&self) -> usize {
         self.p
+    }
+
+    /// Constructs a two-point [n/m] Padé approximant from endpoint derivatives.
+    ///
+    /// This method provides an API compatible with `SymmetricPade::from_endpoint_derivatives`,
+    /// allowing drop-in replacement in piecewise construction code.
+    ///
+    /// # Arguments
+    ///
+    /// * `left_derivatives` - [f(x₀), f'(x₀), ..., f^(p-1)(x₀)]
+    /// * `right_derivatives` - [f(x₁), f'(x₁), ..., f^(p-1)(x₁)]
+    /// * `n` - Numerator degree
+    /// * `m` - Denominator degree (requires n+m+1 = 2p for two-point approximant)
+    /// * `x0` - Left endpoint
+    /// * `x1` - Right endpoint
+    ///
+    /// # Two-Point Condition
+    ///
+    /// For two-point approximants, we require n+m+1 = 2p (even), where p is the
+    /// order of derivative matching at each endpoint. This ensures the approximant
+    /// has sufficient degrees of freedom to match p derivatives at both x₀ and x₁.
+    ///
+    /// # Example
+    ///
+    /// ```ignore
+    /// // Construct [2/1] approximant (n=2, m=1, so p=2)
+    /// let left = vec![f(x0), f_prime(x0)];
+    /// let right = vec![f(x1), f_prime(x1)];
+    /// let pade = TwoPointPade::from_endpoint_derivatives(&left, &right, 2, 1, x0, x1)?;
+    /// ```
+    pub fn from_endpoint_derivatives(
+        left_derivatives: &[T],
+        right_derivatives: &[T],
+        n: usize,
+        m: usize,
+        x0: T,
+        x1: T,
+    ) -> Result<Self> {
+        // Check symmetry condition: n+m+1 must be even
+        if (n + m + 1) % 2 != 0 {
+            return Err(GelfgrenError::InvalidArgument(format!(
+                "Two-point Padé requires n+m+1 = 2p (even), got n+m+1 = {}",
+                n + m + 1
+            )));
+        }
+
+        let p = (n + m + 1) / 2;
+
+        // Validate we have enough derivatives
+        if left_derivatives.len() < p || right_derivatives.len() < p {
+            return Err(GelfgrenError::InvalidArgument(format!(
+                "Need {} derivatives at each endpoint for [{}/{}] approximant, got {} and {}",
+                p,
+                n,
+                m,
+                left_derivatives.len(),
+                right_derivatives.len()
+            )));
+        }
+
+        // Extract exactly p derivatives from each side
+        let left_p = &left_derivatives[0..p];
+        let right_p = &right_derivatives[0..p];
+
+        // Use the existing from_derivatives method
+        Self::from_derivatives(left_p, right_p, x0, x1)
     }
 
     /// Evaluates the two-point Padé approximant at t.
