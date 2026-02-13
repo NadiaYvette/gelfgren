@@ -233,8 +233,27 @@ impl<T: Float + FromPrimitive + std::fmt::Debug + std::iter::Sum> TwoPointPade<T
         let left_p = &left_derivatives[0..p];
         let right_p = &right_derivatives[0..p];
 
-        // Use the existing from_derivatives method
-        Self::from_derivatives(left_p, right_p, x0, x1)
+        // Build the rational approximant with specified degrees
+        let delta_x = x1 - x0;
+        if delta_x <= T::zero() {
+            return Err(GelfgrenError::InvalidArgument(
+                "x1 must be greater than x0".to_string(),
+            ));
+        }
+
+        // Construct the rational approximant directly with specified n and m
+        let (numerator, denominator) =
+            construct_rational_pade(left_p, right_p, x0, x1, delta_x, n, m)?;
+
+        let rational = RationalFunction::new(numerator, denominator)?;
+
+        Ok(Self {
+            rational,
+            x0,
+            x1,
+            delta_x,
+            p,
+        })
     }
 
     /// Evaluates the two-point Padé approximant at t.
@@ -319,41 +338,46 @@ fn construct_two_point_pade<T: Float + FromPrimitive + std::fmt::Debug>(
     construct_rational_pade(left_derivatives, right_derivatives, x0, x1, delta_x, n, m)
 }
 
-/// Constructs a rational [n/m] Padé approximant by solving the matching conditions.
+/// Builds the linear system for Hermite interpolation with rational approximants.
 ///
-/// Sets up and solves the linear system arising from the requirement that
-/// R^(k)(xᵢ) = f^(k)(xᵢ) for i ∈ {0,1} and k = 0,...,p-1,
-/// where R(t) = P(t)/Q(t) with P of degree n and Q of degree m.
+/// Exposes the constraint equations Ax = b where x contains the coefficients
+/// of the numerator and denominator polynomials.
 ///
-/// The denominator is normalized with Q(x₀) = 1 (i.e., q₀ = 1).
-fn construct_rational_pade<T: Float + FromPrimitive + std::fmt::Debug>(
+/// # Arguments
+///
+/// * `left_derivatives` - [f(a), f'(a), ..., f^(p-1)(a)]
+/// * `right_derivatives` - [f(b), f'(b), ..., f^(p-1)(b)]
+/// * `n` - Numerator degree
+/// * `m` - Denominator degree
+/// * `x0` - Left endpoint a
+/// * `x1` - Right endpoint b
+/// * `delta_x` - Spacing Δx = b - a
+///
+/// # Returns
+///
+/// Tuple (matrix_a, vector_b, num_unknowns) where:
+/// - `matrix_a`: Flattened constraint matrix (row-major order)
+/// - `vector_b`: Right-hand side vector
+/// - `num_unknowns`: Number of variables (n+m+1)
+///
+/// This is the same system that `construct_rational_pade` solves internally.
+/// Exposed to allow custom solvers, inspection, and optimization formulations.
+pub(crate) fn build_hermite_linear_system<T: Float + FromPrimitive + std::fmt::Debug>(
     left_derivatives: &[T],
     right_derivatives: &[T],
+    n: usize,
+    m: usize,
     x0: T,
     x1: T,
     delta_x: T,
-    n: usize,
-    m: usize,
-) -> Result<(BernsteinPolynomial<T>, BernsteinPolynomial<T>)> {
+) -> (Vec<T>, Vec<T>, usize) {
     let p = left_derivatives.len();
-
-    // Special case: if m = 0, construct polynomial interpolant
-    if m == 0 {
-        return construct_polynomial_interpolant(left_derivatives, right_derivatives, x0, x1, delta_x, n);
-    }
 
     // Set up linear system for matching conditions
     // Unknowns: [p₀, p₁, ..., pₙ, q₁, q₂, ..., qₘ] (with q₀ = 1 normalization)
     // Total unknowns: (n+1) + m = n + m + 1
     let num_unknowns = n + m + 1;
     let num_equations = 2 * p;
-
-    if num_equations != num_unknowns {
-        return Err(GelfgrenError::InvalidArgument(format!(
-            "System must be square: {} equations for {} unknowns",
-            num_equations, num_unknowns
-        )));
-    }
 
     // Initialize matrix A and vector b for Ax = b
     let mut matrix_a = vec![T::zero(); num_equations * num_unknowns];
@@ -528,6 +552,54 @@ fn construct_rational_pade<T: Float + FromPrimitive + std::fmt::Debug>(
 
         row += 1;
     }
+
+    (matrix_a, vector_b, num_unknowns)
+}
+
+/// Constructs a rational [n/m] Padé approximant by solving the matching conditions.
+///
+/// Sets up and solves the linear system arising from the requirement that
+/// R^(k)(xᵢ) = f^(k)(xᵢ) for i ∈ {0,1} and k = 0,...,p-1,
+/// where R(t) = P(t)/Q(t) with P of degree n and Q of degree m.
+///
+/// The denominator is normalized with Q(x₀) = 1 (i.e., q₀ = 1).
+fn construct_rational_pade<T: Float + FromPrimitive + std::fmt::Debug>(
+    left_derivatives: &[T],
+    right_derivatives: &[T],
+    x0: T,
+    x1: T,
+    delta_x: T,
+    n: usize,
+    m: usize,
+) -> Result<(BernsteinPolynomial<T>, BernsteinPolynomial<T>)> {
+    let p = left_derivatives.len();
+
+    // Special case: if m = 0, construct polynomial interpolant
+    if m == 0 {
+        return construct_polynomial_interpolant(left_derivatives, right_derivatives, x0, x1, delta_x, n);
+    }
+
+    // Validate system is square
+    let num_unknowns = n + m + 1;
+    let num_equations = 2 * p;
+
+    if num_equations != num_unknowns {
+        return Err(GelfgrenError::InvalidArgument(format!(
+            "System must be square: {} equations for {} unknowns",
+            num_equations, num_unknowns
+        )));
+    }
+
+    // Build the linear system
+    let (matrix_a, vector_b, num_unknowns) = build_hermite_linear_system(
+        left_derivatives,
+        right_derivatives,
+        n,
+        m,
+        x0,
+        x1,
+        delta_x,
+    );
 
     // Solve the linear system
     let solution = solve_linear_system(&matrix_a, &vector_b, num_unknowns)?;

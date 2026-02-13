@@ -37,10 +37,12 @@
 //! - Baker & Graves-Morris: "Padé Approximants" (standard reference)
 
 mod approximant;
+mod constraints;
 mod linear_system;
 mod symmetric;
 mod two_point;
 
 pub use approximant::PadeApproximant;
+pub use constraints::HermiteConstraints;
 pub use symmetric::SymmetricPade;
 pub use two_point::TwoPointPade;
