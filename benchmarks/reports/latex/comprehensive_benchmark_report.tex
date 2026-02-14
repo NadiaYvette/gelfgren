@@ -437,11 +437,20 @@ using piecewise rational approximants compared to polynomial splines.
 
 \section{Discontinuous Poisson}
 
+\begin{tcolorbox}[colback=yellow!10!white,colframe=orange!75!black,title=Methodology Note]
+\textbf{Important:} The "Poly" and "Rat" results below are identical because both use the same
+polynomial finite difference discretization for the BVP solve. The only difference is the
+interpolation method applied afterward. See Section 5.3.4 for detailed explanation.
+
+These benchmarks test \textbf{interpolation quality}, not different BVP solving methods.
+True rational BVP solving (Section 6.3) uses rational collocation throughout the solve process.
+\end{tcolorbox}
+
 \subsection{Error Measurements}
 
 \begin{table}[htbp]
 \centering
-\caption{Error norms for Discontinuous Poisson}
+\caption{Error norms for Discontinuous Poisson (interpolation comparison only)}
 \begin{tabular}{@{} c c c c c c @{}}
 \toprule
 $N$ & $h$ & Method & $\norm{e}_{L^2}$ & $\norm{e}_{L^\infty}$ & $\norm{e}_{H^1}$ \\
@@ -474,7 +483,7 @@ Computed convergence rates $\alpha$ where $\norm{e} \sim h^\alpha$:
 
 \begin{table}[htbp]
 \centering
-\caption{Convergence rates for Discontinuous Poisson}
+\caption{Convergence rates for Discontinuous Poisson (identical because same discretization)}
 \begin{tabular}{@{} c c c c c @{}}
 \toprule
 Refinement & \multicolumn{2}{c}{$L^2$ rate} & \multicolumn{2}{c}{$L^\infty$ rate} \\
@@ -490,6 +499,10 @@ Refinement & \multicolumn{2}{c}{$L^2$ rate} & \multicolumn{2}{c}{$L^\infty$ rate
 \end{tabular}
 \end{table}
 
+\textbf{Note:} Poor convergence ($\alpha \approx 0.01$-$0.15$) expected for discontinuous solutions.
+Finite difference methods cannot accurately represent discontinuities without adaptive refinement
+or specialized techniques.
+
 \subsection{Convergence Plots}
 
 \begin{figure}[htbp]
@@ -501,11 +514,16 @@ Refinement & \multicolumn{2}{c}{$L^2$ rate} & \multicolumn{2}{c}{$L^\infty$ rate
 
 \section{Oscillatory Poisson (ω=10.0)}
 
+\begin{tcolorbox}[colback=yellow!10!white,colframe=orange!75!black,title=Methodology Note]
+\textbf{Important:} The "Poly" and "Rat" results are identical (same finite difference discretization,
+different interpolation only). See Section 5.3.4 and the note in Section 5.1 for details.
+\end{tcolorbox}
+
 \subsection{Error Measurements}
 
 \begin{table}[htbp]
 \centering
-\caption{Error norms for Oscillatory Poisson (ω=10.0)}
+\caption{Error norms for Oscillatory Poisson (ω=10.0) (interpolation comparison only)}
 \begin{tabular}{@{} c c c c c c @{}}
 \toprule
 $N$ & $h$ & Method & $\norm{e}_{L^2}$ & $\norm{e}_{L^\infty}$ & $\norm{e}_{H^1}$ \\
@@ -565,11 +583,17 @@ Refinement & \multicolumn{2}{c}{$L^2$ rate} & \multicolumn{2}{c}{$L^\infty$ rate
 
 \section{Smooth Poisson (sin)}
 
+\begin{tcolorbox}[colback=yellow!10!white,colframe=orange!75!black,title=Methodology Note]
+\textbf{Important:} The "Poly" and "Rat" results are identical (same finite difference discretization,
+different interpolation only). See Section 5.3.4 for detailed explanation. True rational BVP solving
+is demonstrated in Section 6.3 with spectral convergence on this problem.
+\end{tcolorbox}
+
 \subsection{Error Measurements}
 
 \begin{table}[htbp]
 \centering
-\caption{Error norms for Smooth Poisson (sin)}
+\caption{Error norms for Smooth Poisson (sin) (interpolation comparison only)}
 \begin{tabular}{@{} c c c c c c @{}}
 \toprule
 $N$ & $h$ & Method & $\norm{e}_{L^2}$ & $\norm{e}_{L^\infty}$ & $\norm{e}_{H^1}$ \\
