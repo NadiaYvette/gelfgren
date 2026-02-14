@@ -1054,24 +1054,65 @@ When approximating known functions directly (not solving BVPs):
 \item Superior local adaptivity is beneficial
 \end{itemize}
 
-\subsection{Future: True Rational BVP Solvers}
+\subsection{Pole Prevention Strategies: A Critical Analysis}
 
-If rational basis functions are used for BVP \emph{discretization} (not yet implemented):
+The rational collocation implementation supports multiple constraint strategies to prevent
+spurious poles in Q(x). Understanding their trade-offs is crucial:
 
-\paragraph{Potential Advantages:}
-\begin{itemize}
-\item Better representation of solutions with singular behavior
-\item Possibly superior convergence for problems with sharp gradients
-\item Natural handling of problems with known singular structure
-\end{itemize}
+\paragraph{Available Constraint Types:}
 
-\paragraph{Challenges to Address:}
-\begin{itemize}
-\item Assembly of stiffness matrices with rational basis functions
-\item Potential nonlinearity in resulting systems
-\item Numerical stability of rational Galerkin methods
-\item Computational cost of evaluating rational integrals
-\end{itemize}
+\begin{enumerate}
+\item \textbf{ENDPOINT}: Constrains only boundary coefficients $b_1, b_m \geq \epsilon$
+  \begin{itemize}
+  \item Prevents boundary poles
+  \item Allows interior poles (can cause catastrophic failures)
+  \item Least restrictive, best accuracy on smooth problems
+  \end{itemize}
+
+\item \textbf{NONNEGATIVE}: Constrains all coefficients $b_1, \ldots, b_m \geq \epsilon$
+  \begin{itemize}
+  \item Prevents all poles (boundary + interior)
+  \item More restrictive, reduces approximation flexibility
+  \item Forces $Q(x) \geq \epsilon$ everywhere
+  \end{itemize}
+
+\item \textbf{BOUNDED}: Constrains $\epsilon \leq b_i \leq 2$ for all $i$
+  \begin{itemize}
+  \item Most restrictive
+  \item Prevents poles and excessive growth
+  \end{itemize}
+\end{enumerate}
+
+\paragraph{Experimental Results: More Constraints $\neq$ Better Performance}
+
+Testing NONNEGATIVE constraints on discontinuous and oscillatory problems revealed
+a counterintuitive result:
+
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+Problem & ENDPOINT L$^2$ Error & NONNEGATIVE L$^2$ Error \\
+\midrule
+Discontinuous [8/4] & 6.69e-02 & \textbf{1.72e+02} (2500$\times$ worse) \\
+Oscillatory [8/4] & 1.29e+03 & \textbf{1.54e+05} (120$\times$ worse) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Why NONNEGATIVE fails:} The constraint is \emph{too restrictive}. Forcing
+$Q(x) \geq \epsilon$ everywhere severely limits approximation flexibility, causing
+the optimizer to find poor solutions just to satisfy the constraints.
+
+\paragraph{Critical Lesson:}
+
+\textbf{No constraint strategy can fix fundamentally unsuitable problems.} Rational
+approximation is mathematically incompatible with discontinuities and high-frequency
+oscillations. Adding more constraints just further restricts an already unsuitable
+method, making approximations worse.
+
+\textbf{Recommendation:} Use ENDPOINT constraints for smooth problems (optimal accuracy).
+For non-smooth problems, \emph{do not use rational collocation at all}---switch to
+polynomial finite differences or adaptive methods designed for non-smooth solutions.
 
 \section{Future Directions}
 

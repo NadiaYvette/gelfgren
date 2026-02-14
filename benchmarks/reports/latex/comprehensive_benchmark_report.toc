@@ -81,45 +81,46 @@
 \contentsline {subsection}{\numberline {8.3.2}For Special Function Approximation}{31}{subsection.8.3.2}%
 \contentsline {paragraph}{Use Polynomial Splines When:}{31}{section*.26}%
 \contentsline {paragraph}{Use Rational Approximants When:}{31}{section*.27}%
-\contentsline {subsection}{\numberline {8.3.3}Future: True Rational BVP Solvers}{31}{subsection.8.3.3}%
-\contentsline {paragraph}{Potential Advantages:}{31}{section*.28}%
-\contentsline {paragraph}{Challenges to Address:}{31}{section*.29}%
+\contentsline {subsection}{\numberline {8.3.3}Pole Prevention Strategies: A Critical Analysis}{31}{subsection.8.3.3}%
+\contentsline {paragraph}{Available Constraint Types:}{31}{section*.28}%
+\contentsline {paragraph}{Experimental Results: More Constraints $\neq $ Better Performance}{32}{section*.29}%
+\contentsline {paragraph}{Critical Lesson:}{32}{section*.30}%
 \contentsline {section}{\numberline {8.4}Future Directions}{32}{section.8.4}%
 \contentsline {subsection}{\numberline {8.4.1}Rational Collocation: Three Formulations}{32}{subsection.8.4.1}%
-\contentsline {paragraph}{Formulation 1: Quotient Form (Standard)}{32}{section*.30}%
-\contentsline {paragraph}{Formulation 2: Cleared Form (Recommended for Stability)}{32}{section*.31}%
-\contentsline {paragraph}{Formulation 3: Quadratic Form (Recommended for Efficiency)}{32}{section*.32}%
-\contentsline {subsection}{\numberline {8.4.2}Implementation Roadmap}{33}{subsection.8.4.2}%
-\contentsline {subsection}{\numberline {8.4.3}Expected Benefits}{34}{subsection.8.4.3}%
-\contentsline {subsection}{\numberline {8.4.4}Other Future Directions}{34}{subsection.8.4.4}%
+\contentsline {paragraph}{Formulation 1: Quotient Form (Standard)}{32}{section*.31}%
+\contentsline {paragraph}{Formulation 2: Cleared Form (Recommended for Stability)}{33}{section*.32}%
+\contentsline {paragraph}{Formulation 3: Quadratic Form (Recommended for Efficiency)}{33}{section*.33}%
+\contentsline {subsection}{\numberline {8.4.2}Implementation Roadmap}{34}{subsection.8.4.2}%
+\contentsline {subsection}{\numberline {8.4.3}Expected Benefits}{35}{subsection.8.4.3}%
+\contentsline {subsection}{\numberline {8.4.4}Other Future Directions}{35}{subsection.8.4.4}%
 \contentsline {section}{\numberline {8.5}Rational Collocation Implementation (COMPLETED)}{35}{section.8.5}%
 \contentsline {subsection}{\numberline {8.5.1}Overview}{35}{subsection.8.5.1}%
-\contentsline {subsection}{\numberline {8.5.2}Implementation Details}{35}{subsection.8.5.2}%
-\contentsline {paragraph}{Formulation}{35}{section*.33}%
-\contentsline {paragraph}{Basis Functions}{35}{section*.34}%
-\contentsline {paragraph}{Pole Prevention Strategy}{36}{section*.35}%
-\contentsline {paragraph}{Solver}{36}{section*.36}%
-\contentsline {subsection}{\numberline {8.5.3}Benchmark Results}{36}{subsection.8.5.3}%
-\contentsline {paragraph}{Problem 1: Smooth Poisson}{36}{section*.37}%
-\contentsline {paragraph}{Problem 2: Smooth Trigonometric}{37}{section*.39}%
-\contentsline {subsection}{\numberline {8.5.4}Performance Analysis}{37}{subsection.8.5.4}%
-\contentsline {paragraph}{Computational Cost}{37}{section*.41}%
-\contentsline {paragraph}{Accuracy per Degree of Freedom}{38}{section*.42}%
-\contentsline {paragraph}{When to Use Rational Collocation}{38}{section*.43}%
-\contentsline {paragraph}{When to Use Polynomial FD}{38}{section*.44}%
-\contentsline {subsection}{\numberline {8.5.5}Comparison: Quadratic vs Cleared Formulations}{38}{subsection.8.5.5}%
-\contentsline {paragraph}{Theoretical Comparison}{38}{table.caption.46}%
-\contentsline {paragraph}{Empirical Performance Comparison}{39}{section*.47}%
-\contentsline {paragraph}{Accuracy Verification}{39}{section*.49}%
-\contentsline {paragraph}{Recommendation}{40}{section*.50}%
-\contentsline {subsection}{\numberline {8.5.6}Files and Documentation}{40}{subsection.8.5.6}%
+\contentsline {subsection}{\numberline {8.5.2}Implementation Details}{36}{subsection.8.5.2}%
+\contentsline {paragraph}{Formulation}{36}{section*.34}%
+\contentsline {paragraph}{Basis Functions}{36}{section*.35}%
+\contentsline {paragraph}{Pole Prevention Strategy}{36}{section*.36}%
+\contentsline {paragraph}{Solver}{37}{section*.37}%
+\contentsline {subsection}{\numberline {8.5.3}Benchmark Results}{37}{subsection.8.5.3}%
+\contentsline {paragraph}{Problem 1: Smooth Poisson}{37}{section*.38}%
+\contentsline {paragraph}{Problem 2: Smooth Trigonometric}{37}{section*.40}%
+\contentsline {subsection}{\numberline {8.5.4}Performance Analysis}{38}{subsection.8.5.4}%
+\contentsline {paragraph}{Computational Cost}{38}{section*.42}%
+\contentsline {paragraph}{Accuracy per Degree of Freedom}{38}{section*.43}%
+\contentsline {paragraph}{When to Use Rational Collocation}{38}{section*.44}%
+\contentsline {paragraph}{When to Use Polynomial FD}{39}{section*.45}%
+\contentsline {subsection}{\numberline {8.5.5}Comparison: Quadratic vs Cleared Formulations}{39}{subsection.8.5.5}%
+\contentsline {paragraph}{Theoretical Comparison}{39}{table.caption.47}%
+\contentsline {paragraph}{Empirical Performance Comparison}{39}{section*.48}%
+\contentsline {paragraph}{Accuracy Verification}{40}{section*.50}%
+\contentsline {paragraph}{Recommendation}{40}{section*.51}%
+\contentsline {subsection}{\numberline {8.5.6}Files and Documentation}{41}{subsection.8.5.6}%
 \contentsline {subsection}{\numberline {8.5.7}Conclusion}{41}{subsection.8.5.7}%
-\contentsline {chapter}{Acknowledgments}{42}{chapter*.51}%
-\contentsline {chapter}{\numberline {A}Implementation Details}{43}{appendix.A}%
-\contentsline {section}{\numberline {A.1}Polynomial Spline Solver}{43}{section.A.1}%
-\contentsline {section}{\numberline {A.2}Rational Approximant Construction}{43}{section.A.2}%
-\contentsline {section}{\numberline {A.3}Error Computation}{44}{section.A.3}%
-\contentsline {chapter}{\numberline {B}Software Information}{45}{appendix.B}%
-\contentsline {section}{\numberline {B.1}Gelfgren Library}{45}{section.B.1}%
-\contentsline {section}{\numberline {B.2}Dependencies}{45}{section.B.2}%
-\contentsline {section}{\numberline {B.3}Reproducibility}{45}{section.B.3}%
+\contentsline {chapter}{Acknowledgments}{43}{chapter*.52}%
+\contentsline {chapter}{\numberline {A}Implementation Details}{44}{appendix.A}%
+\contentsline {section}{\numberline {A.1}Polynomial Spline Solver}{44}{section.A.1}%
+\contentsline {section}{\numberline {A.2}Rational Approximant Construction}{44}{section.A.2}%
+\contentsline {section}{\numberline {A.3}Error Computation}{45}{section.A.3}%
+\contentsline {chapter}{\numberline {B}Software Information}{46}{appendix.B}%
+\contentsline {section}{\numberline {B.1}Gelfgren Library}{46}{section.B.1}%
+\contentsline {section}{\numberline {B.2}Dependencies}{46}{section.B.2}%
+\contentsline {section}{\numberline {B.3}Reproducibility}{46}{section.B.3}%
