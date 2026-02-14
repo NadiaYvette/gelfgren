@@ -255,14 +255,15 @@ def benchmark_problem(problem: dict, degrees: List[int], grid_sizes: List[int]) 
         m = max(1, n // 2)
 
         try:
-            # Use strong regularization to prevent spurious poles
-            # This effectively forces Q ≈ 1 (polynomial approximation)
-            q_reg = 100.0
+            # Use endpoint constraints to prevent boundary poles
+            # while allowing Q to vary in interior (true rational behavior)
+            from rational_collocation import QConstraintType
 
             solver = RationalCollocationQuadratic(
                 f=f, a=a, b=b, alpha=alpha, beta=beta,
                 n=n, m=m,
-                q_regularization=q_reg
+                q_constraint=QConstraintType.ENDPOINT,
+                constraint_epsilon=1e-4
             )
 
             start_time = time.time()

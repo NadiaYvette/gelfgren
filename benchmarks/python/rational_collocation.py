@@ -12,6 +12,16 @@ import numpy as np
 from scipy.optimize import fsolve, least_squares
 from dataclasses import dataclass
 from typing import Callable, Tuple, List
+from enum import Enum
+
+
+class QConstraintType(Enum):
+    """Types of constraints on Q coefficients to prevent poles"""
+    NONE = "none"  # No constraints (may find spurious poles)
+    REGULARIZATION = "regularization"  # Penalty term pushing Q toward constant
+    NONNEGATIVE = "nonnegative"  # All Q coefficients >= 0 (prevents all poles)
+    ENDPOINT = "endpoint"  # Only b_0, b_m >= epsilon (prevents boundary poles)
+    BOUNDED = "bounded"  # Q coefficients in [0, 2] (non-negative + bounded)
 
 
 @dataclass
@@ -103,7 +113,9 @@ class RationalCollocationQuadratic:
                  alpha: float, beta: float,
                  n: int, m: int,
                  num_collocation_points: int = None,
-                 q_regularization: float = 0.0):
+                 q_constraint: QConstraintType = QConstraintType.NONNEGATIVE,
+                 q_regularization: float = 0.0,
+                 constraint_epsilon: float = 1e-3):
         """
         Parameters
         ----------
@@ -118,9 +130,15 @@ class RationalCollocationQuadratic:
         num_collocation_points : int, optional
             Number of interior collocation points
             Default: k = n + m - 1 (for well-determined system)
+        q_constraint : QConstraintType, optional
+            Type of constraint on Q coefficients to prevent poles
+            Default: NONNEGATIVE (all Q coeffs >= 0)
         q_regularization : float, optional
-            Regularization weight to keep Q close to constant (prevents poles)
-            Default: 0.0 (no regularization)
+            Regularization weight (only used if q_constraint=REGULARIZATION)
+            Default: 0.0
+        constraint_epsilon : float, optional
+            Minimum value for constrained Q coefficients
+            Default: 1e-3
         """
         self.f = f
         self.a = a
@@ -129,7 +147,9 @@ class RationalCollocationQuadratic:
         self.beta = beta
         self.n = n
         self.m = m
+        self.q_constraint = q_constraint
         self.q_regularization = q_regularization
+        self.constraint_epsilon = constraint_epsilon
 
         # Determine number of collocation points
         if num_collocation_points is None:
@@ -143,14 +163,18 @@ class RationalCollocationQuadratic:
         # Total unknowns: (n+1) P coeffs + m Q coeffs + 2k (u and u' values)
         self.num_unknowns = (n + 1) + m + 2 * self.k
 
-        # Total equations: 3k collocation + 2 boundary conditions + m regularization
+        # Total equations: 3k collocation + 2 boundary conditions
         self.num_equations = 3 * self.k + 2
-        if self.q_regularization > 0:
+
+        # Add regularization terms if using that constraint type
+        if self.q_constraint == QConstraintType.REGULARIZATION and self.q_regularization > 0:
             self.num_equations += m  # One regularization term per Q coefficient
 
         # For overdetermined systems (with regularization), use least squares
-        # For square systems, check dimensions
-        if self.q_regularization == 0 and self.num_unknowns != self.num_equations:
+        # For square systems (with inequality constraints), check dimensions
+        using_regularization = (self.q_constraint == QConstraintType.REGULARIZATION and
+                               self.q_regularization > 0)
+        if not using_regularization and self.num_unknowns != self.num_equations:
             raise ValueError(
                 f"System not square: {self.num_equations} equations "
                 f"for {self.num_unknowns} unknowns. "
@@ -243,9 +267,9 @@ class RationalCollocationQuadratic:
             res3 = Pxx - Qxx * ui - 2 * Qx * upi + Q * self.f(xi)
             residuals.append(res3)
 
-        # Add regularization to prevent poles (keep Q close to constant)
+        # Add regularization terms if using that constraint type
         # For Bernstein polynomials, constant Q=1 means all coeffs = 1
-        if self.q_regularization > 0:
+        if self.q_constraint == QConstraintType.REGULARIZATION and self.q_regularization > 0:
             Q_partial = Q_coeffs[1:]  # Coefficients other than b0=1
             for q_coeff in Q_partial:
                 # Penalize deviation from 1 (not from 0!)
@@ -286,10 +310,7 @@ class RationalCollocationQuadratic:
         up_vals = np.gradient(u_poly, h)
         up_vals = np.interp(self.collocation_points, x, up_vals)
 
-        # Simple initial guess for P and Q
-        # Start with Q = 1 (purely polynomial approximation)
-        Q_coeffs = np.concatenate([[1.0], np.zeros(self.m)])
-
+        # Initial guess for P and Q
         # For P, use Bernstein basis control points
         # Sample u_poly at Bernstein control point locations
         P_coeffs = np.zeros(self.n + 1)
@@ -299,7 +320,68 @@ class RationalCollocationQuadratic:
             x_sample = self.a + t * (self.b - self.a)
             P_coeffs[i] = np.interp(x_sample, x, u_poly)
 
+        # For Q, initial guess depends on constraint type
+        if self.q_constraint in [QConstraintType.NONNEGATIVE, QConstraintType.ENDPOINT,
+                                 QConstraintType.BOUNDED]:
+            # Need all coefficients to be positive and close to 1 for constant
+            # Start with Q ≈ 1 everywhere, respecting the constraint
+            Q_coeffs = np.ones(self.m + 1)
+        else:
+            # No constraints or regularization: start with Q = constant 1
+            Q_coeffs = np.concatenate([[1.0], np.ones(self.m)])
+
         return self._pack_coeffs(P_coeffs, Q_coeffs, u_vals, up_vals)
+
+    def _construct_bounds(self) -> Tuple[np.ndarray, np.ndarray]:
+        """
+        Construct bounds on coefficients based on constraint type.
+
+        Returns
+        -------
+        lower_bounds, upper_bounds : ndarray
+            Lower and upper bounds for each coefficient
+        """
+        n_p = self.n + 1  # Number of P coefficients
+        n_q = self.m      # Number of Q coefficients (excluding b0=1)
+        n_u = 2 * self.k  # Number of u and u' values
+
+        # Default: no bounds
+        lower = -np.inf * np.ones(self.num_unknowns)
+        upper = np.inf * np.ones(self.num_unknowns)
+
+        # P coefficients: no constraints
+        # (Could add bounds here if needed for stability)
+
+        # Q coefficients: apply constraint based on type
+        q_start = n_p
+        q_end = n_p + n_q
+
+        if self.q_constraint == QConstraintType.NONNEGATIVE:
+            # All Q coefficients >= epsilon
+            lower[q_start:q_end] = self.constraint_epsilon
+            # Also allow reasonable upper bound to prevent extreme values
+            upper[q_start:q_end] = 10.0
+
+        elif self.q_constraint == QConstraintType.ENDPOINT:
+            # Only constrain first and last Q coefficients
+            # Note: Q_coeffs_partial[0] corresponds to b_1, Q_coeffs_partial[m-1] to b_m
+            # (b_0 = 1 is fixed and not in the unknowns)
+            lower[q_start] = self.constraint_epsilon  # b_1
+            if n_q > 1:
+                lower[q_end - 1] = self.constraint_epsilon  # b_m
+
+        elif self.q_constraint == QConstraintType.BOUNDED:
+            # Q coefficients in [epsilon, 2]
+            lower[q_start:q_end] = self.constraint_epsilon
+            upper[q_start:q_end] = 2.0
+
+        # u and u' values: very permissive bounds
+        # Don't over-constrain the solution values
+        u_start = q_end
+        lower[u_start:] = -1000.0  # Very permissive
+        upper[u_start:] = 1000.0
+
+        return lower, upper
 
     def solve(self, method='lm', initial_guess=None, verbose=False) -> CollocationResult:
         """
@@ -308,7 +390,7 @@ class RationalCollocationQuadratic:
         Parameters
         ----------
         method : str
-            Solver method: 'lm' (Levenberg-Marquardt), 'fsolve' (Newton)
+            Solver method: 'lm' (Levenberg-Marquardt), 'trf' (Trust Region Reflective)
         initial_guess : ndarray, optional
             Initial guess for coefficients
         verbose : bool
@@ -324,13 +406,27 @@ class RationalCollocationQuadratic:
         else:
             x0 = initial_guess
 
-        if method == 'lm':
-            # Levenberg-Marquardt (best for quadratic systems)
+        # Construct bounds based on constraint type
+        if self.q_constraint in [QConstraintType.NONNEGATIVE, QConstraintType.ENDPOINT,
+                                 QConstraintType.BOUNDED]:
+            lower_bounds, upper_bounds = self._construct_bounds()
+            bounds = (lower_bounds, upper_bounds)
+            # Use 'trf' method which supports bounds
+            solver_method = 'trf'
+        else:
+            bounds = (-np.inf, np.inf)
+            # Use 'lm' for unconstrained (faster)
+            solver_method = 'lm' if method == 'lm' else 'trf'
+
+        if method in ['lm', 'trf']:
+            # Levenberg-Marquardt or Trust Region Reflective
             result = least_squares(
                 self.residuals,
                 x0,
-                method='lm',
-                verbose=2 if verbose else 0
+                method=solver_method,
+                bounds=bounds,
+                verbose=2 if verbose else 0,
+                max_nfev=1000  # Increase max iterations for constrained problems
             )
             success = result.success
             message = result.message
@@ -339,7 +435,10 @@ class RationalCollocationQuadratic:
             solution = result.x
 
         elif method == 'fsolve':
-            # Newton's method
+            # Newton's method (no bounds support)
+            if self.q_constraint != QConstraintType.NONE and self.q_constraint != QConstraintType.REGULARIZATION:
+                raise ValueError("fsolve does not support bounds. Use method='trf' with constraints.")
+
             solution, info, ier, msg = fsolve(
                 self.residuals,
                 x0,
@@ -351,7 +450,7 @@ class RationalCollocationQuadratic:
             residual_norm = np.linalg.norm(info['fvec'])
 
         else:
-            raise ValueError(f"Unknown method: {method}")
+            raise ValueError(f"Unknown method: {method}. Use 'lm', 'trf', or 'fsolve'.")
 
         # Unpack solution
         P_coeffs, Q_coeffs, u_vals, up_vals = self._unpack_coeffs(solution)
@@ -391,43 +490,79 @@ def test_simple_poisson():
     f = lambda x: 2.0
     exact = lambda x: x * (1 - x)
 
-    # Solve with [4/2] rational (more collocation points)
-    solver = RationalCollocationQuadratic(
-        f=f, a=0.0, b=1.0, alpha=0.0, beta=0.0,
-        n=4, m=2
-    )
+    # Test different constraint types
+    constraint_types = [
+        (QConstraintType.NONNEGATIVE, "Non-negative Q coefficients"),
+        (QConstraintType.ENDPOINT, "Endpoint constraints only"),
+        (QConstraintType.BOUNDED, "Bounded Q ∈ [ε, 2]"),
+        (QConstraintType.REGULARIZATION, "Regularization (penalty)"),
+    ]
 
-    print(f"\nRational: [{solver.n}/{solver.m}]")
-    print(f"Collocation points: {solver.k}")
-    print(f"Unknowns: {solver.num_unknowns}")
-    print(f"Equations: {solver.num_equations}")
+    results = []
 
-    # Solve
-    result = solver.solve(method='lm', verbose=False)
+    for constraint_type, description in constraint_types:
+        print(f"\n{'-'*70}")
+        print(f"Constraint: {description}")
+        print(f"{'-'*70}")
 
-    print(f"\nSolver: {result.message}")
-    print(f"Iterations: {result.iterations}")
-    print(f"Residual norm: {result.residual_norm:.2e}")
+        # Solve with [6/3] rational
+        solver = RationalCollocationQuadratic(
+            f=f, a=0.0, b=1.0, alpha=0.0, beta=0.0,
+            n=6, m=3,
+            q_constraint=constraint_type,
+            q_regularization=100.0 if constraint_type == QConstraintType.REGULARIZATION else 0.0,
+            constraint_epsilon=1e-3
+        )
 
-    print(f"\nP coefficients: {result.P_coeffs}")
-    print(f"Q coefficients: {result.Q_coeffs}")
+        print(f"Rational: [{solver.n}/{solver.m}], k={solver.k} collocation points")
 
-    # Evaluate at test points
-    x_test = np.array([0.0, 0.25, 0.5, 0.75, 1.0])
-    u_computed = solver.evaluate_solution(result, x_test)
-    u_exact = exact(x_test)
-    error = np.abs(u_computed - u_exact)
+        try:
+            # Solve
+            result = solver.solve(method='trf', verbose=False)
 
-    print(f"\nSolution values:")
-    print(f"{'x':>8} {'u_computed':>12} {'u_exact':>12} {'error':>12}")
-    print("-"*50)
-    for xi, uc, ue, err in zip(x_test, u_computed, u_exact, error):
-        print(f"{xi:8.2f} {uc:12.6f} {ue:12.6f} {err:12.2e}")
+            print(f"Success: {result.success}")
+            print(f"Iterations: {result.iterations}")
+            print(f"Residual norm: {result.residual_norm:.2e}")
+            print(f"Q coefficients: {result.Q_coeffs}")
 
-    print(f"\nMax error: {np.max(error):.2e}")
-    print(f"L2 error: {np.sqrt(np.mean(error**2)):.2e}")
+            # Check Q values
+            x_check = np.linspace(0, 1, 100)
+            Q_vals = np.array([BernsteinBasis.evaluate(result.Q_coeffs, xi, 0.0, 1.0)
+                              for xi in x_check])
+            print(f"Q range: [{np.min(Q_vals):.6f}, {np.max(Q_vals):.6f}]")
 
-    return solver, result
+            # Evaluate error
+            x_test = np.array([0.0, 0.25, 0.5, 0.75, 1.0])
+            u_computed = solver.evaluate_solution(result, x_test)
+            u_exact = exact(x_test)
+            error = np.abs(u_computed - u_exact)
+
+            print(f"Max error: {np.max(error):.2e}")
+            print(f"L2 error: {np.sqrt(np.mean(error**2)):.2e}")
+
+            results.append((constraint_type, result, np.max(error)))
+
+        except Exception as e:
+            print(f"FAILED: {str(e)[:100]}")
+            results.append((constraint_type, None, float('inf')))
+
+    print(f"\n{'='*70}")
+    print("Summary")
+    print(f"{'='*70}")
+    print(f"{'Constraint':<35} {'Max Error':<15} {'Q range':<15}")
+    print(f"{'-'*70}")
+    for constraint_type, result, max_error in results:
+        if result is not None:
+            x_check = np.linspace(0, 1, 100)
+            Q_vals = np.array([BernsteinBasis.evaluate(result.Q_coeffs, xi, 0.0, 1.0)
+                              for xi in x_check])
+            q_range = f"[{np.min(Q_vals):.3f}, {np.max(Q_vals):.3f}]"
+        else:
+            q_range = "FAILED"
+
+        print(f"{constraint_type.value:<35} {max_error:<15.2e} {q_range:<15}")
+
+    return results
 
 
 if __name__ == "__main__":
