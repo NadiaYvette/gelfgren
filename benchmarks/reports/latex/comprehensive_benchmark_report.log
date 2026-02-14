@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2026.2.13)  14 FEB 2026 18:01
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2026.2.13)  14 FEB 2026 18:12
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -982,7 +982,7 @@ Overfull \hbox (14.52681pt too wide) in paragraph at lines 458--481
 [13
 
 ] [14]
-<../figures/Discontinuous_Poisson.pdf, id=593, 860.70522pt x 352.39017pt>
+<../figures/Discontinuous_Poisson.pdf, id=594, 860.70522pt x 352.39017pt>
 File: ../figures/Discontinuous_Poisson.pdf Graphic file (type pdf)
 <use ../figures/Discontinuous_Poisson.pdf>
 Package pdftex.def Info: ../figures/Discontinuous_Poisson.pdf  used on input li
@@ -1006,7 +1006,7 @@ Overfull \hbox (48.97716pt too wide) in paragraph at lines 546--569
  []
 
 [15 <../figures/Discontinuous_Poisson.pdf>] [16]
-<../figures/Oscillatory_Poisson_ω=10.0.pdf, id=661, 860.70522pt x 352.39017pt>
+<../figures/Oscillatory_Poisson_ω=10.0.pdf, id=662, 860.70522pt x 352.39017pt>
 
 File: ../figures/Oscillatory_Poisson_ω=10.0.pdf Graphic file (type pdf)
 <use ../figures/Oscillatory_Poisson_ω=10.0.pdf>
@@ -1019,7 +1019,7 @@ Overfull \hbox (30.79698pt too wide) in paragraph at lines 635--659
  []
 
 [18]
-<../figures/Smooth_Poisson_sin.pdf, id=728, 860.4871pt x 352.39017pt>
+<../figures/Smooth_Poisson_sin.pdf, id=729, 860.4871pt x 352.39017pt>
 File: ../figures/Smooth_Poisson_sin.pdf Graphic file (type pdf)
 <use ../figures/Smooth_Poisson_sin.pdf>
 Package pdftex.def Info: ../figures/Smooth_Poisson_sin.pdf  used on input line 
@@ -1045,102 +1045,136 @@ Overfull \hbox (20.00832pt too wide) in paragraph at lines 876--876
 []\T1/cmr/bx/n/12 CRITICAL: Un-der-stand-ing the BVP Bench-mark Method-
  []
 
-[25] [26] [27] [28] [29] [30] [31] [32]
-Overfull \hbox (49.10074pt too wide) in paragraph at lines 1215--1215
-[]\T1/cmr/bx/n/14.4 Rational Col-lo-ca-tion Im-ple-men-ta-tion (COM-PLETED) 
+
+Underfull \hbox (badness 1412) in paragraph at lines 885--886
+[]\T1/cmr/m/n/10.95 Discretizes the BVP us-ing fi-nite dif-fer-ences: $\OMS/cms
+y/m/n/10.95 ^^@\OML/cmm/m/it/10.95 u[]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 x
+[]\OT1/cmr/m/n/10.95 ) \OMS/cmsy/m/n/10.95 ^^Y
  []
 
 
-Overfull \hbox (14.18611pt too wide) in paragraph at lines 1236--1239
+Underfull \hbox (badness 2343) in paragraph at lines 892--893
+[]\T1/cmr/m/n/10.95 Expresses so-lu-tion as global ra-tio-nal func-tion: $\OML/
+cmm/m/it/10.95 u\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 x\OT1/cmr/m/n/10.95 ) =
+
+ []
+
+[25] [26]
+Overfull \vbox (58.09541pt too high) has occurred while \output is active []
+
+[27] [28]
+Overfull \hbox (3.11197pt too wide) in paragraph at lines 967--968
+[]\T1/cmr/bx/n/10.95 Machine Pre-ci-sion\T1/cmr/m/n/10.95 : Achieves $\OMS/cmsy
+/m/n/10.95 ^^X \OT1/cmr/m/n/10.95 10[]$ \T1/cmr/m/n/10.95 er-rors (lim-ited onl
+y by floating-
+ []
+
+[29] [30] [31] [32] [33]
+Overfull \hbox (49.10074pt too wide) in paragraph at lines 1224--1224
+[]\T1/cmr/bx/n/14.4 Rational Col-lo-ca-tion Im-ple-men-ta-tion (COM-PLETED) 
+ []
+
+[34]
+Overfull \hbox (14.18611pt too wide) in paragraph at lines 1245--1248
 []\T1/cmr/m/n/10.95 Each equa-tion in-volves prod-ucts of ex-actly two un-known
 s, yield-ing quadratic
  []
 
-[33] [34] [35]
+[35]
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 
-Overfull \hbox (0.16302pt too wide) in paragraph at lines 1415--1417
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[36] [37]
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+Overfull \hbox (0.16302pt too wide) in paragraph at lines 1424--1426
  []\T1/cmr/bx/n/10.95 Empirical Per-for-mance Com-par-i-son[] \T1/cmr/m/n/10.95
  Com-pre-hen-sive bench-marks com-
  []
 
 
-Overfull \hbox (4.12029pt too wide) in paragraph at lines 1415--1417
+Overfull \hbox (4.12029pt too wide) in paragraph at lines 1424--1426
 \T1/cmr/m/n/10.95 par-ing both for-mu-la-tions against poly-no-mial fi-nite dif
 -fer-ences on three smooth
  []
 
 
-Overfull \hbox (111.91486pt too wide) in paragraph at lines 1420--1435
+Overfull \hbox (111.91486pt too wide) in paragraph at lines 1429--1444
  [][] 
  []
 
-[36] [37]
-Overfull \hbox (8.62096pt too wide) in paragraph at lines 1489--1490
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[38] [39]
+Overfull \hbox (8.62096pt too wide) in paragraph at lines 1498--1499
 []\T1/cmtt/m/n/10.95 benchmarks/python/rational_collocation.py\T1/cmr/m/n/10.95
  : Quadratic form solver
  []
 
 
-Overfull \hbox (12.69014pt too wide) in paragraph at lines 1490--1491
+Overfull \hbox (12.69014pt too wide) in paragraph at lines 1499--1500
 []\T1/cmtt/m/n/10.95 benchmarks/python/rational_collocation_cleared.py\T1/cmr/m
 /n/10.95 : Cleared form
  []
 
 
-Overfull \hbox (2.60191pt too wide) in paragraph at lines 1492--1493
+Overfull \hbox (2.60191pt too wide) in paragraph at lines 1501--1502
 []\T1/cmtt/m/n/10.95 benchmarks/data/bvp_method_comparison.json\T1/cmr/m/n/10.9
 5 : Com-par-i-son re-sults 
  []
 
 
-Overfull \hbox (11.40723pt too wide) in paragraph at lines 1493--1494
+Overfull \hbox (11.40723pt too wide) in paragraph at lines 1502--1503
 []\T1/cmtt/m/n/10.95 docs/RATIONAL_COLLOCATION_QUADRATIC_FORM.md\T1/cmr/m/n/10.
 95 : Quadratic form the-
  []
 
 
-Overfull \hbox (18.41602pt too wide) in paragraph at lines 1496--1497
+Overfull \hbox (18.41602pt too wide) in paragraph at lines 1505--1506
 []\T1/cmtt/m/n/10.95 docs/RATIONAL_COLLOCATION_IMPLEMENTATION.md\T1/cmr/m/n/10.
 95 : Im-ple-men-ta-tion sum-
  []
 
-[38]
-Overfull \hbox (7.79259pt too wide) in paragraph at lines 1508--1509
+[40]
+Overfull \hbox (7.79259pt too wide) in paragraph at lines 1517--1518
 []\T1/cmr/bx/n/10.95 Configurable pole pre-ven-tion \T1/cmr/m/n/10.95 via end-p
 oint con-straints (END-POINT,
  []
 
-[39] [40
+[41] [42
 
 ]
 Appendix A.
-[41
-
-] [42]
-Appendix B.
 [43
 
+] [44]
+Appendix B.
+[45
+
 ]
-Overfull \hbox (53.06108pt too wide) in paragraph at lines 1604--1604
+Overfull \hbox (53.06108pt too wide) in paragraph at lines 1613--1613
 []\T1/cmtt/m/n/10.95 pdflatex comprehensive_benchmark_report.tex  # Second pass
  for references[] 
  []
 
-[44] [45
+[46] [47
 
 ] (./comprehensive_benchmark_report.aux)
 Package rerunfilecheck Info: File `comprehensive_benchmark_report.out' has not 
 changed.
-(rerunfilecheck)             Checksum: 747B87CC9A51A14286417160E9BA9255;14944.
+(rerunfilecheck)             Checksum: 13677E906717637AD6BF08D791C91DE7;15164.
  ) 
 Here is how much of TeX's memory you used:
- 40018 strings out of 476041
- 961910 string characters out of 5793174
+ 40024 strings out of 476041
+ 962002 string characters out of 5793174
  1868388 words of memory out of 6000000
- 59639 multiletter control sequences out of 15000+600000
+ 59641 multiletter control sequences out of 15000+600000
  535115 words of font info for 91 fonts, out of 8000000 for 9000
  1137 hyphenation exceptions out of 8191
  84i,13n,89p,748b,1047s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1170,10 +1204,10 @@ m-super/sfrm0800.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super
 </usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfti1095.pfb></usr/s
 hare/texlive/texmf-dist/fonts/type1/public/cm-super/sftt1095.pfb></usr/share/te
 xlive/texmf-dist/fonts/type1/public/cm-super/sftt1200.pfb>
-Output written on comprehensive_benchmark_report.pdf (48 pages, 588843 bytes).
+Output written on comprehensive_benchmark_report.pdf (50 pages, 591230 bytes).
 PDF statistics:
- 1165 PDF objects out of 1200 (max. 8388607)
- 897 compressed objects within 9 object streams
- 266 named destinations out of 1000 (max. 500000)
+ 1178 PDF objects out of 1200 (max. 8388607)
+ 907 compressed objects within 10 object streams
+ 270 named destinations out of 1000 (max. 500000)
  740 words of extra memory for PDF output out of 10000 (max. 10000000)
 
