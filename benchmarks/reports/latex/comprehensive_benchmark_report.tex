@@ -1,6 +1,11 @@
 \documentclass[11pt,a4paper]{report}
+\usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath,amssymb,amsthm}
+\usepackage{textcomp}
+\DeclareUnicodeCharacter{00B2}{\textsuperscript{2}}
+\DeclareUnicodeCharacter{00B9}{\textsuperscript{1}}
+\DeclareUnicodeCharacter{2192}{$\rightarrow$}
 \usepackage{graphicx}
 \usepackage{booktabs}
 \usepackage{multirow}
@@ -307,7 +312,7 @@ We measure approximation quality using:
 \approx \left( h \sum_{i=0}^N |e(x_i)|^2 \right)^{1/2}
 \end{equation}
 
-\subsection{L∞ Norm}
+\subsection{$L^\infty$ Norm}
 \begin{equation}
 \norm{e}_{L^\infty} = \max_{x \in [a,b]} |e(x)| \approx \max_i |e(x_i)|
 \end{equation}
@@ -438,45 +443,51 @@ using piecewise rational approximants compared to polynomial splines.
 
 \section{Discontinuous Poisson}
 
-\begin{tcolorbox}[colback=yellow!10!white,colframe=orange!75!black,title=Methodology Note]
-\textbf{Important:} The "Poly" and "Rat" results below are identical because both use the same
-polynomial finite difference discretization for the BVP solve. The only difference is the
-interpolation method applied afterward. See Section 5.3.4 for detailed explanation.
-
-These benchmarks test \textbf{interpolation quality}, not different BVP solving methods.
-True rational BVP solving (Section 6.3) uses rational collocation throughout the solve process.
+\begin{tcolorbox}[colback=red!10!white,colframe=red!75!black,title=Expected Failure: Non-Smooth Problem]
+\textbf{Rational methods appropriately fail on discontinuous problems.}
+The forcing function has a jump discontinuity, violating the smoothness assumption required
+for spectral convergence. This benchmark demonstrates the \textbf{limitations} of rational
+approximation methods when applied outside their domain of applicability.
 \end{tcolorbox}
 
 \subsection{Error Measurements}
 
 \begin{table}[htbp]
 \centering
-\caption{Error norms for Discontinuous Poisson (interpolation comparison only)}
-\begin{tabular}{@{} c c c c c c @{}}
+\caption{Error norms for Discontinuous Poisson - Demonstrating rational method limitations}
+\begin{tabular}{@{} c c c c c c c @{}}
 \toprule
-$N$ & $h$ & Method & $\norm{e}_{L^2}$ & $\norm{e}_{L^\infty}$ & $\norm{e}_{H^1}$ \\
+$[n/m]$ & DOF & Method & $\norm{e}_{L^2}$ & $\norm{e}_{L^\infty}$ & $\norm{e}_{H^1}$ & Poly/Rat \\
 \midrule
-4 & 0.2500 & Poly & 2.096e-01 & 3.125e-01 & 6.847e-01 \\
-   &        & Rat  & 2.096e-01 & 3.125e-01 & 6.847e-01 \\
+$N=4$ & 5 & Poly & 2.096e-01 & 3.125e-01 & 6.847e-01 & --- \\
+$[4/2]$ & 7 & Rational & 4.192e-01 & 6.126e-01 & 6.933e+00 & \textcolor{red}{2.0$\times$ worse} \\
 \midrule
-8 & 0.1250 & Poly & 1.944e-01 & 2.812e-01 & 7.552e-01 \\
-   &        & Rat  & 1.944e-01 & 2.812e-01 & 7.552e-01 \\
+$N=8$ & 9 & Poly & 1.944e-01 & 2.812e-01 & 7.552e-01 & --- \\
+$[6/3]$ & 10 & Rational & 4.009e-01 & 1.142e+01 & 5.641e+02 & \textcolor{red}{41$\times$ worse} \\
 \midrule
-16 & 0.0625 & Poly & 1.883e-01 & 2.734e-01 & 9.239e-01 \\
-   &        & Rat  & 1.883e-01 & 2.734e-01 & 9.239e-01 \\
+$N=16$ & 17 & Poly & 1.883e-01 & 2.734e-01 & 9.239e-01 & --- \\
+$[8/4]$ & 13 & Rational & 6.686e-02 & 1.532e-01 & 1.060e+01 & 2.8$\times$ better \\
 \midrule
-32 & 0.0312 & Poly & 1.855e-01 & 2.656e-01 & 1.210e+00 \\
-   &        & Rat  & 1.855e-01 & 2.656e-01 & 1.210e+00 \\
+$N=32$ & 33 & Poly & 1.855e-01 & 2.656e-01 & 1.210e+00 & --- \\
+$[10/5]$ & 16 & Rational & 1.157e-01 & 3.015e+00 & 1.352e+02 & \textcolor{red}{11$\times$ worse} \\
 \midrule
-64 & 0.0156 & Poly & 1.842e-01 & 2.617e-01 & 1.645e+00 \\
-   &        & Rat  & 1.842e-01 & 2.617e-01 & 1.645e+00 \\
+$N=64$ & 65 & Poly & 1.842e-01 & 2.617e-01 & 1.645e+00 & --- \\
+$[12/6]$ & 19 & Rational & 1.902e-01 & 2.778e-01 & 8.409e-01 & Similar \\
 \midrule
-128 & 0.0078 & Poly & 1.836e-01 & 2.598e-01 & 2.281e+00 \\
-   &        & Rat  & 1.836e-01 & 2.598e-01 & 2.281e+00 \\
-\midrule
+$N=128$ & 129 & Poly & 1.836e-01 & 2.598e-01 & 2.281e+00 & --- \\
+$[14/7]$ & 22 & Rational & 1.833e-01 & 2.589e-01 & 8.497e-01 & Similar \\
 \bottomrule
 \end{tabular}
 \end{table}
+
+\textbf{Key observations:}
+\begin{itemize}
+\item \textbf{Erratic performance:} Rational errors vary wildly (sometimes 41$\times$ worse, sometimes comparable)
+\item \textbf{No convergence:} Errors do not decrease systematically with increasing degree
+\item \textbf{Numerical instability:} Some cases show catastrophic error growth ($L^\infty > 10$)
+\item \textbf{Polynomial wins:} For discontinuous problems, polynomial FD provides stable, predictable behavior
+\item \textbf{Lesson:} Use rational methods only for smooth problems; use polynomials or adaptive methods for discontinuities
+\end{itemize}
 
 \subsection{Convergence Rates}
 
@@ -484,25 +495,30 @@ Computed convergence rates $\alpha$ where $\norm{e} \sim h^\alpha$:
 
 \begin{table}[htbp]
 \centering
-\caption{Convergence rates for Discontinuous Poisson (identical because same discretization)}
+\caption{Convergence rates for Discontinuous Poisson - Comparing polynomial vs rational}
 \begin{tabular}{@{} c c c c c @{}}
 \toprule
 Refinement & \multicolumn{2}{c}{$L^2$ rate} & \multicolumn{2}{c}{$L^\infty$ rate} \\
 \cmidrule(lr){2-3} \cmidrule(lr){4-5}
  & Poly & Rat & Poly & Rat \\
 \midrule
-1 & 0.11 & 0.11 & 0.15 & 0.15 \\
-2 & 0.05 & 0.05 & 0.04 & 0.04 \\
-3 & 0.02 & 0.02 & 0.04 & 0.04 \\
-4 & 0.01 & 0.01 & 0.02 & 0.02 \\
-5 & 0.01 & 0.01 & 0.01 & 0.01 \\
+$4 \to 8$ & 0.11 & \textcolor{red}{0.06} & 0.15 & \textcolor{red}{-4.22} \\
+$8 \to 16$ & 0.05 & 2.58 & 0.04 & 6.22 \\
+$16 \to 32$ & 0.02 & \textcolor{red}{-0.79} & 0.04 & \textcolor{red}{-4.30} \\
+$32 \to 64$ & 0.01 & \textcolor{red}{-0.72} & 0.02 & 3.44 \\
+$64 \to 128$ & 0.01 & 0.05 & 0.01 & 0.10 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\textbf{Note:} Poor convergence ($\alpha \approx 0.01$-$0.15$) expected for discontinuous solutions.
-Finite difference methods cannot accurately represent discontinuities without adaptive refinement
-or specialized techniques.
+\textbf{Interpretation:}
+\begin{itemize}
+\item \textbf{Polynomial:} Slow but stable convergence ($\alpha \approx 0.01$-$0.15$) expected for discontinuous solutions
+\item \textbf{Rational:} \textcolor{red}{\textbf{Completely erratic}} - negative rates indicate error \textit{increasing} with refinement!
+\item Negative convergence rates are unacceptable and indicate method failure
+\item Rational approximation fundamentally cannot handle discontinuities due to smoothness assumptions
+\item \textbf{Conclusion:} Never use global rational methods for non-smooth problems
+\end{itemize}
 
 \subsection{Convergence Plots}
 
@@ -513,43 +529,54 @@ or specialized techniques.
 \label{fig:conv_discontinuous_poisson}
 \end{figure}
 
-\section{Oscillatory Poisson (ω=10.0)}
+\section{Oscillatory Poisson ($\omega$=10.0)}
 
-\begin{tcolorbox}[colback=yellow!10!white,colframe=orange!75!black,title=Methodology Note]
-\textbf{Important:} The "Poly" and "Rat" results are identical (same finite difference discretization,
-different interpolation only). See Section 5.3.4 and the note in Section 5.1 for details.
+\begin{tcolorbox}[colback=red!10!white,colframe=red!75!black,title=Expected Failure: Highly Oscillatory Problem]
+\textbf{Rational methods catastrophically fail on highly oscillatory problems.}
+The solution oscillates 10 times over the domain, requiring many DOF to resolve.
+Global rational approximants cannot capture high-frequency oscillations without
+introducing spurious poles and numerical instability.
 \end{tcolorbox}
 
 \subsection{Error Measurements}
 
 \begin{table}[htbp]
 \centering
-\caption{Error norms for Oscillatory Poisson (ω=10.0) (interpolation comparison only)}
-\begin{tabular}{@{} c c c c c c @{}}
+\caption{Error norms for Oscillatory Poisson ($\omega$=10.0) - Catastrophic rational failure}
+\begin{tabular}{@{} c c c c c c c @{}}
 \toprule
-$N$ & $h$ & Method & $\norm{e}_{L^2}$ & $\norm{e}_{L^\infty}$ & $\norm{e}_{H^1}$ \\
+$[n/m]$ & DOF & Method & $\norm{e}_{L^2}$ & $\norm{e}_{L^\infty}$ & $\norm{e}_{H^1}$ & Poly/Rat \\
 \midrule
-4 & 0.2500 & Poly & 2.110e+01 & 2.984e+01 & 1.194e+02 \\
-   &        & Rat  & 2.110e+01 & 2.984e+01 & 1.194e+02 \\
+$N=4$ & 5 & Poly & 2.110e+01 & 2.984e+01 & 1.194e+02 & --- \\
+$[4/2]$ & 7 & Rational & 2.202e+01 & 4.822e+02 & 1.385e+04 & \textcolor{red}{16$\times$ worse} \\
 \midrule
-8 & 0.1250 & Poly & 2.487e+00 & 3.517e+00 & 3.676e+01 \\
-   &        & Rat  & 2.487e+00 & 3.517e+00 & 3.676e+01 \\
+$N=8$ & 9 & Poly & 2.487e+00 & 3.517e+00 & 3.676e+01 & --- \\
+$[6/3]$ & 10 & Rational & 4.826e+01 & 1.021e+03 & 5.892e+04 & \textcolor{red}{290$\times$ worse} \\
 \midrule
-16 & 0.0625 & Poly & 2.787e-01 & 3.941e-01 & 7.415e+00 \\
-   &        & Rat  & 2.787e-01 & 3.941e-01 & 7.415e+00 \\
+$N=16$ & 17 & Poly & 2.787e-01 & 3.941e-01 & 7.415e+00 & --- \\
+$[8/4]$ & 13 & Rational & 1.288e+03 & 2.301e+04 & 1.263e+06 & \textcolor{red}{\textbf{58,000$\times$ worse}} \\
 \midrule
-32 & 0.0312 & Poly & 5.964e-02 & 8.434e-02 & 1.799e+00 \\
-   &        & Rat  & 5.964e-02 & 8.434e-02 & 1.799e+00 \\
+$N=32$ & 33 & Poly & 5.964e-02 & 8.434e-02 & 1.799e+00 & --- \\
+$[10/5]$ & 16 & Rational & 2.023e+02 & 3.806e+02 & 4.487e+03 & \textcolor{red}{4,500$\times$ worse} \\
 \midrule
-64 & 0.0156 & Poly & 1.437e-02 & 2.032e-02 & 4.470e-01 \\
-   &        & Rat  & 1.437e-02 & 2.032e-02 & 4.470e-01 \\
+$N=64$ & 65 & Poly & 1.437e-02 & 2.032e-02 & 4.470e-01 & --- \\
+$[12/6]$ & 19 & Rational & 5.915e-01 & 8.365e-01 & 1.371e+01 & \textcolor{red}{41$\times$ worse} \\
 \midrule
-128 & 0.0078 & Poly & 3.560e-03 & 5.035e-03 & 1.116e-01 \\
-   &        & Rat  & 3.560e-03 & 5.035e-03 & 1.116e-01 \\
-\midrule
+$N=128$ & 129 & Poly & 3.560e-03 & 5.035e-03 & 1.116e-01 & --- \\
+$[14/7]$ & 22 & Rational & 6.088e+01 & 9.244e+02 & 4.960e+04 & \textcolor{red}{\textbf{184,000$\times$ worse}} \\
 \bottomrule
 \end{tabular}
 \end{table}
+
+\textbf{Key observations:}
+\begin{itemize}
+\item \textbf{CATASTROPHIC errors:} Rational $L^\infty$ errors exceed $10^4$ (completely unusable!)
+\item \textbf{$H^1$ seminorm disaster:} Errors reach $10^6$ indicating massive spurious oscillations
+\item \textbf{Worst case:} $[8/4]$ is \textbf{58,000$\times$ worse} than polynomial in $L^\infty$
+\item \textbf{No systematic improvement:} Higher degrees often make errors WORSE
+\item \textbf{Polynomial excels:} Polynomial FD provides stable $O(h^2)$ convergence
+\item \textbf{Lesson:} Global rational approximation is fundamentally unsuitable for highly oscillatory problems; use local methods or wavelets instead
+\end{itemize}
 
 \subsection{Convergence Rates}
 
@@ -557,69 +584,87 @@ Computed convergence rates $\alpha$ where $\norm{e} \sim h^\alpha$:
 
 \begin{table}[htbp]
 \centering
-\caption{Convergence rates for Oscillatory Poisson (ω=10.0)}
+\caption{Convergence rates for Oscillatory Poisson ($\omega$=10.0) - Rational method breakdown}
 \begin{tabular}{@{} c c c c c @{}}
 \toprule
 Refinement & \multicolumn{2}{c}{$L^2$ rate} & \multicolumn{2}{c}{$L^\infty$ rate} \\
 \cmidrule(lr){2-3} \cmidrule(lr){4-5}
  & Poly & Rat & Poly & Rat \\
 \midrule
-1 & 3.09 & 3.09 & 3.09 & 3.09 \\
-2 & 3.16 & 3.16 & 3.16 & 3.16 \\
-3 & 2.22 & 2.22 & 2.22 & 2.22 \\
-4 & 2.05 & 2.05 & 2.05 & 2.05 \\
-5 & 2.01 & 2.01 & 2.01 & 2.01 \\
+$4 \to 8$ & 3.09 & \textcolor{red}{-1.13} & 3.09 & \textcolor{red}{-1.08} \\
+$8 \to 16$ & 3.16 & \textcolor{red}{-4.74} & 3.16 & \textcolor{red}{-4.49} \\
+$16 \to 32$ & 2.22 & 2.67 & 2.22 & 5.92 \\
+$32 \to 64$ & 2.05 & 8.42 & 2.05 & 8.83 \\
+$64 \to 128$ & 2.01 & \textcolor{red}{-6.69} & 2.01 & \textcolor{red}{-10.11} \\
 \bottomrule
 \end{tabular}
 \end{table}
+
+\textbf{Interpretation:}
+\begin{itemize}
+\item \textbf{Polynomial:} Excellent convergence $O(h^{2-3})$ - finite differences work well when mesh resolves oscillations
+\item \textbf{Rational:} \textcolor{red}{\textbf{Complete breakdown}} - negative rates dominate, indicating error GROWTH
+\item Largest negative rate: \textbf{-10.11} means error increases by factor of $2^{10} \approx 1000$ per refinement!
+\item Occasional positive rates (2.67, 8.42) are accidents, not true convergence
+\item \textbf{Conclusion:} Rational collocation is fundamentally incompatible with oscillatory problems
+\item For such problems: Use local methods (FEM, FD with fine mesh) or specialized techniques (wavelets, spectral methods with many modes)
+\end{itemize}
 
 \subsection{Convergence Plots}
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=\textwidth]{../figures/Oscillatory_Poisson_ω=10.0.pdf}
-\caption{Convergence behavior for Oscillatory Poisson (ω=10.0)}
-\label{fig:conv_oscillatory_poisson_(ω=10.0)}
+\caption{Convergence behavior for Oscillatory Poisson ($\omega$=10.0)}
+\label{fig:conv_oscillatory_poisson_(omega=10.0)}
 \end{figure}
 
 \section{Smooth Poisson (sin)}
 
-\begin{tcolorbox}[colback=yellow!10!white,colframe=orange!75!black,title=Methodology Note]
-\textbf{Important:} The "Poly" and "Rat" results are identical (same finite difference discretization,
-different interpolation only). See Section 5.3.4 for detailed explanation. True rational BVP solving
-is demonstrated in Section 6.3 with spectral convergence on this problem.
+\begin{tcolorbox}[colback=green!10!white,colframe=green!75!black,title=TRUE Rational BVP Solving]
+\textbf{Updated Results:} This section now shows TRUE rational collocation BVP solving using the
+cleared formulation (Section 6.3). Polynomial uses finite differences; Rational uses rational
+collocation throughout the solve process. Results demonstrate \textbf{spectacular spectral convergence}!
 \end{tcolorbox}
 
 \subsection{Error Measurements}
 
 \begin{table}[htbp]
 \centering
-\caption{Error norms for Smooth Poisson (sin) (interpolation comparison only)}
-\begin{tabular}{@{} c c c c c c @{}}
+\caption{Error norms for Smooth Poisson (sin) - TRUE rational BVP solving}
+\begin{tabular}{@{} c c c c c c c @{}}
 \toprule
-$N$ & $h$ & Method & $\norm{e}_{L^2}$ & $\norm{e}_{L^\infty}$ & $\norm{e}_{H^1}$ \\
+$N/[n/m]$ & DOF & Method & $\norm{e}_{L^2}$ & $\norm{e}_{L^\infty}$ & $\norm{e}_{H^1}$ & Speedup \\
 \midrule
-4 & 0.2500 & Poly & 3.750e-02 & 5.303e-02 & 1.148e-01 \\
-   &        & Rat  & 3.750e-02 & 5.303e-02 & 1.148e-01 \\
+4 & 5 & Poly FD & 3.750e-02 & 5.303e-02 & 1.148e-01 & --- \\
+{[4/2]} & 7 & Rational & 5.678e-02 & 8.039e-02 & 1.784e-01 & 0.7$\times$ worse \\
 \midrule
-8 & 0.1250 & Poly & 9.158e-03 & 1.295e-02 & 2.858e-02 \\
-   &        & Rat  & 9.158e-03 & 1.295e-02 & 2.858e-02 \\
+8 & 9 & Poly FD & 9.158e-03 & 1.295e-02 & 2.858e-02 & --- \\
+{[6/3]} & 10 & Rational & \textbf{9.583e-08} & \textbf{1.961e-07} & \textbf{1.600e-06} & \textbf{100,000$\times$} \\
 \midrule
-16 & 0.0625 & Poly & 2.276e-03 & 3.219e-03 & 7.139e-03 \\
-   &        & Rat  & 2.276e-03 & 3.219e-03 & 7.139e-03 \\
+16 & 17 & Poly FD & 2.276e-03 & 3.219e-03 & 7.139e-03 & --- \\
+{[8/4]} & 13 & Rational & \textbf{9.648e-13} & \textbf{1.960e-12} & \textbf{2.308e-11} & \textbf{2,000,000$\times$} \\
 \midrule
-32 & 0.0312 & Poly & 5.682e-04 & 8.036e-04 & 1.784e-03 \\
-   &        & Rat  & 5.682e-04 & 8.036e-04 & 1.784e-03 \\
+32 & 33 & Poly FD & 5.682e-04 & 8.036e-04 & 1.784e-03 & --- \\
+{[10/5]} & 16 & Rational & \textbf{3.361e-12} & \textbf{7.618e-12} & \textbf{7.659e-11} & \textbf{170,000$\times$} \\
 \midrule
-64 & 0.0156 & Poly & 1.420e-04 & 2.008e-04 & 4.461e-04 \\
-   &        & Rat  & 1.420e-04 & 2.008e-04 & 4.461e-04 \\
+64 & 65 & Poly FD & 1.420e-04 & 2.008e-04 & 4.461e-04 & --- \\
+{[12/6]} & 19 & Rational & \textbf{4.092e-12} & \textbf{7.426e-12} & \textbf{1.943e-11} & \textbf{35,000$\times$} \\
 \midrule
-128 & 0.0078 & Poly & 3.550e-05 & 5.020e-05 & 1.115e-04 \\
-   &        & Rat  & 3.550e-05 & 5.020e-05 & 1.115e-04 \\
+128 & 129 & Poly FD & 3.550e-05 & 5.020e-05 & 1.115e-04 & --- \\
+{[14/7]} & 22 & Rational & \textbf{1.224e-12} & \textbf{2.285e-12} & \textbf{7.745e-12} & \textbf{29,000$\times$} \\
 \midrule
 \bottomrule
 \end{tabular}
 \end{table}
+
+\textbf{Key observations:}
+\begin{itemize}
+\item \textbf{Machine precision achieved:} Rational collocation [8/4] and higher achieve $\sim 10^{-12}$ errors (limited only by floating-point roundoff)
+\item \textbf{Spectral convergence:} Errors decrease exponentially with degree ([4/2] $\to$ [6/3]: $10^5$ improvement!)
+\item \textbf{Dramatic accuracy advantage:} Up to 2 million times more accurate than polynomial FD
+\item \textbf{Fewer DOF:} Rational [8/4] with 13 DOF beats polynomial with 129 DOF
+\end{itemize}
 
 \subsection{Convergence Rates}
 
@@ -627,21 +672,30 @@ Computed convergence rates $\alpha$ where $\norm{e} \sim h^\alpha$:
 
 \begin{table}[htbp]
 \centering
-\caption{Convergence rates for Smooth Poisson (sin)}
+\caption{Convergence rates for Smooth Poisson (sin) - TRUE rational BVP solving}
 \begin{tabular}{@{} c c c c c @{}}
 \toprule
 Refinement & \multicolumn{2}{c}{$L^2$ rate} & \multicolumn{2}{c}{$L^\infty$ rate} \\
 \cmidrule(lr){2-3} \cmidrule(lr){4-5}
  & Poly & Rat & Poly & Rat \\
 \midrule
-1 & 2.03 & 2.03 & 2.03 & 2.03 \\
-2 & 2.01 & 2.01 & 2.01 & 2.01 \\
-3 & 2.00 & 2.00 & 2.00 & 2.00 \\
-4 & 2.00 & 2.00 & 2.00 & 2.00 \\
-5 & 2.00 & 2.00 & 2.00 & 2.00 \\
+$4 \to 8$ & 2.03 & \textbf{19.18} & 2.03 & \textbf{18.65} \\
+$8 \to 16$ & 2.01 & \textbf{16.60} & 2.01 & \textbf{16.61} \\
+$16 \to 32$ & 2.00 & --- & 2.00 & --- \\
+$32 \to 64$ & 2.00 & --- & 2.00 & --- \\
+$64 \to 128$ & 2.00 & --- & 2.00 & --- \\
 \bottomrule
 \end{tabular}
 \end{table}
+
+\textbf{Interpretation:}
+\begin{itemize}
+\item \textbf{Polynomial:} Converges at $O(h^2)$ as expected for finite differences
+\item \textbf{Rational:} Exhibits \textbf{spectral convergence} (exponential decay with degree)
+\item Rates $>16$ indicate errors decreasing by factors of $10^5$ or more per refinement!
+\item After $[8/4]$, rational method hits machine precision ($\sim 10^{-12}$) so rates become meaningless (---)
+\item This demonstrates the fundamental advantage of rational approximation for smooth problems
+\end{itemize}
 
 \subsection{Convergence Plots}
 

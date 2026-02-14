@@ -8,6 +8,15 @@ Previous benchmarks used polynomial interpolation (Q=1 placeholder) incorrectly
 labeled as [2/2] rationals. Now we have true rational approximants with non-trivial
 denominators working correctly.
 
+**→ See [RATIONAL_CONSTRUCTION_VERIFICATION.md](RATIONAL_CONSTRUCTION_VERIFICATION.md) for complete verification results and examples.**
+
+### Quick Verification
+```bash
+# Run working examples that demonstrate non-trivial rational denominators:
+cargo run --release --example exponential_approximation
+cargo run --release --example runge_function
+```
+
 ## Test Suite Results
 
 ### Core Library (gelfgren-core)

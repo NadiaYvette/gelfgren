@@ -82,69 +82,26 @@ class SpecialFunctionApproximation:
 
         return x_fine, y_approx
 
-    def approximate_rational_piecewise(self, n_intervals: int, deg_num: int = 2, deg_den: int = 2):
+    def approximate_rational_piecewise(self, n_intervals: int, deg_num: int = 2, deg_den: int = 1):
         """Approximate using piecewise rational approximants"""
         if not GELFGREN_AVAILABLE:
             # Fallback: use polynomial spline
             return self.approximate_polynomial_spline(n_intervals)
 
         # Create mesh
-        x_mesh = np.linspace(self.a, self.b, n_intervals + 1)
+        mesh = gf.Mesh.uniform(self.a, self.b, n_intervals)
 
-        # Fine evaluation grid
+        # Compute first derivative numerically
+        def f_deriv(x):
+            h = 1e-7
+            return (self.func(x + h) - self.func(x - h)) / (2 * h)
+
+        # Create piecewise rational approximation using two-point Padé
+        pw = gf.PiecewiseRational.from_function(mesh, deg_num, deg_den, [self.func, f_deriv])
+
+        # Evaluate on fine grid
         x_fine = np.linspace(self.a, self.b, 1000)
-        y_approx = np.zeros_like(x_fine)
-
-        for i in range(n_intervals):
-            x_left = x_mesh[i]
-            x_right = x_mesh[i + 1]
-            mask = (x_fine >= x_left) & (x_fine <= x_right)
-            x_local = x_fine[mask]
-
-            # Compute local Taylor series coefficients at midpoint
-            x_mid = (x_left + x_right) / 2.0
-            h = x_right - x_left
-
-            # Compute derivatives numerically at midpoint
-            coeffs = []
-            delta = 1e-6
-
-            # f(x_mid)
-            coeffs.append(self.func(x_mid))
-
-            # f'(x_mid)
-            f_plus = self.func(x_mid + delta)
-            f_minus = self.func(x_mid - delta)
-            coeffs.append((f_plus - f_minus) / (2.0 * delta))
-
-            # f''(x_mid) / 2!
-            f_center = self.func(x_mid)
-            coeffs.append((f_plus - 2.0 * f_center + f_minus) / (2.0 * delta * delta))
-
-            # f'''(x_mid) / 3!
-            f_2plus = self.func(x_mid + 2 * delta)
-            f_2minus = self.func(x_mid - 2 * delta)
-            coeffs.append((f_2plus - 2.0 * f_plus + 2.0 * f_minus - f_2minus) / (12.0 * delta ** 3))
-
-            # f''''(x_mid) / 4!
-            coeffs.append((f_2plus - 4.0 * f_plus + 6.0 * f_center - 4.0 * f_minus + f_2minus) / (24.0 * delta ** 4))
-
-            try:
-                # Create Padé approximant on normalized interval [0, 1]
-                pade = gf.PadeApproximant(coeffs, deg_num, deg_den, 0.0, 1.0)
-
-                # Map local x to [0, 1]
-                x_local_normalized = (x_local - x_left) / (x_right - x_left)
-
-                # Evaluate Padé approximant
-                y_local = np.array([pade.evaluate(xi) for xi in x_local_normalized])
-                y_approx[mask] = y_local
-            except:
-                # Fallback to polynomial Taylor expansion
-                x_local_centered = x_local - x_mid
-                y_local = sum(c * x_local_centered ** k / np.math.factorial(k)
-                            for k, c in enumerate(coeffs[:4]))
-                y_approx[mask] = y_local
+        y_approx = pw.evaluate(np.array(x_fine))
 
         return x_fine, y_approx
 

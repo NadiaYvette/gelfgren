@@ -29,7 +29,19 @@
       "WebFetch(domain:encyclopediaofmath.org)",
       "Bash(git push:*)",
       "Bash(tee:*)",
-      "Bash(git reset:*)"
+      "Bash(git reset:*)",
+      "Bash(cargo run:*)",
+      "Bash(PYO3_USE_ABI3_FORWARD_COMPATIBILITY=1 cargo build:*)",
+      "Bash(PYO3_USE_ABI3_FORWARD_COMPATIBILITY=1 python3 -m pip install:*)",
+      "Bash(PYO3_USE_ABI3_FORWARD_COMPATIBILITY=1 maturin develop:*)",
+      "Bash(PYO3_USE_ABI3_FORWARD_COMPATIBILITY=1 maturin build:*)",
+      "Bash(/tmp/new_function.txt << 'EOF'\n/// Builds the linear system for Hermite interpolation with rational approximants.\n///\n/// Exposes the constraint equations Ax = b where x contains the coefficients\n/// of the numerator and denominator polynomials.\n///\n/// # Arguments\n///\n/// * `left_derivatives` - [f\\(a\\), f'\\(a\\), ..., f^\\(p-1\\)\\(a\\)]\n/// * `right_derivatives` - [f\\(b\\), f'\\(b\\), ..., f^\\(p-1\\)\\(b\\)]\n/// * `n` - Numerator degree\n/// * `m` - Denominator degree\n/// * `x0` - Left endpoint a\n/// * `x1` - Right endpoint b\n/// * `delta_x` - Spacing Δx = b - a\n///\n/// # Returns\n///\n/// Tuple \\(matrix_a, vector_b, num_unknowns\\) where:\n/// - `matrix_a`: Flattened constraint matrix \\(row-major order\\)\n/// - `vector_b`: Right-hand side vector\n/// - `num_unknowns`: Number of variables \\(n+m+1\\)\n///\n/// This is the same system that `construct_rational_pade` solves internally.\n/// Exposed to allow custom solvers, inspection, and optimization formulations.\npub\\(crate\\) fn build_hermite_linear_system<T: Float + FromPrimitive + std::fmt::Debug>\\(\n    left_derivatives: &[T],\n    right_derivatives: &[T],\n    n: usize,\n    m: usize,\n    x0: T,\n    x1: T,\n    delta_x: T,\n\\) -> \\(Vec<T>, Vec<T>, usize\\) {\n    // Call construct_rational_pade_internal to build the system\n    construct_rational_pade_internal\\(left_derivatives, right_derivatives, x0, x1, delta_x, n, m, false\\)\n        .expect\\(\"Failed to build linear system\"\\)\n}\n\nEOF)",
+      "Bash(pdflatex:*)",
+      "Bash(python:*)",
+      "Bash(echo:*)",
+      "Bash(pdfinfo:*)",
+      "Bash(pkill:*)",
+      "Bash(wait:*)"
     ]
   }
 }

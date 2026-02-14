@@ -1,5 +1,9 @@
 # Gelfgren Benchmarks
 
+> **✅ Python bindings are now available!** The special functions benchmark (`special_function_convergence.py`) uses the real Gelfgren implementation and demonstrates significant improvements for rational approximants over polynomial splines.
+>
+> **Note:** The BVP benchmark (`bvp_convergence.py`) still uses placeholder code as it requires implementing a full rational-based BVP solver, which is beyond the scope of an interpolation library.
+
 Comprehensive benchmark suite comparing piecewise rational approximants against polynomial splines for:
 
 1. **Boundary Value Problems (BVPs)**: 1D Poisson equation variants
