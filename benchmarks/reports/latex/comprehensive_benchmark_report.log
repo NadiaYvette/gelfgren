@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2026.2.13)  14 FEB 2026 18:41
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2026.2.13)  14 FEB 2026 18:54
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -914,7 +914,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.32 ...1}Problem Statement}{10}{subsection.4.2.1}
+l.32 ....1}Problem Statement}{8}{subsection.4.2.1}
                                                   % [1
 
 
@@ -922,6 +922,12 @@ l.32 ...1}Problem Statement}{10}{subsection.4.2.1}
 Overfull \hbox (16.05493pt too wide) in paragraph at lines 68--68
  [][] [][]\T1/cmr/m/n/10.95 CRITICAL: Un-der-stand-ing the BVP Bench-mark Metho
 d- 
+ []
+
+
+Overfull \hbox (2.59541pt too wide) in paragraph at lines 88--88
+ [][] [][]\T1/cmr/m/n/10.95 Degree Pro-gres-sion Strate-gies: Fixed vs Bal-ance
+d Growth[] [][]  
  []
 
 [2])
@@ -982,7 +988,7 @@ Overfull \hbox (14.52681pt too wide) in paragraph at lines 458--481
 [13
 
 ] [14]
-<../figures/Discontinuous_Poisson.pdf, id=594, 860.70522pt x 352.39017pt>
+<../figures/Discontinuous_Poisson.pdf, id=599, 860.70522pt x 352.39017pt>
 File: ../figures/Discontinuous_Poisson.pdf Graphic file (type pdf)
 <use ../figures/Discontinuous_Poisson.pdf>
 Package pdftex.def Info: ../figures/Discontinuous_Poisson.pdf  used on input li
@@ -1006,7 +1012,7 @@ Overfull \hbox (48.97716pt too wide) in paragraph at lines 546--569
  []
 
 [15 <../figures/Discontinuous_Poisson.pdf>] [16]
-<../figures/Oscillatory_Poisson_ω=10.0.pdf, id=662, 860.70522pt x 352.39017pt>
+<../figures/Oscillatory_Poisson_ω=10.0.pdf, id=667, 860.70522pt x 352.39017pt>
 
 File: ../figures/Oscillatory_Poisson_ω=10.0.pdf Graphic file (type pdf)
 <use ../figures/Oscillatory_Poisson_ω=10.0.pdf>
@@ -1019,7 +1025,7 @@ Overfull \hbox (30.79698pt too wide) in paragraph at lines 635--659
  []
 
 [18]
-<../figures/Smooth_Poisson_sin.pdf, id=729, 860.4871pt x 352.39017pt>
+<../figures/Smooth_Poisson_sin.pdf, id=734, 860.4871pt x 352.39017pt>
 File: ../figures/Smooth_Poisson_sin.pdf Graphic file (type pdf)
 <use ../figures/Smooth_Poisson_sin.pdf>
 Package pdftex.def Info: ../figures/Smooth_Poisson_sin.pdf  used on input line 
@@ -1074,105 +1080,131 @@ Overfull \hbox (0.48056pt too wide) in paragraph at lines 1092--1100
  [] 
  []
 
-[32] [33] [34]
-Overfull \hbox (49.10074pt too wide) in paragraph at lines 1265--1265
+
+Overfull \hbox (17.13127pt too wide) in paragraph at lines 1117--1117
+[]\T1/cmr/bx/n/12 Degree Pro-gres-sion Strate-gies: Fixed vs Bal-anced Growth 
+ []
+
+
+Overfull \hbox (27.47961pt too wide) in paragraph at lines 1148--1157
+ [] 
+ []
+
+[32]
+Overfull \hbox (0.9161pt too wide) in paragraph at lines 1186--1188
+[]\T1/cmr/bx/n/10.95 Mesh re-fine-ment strat-egy\T1/cmr/m/n/10.95 : Han-dle lo-
+cal vari-a-tions by re-fin-ing mesh,
+ []
+
+[33] [34] [35]
+Overfull \hbox (49.10074pt too wide) in paragraph at lines 1352--1352
 []\T1/cmr/bx/n/14.4 Rational Col-lo-ca-tion Im-ple-men-ta-tion (COM-PLETED) 
  []
 
-[35]
-Overfull \hbox (14.18611pt too wide) in paragraph at lines 1286--1289
+[36]
+Overfull \hbox (14.18611pt too wide) in paragraph at lines 1373--1376
 []\T1/cmr/m/n/10.95 Each equa-tion in-volves prod-ucts of ex-actly two un-known
 s, yield-ing quadratic
  []
 
-[36]
+[37]
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[37] [38]
-Overfull \hbox (0.16302pt too wide) in paragraph at lines 1465--1467
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[38] [39]
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+Overfull \hbox (0.16302pt too wide) in paragraph at lines 1552--1554
  []\T1/cmr/bx/n/10.95 Empirical Per-for-mance Com-par-i-son[] \T1/cmr/m/n/10.95
  Com-pre-hen-sive bench-marks com-
  []
 
 
-Overfull \hbox (4.12029pt too wide) in paragraph at lines 1465--1467
+Overfull \hbox (4.12029pt too wide) in paragraph at lines 1552--1554
 \T1/cmr/m/n/10.95 par-ing both for-mu-la-tions against poly-no-mial fi-nite dif
 -fer-ences on three smooth
  []
 
 
-Overfull \hbox (111.91486pt too wide) in paragraph at lines 1470--1485
+Overfull \hbox (111.91486pt too wide) in paragraph at lines 1557--1572
  [][] 
  []
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[39] [40]
-Overfull \hbox (8.62096pt too wide) in paragraph at lines 1539--1540
+[40] [41]
+Overfull \hbox (8.62096pt too wide) in paragraph at lines 1626--1627
 []\T1/cmtt/m/n/10.95 benchmarks/python/rational_collocation.py\T1/cmr/m/n/10.95
  : Quadratic form solver
  []
 
 
-Overfull \hbox (12.69014pt too wide) in paragraph at lines 1540--1541
+Overfull \hbox (12.69014pt too wide) in paragraph at lines 1627--1628
 []\T1/cmtt/m/n/10.95 benchmarks/python/rational_collocation_cleared.py\T1/cmr/m
 /n/10.95 : Cleared form
  []
 
 
-Overfull \hbox (2.60191pt too wide) in paragraph at lines 1542--1543
+Overfull \hbox (2.60191pt too wide) in paragraph at lines 1629--1630
 []\T1/cmtt/m/n/10.95 benchmarks/data/bvp_method_comparison.json\T1/cmr/m/n/10.9
 5 : Com-par-i-son re-sults 
  []
 
 
-Overfull \hbox (11.40723pt too wide) in paragraph at lines 1543--1544
+Overfull \hbox (11.40723pt too wide) in paragraph at lines 1630--1631
 []\T1/cmtt/m/n/10.95 docs/RATIONAL_COLLOCATION_QUADRATIC_FORM.md\T1/cmr/m/n/10.
 95 : Quadratic form the-
  []
 
 
-Overfull \hbox (18.41602pt too wide) in paragraph at lines 1546--1547
+Overfull \hbox (18.41602pt too wide) in paragraph at lines 1633--1634
 []\T1/cmtt/m/n/10.95 docs/RATIONAL_COLLOCATION_IMPLEMENTATION.md\T1/cmr/m/n/10.
 95 : Im-ple-men-ta-tion sum-
  []
 
-
-Overfull \hbox (7.79259pt too wide) in paragraph at lines 1558--1559
+[42]
+Overfull \hbox (7.79259pt too wide) in paragraph at lines 1645--1646
 []\T1/cmr/bx/n/10.95 Configurable pole pre-ven-tion \T1/cmr/m/n/10.95 via end-p
 oint con-straints (END-POINT,
  []
 
-[41] [42] [43
+[43] [44
 
 ]
 Appendix A.
-[44
+[45
 
-] [45]
+] [46]
 Appendix B.
-[46
+[47
 
 ]
-Overfull \hbox (53.06108pt too wide) in paragraph at lines 1654--1654
+Overfull \hbox (53.06108pt too wide) in paragraph at lines 1741--1741
 []\T1/cmtt/m/n/10.95 pdflatex comprehensive_benchmark_report.tex  # Second pass
  for references[] 
  []
 
-[47] [48
+[48] [49
 
 ] (./comprehensive_benchmark_report.aux)
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
 Package rerunfilecheck Info: File `comprehensive_benchmark_report.out' has not 
 changed.
-(rerunfilecheck)             Checksum: 9412B08DCC3F1B2D5C778DE72F795121;15237.
+(rerunfilecheck)             Checksum: 2FBD7ABECF774A4D14AE387A094DAE24;15592.
  ) 
 Here is how much of TeX's memory you used:
- 40029 strings out of 476041
- 962041 string characters out of 5793174
+ 40044 strings out of 476041
+ 962186 string characters out of 5793174
  1868388 words of memory out of 6000000
- 59641 multiletter control sequences out of 15000+600000
+ 59642 multiletter control sequences out of 15000+600000
  535115 words of font info for 91 fonts, out of 8000000 for 9000
  1137 hyphenation exceptions out of 8191
  84i,13n,89p,748b,1047s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1202,10 +1234,10 @@ m-super/sfrm0800.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super
 </usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfti1095.pfb></usr/s
 hare/texlive/texmf-dist/fonts/type1/public/cm-super/sftt1095.pfb></usr/share/te
 xlive/texmf-dist/fonts/type1/public/cm-super/sftt1200.pfb>
-Output written on comprehensive_benchmark_report.pdf (51 pages, 593445 bytes).
+Output written on comprehensive_benchmark_report.pdf (52 pages, 597990 bytes).
 PDF statistics:
- 1187 PDF objects out of 1200 (max. 8388607)
- 915 compressed objects within 10 object streams
- 275 named destinations out of 1000 (max. 500000)
- 740 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1212 PDF objects out of 1440 (max. 8388607)
+ 939 compressed objects within 10 object streams
+ 289 named destinations out of 1000 (max. 500000)
+ 748 words of extra memory for PDF output out of 10000 (max. 10000000)
 

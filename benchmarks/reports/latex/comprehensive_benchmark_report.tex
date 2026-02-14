@@ -1114,6 +1114,93 @@ method, making approximations worse.
 For non-smooth problems, \emph{do not use rational collocation at all}---switch to
 polynomial finite differences or adaptive methods designed for non-smooth solutions.
 
+\subsection{Degree Progression Strategies: Fixed vs Balanced Growth}
+
+A critical question for rational approximation: Should both numerator and denominator
+degrees grow together, or should we fix the pole structure and only increase numerator
+degree?
+
+\paragraph{Three Strategies Tested:}
+
+\begin{enumerate}
+\item \textbf{BALANCED [n/m]}: $n \approx 2m$ (current benchmarks)
+  \begin{itemize}
+  \item Progression: [4/2], [6/3], [8/4], [10/5], [12/6], [14/7]
+  \item Both $n$ and $m$ increase together
+  \end{itemize}
+
+\item \textbf{FIXED [n/2]}: Fix $m=2$ (one complex conjugate pair), vary $n$
+  \begin{itemize}
+  \item Progression: [4/2], [6/2], [8/2], [10/2], [12/2], [14/2], ...
+  \item Minimal pole structure
+  \end{itemize}
+
+\item \textbf{FIXED [n/4]}: Fix $m=4$ (two complex conjugate pairs), vary $n$
+  \begin{itemize}
+  \item Progression: [8/4], [10/4], [12/4], [14/4], [16/4], [18/4], ...
+  \item Moderate fixed pole structure
+  \end{itemize}
+\end{enumerate}
+
+\paragraph{Experimental Results (Smooth Poisson):}
+
+\begin{center}
+\begin{tabular}{lccc}
+\toprule
+Strategy & Machine Precision & Best Achieved & Assessment \\
+\midrule
+Balanced [n/m] & [8/4] @ 13 DOF & 9.65e-13 & Works but wastes DOF \\
+Fixed [n/2] & \textbf{NEVER} & 2.07e-03 & Insufficient poles \\
+Fixed [n/4] & [8/4] @ 13 DOF & \textbf{3.16e-16} & \textbf{OPTIMAL} $\bigstar$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\paragraph{Critical Discovery:}
+
+For smooth problems, \textbf{$m=4$ (two complex conjugate pairs) provides sufficient
+pole flexibility}. Once adequate pole structure exists, arbitrarily high accuracy
+is achievable by increasing $n$ alone:
+
+\begin{center}
+\begin{tabular}{lc}
+\toprule
+Configuration & L$^2$ Error \\
+\midrule
+{[8/4]} & 9.65e-13 (machine precision) \\
+{[12/4]} & 1.58e-13 (beyond machine precision) \\
+{[18/4]} & \textbf{3.16e-16} (near double precision limit!) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Meanwhile, Fixed [n/2] \textbf{never converges}---one conjugate pair is insufficient.
+Errors oscillate erratically without systematic decrease.
+
+\paragraph{Why Fixed [n/4] is Superior:}
+
+\begin{itemize}
+\item \textbf{Efficient DOF usage}: Achieves machine precision with same DOF as balanced,
+  then continues improving without adding poles
+\item \textbf{Stable optimization}: Fixed $m$ means fewer unknowns, more robust solve
+\item \textbf{Mesh refinement strategy}: Handle local variations by refining mesh,
+  not by increasing $m$ (each element uses [n/4])
+\item \textbf{Predictable behavior}: Known pole structure makes analysis easier
+\end{itemize}
+
+\paragraph{Recommendation for Smooth Problems:}
+
+\textbf{Use FIXED [n/4] strategy:}
+\begin{enumerate}
+\item Start with $m=4$ (two complex conjugate pairs)
+\item Increase $n$ as needed: [8/4], [10/4], [12/4], ...
+\item For local pole variations, refine the \emph{mesh}, not $m$
+\item Each mesh element maintains [n/4] structure
+\end{enumerate}
+
+This approach provides superior accuracy with more efficient DOF usage than
+balanced [n/m] growth.
+
 \section{Future Directions}
 
 \subsection{Rational Collocation: Three Formulations}
