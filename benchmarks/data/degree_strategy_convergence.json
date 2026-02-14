@@ -1,0 +1,323 @@
+{
+  "problem": "Smooth Poisson",
+  "strategies": [
+    {
+      "name": "Balanced [n/m]",
+      "description": "n \u2248 2m",
+      "results": [
+        {
+          "n": 4,
+          "m": 2,
+          "dof": 7,
+          "l2_error": 0.056775518104750906,
+          "l_inf_error": 0.08039469561175916,
+          "h1_seminorm_error": 0.1783664377414898,
+          "iterations": 6,
+          "success": true
+        },
+        {
+          "n": 6,
+          "m": 3,
+          "dof": 10,
+          "l2_error": 9.583067324560023e-08,
+          "l_inf_error": 1.960855771088177e-07,
+          "h1_seminorm_error": 1.5996517784595572e-06,
+          "iterations": 8,
+          "success": true
+        },
+        {
+          "n": 8,
+          "m": 4,
+          "dof": 13,
+          "l2_error": 9.647555299184315e-13,
+          "l_inf_error": 1.9597656830683263e-12,
+          "h1_seminorm_error": 2.3078963698337414e-11,
+          "iterations": 6,
+          "success": true
+        },
+        {
+          "n": 10,
+          "m": 5,
+          "dof": 16,
+          "l2_error": 3.36074001437149e-12,
+          "l_inf_error": 7.617795283465512e-12,
+          "h1_seminorm_error": 7.65909298247213e-11,
+          "iterations": 8,
+          "success": true
+        },
+        {
+          "n": 12,
+          "m": 6,
+          "dof": 19,
+          "l2_error": 4.0920040794604736e-12,
+          "l_inf_error": 7.42617078941521e-12,
+          "h1_seminorm_error": 1.9430609409738563e-11,
+          "iterations": 7,
+          "success": true
+        },
+        {
+          "n": 14,
+          "m": 7,
+          "dof": 22,
+          "l2_error": 1.2237966700662667e-12,
+          "l_inf_error": 2.285061029283497e-12,
+          "h1_seminorm_error": 7.745363603589009e-12,
+          "iterations": 19,
+          "success": true
+        },
+        {
+          "n": 16,
+          "m": 8,
+          "dof": 25,
+          "l2_error": 2.3549159772803405e-13,
+          "l_inf_error": 3.6914915568786455e-13,
+          "h1_seminorm_error": 8.319477103517716e-13,
+          "iterations": 14,
+          "success": true
+        },
+        {
+          "n": 18,
+          "m": 9,
+          "dof": 28,
+          "l2_error": 1.8492772571864865e-13,
+          "l_inf_error": 3.476108290101365e-13,
+          "h1_seminorm_error": 7.46893228555815e-12,
+          "iterations": 17,
+          "success": true
+        },
+        {
+          "n": 20,
+          "m": 10,
+          "dof": 31,
+          "l2_error": 2.9817583020588896e-13,
+          "l_inf_error": 6.766809335090329e-13,
+          "h1_seminorm_error": 1.2214626172218721e-11,
+          "iterations": 23,
+          "success": true
+        }
+      ]
+    },
+    {
+      "name": "Fixed [n/2]",
+      "description": "One complex conjugate pair",
+      "results": [
+        {
+          "n": 4,
+          "m": 2,
+          "dof": 7,
+          "l2_error": 0.056775518104750906,
+          "l_inf_error": 0.08039469561175916,
+          "h1_seminorm_error": 0.1783664377414898,
+          "iterations": 6,
+          "success": true
+        },
+        {
+          "n": 6,
+          "m": 2,
+          "dof": 9,
+          "l2_error": 0.027841604733474752,
+          "l_inf_error": 0.03940297076743371,
+          "h1_seminorm_error": 0.08746716047683702,
+          "iterations": 12,
+          "success": true
+        },
+        {
+          "n": 8,
+          "m": 2,
+          "dof": 11,
+          "l2_error": 0.01668820956324254,
+          "l_inf_error": 0.023611328896119943,
+          "h1_seminorm_error": 0.05242758364106828,
+          "iterations": 71,
+          "success": true
+        },
+        {
+          "n": 10,
+          "m": 2,
+          "dof": 13,
+          "l2_error": 0.011090272157429148,
+          "l_inf_error": 0.015688745317830044,
+          "h1_seminorm_error": 0.034841117752812054,
+          "iterations": 671,
+          "success": true
+        },
+        {
+          "n": 12,
+          "m": 2,
+          "dof": 15,
+          "l2_error": 0.0020682129882107665,
+          "l_inf_error": 0.0029250587540872175,
+          "h1_seminorm_error": 0.006497480149762181,
+          "iterations": 26,
+          "success": true
+        },
+        {
+          "n": 14,
+          "m": 2,
+          "dof": 17,
+          "l2_error": 5.763809789494342e-06,
+          "l_inf_error": 8.151246840504278e-06,
+          "h1_seminorm_error": 1.8107535034100128e-05,
+          "iterations": 14,
+          "success": true
+        },
+        {
+          "n": 16,
+          "m": 2,
+          "dof": 19,
+          "l2_error": 0.00014448366871085328,
+          "l_inf_error": 0.00020432971818740153,
+          "h1_seminorm_error": 0.00045390864659000055,
+          "iterations": 4,
+          "success": true
+        },
+        {
+          "n": 18,
+          "m": 2,
+          "dof": 21,
+          "l2_error": 0.0013501807587402595,
+          "l_inf_error": 0.0019095147709322635,
+          "h1_seminorm_error": 0.004241717852888209,
+          "iterations": 5,
+          "success": true
+        },
+        {
+          "n": 20,
+          "m": 2,
+          "dof": 23,
+          "l2_error": 0.003335504775704905,
+          "l_inf_error": 0.004716673152379447,
+          "h1_seminorm_error": 0.01047881091753115,
+          "iterations": 5,
+          "success": true
+        },
+        {
+          "n": 22,
+          "m": 2,
+          "dof": 25,
+          "l2_error": 0.0006188157729313935,
+          "l_inf_error": 0.0008751521179368726,
+          "h1_seminorm_error": 0.00194406645550233,
+          "iterations": 4,
+          "success": true
+        },
+        {
+          "n": 24,
+          "m": 2,
+          "dof": 27,
+          "l2_error": 0.014519149023239815,
+          "l_inf_error": 0.02054100469271536,
+          "h1_seminorm_error": 0.04561473927990512,
+          "iterations": 5,
+          "success": true
+        }
+      ]
+    },
+    {
+      "name": "Fixed [n/4]",
+      "description": "Two complex conjugate pairs",
+      "results": [
+        {
+          "n": 8,
+          "m": 4,
+          "dof": 13,
+          "l2_error": 9.647555299184315e-13,
+          "l_inf_error": 1.9597656830683263e-12,
+          "h1_seminorm_error": 2.3078963698337414e-11,
+          "iterations": 6,
+          "success": true
+        },
+        {
+          "n": 10,
+          "m": 4,
+          "dof": 15,
+          "l2_error": 2.039518912562597e-12,
+          "l_inf_error": 3.857580921362569e-12,
+          "h1_seminorm_error": 5.363186309747403e-11,
+          "iterations": 4,
+          "success": true
+        },
+        {
+          "n": 12,
+          "m": 4,
+          "dof": 17,
+          "l2_error": 1.5787307261771256e-13,
+          "l_inf_error": 2.581268532253489e-13,
+          "h1_seminorm_error": 7.560053461334855e-13,
+          "iterations": 4,
+          "success": true
+        },
+        {
+          "n": 14,
+          "m": 4,
+          "dof": 19,
+          "l2_error": 1.1325123863853931e-13,
+          "l_inf_error": 2.1116441928370477e-13,
+          "h1_seminorm_error": 7.211543104262856e-13,
+          "iterations": 9,
+          "success": true
+        },
+        {
+          "n": 16,
+          "m": 4,
+          "dof": 21,
+          "l2_error": 1.1932557933866077e-13,
+          "l_inf_error": 1.7552626019323725e-13,
+          "h1_seminorm_error": 5.834074537717118e-13,
+          "iterations": 4,
+          "success": true
+        },
+        {
+          "n": 18,
+          "m": 4,
+          "dof": 23,
+          "l2_error": 3.163844320459063e-16,
+          "l_inf_error": 1.2212453270876722e-15,
+          "h1_seminorm_error": 4.841264300184913e-13,
+          "iterations": 5,
+          "success": true
+        },
+        {
+          "n": 20,
+          "m": 4,
+          "dof": 25,
+          "l2_error": 3.3119787369929737e-16,
+          "l_inf_error": 1.1102230246251565e-15,
+          "h1_seminorm_error": 5.562743235665904e-13,
+          "iterations": 5,
+          "success": true
+        },
+        {
+          "n": 22,
+          "m": 4,
+          "dof": 27,
+          "l2_error": 5.114076689449174e-16,
+          "l_inf_error": 1.7763568394002505e-15,
+          "h1_seminorm_error": 6.025494360462804e-13,
+          "iterations": 5,
+          "success": true
+        },
+        {
+          "n": 24,
+          "m": 4,
+          "dof": 29,
+          "l2_error": 4.1426348297752035e-16,
+          "l_inf_error": 1.5543122344752192e-15,
+          "h1_seminorm_error": 6.683127037962101e-13,
+          "iterations": 5,
+          "success": true
+        },
+        {
+          "n": 26,
+          "m": 4,
+          "dof": 31,
+          "l2_error": 4.273495778182493e-15,
+          "l_inf_error": 6.5503158452884236e-15,
+          "h1_seminorm_error": 7.386796284379601e-13,
+          "iterations": 5,
+          "success": true
+        }
+      ]
+    }
+  ]
+}
