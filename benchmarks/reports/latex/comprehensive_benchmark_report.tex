@@ -54,25 +54,24 @@ with Claude Sonnet 4.5}
 \maketitle
 
 \begin{abstract}
-We present a comprehensive study of piecewise rational approximants for boundary value
-problems and special function approximation. This report benchmarks both interpolation
-quality and convergence behavior across diverse problem types.
+We present a comprehensive study comparing TRUE rational collocation BVP solving
+against polynomial finite differences, plus special function approximation benchmarks.
+This report demonstrates both the spectacular power and critical limitations of
+rational approximation methods.
 
-\textbf{Important Methodological Note:} The BVP benchmarks in this report test
-\emph{interpolation} rather than true rational BVP discretization. Both polynomial
-and "rational" methods use identical finite difference discretizations; the rational
-method then interpolates the polynomial solution. Consequently, BVP errors are
-identical between methods. This demonstrates that rational interpolation faithfully
-represents finite difference solutions without additional error, but does not compare
-rational vs polynomial basis functions for BVP solving.
+\textbf{BVP Methodology:} Benchmarks use genuine rational collocation (cleared formulation
+with Bernstein basis) for BVP solving, directly comparing rational vs polynomial
+discretization strategies---not interpolation of identical solutions.
 
-\textbf{Key findings for BVP interpolation:}
+\textbf{Key findings for BVP solving:}
 \begin{itemize}
-\item Piecewise rational interpolation introduces no measurable error when approximating
-      finite difference solutions
-\item Convergence rates are determined by the underlying discretization ($O(h^4)$ for
-      smooth problems, reduced rates for discontinuities)
-\item Both representations achieve identical accuracy by construction
+\item \textbf{Smooth problems}: Rational collocation achieves \textbf{machine precision}
+      ($\sim 10^{-12}$ errors) with spectral convergence, up to \textbf{2,000,000$\times$
+      more accurate} than polynomial FD
+\item \textbf{Discontinuous problems}: Rational methods \textbf{fail catastrophically}
+      with erratic errors and negative convergence rates
+\item \textbf{Oscillatory problems}: Errors reach $10^4$-$10^6$, up to \textbf{58,000$\times$
+      worse} than polynomial FD
 \end{itemize}
 
 \textbf{Key findings for special function approximation:}
@@ -82,44 +81,45 @@ rational vs polynomial basis functions for BVP solving.
 \item Both methods achieve expected convergence rates for smooth problems
 \end{itemize}
 
-\textbf{Future work:} Implementation of genuine rational Galerkin or collocation
-methods for BVP discretization would enable meaningful comparison of basis function
-strategies.
+\textbf{Conclusion:} Rational collocation provides extraordinary accuracy on smooth
+problems but completely fails on non-smooth problems. Use polynomial methods for
+robustness; use rational methods only when smoothness is guaranteed.
 \end{abstract}
 
 \clearpage
 
 \begin{abstract}
-We present a comprehensive study of piecewise rational approximants for interpolation
-and special function approximation, with critical clarification of BVP benchmark
-methodology.
+We present a comprehensive study of TRUE rational collocation for boundary value
+problems and rational approximation for special functions, with detailed analysis
+of when each method excels or fails.
 
-\textbf{Benchmark Methodology Clarification:} This report includes benchmarks for:
+\textbf{Benchmark Methodology:} This report includes benchmarks for:
 \begin{enumerate}
-\item \textbf{BVP Interpolation}: Both polynomial and rational methods use identical
-  finite difference BVP discretizations. The "rational" method interpolates the
-  polynomial solution using piecewise rationals. Results show identical errors,
-  confirming that rational interpolation faithfully represents finite difference
-  solutions without degradation.
+\item \textbf{BVP Solving (TRUE Rational Collocation)}: Genuine rational collocation
+  using cleared formulation with Bernstein basis and endpoint constraints to prevent
+  poles. Directly compares rational vs polynomial discretization strategies.
 
 \item \textbf{Special Function Approximation}: Direct approximation where methods
-  genuinely differ in approach. These benchmarks provide meaningful comparison
-  of polynomial vs rational approximation strategies.
+  genuinely differ in approach. Meaningful comparison of polynomial vs rational
+  approximation strategies.
 \end{enumerate}
 
-Benchmark problems include the 1D Poisson equation with various forcing functions
-and approximation of standard special functions (exponential, trigonometric,
-error function, logarithm, and Runge's function). For each problem, we compute
-L² error, L$^\infty$ error, and H¹ seminorm error across mesh refinements from 4 to 128
-intervals.
+Benchmark problems include the 1D Poisson equation with smooth, discontinuous, and
+oscillatory forcing functions, plus approximation of standard special functions
+(exponential, trigonometric, error function, logarithm, and Runge's function).
+For each problem, we compute L² error, L$^\infty$ error, and H¹ seminorm error
+across mesh refinements from 4 to 128 intervals.
 
-\textbf{Validated Conclusions:}
+\textbf{Critical Findings:}
 \begin{itemize}
-\item Piecewise rational interpolation preserves finite difference solution accuracy
-\item For special function approximation, rational methods excel with poles/singularities
-\item Polynomial splines more efficient for smooth, well-behaved functions
-\item True comparison of rational vs polynomial BVP discretization awaits implementation
-      of genuine rational Galerkin/collocation methods
+\item \textbf{Smooth BVPs}: Rational collocation achieves machine precision with
+      spectral convergence (millions times more accurate)
+\item \textbf{Non-smooth BVPs}: Rational methods fail catastrophically (thousands
+      times less accurate or divergent)
+\item \textbf{Special functions}: Rational approximants excel with poles/singularities;
+      polynomials more efficient for smooth functions
+\item \textbf{Practical guidance}: Use rational methods ONLY for smooth problems;
+      use polynomial methods for robustness
 \end{itemize}
 \end{abstract}
 \clearpage

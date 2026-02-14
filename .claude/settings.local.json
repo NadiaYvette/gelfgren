@@ -41,7 +41,8 @@
       "Bash(echo:*)",
       "Bash(pdfinfo:*)",
       "Bash(pkill:*)",
-      "Bash(wait:*)"
+      "Bash(wait:*)",
+      "Bash(git restore:*)"
     ]
   }
 }
