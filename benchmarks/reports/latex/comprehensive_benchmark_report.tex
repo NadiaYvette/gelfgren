@@ -96,7 +96,7 @@ on solution smoothness:
 \end{itemize}
 
 \textbf{Critical Lesson:} Smoothness is non-negotiable for rational methods. The
-fixed denominator degree strategy [n/4] provides optimal performance for smooth problems.
+fixed denominator degree strategy {[}n/4] provides optimal performance for smooth problems.
 Endpoint pole prevention constraints suffice; more restrictive constraints degrade performance.
 
 \textbf{Practical Guidance:} Use rational collocation \emph{only} for smooth problems
@@ -182,7 +182,7 @@ Typical results for Smooth Poisson:
 Method & DOF & $\norm{e}_{L^2}$ & Speedup \\
 \hline
 Poly FD & 17 & 2.28e-03 & --- \\
-Rational [8/4] & 13 & \textbf{9.65e-13} & \textbf{2,000,000$\times$} \\
+Rational {[}8/4] & 13 & \textbf{9.65e-13} & \textbf{2,000,000$\times$} \\
 \end{tabular}
 \end{center}
 Rational collocation achieves \emph{machine precision} with fewer DOF!
@@ -356,7 +356,7 @@ Focus on implementation details and future directions:
 A polynomial spline $s(x)$ of degree $n$ on mesh $\{x_i\}_{i=0}^N$ is a piecewise
 polynomial satisfying:
 \begin{align}
-s(x) &= p_i(x) \quad \text{for } x \in [x_i, x_{i+1}], \quad p_i \in \mathbb{P}_n\\
+s(x) &= p_i(x) \quad \text{for } x \in {[}x_i, x_{i+1}], \quad p_i \in \mathbb{P}_n\\
 s^{(j)}(x_i^-) &= s^{(j)}(x_i^+) \quad \text{for } j = 0, \ldots, k
 \end{align}
 where $k < n$ determines smoothness.
@@ -442,7 +442,7 @@ Padé approximant, then for $|x| < \rho$:
 
 On mesh $\{x_i\}_{i=0}^N$, define piecewise rational:
 \begin{equation}
-r(x) = R_i(x) \quad \text{for } x \in [x_i, x_{i+1}]
+r(x) = R_i(x) \quad \text{for } x \in {[}x_i, x_{i+1}]
 \end{equation}
 where each $R_i$ is a \pade{m}{n} approximant to the local solution.
 
@@ -469,7 +469,7 @@ We measure approximation quality using:
 
 \subsection{$L^\infty$ Norm}
 \begin{equation}
-\norm{e}_{L^\infty} = \max_{x \in [a,b]} |e(x)| \approx \max_i |e(x_i)|
+\norm{e}_{L^\infty} = \max_{x \in {[}a,b]} |e(x)| \approx \max_i |e(x_i)|
 \end{equation}
 
 \subsection{H¹ Seminorm}
@@ -498,7 +498,7 @@ Empirically estimated from successive refinements:
 
 \subsection{Problem Statement}
 
-Find $u : [0,1] \to \R$ satisfying:
+Find $u : {[}0,1] \to \R$ satisfying:
 \begin{equation}
 \begin{cases}
 -u''(x) = \pi^2 \sin(\pi x) & x \in (0,1)\\
@@ -541,7 +541,7 @@ u(0) = 0, \quad u(1) = 0
 where
 \begin{equation}
 f(x) = \begin{cases}
--2 & x \in [0.25, 0.75]\\
+-2 & x \in {[}0.25, 0.75]\\
 0 & \text{otherwise}
 \end{cases}
 \end{equation}
@@ -632,10 +632,10 @@ $N/[n/m]$ & DOF & Method & $\norm{e}_{L^2}$ & $\norm{e}_{L^\infty}$ & $\norm{e}_
 
 \textbf{Key observations:}
 \begin{itemize}
-\item \textbf{Machine precision achieved:} Rational collocation [8/4] and higher achieve $\sim 10^{-12}$ errors (limited only by floating-point roundoff)
-\item \textbf{Spectral convergence:} Errors decrease exponentially with degree ([4/2] $\to$ [6/3]: $10^5$ improvement!)
+\item \textbf{Machine precision achieved:} Rational collocation {[}8/4] and higher achieve $\sim 10^{-12}$ errors (limited only by floating-point roundoff)
+\item \textbf{Spectral convergence:} Errors decrease exponentially with degree ([4/2] $\to$ {[}6/3]: $10^5$ improvement!)
 \item \textbf{Dramatic accuracy advantage:} Up to 2 million times more accurate than polynomial FD
-\item \textbf{Fewer DOF:} Rational [8/4] with 13 DOF beats polynomial with 129 DOF
+\item \textbf{Fewer DOF:} Rational {[}8/4] with 13 DOF beats polynomial with 129 DOF
 \end{itemize}
 
 \subsection{Convergence Rates}
@@ -938,7 +938,7 @@ The codebase includes benchmarks (\texttt{special\_function\_convergence.py}) co
 
 \item \textbf{Jacobi Elliptic Functions}: $\text{sn}(x, k)$, $\text{cn}(x, k)$, $\text{dn}(x, k)$
    \begin{itemize}
-   \item Generalizations of trigonometric functions with elliptic modulus $k \in [0, 1]$
+   \item Generalizations of trigonometric functions with elliptic modulus $k \in {[}0, 1]$
    \item Periodic with period depending on complete elliptic integral $K(k)$
    \item $k = 0$: Reduce to ordinary trig ($\text{sn}(x,0) = \sin(x)$)
    \item $k \to 1$: Degenerate to hyperbolic functions ($\text{cn}(x,1) = \text{sech}(x)$)
@@ -1014,7 +1014,93 @@ The expanded test suite probes different oscillatory and exponential characteris
 \item \textbf{Mesh sequence}: 4, 8, 16, 32, 64, 128 intervals (DOF = 2n+3 for polynomials, 4n+4 for rationals)
 \end{itemize}
 
-\subsection{Rational Hermite Interpolation Scheme}
+\subsection{Critical Methodological Issue: Choice of {[}3/1] Rational}
+
+\textbf{Important limitation:} The benchmarks used {[}3/1] rational approximants (cubic numerator, \textbf{linear denominator}). This was a \textbf{poor methodological choice} that undermines the rational method's potential.
+
+\paragraph{Why Odd Denominator Degrees Are Problematic:}
+
+\textbf{Complex poles come in conjugate pairs.} For oscillatory or rapidly-varying functions, poles typically occur as complex conjugates:
+\begin{equation}
+\text{Pole pair: } z = a \pm bi \quad \Rightarrow \quad Q(x) = {[}(x-a)^2 + b^2]
+\end{equation}
+
+\begin{itemize}
+\item \textbf{Even denominator degrees} (2, 4, 6): Can represent conjugate pole pairs
+  \begin{itemize}
+  \item Quadratic ($m=2$): One conjugate pair $(x-a)^2 + b^2$
+  \item Quartic ($m=4$): Two conjugate pairs
+  \item Sextic ($m=6$): Three conjugate pairs
+  \end{itemize}
+
+\item \textbf{Odd denominator degrees} (1, 3, 5): Can only represent real poles
+  \begin{itemize}
+  \item Linear ($m=1$): Single real pole $(x-a)$
+  \item Cubic ($m=3$): One real + one conjugate pair (suboptimal)
+  \item \textbf{Requires advance knowledge} of real pole locations
+  \end{itemize}
+\end{itemize}
+
+\paragraph{Implications for {[}3/1] Benchmarks:}
+
+The {[}3/1] rational approximants used in this study:
+\begin{enumerate}
+\item \textbf{Cannot represent complex poles} (limited to single real pole)
+\item \textbf{Inappropriate for oscillatory functions} (sine, cosine, Bessel, Mathieu)
+\item \textbf{Wastes flexibility} on functions without real poles (exponential, error function)
+\item \textbf{Would only be justified} if target function has known real pole (e.g., $1/(1+x)$, $\tan(x)$)
+\end{enumerate}
+
+\textbf{Consequence:} The rational approximants were handicapped by poor degree choice, potentially explaining some failures (Mathieu stagnation, Bessel struggles).
+
+\paragraph{What Should Have Been Used:}
+
+For fair, methodologically sound comparison:
+
+\begin{center}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Rational Type} & \textbf{Num Deg} & \textbf{Den Deg} & \textbf{Pole Capability} \\
+\midrule
+\textbf{[3/2]} & 3 & 2 & 1 conjugate pair \\
+\textbf{[5/2]} & 5 & 2 & 1 conjugate pair (higher accuracy) \\
+\textbf{[3/4]} & 3 & 4 & 2 conjugate pairs \\
+\textbf{[5/4]} & 5 & 4 & 2 conjugate pairs (higher accuracy) \\
+\midrule
+{[}3/1] (used) & 3 & 1 & 1 real pole only \textcolor{red}{(poor choice)} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\paragraph{Revised Assessment:}
+
+\begin{enumerate}
+\item \textbf{Existing {[}3/1] results are methodologically flawed}
+  \begin{itemize}
+  \item Rational method tested with inappropriate degree type
+  \item Polynomial victory on 10/16 functions may understate rational potential (or may not!)
+  \end{itemize}
+
+\item \textbf{Proper comparison would use {[}3/2], {[}5/2], {[}3/4]}
+  \begin{itemize}
+  \item Even denominators enable complex pole representation
+  \item Could potentially improve on oscillatory functions
+  \item But: implementation attempts failed (Section~\ref{sec:dof_fairness})
+  \end{itemize}
+
+\item \textbf{Quintic Hermite results remain valid and compelling}
+  \begin{itemize}
+  \item Achieves machine precision (10$^{-11}$ to 10$^{-12}$)
+  \item Simple, robust implementation
+  \item Sets high bar for rational methods to beat
+  \end{itemize}
+\end{enumerate}
+
+\textbf{Recommendation:} Future work should re-run benchmarks with {[}3/2], {[}5/2], {[}3/4] rational approximants. However, given quintic Hermite's machine precision and implementation simplicity, the practical conclusion (use polynomial methods) likely remains unchanged.
+
+\subsection{Rational Hermite Interpolation Scheme (As Implemented)}
+
+\textbf{Note:} The following describes the {[}3/1] scheme actually used, despite its methodological limitations.
 
 The piecewise rational approximants used in this study are constructed via a \textbf{two-point Padé-Hermite interpolation} scheme on each subinterval $[a_i, a_{i+1}]$.
 
@@ -1033,7 +1119,7 @@ r(a) &= f(a), \quad r'(a) = f'(a) \\
 r(b) &= f(b), \quad r'(b) = f'(b)
 \end{align}
 
-This gives \textbf{4 conditions} for the [3/1] rational approximant.
+This gives \textbf{4 conditions} for the {[}3/1] rational approximant.
 
 \paragraph{Degrees of Freedom:}
 
@@ -1084,7 +1170,7 @@ f'(x) \approx \frac{f(x + h) - f(x - h)}{2h}, \quad h = 10^{-7}
 
 \begin{enumerate}
 \item Partition domain $[a, b]$ into $n$ subintervals: $a = x_0 < x_1 < \cdots < x_n = b$
-\item On each $[x_i, x_{i+1}]$, construct [3/1] rational via above scheme
+\item On each $[x_i, x_{i+1}]$, construct {[}3/1] rational via above scheme
 \item \textbf{No continuity enforced} between intervals (piecewise independent construction)
 \item Evaluate piecewise function by determining which interval contains evaluation point
 \end{enumerate}
@@ -1137,7 +1223,7 @@ Global DOF & $2n + 2$ & $5n$ \\
 
 \textbf{For fair comparison}, one would use:
 \begin{itemize}
-\item [3/2] rational (quadratic denominator) matching $f, f', f''$ at endpoints
+\item {[}3/2] rational (quadratic denominator) matching $f, f', f''$ at endpoints
 \item Equivalent to quintic Hermite (6 interpolation conditions)
 \item Requires solving nonlinear system (see Section~\ref{sec:dof_fairness} for attempted implementation)
 \end{itemize}
@@ -1145,7 +1231,7 @@ Global DOF & $2n + 2$ & $5n$ \\
 \section{Critical Analysis: DOF Fairness}
 \label{sec:dof_fairness}
 
-\textbf{Important caveat:} The comparison above used cubic Hermite splines vs [3/1] rational approximants. A careful analysis reveals this was \textbf{unfair to the polynomial method}:
+\textbf{Important caveat:} The comparison above used cubic Hermite splines vs {[}3/1] rational approximants. A careful analysis reveals this was \textbf{unfair to the polynomial method}:
 
 \subsection{Degrees of Freedom Mismatch}
 
@@ -1156,7 +1242,7 @@ Global DOF & $2n + 2$ & $5n$ \\
 \item \textbf{Asymptotic: $\sim$2 DOF per interval}
 \end{itemize}
 
-\paragraph{Rational [3/1] (piecewise independent):}
+\paragraph{Rational {[}3/1] (piecewise independent):}
 \begin{itemize}
 \item Cubic numerator: 4 coefficients ($p_0, p_1, p_2, p_3$)
 \item Linear denominator: 2 coefficients (with normalization $q_0=1$: 1 free parameter)
@@ -1175,15 +1261,15 @@ For fair DOF matching via \textbf{Hermite interpolation} (same data at endpoints
 \toprule
 \textbf{Hermite Polynomial} & \textbf{Rational} & \textbf{Interpolation Data} & \textbf{DOF/Interval} \\
 \midrule
-Cubic (C$^1$) & [1/1] & $u, u'$ at both ends & 4 \\
+Cubic (C$^1$) & {[}1/1] & $u, u'$ at both ends & 4 \\
 \textbf{Quintic (C$^2$)} & \textbf{[3/2]} & $u, u', u''$ at both ends & 6 \\
-Septic (C$^3$) & [5/4] & $u \to u'''$ at both ends & 8 \\
-Nonic (C$^4$) & [7/6] & $u \to u''''$ at both ends & 10 \\
+Septic (C$^3$) & {[}5/4] & $u \to u'''$ at both ends & 8 \\
+Nonic (C$^4$) & {[}7/6] & $u \to u''''$ at both ends & 10 \\
 \bottomrule
 \end{tabular}
 \end{center}
 
-\textbf{Key insight:} [3/2] rational (cubic numerator, \textbf{quadratic denominator}) should be compared to \textbf{quintic Hermite}, as both use 6 pieces of information per interval.
+\textbf{Key insight:} {[}3/2] rational (cubic numerator, \textbf{quadratic denominator}) should be compared to \textbf{quintic Hermite}, as both use 6 pieces of information per interval.
 
 \paragraph{Why Even Denominator Degrees?}
 Complex conjugate poles come in pairs, requiring even denominator degree:
@@ -1226,7 +1312,7 @@ Nonic & 2.3$\times 10^{-2}$ & \textbf{1.9$\times 10^{0}$} & 1.4$\times 10^{-1}$ 
 \item \textbf{Quintic Hermite achieves machine precision}: 8.7$\times 10^{-12}$ on exponential, 5.1$\times 10^{-11}$ on sine
   \begin{itemize}
   \item Better than cubic by 50-300$\times$ at same $n$
-  \item Uses $\sim$3 DOF/interval (vs [3/2]'s 6 DOF/interval)
+  \item Uses $\sim$3 DOF/interval (vs {[}3/2]'s 6 DOF/interval)
   \item Stable, consistent convergence rate $\alpha \approx 6$
   \end{itemize}
 
@@ -1248,20 +1334,20 @@ Nonic & 2.3$\times 10^{-2}$ & \textbf{1.9$\times 10^{0}$} & 1.4$\times 10^{-1}$ 
 
 \paragraph{Original Comparison Was Unfair TO POLYNOMIALS:}
 \begin{itemize}
-\item Cubic Hermite (2 DOF/interval) vs [3/1] rational (5 DOF/interval)
+\item Cubic Hermite (2 DOF/interval) vs {[}3/1] rational (5 DOF/interval)
 \item Rationals had 2.5$\times$ DOF advantage
 \item \textbf{Yet polynomials won 10/16 functions!}
 \end{itemize}
 
 \paragraph{Fair Comparison Would Be:}
 \begin{itemize}
-\item Quintic Hermite (3 DOF/interval) vs [3/2] rational (6 DOF/interval)
+\item Quintic Hermite (3 DOF/interval) vs {[}3/2] rational (6 DOF/interval)
 \item But \textbf{quintic already achieves machine precision} (10$^{-11}$ to 10$^{-12}$)!
-\item Even if [3/2] rationals matched this accuracy, they'd need \textbf{2$\times$ more DOF}
+\item Even if {[}3/2] rationals matched this accuracy, they'd need \textbf{2$\times$ more DOF}
 \end{itemize}
 
 \paragraph{Why Rational Hermite Implementation Failed:}
-Attempts to implement [3/2] rational Hermite interpolation revealed fundamental practical issue:
+Attempts to implement {[}3/2] rational Hermite interpolation revealed fundamental practical issue:
 \begin{itemize}
 \item Requires solving highly nonlinear system per interval (quotient rule derivatives)
 \item Optimization often fails to converge
@@ -1289,7 +1375,7 @@ Attempts to implement [3/2] rational Hermite interpolation revealed fundamental 
   \item Pole management overhead wastes DOF
   \end{itemize}
 
-\item \textbf{Fair [3/2] comparison would likely show}:
+\item \textbf{Fair {[}3/2] comparison would likely show}:
   \begin{itemize}
   \item Rationals might win 2-3/16 functions (logarithm, possibly exponential)
   \item But at 2$\times$ DOF cost vs quintic Hermite
@@ -1306,7 +1392,7 @@ Attempts to implement [3/2] rational Hermite interpolation revealed fundamental 
 \item No pole pathologies or convergence issues
 \end{itemize}
 
-\section{Comprehensive Results (Cubic vs [3/1])}
+\section{Comprehensive Results (Cubic vs {[}3/1])}
 
 \textbf{Note:} The following results use the original (unfair to polynomials) comparison. See preceding section for analysis.
 
@@ -1512,11 +1598,11 @@ The results demonstrate both extraordinary successes and catastrophic failures.
 \item \textbf{Machine Precision}: Achieves $\sim 10^{-12}$ errors (limited only by floating-point roundoff)
 \item \textbf{Spectral Convergence}: Errors decay exponentially with degree increase
   \begin{itemize}
-  \item [4/2] $\to$ [6/3]: Error decreases by factor of $10^5$!
+  \item {[}4/2] $\to$ {[}6/3]: Error decreases by factor of $10^5$!
   \item Convergence rates exceed 16 (vs 2 for polynomial)
   \end{itemize}
 \item \textbf{Dramatic Accuracy Advantage}: Up to 2,000,000$\times$ more accurate than polynomial FD
-\item \textbf{Fewer DOF}: Rational [8/4] with 13 DOF beats polynomial with 129 DOF
+\item \textbf{Fewer DOF}: Rational {[}8/4] with 13 DOF beats polynomial with 129 DOF
 \end{itemize}
 
 \subsection{Discontinuous Poisson Problem}
@@ -1535,7 +1621,7 @@ The results demonstrate both extraordinary successes and catastrophic failures.
 \textbf{Complete Breakdown for Rational Collocation:}
 \begin{itemize}
 \item \textbf{Catastrophic Errors}: L$^\infty$ errors exceed $10^4$ (completely unusable)
-\item \textbf{Worst Case}: [8/4] is 58,000$\times$ \emph{worse} than polynomial
+\item \textbf{Worst Case}: {[}8/4] is 58,000$\times$ \emph{worse} than polynomial
 \item \textbf{H¹ Disaster}: Seminorm errors reach $10^6$, indicating massive spurious oscillations
 \item \textbf{Divergence}: Negative convergence rates up to $-10.11$ (error multiplies by 1000 per refinement!)
 \item \textbf{Polynomial Excels}: Stable $O(h^{2-3})$ convergence when mesh resolves oscillations
@@ -1550,7 +1636,7 @@ when smoothness is guaranteed.
 
 Direct approximation of special functions (Chapter~5) reveals surprising results that challenge conventional wisdom:
 
-\subsection{Original Cubic Hermite vs [3/1] Rational Comparison}
+\subsection{Original Cubic Hermite vs {[}3/1] Rational Comparison}
 
 \begin{itemize}
 \item \textbf{Polynomial dominance}: Win on 10/16 functions, comparable on 5/16, lose on only 1/16
@@ -1564,12 +1650,50 @@ Direct approximation of special functions (Chapter~5) reveals surprising results
 \item \textbf{Robustness}: Polynomial convergence rate consistently $\alpha \approx 4.4$; rationals vary 1.4--6.0
 \end{itemize}
 
+\subsection{Critical Methodological Flaw: {[}3/1] Degree Choice}
+
+\textbf{The {[}3/1] rational degree type was fundamentally inappropriate:}
+
+\paragraph{Why {[}3/1] Handicapped Rational Methods:}
+\begin{itemize}
+\item \textbf{Linear denominator} (deg = 1) can only represent \textbf{real poles}
+\item \textbf{Complex poles come in conjugate pairs}, requiring \textbf{even denominator degree}
+\item Quadratic denominator ($m=2$): $(x-a)^2 + b^2$ captures one conjugate pair
+\item Linear denominator ($m=1$): $(x-a)$ captures only one real pole
+\end{itemize}
+
+\paragraph{Impact on Test Functions:}
+\begin{itemize}
+\item \textbf{Oscillatory functions} (sine, cosine, Bessel, Mathieu): Need complex pole representation
+\item \textbf{Smooth functions} (exponential, erf): No poles, so linear denominator wastes flexibility
+\item \textbf{Only appropriate for}: Functions with known real poles (e.g., logarithm near branch point)
+\end{itemize}
+
+\textbf{Rational failures may partly result from inappropriate degree choice}, not fundamental method limitations.
+
+\paragraph{What Should Have Been Used:}
+
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Rational Type} & \textbf{Pole Capability} & \textbf{Appropriate For} \\
+\midrule
+\textbf{[3/2]} & 1 conjugate pair & Oscillatory functions \\
+\textbf{[5/2]} & 1 conjugate pair (higher num) & High-accuracy oscillatory \\
+\textbf{[3/4]} & 2 conjugate pairs & Complex oscillations \\
+{[}3/1] (used) & 1 real pole \textcolor{red}{only} & \textcolor{red}{Limited cases} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Conclusion:} Existing results are methodologically compromised. Proper comparison would use {[}3/2], {[}5/2], {[}3/4]. However, implementation attempts failed (nonlinear system convergence issues), and quintic Hermite already achieves machine precision, making the practical recommendation unchanged.
+
 \subsection{Critical DOF Fairness Issue}
 
 \textbf{Comparison was unfair TO POLYNOMIALS:}
 \begin{itemize}
 \item Cubic Hermite: $\sim$2 DOF per interval
-\item Rational [3/1]: $\sim$5 DOF per interval
+\item Rational {[}3/1]: $\sim$5 DOF per interval
 \item \textbf{Rationals had 2.5$\times$ more DOF, yet lost on 10/16 functions!}
 \end{itemize}
 
@@ -1578,7 +1702,7 @@ Direct approximation of special functions (Chapter~5) reveals surprising results
 \textbf{Quintic Hermite achieves machine precision:}
 \begin{itemize}
 \item 8.7$\times 10^{-12}$ on exponential, 5.1$\times 10^{-11}$ on sine at $n=128$
-\item Uses $\sim$3 DOF per interval (vs fair [3/2] rational's 6 DOF)
+\item Uses $\sim$3 DOF per interval (vs fair {[}3/2] rational's 6 DOF)
 \item Simple, robust implementation (vs failed rational Hermite attempts)
 \item Consistent convergence rate $\alpha \approx 6$
 \end{itemize}
@@ -1596,7 +1720,7 @@ Direct approximation of special functions (Chapter~5) reveals surprising results
 \begin{enumerate}
 \item With unfair DOF disadvantage, cubics beat rationals 10/16
 \item With fair DOF, quintic achieves machine precision
-\item Quintic needs 2$\times$ fewer DOF than [3/2] rationals would
+\item Quintic needs 2$\times$ fewer DOF than {[}3/2] rationals would
 \item Implementation simpler and more robust
 \end{enumerate}
 
@@ -1619,11 +1743,28 @@ Direct approximation of special functions (Chapter~5) reveals surprising results
 \item No pole pathologies
 \end{itemize}
 
+\textbf{If using rationals, require even denominator degrees:}
+\begin{itemize}
+\item \textbf{Use {[}3/2], {[}5/2], {[}3/4], {[}5/4]} (even denominators: 2, 4, 6)
+\item \textbf{Never use {[}n/1], {[}n/3], {[}n/5]} (odd denominators) without advance knowledge of real poles
+\item Complex poles come in conjugate pairs → require even degree
+\item The {[}3/1] benchmarks in this chapter are methodologically flawed due to odd denominator
+\end{itemize}
+
 \textbf{Consider rationals only for:}
 \begin{itemize}
 \item Functions with known poles requiring exact representation
 \item Logarithmic character (demonstrated advantage)
 \item Specific domains where literature recommends Padé-type methods
+\item \textbf{And only with proper even denominator degrees}
+\end{itemize}
+
+\textbf{Caveat on existing {[}3/1] results:}
+\begin{itemize}
+\item Linear denominator was inappropriate choice
+\item Rational failures (Mathieu, Bessel) may partly result from poor degree selection
+\item Proper {[}3/2], {[}5/2], {[}3/4] comparison needed but implementation difficult
+\item However, quintic Hermite's machine precision sets high bar
 \end{itemize}
 
 \textbf{Critical distinction from BVP results}: While rational collocation excels at \emph{solving} smooth BVPs via cleared form (Chapters 11--15), rational \emph{interpolation} offers little advantage over high-order polynomial splines for \emph{approximating} smooth functions. The cleared form formulation provides genuine benefits for differential operators that do not transfer to direct function representation.
@@ -1656,7 +1797,7 @@ accuracy when:
   provides 2,000,000$\times$ better accuracy than polynomial methods. This dramatic
   advantage justifies the computational cost when precision is paramount.
 
-\item \textbf{Degrees of freedom must be minimized}: Rational [8/4] with 13 DOF
+\item \textbf{Degrees of freedom must be minimized}: Rational {[}8/4] with 13 DOF
   achieves errors smaller than polynomial with 129 DOF. For smooth problems, rationals
   reach target accuracy with far fewer coefficients.
 \end{enumerate}
@@ -1765,7 +1906,7 @@ The benchmarks inform future method development:
   elsewhere (Chapter~9 discusses this direction)
 \item \textbf{Robust initialization}: Better initial guesses for nonlinear solver
   to improve convergence reliability
-\item \textbf{Fixed denominator strategy}: [n/4] progression (fix $m=4$, vary $n$)
+\item \textbf{Fixed denominator strategy}: {[}n/4] progression (fix $m=4$, vary $n$)
   provides optimal balance for smooth problems
 \end{itemize}
 
@@ -1885,8 +2026,8 @@ a counterintuitive result:
 \toprule
 Problem & ENDPOINT L$^2$ Error & NONNEGATIVE L$^2$ Error \\
 \midrule
-Discontinuous [8/4] & 6.69e-02 & \textbf{1.72e+02} (2500$\times$ worse) \\
-Oscillatory [8/4] & 1.29e+03 & \textbf{1.54e+05} (120$\times$ worse) \\
+Discontinuous {[}8/4] & 6.69e-02 & \textbf{1.72e+02} (2500$\times$ worse) \\
+Oscillatory {[}8/4] & 1.29e+03 & \textbf{1.54e+05} (120$\times$ worse) \\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -1915,21 +2056,21 @@ degree?
 \paragraph{Three Strategies Tested:}
 
 \begin{enumerate}
-\item \textbf{BALANCED [n/m]}: $n \approx 2m$ (current benchmarks)
+\item \textbf{BALANCED {[}n/m]}: $n \approx 2m$ (current benchmarks)
   \begin{itemize}
-  \item Progression: [4/2], [6/3], [8/4], [10/5], [12/6], [14/7]
+  \item Progression: {[}4/2], {[}6/3], {[}8/4], {[}10/5], {[}12/6], {[}14/7]
   \item Both $n$ and $m$ increase together
   \end{itemize}
 
-\item \textbf{FIXED [n/2]}: Fix $m=2$ (one complex conjugate pair), vary $n$
+\item \textbf{FIXED {[}n/2]}: Fix $m=2$ (one complex conjugate pair), vary $n$
   \begin{itemize}
-  \item Progression: [4/2], [6/2], [8/2], [10/2], [12/2], [14/2], ...
+  \item Progression: {[}4/2], {[}6/2], {[}8/2], {[}10/2], {[}12/2], {[}14/2], ...
   \item Minimal pole structure
   \end{itemize}
 
-\item \textbf{FIXED [n/4]}: Fix $m=4$ (two complex conjugate pairs), vary $n$
+\item \textbf{FIXED {[}n/4]}: Fix $m=4$ (two complex conjugate pairs), vary $n$
   \begin{itemize}
-  \item Progression: [8/4], [10/4], [12/4], [14/4], [16/4], [18/4], ...
+  \item Progression: {[}8/4], {[}10/4], {[}12/4], {[}14/4], {[}16/4], {[}18/4], ...
   \item Moderate fixed pole structure
   \end{itemize}
 \end{enumerate}
@@ -1941,9 +2082,9 @@ degree?
 \toprule
 Strategy & Machine Precision & Best Achieved & Assessment \\
 \midrule
-Balanced [n/m] & [8/4] @ 13 DOF & 9.65e-13 & Works but wastes DOF \\
-Fixed [n/2] & \textbf{NEVER} & 2.07e-03 & Insufficient poles \\
-Fixed [n/4] & [8/4] @ 13 DOF & \textbf{3.16e-16} & \textbf{OPTIMAL} $\bigstar$ \\
+Balanced {[}n/m] & {[}8/4] @ 13 DOF & 9.65e-13 & Works but wastes DOF \\
+Fixed {[}n/2] & \textbf{NEVER} & 2.07e-03 & Insufficient poles \\
+Fixed {[}n/4] & {[}8/4] @ 13 DOF & \textbf{3.16e-16} & \textbf{OPTIMAL} $\bigstar$ \\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -1966,32 +2107,32 @@ Configuration & L$^2$ Error \\
 \end{tabular}
 \end{center}
 
-Meanwhile, Fixed [n/2] \textbf{never converges}---one conjugate pair is insufficient.
+Meanwhile, Fixed {[}n/2] \textbf{never converges}---one conjugate pair is insufficient.
 Errors oscillate erratically without systematic decrease.
 
-\paragraph{Why Fixed [n/4] is Superior:}
+\paragraph{Why Fixed {[}n/4] is Superior:}
 
 \begin{itemize}
 \item \textbf{Efficient DOF usage}: Achieves machine precision with same DOF as balanced,
   then continues improving without adding poles
 \item \textbf{Stable optimization}: Fixed $m$ means fewer unknowns, more robust solve
 \item \textbf{Mesh refinement strategy}: Handle local variations by refining mesh,
-  not by increasing $m$ (each element uses [n/4])
+  not by increasing $m$ (each element uses {[}n/4])
 \item \textbf{Predictable behavior}: Known pole structure makes analysis easier
 \end{itemize}
 
 \paragraph{Recommendation for Smooth Problems:}
 
-\textbf{Use FIXED [n/4] strategy:}
+\textbf{Use FIXED {[}n/4] strategy:}
 \begin{enumerate}
 \item Start with $m=4$ (two complex conjugate pairs)
-\item Increase $n$ as needed: [8/4], [10/4], [12/4], ...
+\item Increase $n$ as needed: {[}8/4], {[}10/4], {[}12/4], ...
 \item For local pole variations, refine the \emph{mesh}, not $m$
-\item Each mesh element maintains [n/4] structure
+\item Each mesh element maintains {[}n/4] structure
 \end{enumerate}
 
 This approach provides superior accuracy with more efficient DOF usage than
-balanced [n/m] growth.
+balanced {[}n/m] growth.
 
 \subsection{Comprehensive Convergence Studies}
 
@@ -2000,7 +2141,7 @@ for all three strategies on the smooth Poisson problem ($-u'' = \pi^2 \sin(\pi x
 Each strategy was tested across multiple degree configurations up to approximately
 30 degrees of freedom.
 
-\paragraph{Balanced [n/m] Strategy ($n \approx 2m$):}
+\paragraph{Balanced {[}n/m] Strategy ($n \approx 2m$):}
 
 \begin{center}
 \small
@@ -2021,11 +2162,11 @@ Each strategy was tested across multiple degree configurations up to approximate
 \end{tabular}
 \end{center}
 
-\textbf{Observation:} Achieves machine precision at [8/4], then \emph{plateaus}
+\textbf{Observation:} Achieves machine precision at {[}8/4], then \emph{plateaus}
 around $10^{-13}$ despite adding more DOF. Increasing both $n$ and $m$ wastes
 computational resources once sufficient accuracy is reached.
 
-\paragraph{Fixed [n/2] Strategy (one conjugate pair):}
+\paragraph{Fixed {[}n/2] Strategy (one conjugate pair):}
 
 \begin{center}
 \small
@@ -2050,9 +2191,9 @@ computational resources once sufficient accuracy is reached.
 
 \textbf{Observation:} Errors \emph{oscillate erratically} without systematic decrease.
 One conjugate pair provides \textbf{insufficient pole flexibility} for smooth problems.
-High iteration counts (671 for [10/2]) indicate optimization struggles.
+High iteration counts (671 for {[}10/2]) indicate optimization struggles.
 
-\paragraph{Fixed [n/4] Strategy (two conjugate pairs):}
+\paragraph{Fixed {[}n/4] Strategy (two conjugate pairs):}
 
 \begin{center}
 \small
@@ -2074,8 +2215,8 @@ High iteration counts (671 for [10/2]) indicate optimization struggles.
 \end{tabular}
 \end{center}
 
-\textbf{Observation:} Achieves machine precision at [8/4], then \emph{continues improving}
-to \textbf{3.16e-16} at [18/4]---approaching double precision roundoff limits.
+\textbf{Observation:} Achieves machine precision at {[}8/4], then \emph{continues improving}
+to \textbf{3.16e-16} at {[}18/4]---approaching double precision roundoff limits.
 Low iteration counts (4-9) indicate robust optimization. Fixed $m=4$ provides
 adequate pole structure; accuracy improvement comes purely from increasing $n$.
 
@@ -2088,27 +2229,27 @@ the convergence behavior:
 \centering
 \includegraphics[width=0.95\textwidth]{../figures/degree_strategy_comparison.pdf}
 \caption{Degree progression strategy comparison. \textbf{Top left:} L$^2$ error
-vs DOF shows Fixed [n/4] achieving lowest errors. \textbf{Top right:} L$^\infty$
+vs DOF shows Fixed {[}n/4] achieving lowest errors. \textbf{Top right:} L$^\infty$
 error exhibits similar behavior. \textbf{Bottom left:} Error progression by
-configuration index reveals Fixed [n/2] oscillation vs Fixed [n/4] smooth descent.
+configuration index reveals Fixed {[}n/2] oscillation vs Fixed {[}n/4] smooth descent.
 \textbf{Bottom right:} Convergence rate $\alpha$ (error $\sim$ DOF$^{-\alpha}$)
-shows Fixed [n/4] maintaining spectral convergence.}
+shows Fixed {[}n/4] maintaining spectral convergence.}
 \label{fig:degree_strategy_comparison}
 \end{figure}
 
 \paragraph{Convergence Analysis:}
 
 \begin{itemize}
-\item \textbf{Balanced [n/m]:} Shows initial spectral convergence (9 orders from
-  [4/2] to [8/4]) but then plateaus. Adding more poles and numerator terms
+\item \textbf{Balanced {[}n/m]:} Shows initial spectral convergence (9 orders from
+  {[}4/2] to {[}8/4]) but then plateaus. Adding more poles and numerator terms
   simultaneously provides diminishing returns once machine precision is reached.
 
-\item \textbf{Fixed [n/2]:} Demonstrates that \emph{insufficient pole flexibility
+\item \textbf{Fixed {[}n/2]:} Demonstrates that \emph{insufficient pole flexibility
   prevents convergence} regardless of numerator degree. The single conjugate pair
   cannot adequately represent the solution's analytic structure, leading to
   persistent approximation errors.
 
-\item \textbf{Fixed [n/4]:} Exhibits sustained spectral convergence beyond machine
+\item \textbf{Fixed {[}n/4]:} Exhibits sustained spectral convergence beyond machine
   precision. Two conjugate pairs provide sufficient pole flexibility for smooth
   problems; subsequent accuracy improvements result from better polynomial
   approximation (increasing $n$) without the overhead of additional poles.
@@ -2116,16 +2257,16 @@ shows Fixed [n/4] maintaining spectral convergence.}
 
 \paragraph{Practical Implications:}
 
-These systematic studies validate the Fixed [n/4] recommendation:
+These systematic studies validate the Fixed {[}n/4] recommendation:
 \begin{enumerate}
 \item \textbf{Threshold behavior:} $m=4$ represents a critical threshold---sufficient
   pole flexibility for smooth single-element problems
 \item \textbf{Computational efficiency:} Fixed $m$ reduces optimization complexity
   (fewer unknowns) while maintaining accuracy gains
-\item \textbf{Predictable convergence:} Unlike Fixed [n/2] oscillation or Balanced
-  [n/m] plateaus, Fixed [n/4] shows reliable monotonic improvement
+\item \textbf{Predictable convergence:} Unlike Fixed {[}n/2] oscillation or Balanced
+  {[}n/m] plateaus, Fixed {[}n/4] shows reliable monotonic improvement
 \item \textbf{Extension to multi-element:} For problems requiring local refinement,
-  use Fixed [n/4] per element with mesh refinement rather than increasing $m$
+  use Fixed {[}n/4] per element with mesh refinement rather than increasing $m$
 \end{enumerate}
 
 \chapter{Implementation Status}
@@ -2236,7 +2377,7 @@ B_i^n(x) = \binom{n}{i} t^i (1-t)^{n-i}, \quad t = \frac{x-a}{b-a}
 
 Key properties for numerical computation:
 \begin{itemize}
-\item \textbf{Non-negativity}: $B_i^n(t) \geq 0$ for $t \in [0,1]$ (enables pole prevention via coefficient constraints)
+\item \textbf{Non-negativity}: $B_i^n(t) \geq 0$ for $t \in {[}0,1]$ (enables pole prevention via coefficient constraints)
 \item \textbf{Partition of unity}: $\sum_{i=0}^n B_i^n(t) = 1$ (numerical stability)
 \item \textbf{Endpoint interpolation}: $B_i^n(0) = \delta_{i0}$, $B_i^n(1) = \delta_{in}$ (exact boundary conditions)
 \item \textbf{Convex hull property}: Polynomial lies in convex hull of control points (predictable behavior)
@@ -2255,7 +2396,7 @@ Implemented constraint types (configurable via \texttt{QConstraintType} enum):
 \begin{itemize}
 \item \textbf{ENDPOINT} (recommended): Constrain $b_1, b_m \geq \epsilon$ (prevents boundary poles)
 \item \textbf{NONNEGATIVE}: Constrain all $b_i \geq \epsilon$ (prevents all poles)
-\item \textbf{BOUNDED}: Constrain $b_i \in [\epsilon, 2]$ (prevents poles + extreme values)
+\item \textbf{BOUNDED}: Constrain $b_i \in {[}\epsilon, 2]$ (prevents poles + extreme values)
 \item \textbf{REGULARIZATION}: Penalty term $\lambda \sum (b_i - 1)^2$ (soft constraint)
 \end{itemize}
 
@@ -2289,9 +2430,9 @@ Poly FD & $n=10$ & $2.07 \times 10^{-3}$ & 0.22 \\
 Poly FD & $n=40$ & $1.49 \times 10^{-4}$ & 0.20 \\
 Poly FD & $n=160$ & $9.64 \times 10^{-6}$ & 1.06 \\
 \hline
-\textbf{Rational [4/2]} & $k=5$ & $\mathbf{1.36 \times 10^{-12}}$ & 136.26 \\
-\textbf{Rational [6/3]} & $k=8$ & $\mathbf{9.99 \times 10^{-16}}$ & 58.96 \\
-\textbf{Rational [8/4]} & $k=11$ & $\mathbf{5.55 \times 10^{-16}}$ & 120.20 \\
+\textbf{Rational {[}4/2]} & $k=5$ & $\mathbf{1.36 \times 10^{-12}}$ & 136.26 \\
+\textbf{Rational {[}6/3]} & $k=8$ & $\mathbf{9.99 \times 10^{-16}}$ & 58.96 \\
+\textbf{Rational {[}8/4]} & $k=11$ & $\mathbf{5.55 \times 10^{-16}}$ & 120.20 \\
 \hline
 \end{tabular}
 \caption{Smooth Poisson: Rational collocation achieves \textbf{machine precision}}
@@ -2313,9 +2454,9 @@ Poly FD & $n=10$ & $6.72 \times 10^{-3}$ & $2.17 \times 10^{-3}$ \\
 Poly FD & $n=40$ & $4.80 \times 10^{-4}$ & $1.55 \times 10^{-4}$ \\
 Poly FD & $n=160$ & $3.13 \times 10^{-5}$ & $1.00 \times 10^{-5}$ \\
 \hline
-\textbf{Rational [4/2]} & $k=5$ & $8.04 \times 10^{-2}$ & $5.67 \times 10^{-2}$ \\
-\textbf{Rational [6/3]} & $k=8$ & $\mathbf{1.96 \times 10^{-7}}$ & $\mathbf{9.58 \times 10^{-8}}$ \\
-\textbf{Rational [8/4]} & $k=11$ & $\mathbf{1.75 \times 10^{-12}}$ & $\mathbf{9.50 \times 10^{-13}}$ \\
+\textbf{Rational {[}4/2]} & $k=5$ & $8.04 \times 10^{-2}$ & $5.67 \times 10^{-2}$ \\
+\textbf{Rational {[}6/3]} & $k=8$ & $\mathbf{1.96 \times 10^{-7}}$ & $\mathbf{9.58 \times 10^{-8}}$ \\
+\textbf{Rational {[}8/4]} & $k=11$ & $\mathbf{1.75 \times 10^{-12}}$ & $\mathbf{9.50 \times 10^{-13}}$ \\
 \hline
 \end{tabular}
 \caption{Smooth Trigonometric: Rational collocation shows \textbf{spectral convergence}}
@@ -2323,8 +2464,8 @@ Poly FD & $n=160$ & $3.13 \times 10^{-5}$ & $1.00 \times 10^{-5}$ \\
 
 \textbf{Spectral convergence}: Each degree increase reduces error by $\sim 10^5$ factor:
 \begin{itemize}
-\item $[4/2] \to [6/3]$: Error decreases $8 \times 10^{-2} \to 2 \times 10^{-7}$ ($4 \times 10^5$ factor)
-\item $[6/3] \to [8/4]$: Error decreases $2 \times 10^{-7} \to 2 \times 10^{-12}$ ($10^5$ factor)
+\item $[4/2] \to {[}6/3]$: Error decreases $8 \times 10^{-2} \to 2 \times 10^{-7}$ ($4 \times 10^5$ factor)
+\item $[6/3] \to {[}8/4]$: Error decreases $2 \times 10^{-7} \to 2 \times 10^{-12}$ ($10^5$ factor)
 \end{itemize}
 
 Compare to polynomial FD second-order convergence:
@@ -2333,7 +2474,7 @@ Compare to polynomial FD second-order convergence:
 \item $n=40 \to 160$: Error decreases by factor of $\sim 15$ (quadratic: expect 16)
 \end{itemize}
 
-\textbf{Rational [8/4] with 11 collocation points achieves 4000$\times$ better accuracy
+\textbf{Rational {[}8/4] with 11 collocation points achieves 4000$\times$ better accuracy
 than polynomial FD with 160 grid points.}
 
 \section{Performance Analysis}
@@ -2349,7 +2490,7 @@ than polynomial FD with 160 grid points.}
 \paragraph{Accuracy per Degree of Freedom}
 For same computational cost, rational collocation achieves dramatically higher accuracy:
 \begin{itemize}
-\item Rational [8/4]: 11 DOF, $1.75 \times 10^{-12}$ error, 288 ms
+\item Rational {[}8/4]: 11 DOF, $1.75 \times 10^{-12}$ error, 288 ms
 \item Poly FD: Would need $n \sim 10^6$ for similar accuracy, impractical
 \end{itemize}
 
@@ -2409,14 +2550,14 @@ on three smooth problems show:
 \textbf{Problem} & \textbf{[n/m]} & \textbf{DOF} & \textbf{Quadratic Time (ms)} & \textbf{Cleared Time (ms)} & \textbf{Speedup} \\
 \hline
 \multirow{3}{*}{Smooth Poisson}
-  & [4/2] & 5  & 167.4 & 81.2  & 2.1$\times$ \\
-  & [6/3] & 8  & 76.7  & 29.9  & 2.6$\times$ \\
-  & [8/4] & 11 & 165.3 & 60.0  & 2.8$\times$ \\
+  & {[}4/2] & 5  & 167.4 & 81.2  & 2.1$\times$ \\
+  & {[}6/3] & 8  & 76.7  & 29.9  & 2.6$\times$ \\
+  & {[}8/4] & 11 & 165.3 & 60.0  & 2.8$\times$ \\
 \hline
 \multirow{3}{*}{Smooth Trig}
-  & [4/2] & 5  & 52.7  & 27.1  & 1.9$\times$ \\
-  & [6/3] & 8  & 217.6 & 89.8  & 2.4$\times$ \\
-  & [8/4] & 11 & 333.1 & 129.5 & 2.6$\times$ \\
+  & {[}4/2] & 5  & 52.7  & 27.1  & 1.9$\times$ \\
+  & {[}6/3] & 8  & 217.6 & 89.8  & 2.4$\times$ \\
+  & {[}8/4] & 11 & 333.1 & 129.5 & 2.6$\times$ \\
 \hline
 \end{tabular}
 \caption{Computational performance: Cleared form is consistently 2-3$\times$ faster}
@@ -2429,19 +2570,19 @@ on three smooth problems show:
 \item \textbf{Cleared form faster}: Consistently 2-3$\times$ faster despite cubic nonlinearity
 \item \textbf{Reason}: Cleared form has fewer unknowns ($n+m+1$ vs $n+m+2k+1$), making
       each Jacobian evaluation and linear solve cheaper
-\item \textbf{Example}: For [8/4], quadratic has 24 unknowns, cleared has 13 unknowns (46\% reduction)
+\item \textbf{Example}: For {[}8/4], quadratic has 24 unknowns, cleared has 13 unknowns (46\% reduction)
 \end{itemize}
 
 \paragraph{Accuracy Verification}
 
 Both formulations achieve:
 \begin{itemize}
-\item \textbf{Smooth Poisson [6/3]}: Machine precision
+\item \textbf{Smooth Poisson {[}6/3]}: Machine precision
   \begin{itemize}
   \item Quadratic: $9.99 \times 10^{-16}$ max error
   \item Cleared: $8.33 \times 10^{-17}$ max error
   \end{itemize}
-\item \textbf{Smooth Trig [8/4]}: Near machine precision
+\item \textbf{Smooth Trig {[}8/4]}: Near machine precision
   \begin{itemize}
   \item Quadratic: $1.75 \times 10^{-12}$ max error
   \item Cleared: $1.96 \times 10^{-12}$ max error
@@ -2821,9 +2962,9 @@ solution $u(x) = \sin(\pi x)$:
 \item \textbf{Spectral Convergence}: Errors decay exponentially with degree increase;
   convergence rates exceed 16 compared to polynomial's rate of 2
 \item \textbf{Dramatic Accuracy Advantage}: At 17 intervals, polynomial FD achieves
-  $2.28 \times 10^{-3}$ error while rational [8/4] achieves $9.65 \times 10^{-13}$
+  $2.28 \times 10^{-3}$ error while rational {[}8/4] achieves $9.65 \times 10^{-13}$
   error---an improvement of \textbf{2,000,000$\times$}
-\item \textbf{Efficiency}: Rational [8/4] with 13 DOF surpasses polynomial with
+\item \textbf{Efficiency}: Rational {[}8/4] with 13 DOF surpasses polynomial with
   129 DOF, demonstrating superior DOF efficiency for smooth problems
 \end{itemize}
 
@@ -2834,7 +2975,7 @@ convergence.
 \paragraph{Discontinuous Problems---Catastrophic Failure:}
 For the discontinuous Poisson equation with piecewise smooth forcing:
 \begin{itemize}
-\item \textbf{Erratic Performance}: Errors vary unpredictably; rational [6/3] is
+\item \textbf{Erratic Performance}: Errors vary unpredictably; rational {[}6/3] is
   sometimes 41$\times$ worse than polynomial
 \item \textbf{No Systematic Convergence}: Refinement does not reliably reduce errors;
   some refinements increase error
@@ -2852,7 +2993,7 @@ For the oscillatory Poisson equation $-u''(x) = -100\pi^2 \sin(10\pi x)$:
 \begin{itemize}
 \item \textbf{Catastrophic Errors}: L$^\infty$ errors reach $10^4$ to $10^6$,
   completely unusable for any application
-\item \textbf{Worst Case Quantified}: Rational [8/4] produces $5.83 \times 10^4$
+\item \textbf{Worst Case Quantified}: Rational {[}8/4] produces $5.83 \times 10^4$
   error while polynomial achieves $1.01$ error---rational is \textbf{58,000$\times$
   worse}
 \item \textbf{Gradient Disaster}: H$^1$ seminorm errors reach $10^6$, indicating
@@ -2902,32 +3043,32 @@ polynomials suffice and are often more efficient for globally smooth functions.
 
 Testing three degree progression strategies reveals optimal choices:
 
-\paragraph{Fixed Denominator [n/4] Strategy:}
+\paragraph{Fixed Denominator {[}n/4] Strategy:}
 Fixing $m=4$ (two complex conjugate pole pairs) and varying $n$ provides:
 \begin{itemize}
-\item Optimal accuracy for smooth problems (machine precision with [16/4])
+\item Optimal accuracy for smooth problems (machine precision with {[}16/4])
 \item Consistent spectral convergence without over-fitting
 \item Balanced flexibility without excessive pole structure
 \end{itemize}
 
-\paragraph{Balanced Growth [n/m] Strategy:}
+\paragraph{Balanced Growth {[}n/m] Strategy:}
 Growing both $n$ and $m$ together (current benchmarks) shows:
 \begin{itemize}
-\item Good performance but slightly less accuracy than fixed [n/4]
+\item Good performance but slightly less accuracy than fixed {[}n/4]
 \item More degrees of freedom for equivalent accuracy
 \item Useful when pole structure requirements vary across problems
 \end{itemize}
 
-\paragraph{Minimal Poles [n/2] Strategy:}
+\paragraph{Minimal Poles {[}n/2] Strategy:}
 Fixing $m=2$ shows:
 \begin{itemize}
 \item Insufficient flexibility for many smooth problems
-\item Slower convergence than [n/4] strategy
+\item Slower convergence than {[}n/4] strategy
 \item Useful only when minimal pole structure is theoretically justified
 \end{itemize}
 
-\textbf{Recommendation}: For smooth problems, use fixed [n/4] progression starting
-at [8/4] and increasing $n$ by 2 per refinement.
+\textbf{Recommendation}: For smooth problems, use fixed {[}n/4] progression starting
+at {[}8/4] and increasing $n$ by 2 per refinement.
 
 \subsection{Constraint Strategies: Less is More}
 
@@ -2945,8 +3086,8 @@ Constraining only boundary coefficients $b_1, b_m \geq \epsilon$:
 \paragraph{NONNEGATIVE Constraints (Harmful):}
 Constraining all coefficients $b_1, \ldots, b_m \geq \epsilon$:
 \begin{itemize}
-\item Makes discontinuous [8/4] \textbf{2500$\times$ worse} (1.72e+02 vs 6.69e-02)
-\item Makes oscillatory [8/4] \textbf{120$\times$ worse} (1.54e+05 vs 1.29e+03)
+\item Makes discontinuous {[}8/4] \textbf{2500$\times$ worse} (1.72e+02 vs 6.69e-02)
+\item Makes oscillatory {[}8/4] \textbf{120$\times$ worse} (1.54e+05 vs 1.29e+03)
 \item Over-constrains the optimization, forcing poor solutions
 \item Provides no benefit even for problems where method is already failing
 \end{itemize}
@@ -3003,7 +3144,7 @@ The report synthesizes numerical evidence into actionable guidance:
 \item \textbf{Secondary criteria}: Accuracy requirements, pole structure, DOF constraints
 \item \textbf{Safety principle}: Conservative selection---use rationals only when
       smoothness is certain
-\item \textbf{Degree strategy}: Fixed [n/4] progression for smooth problems
+\item \textbf{Degree strategy}: Fixed {[}n/4] progression for smooth problems
 \item \textbf{Constraint strategy}: ENDPOINT suffices; avoid NONNEGATIVE
 \end{enumerate}
 
@@ -3052,7 +3193,7 @@ selection. If smoothness cannot be guaranteed, rational methods must not be used
 For smooth problems, spectral convergence is not merely ``faster than algebraic
 convergence''---it is transformative:
 \begin{itemize}
-\item Moderate degrees ([8/4] to [16/4]) achieve machine precision
+\item Moderate degrees ([8/4] to {[}16/4]) achieve machine precision
 \item Each degree increase yields orders-of-magnitude error reduction
 \item Accuracy impossible for polynomial methods becomes routine
 \end{itemize}
@@ -3106,9 +3247,9 @@ to polynomial methods, not to add more constraints.
 Theoretical intuition might suggest growing both numerator and denominator degrees
 together to maintain ``balance.'' The benchmarks contradict this intuition:
 \begin{itemize}
-\item Fixed [n/4] strategy achieves machine precision with fewer DOF
-\item Balanced [n/m] strategy shows slower convergence
-\item Minimal [n/2] strategy insufficient for many problems
+\item Fixed {[}n/4] strategy achieves machine precision with fewer DOF
+\item Balanced {[}n/m] strategy shows slower convergence
+\item Minimal {[}n/2] strategy insufficient for many problems
 \end{itemize}
 
 \textbf{Explanation}: For smooth problems, a small fixed pole structure ($m=4$)
@@ -3116,7 +3257,7 @@ suffices to capture essential features. Additional DOF should expand numerator
 flexibility, not add more poles. Excessive pole structure ($m \to \infty$) increases
 optimization difficulty without accuracy benefit.
 
-\textbf{Implication}: Start with [8/4] and increase $n$ by 2 per refinement, keeping
+\textbf{Implication}: Start with {[}8/4] and increase $n$ by 2 per refinement, keeping
 $m=4$ fixed.
 
 \section{Final Recommendations}
@@ -3137,7 +3278,7 @@ $m=4$ fixed.
 
 \item \textbf{Determine accuracy requirements}:
   \begin{itemize}
-  \item Machine precision ($< 10^{-10}$) $\to$ \textbf{Use rational collocation [n/4]}
+  \item Machine precision ($< 10^{-10}$) $\to$ \textbf{Use rational collocation {[}n/4]}
   \item High accuracy ($10^{-6}$ to $10^{-10}$) $\to$ Rational provides advantage
         if DOF minimization important
   \item Engineering accuracy ($10^{-3}$ to $10^{-6}$) $\to$ Either method acceptable;
@@ -3158,7 +3299,7 @@ $m=4$ fixed.
 
 For rational collocation:
 \begin{itemize}
-\item Start with [8/4] (8 numerator, 4 denominator coefficients)
+\item Start with {[}8/4] (8 numerator, 4 denominator coefficients)
 \item Use ENDPOINT constraints only (prevent boundary poles)
 \item Use trust-region-reflective solver with box constraints
 \item Increase $n$ by 2 per refinement, keep $m=4$ fixed
@@ -3262,7 +3403,7 @@ Production-quality rational BVP solvers should implement:
 \item \textbf{Comprehensive diagnostics}: Report convergence issues, constraint
       violations, pole locations, and error estimates
 
-\item \textbf{Robust defaults}: ENDPOINT constraints, [8/4] initial degree, trust-region
+\item \textbf{Robust defaults}: ENDPOINT constraints, {[}8/4] initial degree, trust-region
       solver with sensible tolerance settings
 
 \item \textbf{User warnings}: Clear documentation of smoothness requirements and
