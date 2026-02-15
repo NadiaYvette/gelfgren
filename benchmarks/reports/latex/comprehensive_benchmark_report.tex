@@ -858,14 +858,133 @@ $64 \to 128$ & 2.01 & \textcolor{red}{-6.69} & 2.01 & \textcolor{red}{-10.11} \\
 
 \chapter{Convergence Studies: Special Functions}
 
-This chapter examines the approximation of special functions using piecewise
-rational approximants and polynomial splines. Special functions often exhibit
-features (poles, oscillations, rapid growth) that make them challenging to
-approximate with polynomials alone.
+\section{Scope and Distinction from BVP Studies}
 
-% NOTE: The original document had special function content starting at line 709
-% but no detailed sections were provided in the excerpts read. The chapter introduction
-% is preserved here. Any additional special function convergence studies would go here.
+\textbf{Important distinction:} This chapter concerns \textbf{function approximation}—representing known functions like $e^x$, $\sin(x)$, or $J_0(x)$ using piecewise rational or polynomial approximants. This is fundamentally different from the \textbf{boundary value problem (BVP) solving} studied in Chapters 11--15, where rational collocation discretizes differential operators.
+
+\subsection{Two Uses of Rational Functions}
+
+\begin{enumerate}
+\item \textbf{Function Approximation} (This chapter):
+   \begin{itemize}
+   \item Goal: Represent a known function $f(x)$ accurately
+   \item Method: Piecewise rational approximants constructed via Hermite interpolation
+   \item Example: Approximate $e^x$ on $[0,1]$ using rational segments
+   \item Comparison: Rational approximants vs polynomial splines
+   \end{itemize}
+
+\item \textbf{BVP Solving} (Chapters 11--15):
+   \begin{itemize}
+   \item Goal: Solve differential equation $L[u] = f$ for unknown $u(x)$
+   \item Method: Rational collocation with cleared form
+   \item Example: Solve $-u'' + k^2u = f$ on $[0,1]$ with boundary conditions
+   \item Comparison: Rational collocation vs spectral methods vs finite differences
+   \end{itemize}
+\end{enumerate}
+
+\section{Special Functions Tested}
+
+The codebase includes benchmarks (\texttt{special\_function\_convergence.py}) comparing piecewise rational approximants vs polynomial splines for:
+
+\begin{enumerate}
+\item \textbf{Exponential}: $e^x$ on $[0, 1]$
+   \begin{itemize}
+   \item Natural for rationals: Padé approximants are optimal
+   \item Expected: Rationals significantly outperform polynomials
+   \end{itemize}
+
+\item \textbf{Trigonometric}: $\sin(x)$, $\cos(x)$, $\tan(x)$ on $[0, \pi/2]$
+   \begin{itemize}
+   \item $\tan(x)$ has pole at $\pi/2$—tests rational ability to handle near-singularities
+   \item Expected: Rationals excel, especially near poles
+   \end{itemize}
+
+\item \textbf{Error Function}: $\text{erf}(x)$ on $[0, 3]$
+   \begin{itemize}
+   \item Smooth sigmoid shape
+   \item Expected: Both methods work well, rationals slightly better
+   \end{itemize}
+
+\item \textbf{Bessel Function}: $J_0(x)$ on $[0, 10]$
+   \begin{itemize}
+   \item Oscillatory with decreasing amplitude
+   \item Tests rational handling of oscillations
+   \end{itemize}
+
+\item \textbf{Logarithm}: $\log(1+x)$ on $[0, 5]$
+   \begin{itemize}
+   \item Smooth but unbounded derivative at $x \to -1$
+   \item Tests rational representation of logarithmic growth
+   \end{itemize}
+
+\item \textbf{Runge's Function}: $\frac{1}{1 + 25x^2}$ on $[-1, 1]$
+   \begin{itemize}
+   \item Classic example where polynomial interpolation fails (Runge phenomenon)
+   \item Expected: Rationals handle naturally (already in rational form)
+   \end{itemize}
+\end{enumerate}
+
+\section{Status: Benchmarks Not Yet Executed}
+
+\textbf{Current Status:} The special function approximation benchmarks exist in the codebase but have not yet been executed and documented in this report. The focus of this study was on the more complex problem of \textbf{BVP solving} (Chapters 11--15), which revealed critical limitations of rational methods on non-smooth problems.
+
+\subsection{Why Function Approximation Was Not Prioritized}
+
+\begin{enumerate}
+\item \textbf{Well-established results}: Padé approximants and piecewise rational approximation of smooth functions is well-studied with known advantages
+\item \textbf{BVP solving more critical}: The question of whether rational collocation methods work for differential equations is less established and revealed unexpected catastrophic failures
+\item \textbf{Resource constraints}: Comprehensive BVP benchmarks (20 problems, 6 methods, convergence analysis, report generation) consumed available effort
+\end{enumerate}
+
+\section{Expected Results (Based on Theory)}
+
+If these benchmarks were executed, we would expect:
+
+\begin{table}[h]
+\centering
+\caption{Predicted special function approximation results}
+\begin{tabular}{lcc}
+\hline
+\textbf{Function} & \textbf{Rational Advantage?} & \textbf{Reason} \\
+\hline
+$e^x$ & Yes (significant) & Padé optimal for exponentials \\
+$\sin(x), \cos(x)$ & Moderate & Both methods work well \\
+$\tan(x)$ & Yes (near pole) & Rational handles singularity \\
+$\text{erf}(x)$ & Slight & Smooth, both work \\
+$J_0(x)$ & Moderate & Oscillatory but smooth \\
+$\log(1+x)$ & Moderate & Rational natural form \\
+Runge's function & Yes (dramatic) & Already rational \\
+\hline
+\end{tabular}
+\end{table}
+
+\textbf{Key prediction}: Unlike BVP solving (where rationals catastrophically fail on boundary layers and discontinuities), function approximation of \textbf{smooth} functions should show consistent rational advantages. The critical difference is that these special functions are \textbf{known, smooth, and can be sampled at any point}—none of the pathologies (sharp gradients, discontinuities) that plague BVP rational collocation.
+
+\section{Relationship to Extended BVP Benchmarks}
+
+The extended BVP benchmarks (Chapters 11--15) used some functions similar to special functions as \textbf{exact solutions}:
+
+\begin{itemize}
+\item Helmholtz exponential-oscillatory: $u(x) = e^{-2x}\sin(2\pi x)$ (rationals excelled)
+\item Reaction-diffusion exponential: $u(x) = \sinh(\sqrt{c}x)/\sinh(\sqrt{c})$ (rationals excelled)
+\item Advection-diffusion boundary layer: $u(x) = e^{-x/\varepsilon}$ (rationals failed)
+\end{itemize}
+
+These results are \textbf{consistent} with function approximation theory: smooth exponentials are well-approximated by rationals, but sharp gradients (small $\varepsilon$) cause failure.
+
+\section{Recommendation for Future Work}
+
+To complete this chapter, the following work would be needed:
+
+\begin{enumerate}
+\item Execute \texttt{special\_function\_convergence.py} benchmarks
+\item Generate convergence plots (error vs mesh refinement)
+\item Document convergence rates for each method on each function
+\item Compare against theoretical predictions (Padé error bounds)
+\item Contrast with BVP results to highlight smooth vs non-smooth distinction
+\end{enumerate}
+
+\textbf{Estimated effort}: 1--2 days to run benchmarks, generate figures, and document results. Lower priority than BVP studies since results are more predictable.
 
 \chapter{Analysis of Results}
 
