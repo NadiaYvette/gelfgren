@@ -922,7 +922,83 @@ The codebase includes benchmarks (\texttt{special\_function\_convergence.py}) co
    \item Classic example where polynomial interpolation fails (Runge phenomenon)
    \item Expected: Rationals handle naturally (already in rational form)
    \end{itemize}
+
+\item \textbf{Mathieu Functions}: $\text{ce}_n(x, q)$, $\text{se}_n(x, q)$ (even/odd periodic solutions)
+   \begin{itemize}
+   \item Solutions to Mathieu equation: $u'' + (a - 2q\cos(2x))u = 0$
+   \item Oscillatory with period modulation depending on parameter $q$
+   \item Example test cases:
+      \begin{itemize}
+      \item $\text{ce}_0(x, 5)$ on $[0, 2\pi]$ (low-order, moderate modulation)
+      \item $\text{se}_2(x, 10)$ on $[0, 2\pi]$ (higher-order, stronger modulation)
+      \end{itemize}
+   \item \textbf{Interpretation caveat}: Results specific to chosen $(n, q)$ parameters. Tests rational approximation of \emph{Mathieu-like oscillatory character} rather than general Mathieu function approximation across parameter space.
+   \item Expected: Rationals competitive with polynomials; advantage depends on modulation strength
+   \end{itemize}
+
+\item \textbf{Jacobi Elliptic Functions}: $\text{sn}(x, k)$, $\text{cn}(x, k)$, $\text{dn}(x, k)$
+   \begin{itemize}
+   \item Generalizations of trigonometric functions with elliptic modulus $k \in [0, 1]$
+   \item Periodic with period depending on complete elliptic integral $K(k)$
+   \item $k = 0$: Reduce to ordinary trig ($\text{sn}(x,0) = \sin(x)$)
+   \item $k \to 1$: Degenerate to hyperbolic functions ($\text{cn}(x,1) = \text{sech}(x)$)
+   \item Example test cases:
+      \begin{itemize}
+      \item $\text{sn}(x, 0.5)$ on $[0, K(0.5)]$ (moderate ellipticity)
+      \item $\text{cn}(x, 0.9)$ on $[0, K(0.9)]$ (near-degenerate, tests rational handling of sharp transitions)
+      \item $\text{dn}(x, 0.7)$ on $[0, 2K(0.7)]$ (double period)
+      \end{itemize}
+   \item \textbf{Interpretation caveat}: Choice of $k$ determines oscillatory vs exponential-like character. Results indicate performance on functions with that specific modulus, not universal approximability.
+   \item Expected: Rationals excel at near-degenerate cases ($k \to 1$, exponential-like); comparable to polynomials for moderate $k$
+   \end{itemize}
+
+\item \textbf{Lemniscate Functions}: $\text{sl}(x)$, $\text{cl}(x)$
+   \begin{itemize}
+   \item Special case of Jacobi elliptic functions with $k = 1/\sqrt{2}$
+   \item $\text{sl}(x) = \text{sn}(x, 1/\sqrt{2})$, $\text{cl}(x) = \text{cn}(x, 1/\sqrt{2})$
+   \item Period $2\varpi$ where $\varpi = K(1/\sqrt{2}) \approx 1.8541$
+   \item Historical significance: Arc length of lemniscate curve
+   \item Expected: Similar to moderate-$k$ Jacobi elliptic functions
+   \end{itemize}
+
+\item \textbf{Airy Functions}: $\text{Ai}(x)$, $\text{Bi}(x)$ on $[-10, 2]$
+   \begin{itemize}
+   \item Solutions to Airy equation: $u'' - xu = 0$
+   \item $\text{Ai}(x)$: Exponentially decaying for $x > 0$, oscillatory for $x < 0$
+   \item $\text{Bi}(x)$: Exponentially growing for $x > 0$, oscillatory for $x < 0$
+   \item Tests rational handling of transition from oscillatory to exponential behavior
+   \item Expected: Rationals excel in exponential regime; competitive in oscillatory regime
+   \end{itemize}
+
+\item \textbf{Higher-Order Bessel Functions}: $J_n(x)$ for $n = 1, 2, 5, 10$
+   \begin{itemize}
+   \item Varying oscillatory frequency and zero structure with order $n$
+   \item $J_n(x) \sim \sqrt{\frac{2}{\pi x}} \cos(x - n\pi/2 - \pi/4)$ as $x \to \infty$
+   \item Example domains:
+      \begin{itemize}
+      \item $J_1(x)$ on $[0, 20]$ (first-order, frequent zeros)
+      \item $J_5(x)$ on $[0, 30]$ (higher-order, delayed onset of oscillations)
+      \item $J_{10}(x)$ on $[0, 40]$ (very high order, long ramp-up before oscillations)
+      \end{itemize}
+   \item Tests rational handling of order-dependent oscillatory onset
+   \item Expected: Rationals competitive; advantage in near-zero regions where $J_n$ is smooth
+   \end{itemize}
 \end{enumerate}
+
+\subsection{Rationale for Expanded Test Suite}
+
+The expanded test suite probes different oscillatory and exponential characteristics:
+
+\begin{itemize}
+\item \textbf{Simple oscillations}: $\sin$, $\cos$ (constant frequency)
+\item \textbf{Damped oscillations}: $J_0(x)$, $\text{Ai}(x)$ for $x < 0$ (decreasing amplitude)
+\item \textbf{Modulated oscillations}: Mathieu functions (parametric frequency variation)
+\item \textbf{Elliptic oscillations}: Jacobi elliptics (interpolate between trig and hyperbolic)
+\item \textbf{Order-dependent oscillations}: $J_n(x)$ (onset delay with order)
+\item \textbf{Exponential-oscillatory transitions}: Airy functions (phase change at $x = 0$)
+\end{itemize}
+
+\textbf{Key observation}: Parameter choices $(q, k, n)$ are not arbitrary—they're selected to probe specific behaviors relevant to applications where such functions arise (quantum mechanics, wave propagation, nonlinear dynamics). Results indicate how well rational approximation handles \emph{that class of behavior}, not just that specific function.
 
 \section{Status: Benchmarks Not Yet Executed}
 
@@ -942,21 +1018,42 @@ If these benchmarks were executed, we would expect:
 
 \begin{table}[h]
 \centering
-\caption{Predicted special function approximation results}
+\caption{Predicted special function approximation results (expanded test suite)}
 \begin{tabular}{lcc}
 \hline
 \textbf{Function} & \textbf{Rational Advantage?} & \textbf{Reason} \\
 \hline
+\multicolumn{3}{c}{\textit{Basic Functions}} \\
 $e^x$ & Yes (significant) & Padé optimal for exponentials \\
 $\sin(x), \cos(x)$ & Moderate & Both methods work well \\
 $\tan(x)$ & Yes (near pole) & Rational handles singularity \\
 $\text{erf}(x)$ & Slight & Smooth, both work \\
-$J_0(x)$ & Moderate & Oscillatory but smooth \\
 $\log(1+x)$ & Moderate & Rational natural form \\
 Runge's function & Yes (dramatic) & Already rational \\
 \hline
+\multicolumn{3}{c}{\textit{Oscillatory Functions}} \\
+$J_0(x)$ & Moderate & Decreasing amplitude \\
+$J_n(x)$ (high $n$) & Slight to moderate & Order-dependent onset \\
+$\text{ce}_n(x, q)$, $\text{se}_n(x, q)$ & Moderate & Modulated oscillations \\
+$\text{Ai}(x)$ ($x < 0$) & Moderate & Oscillatory regime \\
+\hline
+\multicolumn{3}{c}{\textit{Elliptic \& Exponential-like}} \\
+$\text{sn}(x, k)$, $\text{cn}(x, k)$ (moderate $k$) & Moderate & Trig-like for $k \sim 0.5$ \\
+$\text{sn}(x, k)$, $\text{cn}(x, k)$ ($k \to 1$) & Yes (significant) & Near-hyperbolic \\
+$\text{sl}(x)$, $\text{cl}(x)$ & Moderate & $k = 1/\sqrt{2}$ intermediate \\
+$\text{Ai}(x)$ ($x > 0$) & Yes (significant) & Exponential decay \\
+$\text{Bi}(x)$ ($x > 0$) & Yes (significant) & Exponential growth \\
+\hline
 \end{tabular}
 \end{table}
+
+\textbf{Key observations from expanded suite}:
+\begin{itemize}
+\item \textbf{Exponential-like behavior}: Rationals consistently excel ($e^x$, Airy/Bi for $x > 0$, Jacobi elliptics with $k \to 1$)
+\item \textbf{Pure oscillations}: Rationals competitive but not dramatically better ($\sin$, $J_n$, Mathieu)
+\item \textbf{Mixed exponential-oscillatory}: Rationals advantageous (Airy transition, $\tan$ near pole)
+\item \textbf{Parameter dependence}: Results for Mathieu ($q$) and Jacobi elliptics ($k$) probe behavior \emph{at those parameters}, revealing how rationals handle that specific oscillatory character
+\end{itemize}
 
 \textbf{Key prediction}: Unlike BVP solving (where rationals catastrophically fail on boundary layers and discontinuities), function approximation of \textbf{smooth} functions should show consistent rational advantages. The critical difference is that these special functions are \textbf{known, smooth, and can be sampled at any point}—none of the pathologies (sharp gradients, discontinuities) that plague BVP rational collocation.
 
