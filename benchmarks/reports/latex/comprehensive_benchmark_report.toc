@@ -1,312 +1,323 @@
-\contentsline {chapter}{\numberline {1}Introduction}{2}{chapter.1}%
-\contentsline {section}{\numberline {1.1}Motivation}{2}{section.1.1}%
-\contentsline {section}{\numberline {1.2}Scope}{2}{section.1.2}%
-\contentsline {section}{\numberline {1.3}Critical Methodological Note}{4}{section.1.3}%
-\contentsline {paragraph}{Polynomial Method (Baseline):}{4}{section*.2}%
-\contentsline {paragraph}{Rational Collocation Method (Cleared Form):}{4}{section*.3}%
-\contentsline {paragraph}{Implementation Details}{5}{section*.4}%
-\contentsline {paragraph}{When Each Method Excels:}{5}{section*.5}%
-\contentsline {section}{\numberline {1.4}Document Organization}{5}{section.1.4}%
-\contentsline {paragraph}{For Researchers and Theoreticians:}{6}{section*.7}%
-\contentsline {paragraph}{For Practitioners and Engineers:}{6}{section*.8}%
-\contentsline {paragraph}{For Students and Self-Learners:}{7}{section*.9}%
-\contentsline {paragraph}{For Software Developers and Implementers:}{7}{section*.10}%
-\contentsline {chapter}{\numberline {2}Mathematical Background}{9}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Polynomial Splines}{9}{section.2.1}%
-\contentsline {subsection}{\numberline {2.1.1}Definition}{9}{subsection.2.1.1}%
-\contentsline {subsection}{\numberline {2.1.2}Cubic Splines}{9}{subsection.2.1.2}%
-\contentsline {subsection}{\numberline {2.1.3}Approximation Theory}{9}{subsection.2.1.3}%
-\contentsline {section}{\numberline {2.2}Rational Approximants}{10}{section.2.2}%
-\contentsline {subsection}{\numberline {2.2.1}Padé Approximants}{10}{subsection.2.2.1}%
-\contentsline {subsection}{\numberline {2.2.2}Construction}{10}{subsection.2.2.2}%
-\contentsline {subsection}{\numberline {2.2.3}Approximation Properties}{10}{subsection.2.2.3}%
-\contentsline {section}{\numberline {2.3}Piecewise Rational Approximants}{11}{section.2.3}%
-\contentsline {subsection}{\numberline {2.3.1}Degrees of Freedom}{11}{subsection.2.3.1}%
-\contentsline {section}{\numberline {2.4}Error Norms}{11}{section.2.4}%
-\contentsline {subsection}{\numberline {2.4.1}L² Norm}{11}{subsection.2.4.1}%
-\contentsline {subsection}{\numberline {2.4.2}$L^\infty $ Norm}{11}{subsection.2.4.2}%
-\contentsline {subsection}{\numberline {2.4.3}H¹ Seminorm}{11}{subsection.2.4.3}%
-\contentsline {section}{\numberline {2.5}Convergence Rates}{11}{section.2.5}%
-\contentsline {chapter}{\numberline {3}Benchmark Problems}{12}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Problem 1: Smooth Poisson Equation}{12}{section.3.1}%
-\contentsline {subsection}{\numberline {3.1.1}Problem Statement}{12}{subsection.3.1.1}%
-\contentsline {subsection}{\numberline {3.1.2}Exact Solution}{12}{subsection.3.1.2}%
-\contentsline {subsection}{\numberline {3.1.3}Theoretical Convergence}{12}{subsection.3.1.3}%
-\contentsline {section}{\numberline {3.2}Problem 2: Discontinuous Forcing}{12}{section.3.2}%
-\contentsline {subsection}{\numberline {3.2.1}Problem Statement}{12}{subsection.3.2.1}%
-\contentsline {subsection}{\numberline {3.2.2}Exact Solution}{13}{subsection.3.2.2}%
-\contentsline {subsection}{\numberline {3.2.3}Expected Behavior}{13}{subsection.3.2.3}%
-\contentsline {section}{\numberline {3.3}Problem 3: Oscillatory Forcing}{13}{section.3.3}%
-\contentsline {subsection}{\numberline {3.3.1}Problem Statement}{13}{subsection.3.3.1}%
-\contentsline {subsection}{\numberline {3.3.2}Exact Solution}{13}{subsection.3.3.2}%
-\contentsline {subsection}{\numberline {3.3.3}Challenge}{13}{subsection.3.3.3}%
-\contentsline {chapter}{\numberline {4}Convergence Studies: Boundary Value Problems}{14}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Smooth Poisson (sin)}{14}{section.4.1}%
-\contentsline {subsection}{\numberline {4.1.1}Error Measurements}{14}{subsection.4.1.1}%
-\contentsline {subsection}{\numberline {4.1.2}Convergence Rates}{14}{subsection.4.1.2}%
-\contentsline {subsection}{\numberline {4.1.3}Convergence Plots}{16}{subsection.4.1.3}%
-\contentsline {section}{\numberline {4.2}Discontinuous Poisson}{16}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}Error Measurements}{16}{subsection.4.2.1}%
-\contentsline {subsection}{\numberline {4.2.2}Convergence Rates}{17}{subsection.4.2.2}%
-\contentsline {subsection}{\numberline {4.2.3}Convergence Plots}{18}{subsection.4.2.3}%
-\contentsline {section}{\numberline {4.3}Oscillatory Poisson ($\omega $=10.0)}{19}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}Error Measurements}{19}{subsection.4.3.1}%
-\contentsline {subsection}{\numberline {4.3.2}Convergence Rates}{20}{subsection.4.3.2}%
-\contentsline {subsection}{\numberline {4.3.3}Convergence Plots}{20}{subsection.4.3.3}%
-\contentsline {chapter}{\numberline {5}Convergence Studies: Special Functions}{22}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Scope and Distinction from BVP Studies}{22}{section.5.1}%
-\contentsline {subsection}{\numberline {5.1.1}Two Uses of Rational Functions}{22}{subsection.5.1.1}%
-\contentsline {section}{\numberline {5.2}Special Functions Tested}{23}{section.5.2}%
-\contentsline {subsection}{\numberline {5.2.1}Rationale for Expanded Test Suite}{25}{subsection.5.2.1}%
-\contentsline {section}{\numberline {5.3}Benchmark Results}{25}{section.5.3}%
-\contentsline {subsection}{\numberline {5.3.1}Methodology}{26}{subsection.5.3.1}%
-\contentsline {section}{\numberline {5.4}Critical Analysis: DOF Fairness}{26}{section.5.4}%
-\contentsline {subsection}{\numberline {5.4.1}Degrees of Freedom Mismatch}{26}{subsection.5.4.1}%
-\contentsline {paragraph}{Cubic Hermite Splines (C^1 continuous):}{26}{section*.21}%
-\contentsline {paragraph}{Rational [3/1] (piecewise independent):}{26}{section*.22}%
-\contentsline {subsection}{\numberline {5.4.2}What Would Be a Fair Comparison?}{27}{subsection.5.4.2}%
-\contentsline {paragraph}{Why Even Denominator Degrees?}{27}{section*.23}%
-\contentsline {subsection}{\numberline {5.4.3}Higher-Order Hermite Spline Results}{27}{subsection.5.4.3}%
-\contentsline {paragraph}{Critical Findings:}{27}{section*.25}%
-\contentsline {subsection}{\numberline {5.4.4}Implications for Fairness Analysis}{28}{subsection.5.4.4}%
-\contentsline {paragraph}{Original Comparison Was Unfair TO POLYNOMIALS:}{28}{section*.26}%
-\contentsline {paragraph}{Fair Comparison Would Be:}{28}{section*.27}%
-\contentsline {paragraph}{Why Rational Hermite Implementation Failed:}{28}{section*.28}%
-\contentsline {subsection}{\numberline {5.4.5}Revised Assessment}{29}{subsection.5.4.5}%
-\contentsline {paragraph}{With Proper Polynomial Baseline:}{29}{section*.29}%
-\contentsline {paragraph}{Practical Recommendation:}{29}{section*.30}%
-\contentsline {section}{\numberline {5.5}Comprehensive Results (Cubic vs [3/1])}{29}{section.5.5}%
-\contentsline {subsection}{\numberline {5.5.1}Key Findings}{31}{subsection.5.5.1}%
-\contentsline {paragraph}{Polynomial Collocation Dominates:}{31}{section*.32}%
-\contentsline {paragraph}{Rational Methods Show Limited Advantage:}{31}{section*.33}%
-\contentsline {paragraph}{Surprising Results vs Theoretical Predictions:}{31}{section*.34}%
-\contentsline {paragraph}{Why Polynomials Outperform:}{32}{section*.35}%
-\contentsline {section}{\numberline {5.6}Visualizations}{32}{section.5.6}%
-\contentsline {section}{\numberline {5.7}Relationship to Extended BVP Benchmarks}{36}{section.5.7}%
-\contentsline {paragraph}{Function Approximation vs BVP Solving:}{36}{section*.40}%
-\contentsline {paragraph}{Consistent Pattern: Smoothness Matters:}{36}{section*.41}%
-\contentsline {paragraph}{Unified Lesson:}{36}{section*.42}%
-\contentsline {section}{\numberline {5.8}Conclusions from Special Function Study}{37}{section.5.8}%
-\contentsline {subsection}{\numberline {5.8.1}Primary Findings}{37}{subsection.5.8.1}%
-\contentsline {subsection}{\numberline {5.8.2}Implications for Method Selection}{37}{subsection.5.8.2}%
-\contentsline {chapter}{\numberline {6}Analysis of Results}{38}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Summary of BVP Results}{38}{section.6.1}%
-\contentsline {subsection}{\numberline {6.1.1}Smooth Poisson Problem}{38}{subsection.6.1.1}%
-\contentsline {subsection}{\numberline {6.1.2}Discontinuous Poisson Problem}{38}{subsection.6.1.2}%
-\contentsline {subsection}{\numberline {6.1.3}Oscillatory Poisson Problem}{39}{subsection.6.1.3}%
-\contentsline {section}{\numberline {6.2}Summary of Special Function Results}{39}{section.6.2}%
-\contentsline {subsection}{\numberline {6.2.1}Original Cubic Hermite vs [3/1] Rational Comparison}{39}{subsection.6.2.1}%
-\contentsline {subsection}{\numberline {6.2.2}Critical DOF Fairness Issue}{40}{subsection.6.2.2}%
-\contentsline {subsection}{\numberline {6.2.3}Higher-Order Hermite Results}{40}{subsection.6.2.3}%
-\contentsline {subsection}{\numberline {6.2.4}Revised Understanding}{40}{subsection.6.2.4}%
-\contentsline {paragraph}{Polynomial Methods Win Decisively:}{40}{section*.43}%
-\contentsline {paragraph}{Why Rationals Lost Despite DOF Advantage:}{41}{section*.44}%
-\contentsline {subsection}{\numberline {6.2.5}Implications for Method Selection}{41}{subsection.6.2.5}%
-\contentsline {section}{\numberline {6.3}Comparative Analysis}{41}{section.6.3}%
-\contentsline {subsection}{\numberline {6.3.1}Unified Performance Patterns}{42}{subsection.6.3.1}%
-\contentsline {paragraph}{When Rational Methods Excel:}{42}{section*.45}%
-\contentsline {paragraph}{When Polynomial Methods Excel:}{42}{section*.46}%
-\contentsline {subsection}{\numberline {6.3.2}Decision Framework}{43}{subsection.6.3.2}%
-\contentsline {paragraph}{Primary Decision Criterion: Problem Smoothness}{43}{section*.47}%
-\contentsline {paragraph}{Accuracy versus Robustness Trade-off}{43}{section*.48}%
-\contentsline {paragraph}{Computational Cost Considerations}{44}{section*.49}%
-\contentsline {subsection}{\numberline {6.3.3}Lessons for Method Development}{44}{subsection.6.3.3}%
-\contentsline {paragraph}{For Rational Method Improvements:}{44}{section*.50}%
-\contentsline {paragraph}{For Polynomial Method Improvements:}{44}{section*.51}%
-\contentsline {paragraph}{Overarching Principle:}{45}{section*.52}%
-\contentsline {chapter}{\numberline {7}Recommendations}{46}{chapter.7}%
-\contentsline {section}{\numberline {7.1}For BVP Solving}{46}{section.7.1}%
-\contentsline {paragraph}{Use Rational Collocation When:}{46}{section*.53}%
-\contentsline {paragraph}{Use Polynomial Finite Differences When:}{46}{section*.54}%
-\contentsline {paragraph}{NEVER Use Rational Collocation For:}{46}{section*.55}%
-\contentsline {section}{\numberline {7.2}For Special Function Approximation}{47}{section.7.2}%
-\contentsline {paragraph}{Use Polynomial Splines When:}{47}{section*.56}%
-\contentsline {paragraph}{Use Rational Approximants When:}{47}{section*.57}%
-\contentsline {section}{\numberline {7.3}Pole Prevention Strategies: A Critical Analysis}{47}{section.7.3}%
-\contentsline {paragraph}{Available Constraint Types:}{47}{section*.58}%
-\contentsline {paragraph}{Experimental Results: More Constraints $\neq $ Better Performance}{48}{section*.59}%
-\contentsline {paragraph}{Critical Lesson:}{48}{section*.60}%
-\contentsline {section}{\numberline {7.4}Degree Progression Strategies: Fixed vs Balanced Growth}{48}{section.7.4}%
-\contentsline {paragraph}{Three Strategies Tested:}{48}{section*.61}%
-\contentsline {paragraph}{Experimental Results (Smooth Poisson):}{49}{section*.62}%
-\contentsline {paragraph}{Critical Discovery:}{49}{section*.63}%
-\contentsline {paragraph}{Why Fixed [n/4] is Superior:}{49}{section*.64}%
-\contentsline {paragraph}{Recommendation for Smooth Problems:}{49}{section*.65}%
-\contentsline {subsection}{\numberline {7.4.1}Comprehensive Convergence Studies}{50}{subsection.7.4.1}%
-\contentsline {paragraph}{Balanced [n/m] Strategy ($n \approx 2m$):}{50}{section*.66}%
-\contentsline {paragraph}{Fixed [n/2] Strategy (one conjugate pair):}{50}{section*.67}%
-\contentsline {paragraph}{Fixed [n/4] Strategy (two conjugate pairs):}{50}{section*.68}%
-\contentsline {paragraph}{Visual Comparison:}{51}{section*.69}%
-\contentsline {paragraph}{Convergence Analysis:}{51}{section*.71}%
-\contentsline {paragraph}{Practical Implications:}{51}{section*.72}%
-\contentsline {chapter}{\numberline {8}Implementation Status}{53}{chapter.8}%
-\contentsline {section}{\numberline {8.1}Overview}{53}{section.8.1}%
-\contentsline {section}{\numberline {8.2}Implementation Details}{53}{section.8.2}%
-\contentsline {paragraph}{Formulation}{53}{section*.73}%
-\contentsline {paragraph}{Choice of Basis Functions: Why Bernstein Polynomials?}{53}{section*.74}%
-\contentsline {paragraph}{Bernstein Polynomial Properties}{55}{section*.75}%
-\contentsline {paragraph}{Pole Prevention Strategy}{55}{section*.76}%
-\contentsline {paragraph}{Solver}{56}{section*.77}%
-\contentsline {section}{\numberline {8.3}Benchmark Results}{56}{section.8.3}%
-\contentsline {paragraph}{Problem 1: Smooth Poisson}{56}{section*.78}%
-\contentsline {paragraph}{Problem 2: Smooth Trigonometric}{57}{section*.80}%
-\contentsline {section}{\numberline {8.4}Performance Analysis}{57}{section.8.4}%
-\contentsline {paragraph}{Computational Cost}{57}{section*.82}%
-\contentsline {paragraph}{Accuracy per Degree of Freedom}{57}{section*.83}%
-\contentsline {paragraph}{When to Use Rational Collocation}{58}{section*.84}%
-\contentsline {paragraph}{When to Use Polynomial FD}{58}{section*.85}%
-\contentsline {subsection}{\numberline {8.4.1}Comparison: Quadratic vs Cleared Formulations}{58}{subsection.8.4.1}%
-\contentsline {paragraph}{Theoretical Comparison}{58}{table.caption.87}%
-\contentsline {paragraph}{Empirical Performance Comparison}{58}{section*.88}%
-\contentsline {paragraph}{Accuracy Verification}{59}{section*.90}%
-\contentsline {paragraph}{Recommendation}{59}{section*.91}%
-\contentsline {subsection}{\numberline {8.4.2}Files and Documentation}{60}{subsection.8.4.2}%
-\contentsline {subsection}{\numberline {8.4.3}Conclusion}{60}{subsection.8.4.3}%
-\contentsline {chapter}{\numberline {9}Future Directions}{62}{chapter.9}%
-\contentsline {section}{\numberline {9.1}Rational Collocation: Three Formulations}{62}{section.9.1}%
-\contentsline {paragraph}{Formulation 1: Quotient Form (Standard)}{62}{section*.92}%
-\contentsline {paragraph}{Formulation 2: Cleared Form (Recommended for Stability)}{62}{section*.93}%
-\contentsline {paragraph}{Formulation 3: Quadratic Form (Recommended for Efficiency)}{63}{section*.94}%
-\contentsline {section}{\numberline {9.2}Implementation Roadmap}{63}{section.9.2}%
-\contentsline {subsection}{\numberline {9.2.1}Expected Benefits}{64}{subsection.9.2.1}%
-\contentsline {subsection}{\numberline {9.2.2}Other Future Directions}{65}{subsection.9.2.2}%
-\contentsline {subsection}{\numberline {9.2.3}Comparison Against State-of-the-Art Methods}{66}{subsection.9.2.3}%
-\contentsline {paragraph}{Critical Gap in Current Benchmarks:}{66}{section*.95}%
-\contentsline {paragraph}{Missing Comparisons:}{66}{section*.96}%
-\contentsline {paragraph}{Expected Insights from Fair Comparison:}{67}{section*.97}%
-\contentsline {paragraph}{Recommended Benchmark Problems:}{67}{section*.98}%
-\contentsline {paragraph}{Implementation Priority:}{68}{section*.99}%
-\contentsline {chapter}{\numberline {10}Conclusions}{69}{chapter.10}%
-\contentsline {section}{\numberline {10.1}Key Findings}{69}{section.10.1}%
-\contentsline {subsection}{\numberline {10.1.1}Boundary Value Problems: The Dramatic Dichotomy}{69}{subsection.10.1.1}%
-\contentsline {paragraph}{Smooth Problems---Spectacular Success:}{69}{section*.100}%
-\contentsline {paragraph}{Discontinuous Problems---Catastrophic Failure:}{70}{section*.101}%
-\contentsline {paragraph}{Oscillatory Problems---Complete Breakdown:}{70}{section*.102}%
-\contentsline {subsection}{\numberline {10.1.2}Special Functions: Domain-Specific Excellence}{70}{subsection.10.1.2}%
-\contentsline {paragraph}{Functions with Poles:}{71}{section*.103}%
-\contentsline {paragraph}{Smooth Functions:}{71}{section*.104}%
-\contentsline {paragraph}{Near-Singularities:}{71}{section*.105}%
-\contentsline {subsection}{\numberline {10.1.3}Degree Progression Strategies}{71}{subsection.10.1.3}%
-\contentsline {paragraph}{Fixed Denominator [n/4] Strategy:}{71}{section*.106}%
-\contentsline {paragraph}{Balanced Growth [n/m] Strategy:}{71}{section*.107}%
-\contentsline {paragraph}{Minimal Poles [n/2] Strategy:}{72}{section*.108}%
-\contentsline {subsection}{\numberline {10.1.4}Constraint Strategies: Less is More}{72}{subsection.10.1.4}%
-\contentsline {paragraph}{ENDPOINT Constraints (Optimal):}{72}{section*.109}%
-\contentsline {paragraph}{NONNEGATIVE Constraints (Harmful):}{72}{section*.110}%
-\contentsline {section}{\numberline {10.2}Contribution to the Field}{72}{section.10.2}%
-\contentsline {subsection}{\numberline {10.2.1}First Rigorous Benchmarks of TRUE Rational Collocation}{73}{subsection.10.2.1}%
-\contentsline {subsection}{\numberline {10.2.2}Quantification of Performance Dichotomy}{73}{subsection.10.2.2}%
-\contentsline {subsection}{\numberline {10.2.3}Practical Decision Framework}{73}{subsection.10.2.3}%
-\contentsline {subsection}{\numberline {10.2.4}Foundation for Future Development}{74}{subsection.10.2.4}%
-\contentsline {section}{\numberline {10.3}Lessons Learned}{74}{section.10.3}%
-\contentsline {subsection}{\numberline {10.3.1}Smoothness is Non-Negotiable}{74}{subsection.10.3.1}%
-\contentsline {subsection}{\numberline {10.3.2}Spectral Convergence is Transformative}{75}{subsection.10.3.2}%
-\contentsline {subsection}{\numberline {10.3.3}Robustness Asymmetry Favors Conservative Selection}{75}{subsection.10.3.3}%
-\contentsline {subsection}{\numberline {10.3.4}Constraints Cannot Fix Unsuitable Problems}{75}{subsection.10.3.4}%
-\contentsline {subsection}{\numberline {10.3.5}Fixed Denominator Strategy Optimal}{76}{subsection.10.3.5}%
-\contentsline {section}{\numberline {10.4}Final Recommendations}{76}{section.10.4}%
-\contentsline {subsection}{\numberline {10.4.1}For Practitioners}{76}{subsection.10.4.1}%
-\contentsline {paragraph}{Method Selection Decision Tree:}{76}{section*.111}%
-\contentsline {paragraph}{Implementation Guidelines:}{77}{section*.112}%
-\contentsline {paragraph}{Warning Signs:}{77}{section*.113}%
-\contentsline {subsection}{\numberline {10.4.2}For Researchers}{78}{subsection.10.4.2}%
-\contentsline {paragraph}{Promising Research Directions:}{78}{section*.114}%
-\contentsline {paragraph}{Open Questions:}{78}{section*.115}%
-\contentsline {subsection}{\numberline {10.4.3}For Software Developers}{79}{subsection.10.4.3}%
-\contentsline {paragraph}{Implementation Priorities:}{79}{section*.116}%
-\contentsline {paragraph}{Testing Requirements:}{79}{section*.117}%
-\contentsline {section}{\numberline {10.5}Closing Perspective}{79}{section.10.5}%
-\contentsline {chapter}{Acknowledgments}{81}{chapter*.118}%
-\contentsline {chapter}{\numberline {A}How to Interpret Results}{82}{appendix.A}%
-\contentsline {section}{\numberline {A.1}Understanding the Convergence Tables}{82}{section.A.1}%
-\contentsline {paragraph}{Reading a table row:}{83}{section*.119}%
-\contentsline {section}{\numberline {A.2}Understanding the Convergence Plots}{83}{section.A.2}%
-\contentsline {paragraph}{Panel 1: L² Error vs Mesh Size (log-log)}{83}{section*.120}%
-\contentsline {paragraph}{Panel 2: Relative L² Error vs Mesh Size}{84}{section*.121}%
-\contentsline {paragraph}{Panel 3: L² Error vs Degrees of Freedom}{84}{section*.122}%
-\contentsline {paragraph}{Panel 4: Convergence Rates}{84}{section*.123}%
-\contentsline {section}{\numberline {A.3}Comparing Polynomial vs Rational Methods}{85}{section.A.3}%
-\contentsline {section}{\numberline {A.4}Special Considerations}{85}{section.A.4}%
-\contentsline {paragraph}{Discontinuous problems:}{85}{section*.124}%
-\contentsline {paragraph}{Near-pole problems:}{85}{section*.125}%
-\contentsline {paragraph}{Oscillatory problems:}{85}{section*.126}%
-\contentsline {chapter}{\numberline {B}Implementation Details}{86}{appendix.B}%
-\contentsline {section}{\numberline {B.1}Polynomial Spline Solver}{86}{section.B.1}%
-\contentsline {section}{\numberline {B.2}Rational Approximant Construction}{86}{section.B.2}%
-\contentsline {section}{\numberline {B.3}Error Computation}{87}{section.B.3}%
-\contentsline {chapter}{\numberline {C}Software Information}{88}{appendix.C}%
-\contentsline {section}{\numberline {C.1}Gelfgren Library}{88}{section.C.1}%
-\contentsline {section}{\numberline {C.2}Dependencies}{88}{section.C.2}%
-\contentsline {section}{\numberline {C.3}Reproducibility}{88}{section.C.3}%
-\contentsline {chapter}{\numberline {D}Helmholtz Equation Benchmarks}{90}{appendix.D}%
-\contentsline {section}{\numberline {D.1}Overview}{90}{section.D.1}%
-\contentsline {section}{\numberline {D.2}Test Problem Solutions}{90}{section.D.2}%
-\contentsline {section}{\numberline {D.3}Results: Helmholtz $k^2=1$ (H1)}{91}{section.D.3}%
-\contentsline {subsection}{\numberline {D.3.1}Convergence Plot}{91}{subsection.D.3.1}%
-\contentsline {subsection}{\numberline {D.3.2}Key Findings}{92}{subsection.D.3.2}%
-\contentsline {section}{\numberline {D.4}Results: Helmholtz Exponential-Oscillatory (H4)}{92}{section.D.4}%
-\contentsline {subsection}{\numberline {D.4.1}Key Findings}{93}{subsection.D.4.1}%
-\contentsline {section}{\numberline {D.5}Summary}{93}{section.D.5}%
-\contentsline {chapter}{\numberline {E}Advection-Diffusion Benchmarks}{94}{appendix.E}%
-\contentsline {section}{\numberline {E.1}Overview and Critical Importance}{94}{section.E.1}%
-\contentsline {section}{\numberline {E.2}Test Problems}{94}{section.E.2}%
-\contentsline {subsection}{\numberline {E.2.1}Visualizing the Boundary Layer}{95}{subsection.E.2.1}%
-\contentsline {section}{\numberline {E.3}CRITICAL: Sharp Boundary Layer ($\varepsilon = 0.001$)}{95}{section.E.3}%
-\contentsline {subsection}{\numberline {E.3.1}The Problem}{95}{subsection.E.3.1}%
-\contentsline {subsection}{\numberline {E.3.2}Catastrophic Rational Failure}{96}{subsection.E.3.2}%
-\contentsline {subsection}{\numberline {E.3.3}Critical Observations}{96}{subsection.E.3.3}%
-\contentsline {section}{\numberline {E.4}Why Rationals Fail on Boundary Layers}{97}{section.E.4}%
-\contentsline {subsection}{\numberline {E.4.1}Mathematical Explanation}{97}{subsection.E.4.1}%
-\contentsline {subsection}{\numberline {E.4.2}Comparison with Other Methods}{97}{subsection.E.4.2}%
-\contentsline {section}{\numberline {E.5}Recommendations}{98}{section.E.5}%
-\contentsline {subsection}{\numberline {E.5.1}When to AVOID Rationals}{98}{subsection.E.5.1}%
-\contentsline {subsection}{\numberline {E.5.2}Alternative Methods for Boundary Layers}{98}{subsection.E.5.2}%
-\contentsline {section}{\numberline {E.6}Summary}{98}{section.E.6}%
-\contentsline {chapter}{\numberline {F}Reaction-Diffusion Benchmarks}{100}{appendix.F}%
-\contentsline {section}{\numberline {F.1}Overview}{100}{section.F.1}%
-\contentsline {section}{\numberline {F.2}Test Problems}{100}{section.F.2}%
-\contentsline {subsection}{\numberline {F.2.1}Visualizing Smooth Exponential Solutions}{100}{subsection.F.2.1}%
-\contentsline {section}{\numberline {F.3}Results: Exponential Layers ($c = 10$)}{101}{section.F.3}%
-\contentsline {subsection}{\numberline {F.3.1}Rationals Excel on Smooth Exponentials}{101}{subsection.F.3.1}%
-\contentsline {subsection}{\numberline {F.3.2}Key Findings}{102}{subsection.F.3.2}%
-\contentsline {section}{\numberline {F.4}Results: Polynomial Solution ($c = 4$)}{102}{section.F.4}%
-\contentsline {subsection}{\numberline {F.4.1}Observations}{103}{subsection.F.4.1}%
-\contentsline {section}{\numberline {F.5}Why Rationals Excel Here (vs Advection-Diffusion)}{103}{section.F.5}%
-\contentsline {subsection}{\numberline {F.5.1}Smooth vs Sharp Gradients}{103}{subsection.F.5.1}%
-\contentsline {section}{\numberline {F.6}Summary}{104}{section.F.6}%
-\contentsline {chapter}{\numberline {G}Variable Coefficient Benchmarks}{105}{appendix.G}%
-\contentsline {section}{\numberline {G.1}Overview}{105}{section.G.1}%
-\contentsline {section}{\numberline {G.2}Test Problems}{105}{section.G.2}%
-\contentsline {subsection}{\numberline {G.2.1}Visualizing Discontinuous Coefficient Solution}{105}{subsection.G.2.1}%
-\contentsline {section}{\numberline {G.3}CRITICAL: Discontinuous Coefficient}{106}{section.G.3}%
-\contentsline {subsection}{\numberline {G.3.1}The Problem}{106}{subsection.G.3.1}%
-\contentsline {subsection}{\numberline {G.3.2}Catastrophic Rational Failure}{107}{subsection.G.3.2}%
-\contentsline {subsection}{\numberline {G.3.3}Critical Observations}{107}{subsection.G.3.3}%
-\contentsline {section}{\numberline {G.4}Why Rationals Fail on Discontinuities}{108}{section.G.4}%
-\contentsline {subsection}{\numberline {G.4.1}Mathematical Explanation}{108}{subsection.G.4.1}%
-\contentsline {subsection}{\numberline {G.4.2}Comparison with Other Methods}{108}{subsection.G.4.2}%
-\contentsline {section}{\numberline {G.5}Recommendations}{109}{section.G.5}%
-\contentsline {subsection}{\numberline {G.5.1}When to AVOID Rationals}{109}{subsection.G.5.1}%
-\contentsline {subsection}{\numberline {G.5.2}Alternative Methods for Discontinuities}{109}{subsection.G.5.2}%
-\contentsline {section}{\numberline {G.6}Smooth Variable Coefficients}{109}{section.G.6}%
-\contentsline {section}{\numberline {G.7}Summary}{109}{section.G.7}%
-\contentsline {chapter}{\numberline {H}Cross-Method Analysis and Recommendations}{110}{appendix.H}%
-\contentsline {section}{\numberline {H.1}Overall Method Performance Summary}{110}{section.H.1}%
-\contentsline {section}{\numberline {H.2}Convergence Rate Summary}{110}{section.H.2}%
-\contentsline {subsection}{\numberline {H.2.1}Key Observations}{110}{subsection.H.2.1}%
-\contentsline {section}{\numberline {H.3}Accuracy vs Cost Tradeoffs}{111}{section.H.3}%
-\contentsline {subsection}{\numberline {H.3.1}For 10$^{-6}$ Accuracy on Smooth Problems}{112}{subsection.H.3.1}%
-\contentsline {section}{\numberline {H.4}Method Selection Decision Tree}{113}{section.H.4}%
-\contentsline {section}{\numberline {H.5}Detailed Recommendations by Problem Class}{113}{section.H.5}%
-\contentsline {subsection}{\numberline {H.5.1}Poisson / Helmholtz (smooth forcing)}{113}{subsection.H.5.1}%
-\contentsline {subsection}{\numberline {H.5.2}Reaction-Diffusion (smooth exponentials)}{114}{subsection.H.5.2}%
-\contentsline {subsection}{\numberline {H.5.3}Advection-Diffusion}{114}{subsection.H.5.3}%
-\contentsline {subsection}{\numberline {H.5.4}Variable Coefficients}{114}{subsection.H.5.4}%
-\contentsline {section}{\numberline {H.6}Cost-Benefit Analysis}{115}{section.H.6}%
-\contentsline {subsection}{\numberline {H.6.1}Rational Collocation}{115}{subsection.H.6.1}%
-\contentsline {subsection}{\numberline {H.6.2}Spectral Methods (Chebyshev/Legendre)}{115}{subsection.H.6.2}%
-\contentsline {subsection}{\numberline {H.6.3}4th-Order Finite Differences}{116}{subsection.H.6.3}%
-\contentsline {section}{\numberline {H.7}Revisiting the Original Claims}{116}{section.H.7}%
-\contentsline {subsection}{\numberline {H.7.1}The "2,000,000$\times $ Improvement" Claim}{116}{subsection.H.7.1}%
-\contentsline {subsection}{\numberline {H.7.2}Honest Assessment}{116}{subsection.H.7.2}%
-\contentsline {section}{\numberline {H.8}Summary}{117}{section.H.8}%
+\contentsline {chapter}{\numberline {1}Introduction}{7}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Motivation}{7}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Scope}{7}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Critical Methodological Note}{9}{section.1.3}%
+\contentsline {paragraph}{Polynomial Method (Baseline):}{9}{section*.2}%
+\contentsline {paragraph}{Rational Collocation Method (Cleared Form):}{9}{section*.3}%
+\contentsline {paragraph}{Implementation Details}{10}{section*.4}%
+\contentsline {paragraph}{When Each Method Excels:}{10}{section*.5}%
+\contentsline {section}{\numberline {1.4}Document Organization}{10}{section.1.4}%
+\contentsline {paragraph}{For Researchers and Theoreticians:}{11}{section*.7}%
+\contentsline {paragraph}{For Practitioners and Engineers:}{11}{section*.8}%
+\contentsline {paragraph}{For Students and Self-Learners:}{12}{section*.9}%
+\contentsline {paragraph}{For Software Developers and Implementers:}{12}{section*.10}%
+\contentsline {chapter}{\numberline {2}Mathematical Background}{14}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Polynomial Splines}{14}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Definition}{14}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}Cubic Splines}{14}{subsection.2.1.2}%
+\contentsline {subsection}{\numberline {2.1.3}Approximation Theory}{14}{subsection.2.1.3}%
+\contentsline {section}{\numberline {2.2}Rational Approximants}{15}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Padé Approximants}{15}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}Construction}{15}{subsection.2.2.2}%
+\contentsline {subsection}{\numberline {2.2.3}Approximation Properties}{15}{subsection.2.2.3}%
+\contentsline {section}{\numberline {2.3}Piecewise Rational Approximants}{16}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Degrees of Freedom}{16}{subsection.2.3.1}%
+\contentsline {section}{\numberline {2.4}Error Norms}{16}{section.2.4}%
+\contentsline {subsection}{\numberline {2.4.1}L² Norm}{16}{subsection.2.4.1}%
+\contentsline {subsection}{\numberline {2.4.2}$L^\infty $ Norm}{16}{subsection.2.4.2}%
+\contentsline {subsection}{\numberline {2.4.3}H¹ Seminorm}{16}{subsection.2.4.3}%
+\contentsline {section}{\numberline {2.5}Convergence Rates}{16}{section.2.5}%
+\contentsline {chapter}{\numberline {3}Benchmark Problems}{17}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Problem 1: Smooth Poisson Equation}{17}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Problem Statement}{17}{subsection.3.1.1}%
+\contentsline {subsection}{\numberline {3.1.2}Exact Solution}{17}{subsection.3.1.2}%
+\contentsline {subsection}{\numberline {3.1.3}Theoretical Convergence}{17}{subsection.3.1.3}%
+\contentsline {section}{\numberline {3.2}Problem 2: Discontinuous Forcing}{17}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Problem Statement}{17}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}Exact Solution}{18}{subsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.2.3}Expected Behavior}{18}{subsection.3.2.3}%
+\contentsline {section}{\numberline {3.3}Problem 3: Oscillatory Forcing}{18}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Problem Statement}{18}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Exact Solution}{18}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.3}Challenge}{18}{subsection.3.3.3}%
+\contentsline {chapter}{\numberline {4}Convergence Studies: Boundary Value Problems}{19}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Smooth Poisson (sin)}{19}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}Error Measurements}{19}{subsection.4.1.1}%
+\contentsline {subsection}{\numberline {4.1.2}Convergence Rates}{19}{subsection.4.1.2}%
+\contentsline {subsection}{\numberline {4.1.3}Convergence Plots}{21}{subsection.4.1.3}%
+\contentsline {section}{\numberline {4.2}Discontinuous Poisson}{21}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Error Measurements}{21}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Convergence Rates}{22}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}Convergence Plots}{23}{subsection.4.2.3}%
+\contentsline {section}{\numberline {4.3}Oscillatory Poisson ($\omega $=10.0)}{24}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Error Measurements}{24}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}Convergence Rates}{25}{subsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.3.3}Convergence Plots}{25}{subsection.4.3.3}%
+\contentsline {chapter}{\numberline {5}Convergence Studies: Special Functions}{27}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Scope and Distinction from BVP Studies}{27}{section.5.1}%
+\contentsline {subsection}{\numberline {5.1.1}Two Uses of Rational Functions}{27}{subsection.5.1.1}%
+\contentsline {section}{\numberline {5.2}Special Functions Tested}{28}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Rationale for Expanded Test Suite}{30}{subsection.5.2.1}%
+\contentsline {section}{\numberline {5.3}Benchmark Results}{30}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}Methodology Overview}{31}{subsection.5.3.1}%
+\contentsline {subsection}{\numberline {5.3.2}Rational Hermite Interpolation Scheme}{31}{subsection.5.3.2}%
+\contentsline {paragraph}{Construction on Each Interval:}{31}{section*.21}%
+\contentsline {paragraph}{Interpolation Conditions:}{31}{section*.22}%
+\contentsline {paragraph}{Degrees of Freedom:}{31}{section*.23}%
+\contentsline {paragraph}{System to Solve:}{32}{section*.24}%
+\contentsline {paragraph}{Derivative Computation:}{32}{section*.25}%
+\contentsline {paragraph}{Piecewise Assembly:}{32}{section*.26}%
+\contentsline {paragraph}{Key Properties:}{32}{section*.27}%
+\contentsline {paragraph}{Comparison to Polynomial Hermite:}{33}{section*.28}%
+\contentsline {paragraph}{Why This Scheme Was Chosen:}{33}{section*.29}%
+\contentsline {paragraph}{Limitations of This Scheme:}{33}{section*.30}%
+\contentsline {section}{\numberline {5.4}Critical Analysis: DOF Fairness}{34}{section.5.4}%
+\contentsline {subsection}{\numberline {5.4.1}Degrees of Freedom Mismatch}{34}{subsection.5.4.1}%
+\contentsline {paragraph}{Cubic Hermite Splines (C^1 continuous):}{34}{section*.31}%
+\contentsline {paragraph}{Rational [3/1] (piecewise independent):}{34}{section*.32}%
+\contentsline {subsection}{\numberline {5.4.2}What Would Be a Fair Comparison?}{34}{subsection.5.4.2}%
+\contentsline {paragraph}{Why Even Denominator Degrees?}{35}{section*.33}%
+\contentsline {subsection}{\numberline {5.4.3}Higher-Order Hermite Spline Results}{35}{subsection.5.4.3}%
+\contentsline {paragraph}{Critical Findings:}{35}{section*.35}%
+\contentsline {subsection}{\numberline {5.4.4}Implications for Fairness Analysis}{36}{subsection.5.4.4}%
+\contentsline {paragraph}{Original Comparison Was Unfair TO POLYNOMIALS:}{36}{section*.36}%
+\contentsline {paragraph}{Fair Comparison Would Be:}{36}{section*.37}%
+\contentsline {paragraph}{Why Rational Hermite Implementation Failed:}{36}{section*.38}%
+\contentsline {subsection}{\numberline {5.4.5}Revised Assessment}{37}{subsection.5.4.5}%
+\contentsline {paragraph}{With Proper Polynomial Baseline:}{37}{section*.39}%
+\contentsline {paragraph}{Practical Recommendation:}{37}{section*.40}%
+\contentsline {section}{\numberline {5.5}Comprehensive Results (Cubic vs [3/1])}{37}{section.5.5}%
+\contentsline {subsection}{\numberline {5.5.1}Key Findings}{37}{subsection.5.5.1}%
+\contentsline {paragraph}{Polynomial Collocation Dominates:}{37}{section*.42}%
+\contentsline {paragraph}{Rational Methods Show Limited Advantage:}{39}{section*.43}%
+\contentsline {paragraph}{Surprising Results vs Theoretical Predictions:}{39}{section*.44}%
+\contentsline {paragraph}{Why Polynomials Outperform:}{40}{section*.45}%
+\contentsline {section}{\numberline {5.6}Visualizations}{40}{section.5.6}%
+\contentsline {section}{\numberline {5.7}Relationship to Extended BVP Benchmarks}{44}{section.5.7}%
+\contentsline {paragraph}{Function Approximation vs BVP Solving:}{44}{section*.50}%
+\contentsline {paragraph}{Consistent Pattern: Smoothness Matters:}{44}{section*.51}%
+\contentsline {paragraph}{Unified Lesson:}{44}{section*.52}%
+\contentsline {section}{\numberline {5.8}Conclusions from Special Function Study}{45}{section.5.8}%
+\contentsline {subsection}{\numberline {5.8.1}Primary Findings}{45}{subsection.5.8.1}%
+\contentsline {subsection}{\numberline {5.8.2}Implications for Method Selection}{45}{subsection.5.8.2}%
+\contentsline {chapter}{\numberline {6}Analysis of Results}{46}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Summary of BVP Results}{46}{section.6.1}%
+\contentsline {subsection}{\numberline {6.1.1}Smooth Poisson Problem}{46}{subsection.6.1.1}%
+\contentsline {subsection}{\numberline {6.1.2}Discontinuous Poisson Problem}{46}{subsection.6.1.2}%
+\contentsline {subsection}{\numberline {6.1.3}Oscillatory Poisson Problem}{47}{subsection.6.1.3}%
+\contentsline {section}{\numberline {6.2}Summary of Special Function Results}{47}{section.6.2}%
+\contentsline {subsection}{\numberline {6.2.1}Original Cubic Hermite vs [3/1] Rational Comparison}{47}{subsection.6.2.1}%
+\contentsline {subsection}{\numberline {6.2.2}Critical DOF Fairness Issue}{48}{subsection.6.2.2}%
+\contentsline {subsection}{\numberline {6.2.3}Higher-Order Hermite Results}{48}{subsection.6.2.3}%
+\contentsline {subsection}{\numberline {6.2.4}Revised Understanding}{48}{subsection.6.2.4}%
+\contentsline {paragraph}{Polynomial Methods Win Decisively:}{48}{section*.53}%
+\contentsline {paragraph}{Why Rationals Lost Despite DOF Advantage:}{49}{section*.54}%
+\contentsline {subsection}{\numberline {6.2.5}Implications for Method Selection}{49}{subsection.6.2.5}%
+\contentsline {section}{\numberline {6.3}Comparative Analysis}{49}{section.6.3}%
+\contentsline {subsection}{\numberline {6.3.1}Unified Performance Patterns}{50}{subsection.6.3.1}%
+\contentsline {paragraph}{When Rational Methods Excel:}{50}{section*.55}%
+\contentsline {paragraph}{When Polynomial Methods Excel:}{50}{section*.56}%
+\contentsline {subsection}{\numberline {6.3.2}Decision Framework}{51}{subsection.6.3.2}%
+\contentsline {paragraph}{Primary Decision Criterion: Problem Smoothness}{51}{section*.57}%
+\contentsline {paragraph}{Accuracy versus Robustness Trade-off}{51}{section*.58}%
+\contentsline {paragraph}{Computational Cost Considerations}{52}{section*.59}%
+\contentsline {subsection}{\numberline {6.3.3}Lessons for Method Development}{52}{subsection.6.3.3}%
+\contentsline {paragraph}{For Rational Method Improvements:}{52}{section*.60}%
+\contentsline {paragraph}{For Polynomial Method Improvements:}{52}{section*.61}%
+\contentsline {paragraph}{Overarching Principle:}{53}{section*.62}%
+\contentsline {chapter}{\numberline {7}Recommendations}{54}{chapter.7}%
+\contentsline {section}{\numberline {7.1}For BVP Solving}{54}{section.7.1}%
+\contentsline {paragraph}{Use Rational Collocation When:}{54}{section*.63}%
+\contentsline {paragraph}{Use Polynomial Finite Differences When:}{54}{section*.64}%
+\contentsline {paragraph}{NEVER Use Rational Collocation For:}{54}{section*.65}%
+\contentsline {section}{\numberline {7.2}For Special Function Approximation}{55}{section.7.2}%
+\contentsline {paragraph}{Use Polynomial Splines When:}{55}{section*.66}%
+\contentsline {paragraph}{Use Rational Approximants When:}{55}{section*.67}%
+\contentsline {section}{\numberline {7.3}Pole Prevention Strategies: A Critical Analysis}{55}{section.7.3}%
+\contentsline {paragraph}{Available Constraint Types:}{55}{section*.68}%
+\contentsline {paragraph}{Experimental Results: More Constraints $\neq $ Better Performance}{56}{section*.69}%
+\contentsline {paragraph}{Critical Lesson:}{56}{section*.70}%
+\contentsline {section}{\numberline {7.4}Degree Progression Strategies: Fixed vs Balanced Growth}{56}{section.7.4}%
+\contentsline {paragraph}{Three Strategies Tested:}{56}{section*.71}%
+\contentsline {paragraph}{Experimental Results (Smooth Poisson):}{57}{section*.72}%
+\contentsline {paragraph}{Critical Discovery:}{57}{section*.73}%
+\contentsline {paragraph}{Why Fixed [n/4] is Superior:}{57}{section*.74}%
+\contentsline {paragraph}{Recommendation for Smooth Problems:}{57}{section*.75}%
+\contentsline {subsection}{\numberline {7.4.1}Comprehensive Convergence Studies}{58}{subsection.7.4.1}%
+\contentsline {paragraph}{Balanced [n/m] Strategy ($n \approx 2m$):}{58}{section*.76}%
+\contentsline {paragraph}{Fixed [n/2] Strategy (one conjugate pair):}{58}{section*.77}%
+\contentsline {paragraph}{Fixed [n/4] Strategy (two conjugate pairs):}{58}{section*.78}%
+\contentsline {paragraph}{Visual Comparison:}{59}{section*.79}%
+\contentsline {paragraph}{Convergence Analysis:}{59}{section*.81}%
+\contentsline {paragraph}{Practical Implications:}{59}{section*.82}%
+\contentsline {chapter}{\numberline {8}Implementation Status}{61}{chapter.8}%
+\contentsline {section}{\numberline {8.1}Overview}{61}{section.8.1}%
+\contentsline {section}{\numberline {8.2}Implementation Details}{61}{section.8.2}%
+\contentsline {paragraph}{Formulation}{61}{section*.83}%
+\contentsline {paragraph}{Choice of Basis Functions: Why Bernstein Polynomials?}{61}{section*.84}%
+\contentsline {paragraph}{Bernstein Polynomial Properties}{63}{section*.85}%
+\contentsline {paragraph}{Pole Prevention Strategy}{63}{section*.86}%
+\contentsline {paragraph}{Solver}{64}{section*.87}%
+\contentsline {section}{\numberline {8.3}Benchmark Results}{64}{section.8.3}%
+\contentsline {paragraph}{Problem 1: Smooth Poisson}{64}{section*.88}%
+\contentsline {paragraph}{Problem 2: Smooth Trigonometric}{65}{section*.90}%
+\contentsline {section}{\numberline {8.4}Performance Analysis}{65}{section.8.4}%
+\contentsline {paragraph}{Computational Cost}{65}{section*.92}%
+\contentsline {paragraph}{Accuracy per Degree of Freedom}{65}{section*.93}%
+\contentsline {paragraph}{When to Use Rational Collocation}{66}{section*.94}%
+\contentsline {paragraph}{When to Use Polynomial FD}{66}{section*.95}%
+\contentsline {subsection}{\numberline {8.4.1}Comparison: Quadratic vs Cleared Formulations}{66}{subsection.8.4.1}%
+\contentsline {paragraph}{Theoretical Comparison}{66}{table.caption.97}%
+\contentsline {paragraph}{Empirical Performance Comparison}{66}{section*.98}%
+\contentsline {paragraph}{Accuracy Verification}{67}{section*.100}%
+\contentsline {paragraph}{Recommendation}{67}{section*.101}%
+\contentsline {subsection}{\numberline {8.4.2}Files and Documentation}{68}{subsection.8.4.2}%
+\contentsline {subsection}{\numberline {8.4.3}Conclusion}{68}{subsection.8.4.3}%
+\contentsline {chapter}{\numberline {9}Future Directions}{70}{chapter.9}%
+\contentsline {section}{\numberline {9.1}Rational Collocation: Three Formulations}{70}{section.9.1}%
+\contentsline {paragraph}{Formulation 1: Quotient Form (Standard)}{70}{section*.102}%
+\contentsline {paragraph}{Formulation 2: Cleared Form (Recommended for Stability)}{70}{section*.103}%
+\contentsline {paragraph}{Formulation 3: Quadratic Form (Recommended for Efficiency)}{71}{section*.104}%
+\contentsline {section}{\numberline {9.2}Implementation Roadmap}{71}{section.9.2}%
+\contentsline {subsection}{\numberline {9.2.1}Expected Benefits}{72}{subsection.9.2.1}%
+\contentsline {subsection}{\numberline {9.2.2}Other Future Directions}{73}{subsection.9.2.2}%
+\contentsline {subsection}{\numberline {9.2.3}Comparison Against State-of-the-Art Methods}{74}{subsection.9.2.3}%
+\contentsline {paragraph}{Critical Gap in Current Benchmarks:}{74}{section*.105}%
+\contentsline {paragraph}{Missing Comparisons:}{74}{section*.106}%
+\contentsline {paragraph}{Expected Insights from Fair Comparison:}{75}{section*.107}%
+\contentsline {paragraph}{Recommended Benchmark Problems:}{75}{section*.108}%
+\contentsline {paragraph}{Implementation Priority:}{76}{section*.109}%
+\contentsline {chapter}{\numberline {10}Conclusions}{77}{chapter.10}%
+\contentsline {section}{\numberline {10.1}Key Findings}{77}{section.10.1}%
+\contentsline {subsection}{\numberline {10.1.1}Boundary Value Problems: The Dramatic Dichotomy}{77}{subsection.10.1.1}%
+\contentsline {paragraph}{Smooth Problems---Spectacular Success:}{77}{section*.110}%
+\contentsline {paragraph}{Discontinuous Problems---Catastrophic Failure:}{78}{section*.111}%
+\contentsline {paragraph}{Oscillatory Problems---Complete Breakdown:}{78}{section*.112}%
+\contentsline {subsection}{\numberline {10.1.2}Special Functions: Domain-Specific Excellence}{78}{subsection.10.1.2}%
+\contentsline {paragraph}{Functions with Poles:}{79}{section*.113}%
+\contentsline {paragraph}{Smooth Functions:}{79}{section*.114}%
+\contentsline {paragraph}{Near-Singularities:}{79}{section*.115}%
+\contentsline {subsection}{\numberline {10.1.3}Degree Progression Strategies}{79}{subsection.10.1.3}%
+\contentsline {paragraph}{Fixed Denominator [n/4] Strategy:}{79}{section*.116}%
+\contentsline {paragraph}{Balanced Growth [n/m] Strategy:}{79}{section*.117}%
+\contentsline {paragraph}{Minimal Poles [n/2] Strategy:}{80}{section*.118}%
+\contentsline {subsection}{\numberline {10.1.4}Constraint Strategies: Less is More}{80}{subsection.10.1.4}%
+\contentsline {paragraph}{ENDPOINT Constraints (Optimal):}{80}{section*.119}%
+\contentsline {paragraph}{NONNEGATIVE Constraints (Harmful):}{80}{section*.120}%
+\contentsline {section}{\numberline {10.2}Contribution to the Field}{80}{section.10.2}%
+\contentsline {subsection}{\numberline {10.2.1}First Rigorous Benchmarks of TRUE Rational Collocation}{81}{subsection.10.2.1}%
+\contentsline {subsection}{\numberline {10.2.2}Quantification of Performance Dichotomy}{81}{subsection.10.2.2}%
+\contentsline {subsection}{\numberline {10.2.3}Practical Decision Framework}{81}{subsection.10.2.3}%
+\contentsline {subsection}{\numberline {10.2.4}Foundation for Future Development}{82}{subsection.10.2.4}%
+\contentsline {section}{\numberline {10.3}Lessons Learned}{82}{section.10.3}%
+\contentsline {subsection}{\numberline {10.3.1}Smoothness is Non-Negotiable}{82}{subsection.10.3.1}%
+\contentsline {subsection}{\numberline {10.3.2}Spectral Convergence is Transformative}{83}{subsection.10.3.2}%
+\contentsline {subsection}{\numberline {10.3.3}Robustness Asymmetry Favors Conservative Selection}{83}{subsection.10.3.3}%
+\contentsline {subsection}{\numberline {10.3.4}Constraints Cannot Fix Unsuitable Problems}{83}{subsection.10.3.4}%
+\contentsline {subsection}{\numberline {10.3.5}Fixed Denominator Strategy Optimal}{84}{subsection.10.3.5}%
+\contentsline {section}{\numberline {10.4}Final Recommendations}{84}{section.10.4}%
+\contentsline {subsection}{\numberline {10.4.1}For Practitioners}{84}{subsection.10.4.1}%
+\contentsline {paragraph}{Method Selection Decision Tree:}{84}{section*.121}%
+\contentsline {paragraph}{Implementation Guidelines:}{85}{section*.122}%
+\contentsline {paragraph}{Warning Signs:}{85}{section*.123}%
+\contentsline {subsection}{\numberline {10.4.2}For Researchers}{86}{subsection.10.4.2}%
+\contentsline {paragraph}{Promising Research Directions:}{86}{section*.124}%
+\contentsline {paragraph}{Open Questions:}{86}{section*.125}%
+\contentsline {subsection}{\numberline {10.4.3}For Software Developers}{87}{subsection.10.4.3}%
+\contentsline {paragraph}{Implementation Priorities:}{87}{section*.126}%
+\contentsline {paragraph}{Testing Requirements:}{87}{section*.127}%
+\contentsline {section}{\numberline {10.5}Closing Perspective}{87}{section.10.5}%
+\contentsline {chapter}{Acknowledgments}{89}{chapter*.128}%
+\contentsline {chapter}{\numberline {A}How to Interpret Results}{90}{appendix.A}%
+\contentsline {section}{\numberline {A.1}Understanding the Convergence Tables}{90}{section.A.1}%
+\contentsline {paragraph}{Reading a table row:}{91}{section*.129}%
+\contentsline {section}{\numberline {A.2}Understanding the Convergence Plots}{91}{section.A.2}%
+\contentsline {paragraph}{Panel 1: L² Error vs Mesh Size (log-log)}{91}{section*.130}%
+\contentsline {paragraph}{Panel 2: Relative L² Error vs Mesh Size}{92}{section*.131}%
+\contentsline {paragraph}{Panel 3: L² Error vs Degrees of Freedom}{92}{section*.132}%
+\contentsline {paragraph}{Panel 4: Convergence Rates}{92}{section*.133}%
+\contentsline {section}{\numberline {A.3}Comparing Polynomial vs Rational Methods}{93}{section.A.3}%
+\contentsline {section}{\numberline {A.4}Special Considerations}{93}{section.A.4}%
+\contentsline {paragraph}{Discontinuous problems:}{93}{section*.134}%
+\contentsline {paragraph}{Near-pole problems:}{93}{section*.135}%
+\contentsline {paragraph}{Oscillatory problems:}{93}{section*.136}%
+\contentsline {chapter}{\numberline {B}Implementation Details}{94}{appendix.B}%
+\contentsline {section}{\numberline {B.1}Polynomial Spline Solver}{94}{section.B.1}%
+\contentsline {section}{\numberline {B.2}Rational Approximant Construction}{94}{section.B.2}%
+\contentsline {section}{\numberline {B.3}Error Computation}{95}{section.B.3}%
+\contentsline {chapter}{\numberline {C}Software Information}{96}{appendix.C}%
+\contentsline {section}{\numberline {C.1}Gelfgren Library}{96}{section.C.1}%
+\contentsline {section}{\numberline {C.2}Dependencies}{96}{section.C.2}%
+\contentsline {section}{\numberline {C.3}Reproducibility}{96}{section.C.3}%
+\contentsline {chapter}{\numberline {D}Helmholtz Equation Benchmarks}{98}{appendix.D}%
+\contentsline {section}{\numberline {D.1}Overview}{98}{section.D.1}%
+\contentsline {section}{\numberline {D.2}Test Problem Solutions}{98}{section.D.2}%
+\contentsline {section}{\numberline {D.3}Results: Helmholtz $k^2=1$ (H1)}{99}{section.D.3}%
+\contentsline {subsection}{\numberline {D.3.1}Convergence Plot}{99}{subsection.D.3.1}%
+\contentsline {subsection}{\numberline {D.3.2}Key Findings}{100}{subsection.D.3.2}%
+\contentsline {section}{\numberline {D.4}Results: Helmholtz Exponential-Oscillatory (H4)}{100}{section.D.4}%
+\contentsline {subsection}{\numberline {D.4.1}Key Findings}{101}{subsection.D.4.1}%
+\contentsline {section}{\numberline {D.5}Summary}{101}{section.D.5}%
+\contentsline {chapter}{\numberline {E}Advection-Diffusion Benchmarks}{102}{appendix.E}%
+\contentsline {section}{\numberline {E.1}Overview and Critical Importance}{102}{section.E.1}%
+\contentsline {section}{\numberline {E.2}Test Problems}{102}{section.E.2}%
+\contentsline {subsection}{\numberline {E.2.1}Visualizing the Boundary Layer}{103}{subsection.E.2.1}%
+\contentsline {section}{\numberline {E.3}CRITICAL: Sharp Boundary Layer ($\varepsilon = 0.001$)}{103}{section.E.3}%
+\contentsline {subsection}{\numberline {E.3.1}The Problem}{103}{subsection.E.3.1}%
+\contentsline {subsection}{\numberline {E.3.2}Catastrophic Rational Failure}{104}{subsection.E.3.2}%
+\contentsline {subsection}{\numberline {E.3.3}Critical Observations}{104}{subsection.E.3.3}%
+\contentsline {section}{\numberline {E.4}Why Rationals Fail on Boundary Layers}{105}{section.E.4}%
+\contentsline {subsection}{\numberline {E.4.1}Mathematical Explanation}{105}{subsection.E.4.1}%
+\contentsline {subsection}{\numberline {E.4.2}Comparison with Other Methods}{105}{subsection.E.4.2}%
+\contentsline {section}{\numberline {E.5}Recommendations}{106}{section.E.5}%
+\contentsline {subsection}{\numberline {E.5.1}When to AVOID Rationals}{106}{subsection.E.5.1}%
+\contentsline {subsection}{\numberline {E.5.2}Alternative Methods for Boundary Layers}{106}{subsection.E.5.2}%
+\contentsline {section}{\numberline {E.6}Summary}{106}{section.E.6}%
+\contentsline {chapter}{\numberline {F}Reaction-Diffusion Benchmarks}{108}{appendix.F}%
+\contentsline {section}{\numberline {F.1}Overview}{108}{section.F.1}%
+\contentsline {section}{\numberline {F.2}Test Problems}{108}{section.F.2}%
+\contentsline {subsection}{\numberline {F.2.1}Visualizing Smooth Exponential Solutions}{108}{subsection.F.2.1}%
+\contentsline {section}{\numberline {F.3}Results: Exponential Layers ($c = 10$)}{109}{section.F.3}%
+\contentsline {subsection}{\numberline {F.3.1}Rationals Excel on Smooth Exponentials}{109}{subsection.F.3.1}%
+\contentsline {subsection}{\numberline {F.3.2}Key Findings}{110}{subsection.F.3.2}%
+\contentsline {section}{\numberline {F.4}Results: Polynomial Solution ($c = 4$)}{110}{section.F.4}%
+\contentsline {subsection}{\numberline {F.4.1}Observations}{111}{subsection.F.4.1}%
+\contentsline {section}{\numberline {F.5}Why Rationals Excel Here (vs Advection-Diffusion)}{111}{section.F.5}%
+\contentsline {subsection}{\numberline {F.5.1}Smooth vs Sharp Gradients}{111}{subsection.F.5.1}%
+\contentsline {section}{\numberline {F.6}Summary}{112}{section.F.6}%
+\contentsline {chapter}{\numberline {G}Variable Coefficient Benchmarks}{113}{appendix.G}%
+\contentsline {section}{\numberline {G.1}Overview}{113}{section.G.1}%
+\contentsline {section}{\numberline {G.2}Test Problems}{113}{section.G.2}%
+\contentsline {subsection}{\numberline {G.2.1}Visualizing Discontinuous Coefficient Solution}{113}{subsection.G.2.1}%
+\contentsline {section}{\numberline {G.3}CRITICAL: Discontinuous Coefficient}{114}{section.G.3}%
+\contentsline {subsection}{\numberline {G.3.1}The Problem}{114}{subsection.G.3.1}%
+\contentsline {subsection}{\numberline {G.3.2}Catastrophic Rational Failure}{115}{subsection.G.3.2}%
+\contentsline {subsection}{\numberline {G.3.3}Critical Observations}{115}{subsection.G.3.3}%
+\contentsline {section}{\numberline {G.4}Why Rationals Fail on Discontinuities}{116}{section.G.4}%
+\contentsline {subsection}{\numberline {G.4.1}Mathematical Explanation}{116}{subsection.G.4.1}%
+\contentsline {subsection}{\numberline {G.4.2}Comparison with Other Methods}{116}{subsection.G.4.2}%
+\contentsline {section}{\numberline {G.5}Recommendations}{117}{section.G.5}%
+\contentsline {subsection}{\numberline {G.5.1}When to AVOID Rationals}{117}{subsection.G.5.1}%
+\contentsline {subsection}{\numberline {G.5.2}Alternative Methods for Discontinuities}{117}{subsection.G.5.2}%
+\contentsline {section}{\numberline {G.6}Smooth Variable Coefficients}{117}{section.G.6}%
+\contentsline {section}{\numberline {G.7}Summary}{117}{section.G.7}%
+\contentsline {chapter}{\numberline {H}Cross-Method Analysis and Recommendations}{118}{appendix.H}%
+\contentsline {section}{\numberline {H.1}Overall Method Performance Summary}{118}{section.H.1}%
+\contentsline {section}{\numberline {H.2}Convergence Rate Summary}{118}{section.H.2}%
+\contentsline {subsection}{\numberline {H.2.1}Key Observations}{118}{subsection.H.2.1}%
+\contentsline {section}{\numberline {H.3}Accuracy vs Cost Tradeoffs}{119}{section.H.3}%
+\contentsline {subsection}{\numberline {H.3.1}For 10$^{-6}$ Accuracy on Smooth Problems}{120}{subsection.H.3.1}%
+\contentsline {section}{\numberline {H.4}Method Selection Decision Tree}{121}{section.H.4}%
+\contentsline {section}{\numberline {H.5}Detailed Recommendations by Problem Class}{121}{section.H.5}%
+\contentsline {subsection}{\numberline {H.5.1}Poisson / Helmholtz (smooth forcing)}{121}{subsection.H.5.1}%
+\contentsline {subsection}{\numberline {H.5.2}Reaction-Diffusion (smooth exponentials)}{122}{subsection.H.5.2}%
+\contentsline {subsection}{\numberline {H.5.3}Advection-Diffusion}{122}{subsection.H.5.3}%
+\contentsline {subsection}{\numberline {H.5.4}Variable Coefficients}{122}{subsection.H.5.4}%
+\contentsline {section}{\numberline {H.6}Cost-Benefit Analysis}{123}{section.H.6}%
+\contentsline {subsection}{\numberline {H.6.1}Rational Collocation}{123}{subsection.H.6.1}%
+\contentsline {subsection}{\numberline {H.6.2}Spectral Methods (Chebyshev/Legendre)}{123}{subsection.H.6.2}%
+\contentsline {subsection}{\numberline {H.6.3}4th-Order Finite Differences}{124}{subsection.H.6.3}%
+\contentsline {section}{\numberline {H.7}Revisiting the Original Claims}{124}{section.H.7}%
+\contentsline {subsection}{\numberline {H.7.1}The "2,000,000$\times $ Improvement" Claim}{124}{subsection.H.7.1}%
+\contentsline {subsection}{\numberline {H.7.2}Honest Assessment}{124}{subsection.H.7.2}%
+\contentsline {section}{\numberline {H.8}Summary}{125}{section.H.8}%

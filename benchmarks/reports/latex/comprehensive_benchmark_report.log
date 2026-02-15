@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2026.2.13)  15 FEB 2026 16:28
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2026.2.13)  15 FEB 2026 16:34
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -977,20 +977,26 @@ been already used, duplicate ignored
                    \relax 
 l.96 \end{itemize}
                    [1{/usr/share/texlive/texmf-dist/fonts/enc/dvips/cm-super/cm
--super-ts1.enc}] [2] (./comprehensive_benchmark_report.toc)
-\tf@toc=\write5
-\openout5 = `comprehensive_benchmark_report.toc'.
-
-
+-super-ts1.enc}] [2] (./comprehensive_benchmark_report.toc
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.112 \clearpage
-                 [1
+l.41 ....3.2}Exact Solution}{13}{subsection.3.3.2}
+                                                  % [1
 
 
 ]
+pdfTeX warning (ext4): destination with the same identifier (name{page.2}) has 
+been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.98 ...Rational Comparison}{39}{subsection.6.2.1}
+                                                  % [2] [3] [4] [5])
+\tf@toc=\write5
+\openout5 = `comprehensive_benchmark_report.toc'.
+
+ [6]
 Chapter 1.
 
 Overfull \hbox (2.59427pt too wide) in paragraph at lines 123--125
@@ -1012,26 +1018,20 @@ cmm/m/it/10.95 u\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 x\OT1/cmr/m/n/10.95 ) =
 
  []
 
-
-pdfTeX warning (ext4): destination with the same identifier (name{page.2}) has 
-been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.190 
-       [2
+[7
 
 
-] [3]
+] [8]
 Overfull \vbox (48.33269pt too high) has occurred while \output is active []
 
 
-[4] [5]
+[9] [10]
 Overfull \hbox (12.32372pt too wide) in paragraph at lines 260--261
  []\T1/cmr/bx/n/10.95 For Prac-ti-tion-ers and En-gi-neers:[] \T1/cmr/m/n/10.95
  Fo-cus on prac-ti-cal guid-ance and method
  []
 
-[6] [7]
+[11] [12]
 Overfull \hbox (16.94202pt too wide) in paragraph at lines 329--331
 []\T1/cmr/m/n/10.95 Documents cur-rent ca-pa-bil-i-ties, known
  []
@@ -1046,11 +1046,11 @@ Overfull \hbox (7.14542pt too wide) in paragraph at lines 339--342
 []\T1/cmr/m/n/10.95 Tutorial on read-ing con-ver-gence
  []
 
-[8]
+[13]
 Chapter 2.
-[9
+[14
 
-] [10]
+] [15]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `math shift' on input line 470.
@@ -1067,21 +1067,21 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `math shift' on input line 470.
 
-[11]
+[16]
 Chapter 3.
-[12
+[17
 
-] [13]
+] [18]
 Chapter 4.
 
 Overfull \hbox (30.79698pt too wide) in paragraph at lines 607--631
  [][] 
  []
 
-[14
+[19
 
-] [15]
-<../figures/Smooth_Poisson_sin.pdf, id=371, 860.4871pt x 352.39017pt>
+] [20]
+<../figures/Smooth_Poisson_sin.pdf, id=1236, 860.4871pt x 352.39017pt>
 File: ../figures/Smooth_Poisson_sin.pdf Graphic file (type pdf)
 <use ../figures/Smooth_Poisson_sin.pdf>
 Package pdftex.def Info: ../figures/Smooth_Poisson_sin.pdf  used on input line 
@@ -1092,8 +1092,8 @@ Overfull \hbox (14.52681pt too wide) in paragraph at lines 695--718
  [][] 
  []
 
-[16 <../figures/Smooth_Poisson_sin.pdf>] [17]
-<../figures/Discontinuous_Poisson.pdf, id=436, 860.70522pt x 352.39017pt>
+[21 <../figures/Smooth_Poisson_sin.pdf>] [22]
+<../figures/Discontinuous_Poisson.pdf, id=1302, 860.70522pt x 352.39017pt>
 File: ../figures/Discontinuous_Poisson.pdf Graphic file (type pdf)
 <use ../figures/Discontinuous_Poisson.pdf>
 Package pdftex.def Info: ../figures/Discontinuous_Poisson.pdf  used on input li
@@ -1112,35 +1112,45 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `math shift' on input line 769.
 
-[18 <../figures/Discontinuous_Poisson.pdf>]
+[23 <../figures/Discontinuous_Poisson.pdf>]
 Overfull \hbox (48.97716pt too wide) in paragraph at lines 783--806
  [][] 
  []
 
-[19]
-<../figures/Oscillatory_Poisson_ω=10.0.pdf, id=504, 860.70522pt x 352.39017pt>
-
+[24]
+<../figures/Oscillatory_Poisson_ω=10.0.pdf, id=1370, 860.70522pt x 352.39017pt
+>
 File: ../figures/Oscillatory_Poisson_ω=10.0.pdf Graphic file (type pdf)
 <use ../figures/Oscillatory_Poisson_ω=10.0.pdf>
 Package pdftex.def Info: ../figures/Oscillatory_Poisson_ω=10.0.pdf  used on in
 put line 854.
 (pdftex.def)             Requested size: 360.0pt x 147.38988pt.
- [20] [21 <../figures/Oscillatory_Poisson_ω=10.0.pdf>]
+ [25] [26 <../figures/Oscillatory_Poisson_ω=10.0.pdf>]
 Chapter 5.
-[22
+[27
 
-] [23]
+] [28]
 Overfull \hbox (28.66156pt too wide) in paragraph at lines 952--953
 []\T1/cmr/m/n/10.95 Expected: Ra-tio-nals ex-cel at near-degenerate cases ($\OM
 L/cmm/m/it/10.95 k \OMS/cmsy/m/n/10.95 ! \OT1/cmr/m/n/10.95 1$\T1/cmr/m/n/10.95
  , exponential-
  []
 
-[24] [25]
+[29] [30] [31] [32]
+Overfull \hbox (79.35806pt too wide) in paragraph at lines 1126--1127
+[]\T1/cmr/bx/n/10.95 Implementation\T1/cmr/m/n/10.95 : Avail-able in gelf-gren 
+li-brary as \T1/cmtt/m/n/10.95 PiecewiseRational.from_function 
+ []
+
+
+LaTeX Warning: Reference `sec:dof_fairness' on page 33 undefined on input line 
+1142.
+
+[33]
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.1024 \begin{itemize}
+l.1153 \begin{itemize}
                       
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -1148,7 +1158,7 @@ you left one out. Proceed, with fingers crossed.
 ! Extra }, or forgotten $.
 \@svsechd ...ermite Splines (C^1 continuous):}{4}}
                                                   \csname paragraphmark\endc...
-l.1024 \begin{itemize}
+l.1153 \begin{itemize}
                       
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -1159,7 +1169,7 @@ deleted material, e.g., by typing `I$}'.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.1024 \begin{itemize}
+l.1153 \begin{itemize}
                       
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -1170,7 +1180,7 @@ my insertion and my current dilemma will both disappear.
 ! Missing } inserted.
 <inserted text> 
                 }
-l.1024 \begin{itemize}
+l.1153 \begin{itemize}
                       
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -1179,322 +1189,311 @@ really didn't forget anything, try typing `2' now; then
 my insertion and my current dilemma will both disappear.
 
 
-Overfull \hbox (23.7057pt too wide) in paragraph at lines 1045--1055
+Overfull \hbox (23.7057pt too wide) in paragraph at lines 1174--1184
  [] 
  []
 
-[26]
-Overfull \hbox (54.47015pt too wide) in paragraph at lines 1076--1093
+[34]
+Overfull \hbox (54.47015pt too wide) in paragraph at lines 1205--1222
  [][] 
  []
 
-[27] [28]
-Overfull \hbox (37.81496pt too wide) in paragraph at lines 1188--1220
+[35] [36]
+Overfull \hbox (37.81496pt too wide) in paragraph at lines 1317--1349
  [][] 
  []
 
-[29] [30]
-Overfull \hbox (12.29686pt too wide) in paragraph at lines 1243--1244
+[37] [38]
+Overfull \hbox (12.29686pt too wide) in paragraph at lines 1372--1373
 []\T1/cmr/bx/n/10.95 Runge's func-tion\T1/cmr/m/n/10.95 : Poly-no-mi-als WIN de
 -spite clas-sic Runge phe-nomenon
  []
 
-[31]
-
-LaTeX Warning: Reference `fig:special_exponential' on page 32 undefined on inpu
-t line 1274.
-
-
-LaTeX Warning: Reference `fig:special_bessel10' on page 32 undefined on input l
-ine 1274.
-
-<../figures/special_functions/Exponential_ex.pdf, id=659, 1004.83517pt x 858.28
-014pt>
+[39]
+<../figures/special_functions/Exponential_ex.pdf, id=1562, 1004.83517pt x 858.2
+8014pt>
 File: ../figures/special_functions/Exponential_ex.pdf Graphic file (type pdf)
 <use ../figures/special_functions/Exponential_ex.pdf>
 Package pdftex.def Info: ../figures/special_functions/Exponential_ex.pdf  used 
-on input line 1278.
+on input line 1407.
 (pdftex.def)             Requested size: 306.0022pt x 261.37563pt.
-<../figures/special_functions/Logarithm_log1plusx.pdf, id=660, 1004.83517pt x 8
-58.28014pt>
+<../figures/special_functions/Logarithm_log1plusx.pdf, id=1563, 1004.83517pt x 
+858.28014pt>
 File: ../figures/special_functions/Logarithm_log1plusx.pdf Graphic file (type p
 df)
 <use ../figures/special_functions/Logarithm_log1plusx.pdf>
 Package pdftex.def Info: ../figures/special_functions/Logarithm_log1plusx.pdf  
-used on input line 1285.
+used on input line 1414.
 (pdftex.def)             Requested size: 306.0022pt x 261.37563pt.
-<../figures/special_functions/Mathieu_ce_0x,_q=5.pdf, id=661, 1004.83517pt x 85
-8.28014pt>
+<../figures/special_functions/Mathieu_ce_0x,_q=5.pdf, id=1564, 1004.83517pt x 8
+58.28014pt>
 File: ../figures/special_functions/Mathieu_ce_0x,_q=5.pdf Graphic file (type pd
 f)
 <use ../figures/special_functions/Mathieu_ce_0x,_q=5.pdf>
 Package pdftex.def Info: ../figures/special_functions/Mathieu_ce_0x,_q=5.pdf  u
-sed on input line 1292.
+sed on input line 1421.
 (pdftex.def)             Requested size: 306.0022pt x 261.37563pt.
-<../figures/special_functions/Bessel_J_10x.pdf, id=662, 1005.24521pt x 858.2801
-4pt>
+<../figures/special_functions/Bessel_J_10x.pdf, id=1565, 1005.24521pt x 858.280
+14pt>
 File: ../figures/special_functions/Bessel_J_10x.pdf Graphic file (type pdf)
 <use ../figures/special_functions/Bessel_J_10x.pdf>
 Package pdftex.def Info: ../figures/special_functions/Bessel_J_10x.pdf  used on
- input line 1299.
+ input line 1428.
 (pdftex.def)             Requested size: 306.0022pt x 261.27086pt.
-[32 <../figures/special_functions/Exponential_ex.pdf>] [33 <../figures/special_
-functions/Logarithm_log1plusx.pdf>] [34 <../figures/special_functions/Mathieu_c
-e_0x,_q=5.pdf>] [35 <../figures/special_functions/Bessel_J_10x.pdf>]
-Overfull \hbox (4.67369pt too wide) in paragraph at lines 1325--1326
+ [40 <../figures/special_functions/Exponential_ex.pdf>] [41 <../figures/special
+_functions/Logarithm_log1plusx.pdf>] [42 <../figures/special_functions/Mathieu_
+ce_0x,_q=5.pdf>] [43 <../figures/special_functions/Bessel_J_10x.pdf>]
+Overfull \hbox (4.67369pt too wide) in paragraph at lines 1454--1455
 []\T1/cmr/bx/n/10.95 Sharp gra-di-ents\T1/cmr/m/n/10.95 : Ra-tio-nals fail (non
 e in smooth func-tion tests; bound-
  []
 
 
-Overfull \hbox (2.49294pt too wide) in paragraph at lines 1336--1337
+Overfull \hbox (2.49294pt too wide) in paragraph at lines 1465--1466
 []\T1/cmr/m/n/10.95 For general-purpose ap-prox-i-ma-tion of smooth func-tions,
  \T1/cmr/bx/n/10.95 piece-wise poly-
  []
 
-[36]
-Overfull \hbox (6.06339pt too wide) in paragraph at lines 1364--1365
+[44]
+Overfull \hbox (6.06339pt too wide) in paragraph at lines 1493--1494
 []\T1/cmr/m/n/10.95 Functions where con-ver-gence rate mat-ters (ra-tio-nals un
 -pre-dictable) 
  []
 
-[37]
+[45]
 Chapter 6.
 
-Overfull \hbox (3.11197pt too wide) in paragraph at lines 1383--1384
+Overfull \hbox (3.11197pt too wide) in paragraph at lines 1512--1513
 []\T1/cmr/bx/n/10.95 Machine Pre-ci-sion\T1/cmr/m/n/10.95 : Achieves $\OMS/cmsy
 /m/n/10.95 ^^X \OT1/cmr/m/n/10.95 10[]$ \T1/cmr/m/n/10.95 er-rors (lim-ited onl
 y by floating-
  []
 
-[38
+[46
 
-] [39]
-Overfull \hbox (0.96048pt too wide) in paragraph at lines 1476--1477
+] [47]
+Overfull \hbox (0.96048pt too wide) in paragraph at lines 1605--1606
 []\T1/cmr/bx/n/10.95 Pole man-age-ment over-head\T1/cmr/m/n/10.95 : DOF wasted 
 pre-vent-ing spu-ri-ous poles 
  []
 
-[40] [41]
-Overfull \hbox (0.86458pt too wide) in paragraph at lines 1538--1542
+[48] [49]
+Overfull \hbox (0.86458pt too wide) in paragraph at lines 1667--1671
 \T1/cmr/m/n/10.95 Os-cil-la-tory BVP demon-strates poly-no-mial han-dling high-
 frequency fea-
  []
 
 
-Overfull \hbox (4.9506pt too wide) in paragraph at lines 1547--1550
+Overfull \hbox (4.9506pt too wide) in paragraph at lines 1676--1679
 []\T1/cmr/bx/n/10.95 Computational cost must be min-i-mized\T1/cmr/m/n/10.95 : 
 For smooth, well-behaved
  []
 
-[42]
-Overfull \hbox (81.37494pt too wide) in paragraph at lines 1591--1602
+[50]
+Overfull \hbox (81.37494pt too wide) in paragraph at lines 1720--1731
  [] 
  []
 
-[43] [44] [45]
+[51] [52] [53]
 Chapter 7.
-[46
+[54
 
-] [47]
-Overfull \hbox (0.48056pt too wide) in paragraph at lines 1755--1763
+] [55]
+Overfull \hbox (0.48056pt too wide) in paragraph at lines 1884--1892
  [] 
  []
 
-[48]
-Overfull \hbox (27.47961pt too wide) in paragraph at lines 1811--1820
+[56]
+Overfull \hbox (27.47961pt too wide) in paragraph at lines 1940--1949
  [] 
  []
 
 
-Overfull \hbox (0.9161pt too wide) in paragraph at lines 1849--1851
+Overfull \hbox (0.9161pt too wide) in paragraph at lines 1978--1980
 []\T1/cmr/bx/n/10.95 Mesh re-fine-ment strat-egy\T1/cmr/m/n/10.95 : Han-dle lo-
 cal vari-a-tions by re-fin-ing mesh,
  []
 
-[49] [50]
-
-LaTeX Warning: Reference `fig:degree_strategy_comparison' on page 51 undefined 
-on input line 1955.
-
-<../figures/degree_strategy_comparison.pdf, id=1199, 1004.2028pt x 715.73146pt>
+[57] [58]
+<../figures/degree_strategy_comparison.pdf, id=2080, 1004.2028pt x 715.73146pt>
 
 File: ../figures/degree_strategy_comparison.pdf Graphic file (type pdf)
 <use ../figures/degree_strategy_comparison.pdf>
 Package pdftex.def Info: ../figures/degree_strategy_comparison.pdf  used on inp
-ut line 1960.
+ut line 2089.
 (pdftex.def)             Requested size: 341.9989pt x 243.74956pt.
+
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 
-Overfull \hbox (0.33955pt too wide) in paragraph at lines 1990--1991
+Overfull \hbox (0.33955pt too wide) in paragraph at lines 2119--2120
  []\T1/cmr/bx/n/10.95 Practical Im-pli-ca-tions:[] \T1/cmr/m/n/10.95 These sys-
 tem-atic stud-ies val-i-date the Fixed [n/4]
  []
 
 
-Overfull \hbox (2.39467pt too wide) in paragraph at lines 1992--1994
+Overfull \hbox (2.39467pt too wide) in paragraph at lines 2121--2123
 []\T1/cmr/bx/n/10.95 Threshold be-hav-ior: $\OML/cmm/m/it/10.95 m \OT1/cmr/m/n/
 10.95 = 4$ \T1/cmr/m/n/10.95 rep-re-sents a crit-i-cal threshold---sufficient
  []
 
-[51] [52 <../figures/degree_strategy_comparison.pdf>]
+[59] [60 <../figures/degree_strategy_comparison.pdf>]
 Chapter 8.
-[53
+[61
 
 ]
-Overfull \hbox (10.66255pt too wide) in paragraph at lines 2059--2061
+Overfull \hbox (10.66255pt too wide) in paragraph at lines 2188--2190
 []\T1/cmr/bx/n/10.95 Cleared for-mu-la-tion re-quires uni-form rep-re-sen-ta-ti
 on\T1/cmr/m/n/10.95 : The cleared
  []
 
-[54] [55]
+[62] [63]
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[56] [57]
-Overfull \hbox (0.16302pt too wide) in paragraph at lines 2273--2275
+[64] [65]
+Overfull \hbox (0.16302pt too wide) in paragraph at lines 2402--2404
  []\T1/cmr/bx/n/10.95 Empirical Per-for-mance Com-par-i-son[] \T1/cmr/m/n/10.95
  Com-pre-hen-sive bench-marks com-
  []
 
 
-Overfull \hbox (4.12029pt too wide) in paragraph at lines 2273--2275
+Overfull \hbox (4.12029pt too wide) in paragraph at lines 2402--2404
 \T1/cmr/m/n/10.95 par-ing both for-mu-la-tions against poly-no-mial fi-nite dif
 -fer-ences on three smooth
  []
 
 
-Overfull \hbox (111.91486pt too wide) in paragraph at lines 2278--2293
+Overfull \hbox (111.91486pt too wide) in paragraph at lines 2407--2422
  [][] 
  []
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[58] [59]
-Overfull \hbox (8.62096pt too wide) in paragraph at lines 2347--2348
+[66] [67]
+Overfull \hbox (8.62096pt too wide) in paragraph at lines 2476--2477
 []\T1/cmtt/m/n/10.95 benchmarks/python/rational_collocation.py\T1/cmr/m/n/10.95
  : Quadratic form solver
  []
 
 
-Overfull \hbox (12.69014pt too wide) in paragraph at lines 2348--2349
+Overfull \hbox (12.69014pt too wide) in paragraph at lines 2477--2478
 []\T1/cmtt/m/n/10.95 benchmarks/python/rational_collocation_cleared.py\T1/cmr/m
 /n/10.95 : Cleared form
  []
 
 
-Overfull \hbox (2.60191pt too wide) in paragraph at lines 2350--2351
+Overfull \hbox (2.60191pt too wide) in paragraph at lines 2479--2480
 []\T1/cmtt/m/n/10.95 benchmarks/data/bvp_method_comparison.json\T1/cmr/m/n/10.9
 5 : Com-par-i-son re-sults 
  []
 
 
-Overfull \hbox (11.40723pt too wide) in paragraph at lines 2351--2352
+Overfull \hbox (11.40723pt too wide) in paragraph at lines 2480--2481
 []\T1/cmtt/m/n/10.95 docs/RATIONAL_COLLOCATION_QUADRATIC_FORM.md\T1/cmr/m/n/10.
 95 : Quadratic form the-
  []
 
 
-Overfull \hbox (18.41602pt too wide) in paragraph at lines 2354--2355
+Overfull \hbox (18.41602pt too wide) in paragraph at lines 2483--2484
 []\T1/cmtt/m/n/10.95 docs/RATIONAL_COLLOCATION_IMPLEMENTATION.md\T1/cmr/m/n/10.
 95 : Im-ple-men-ta-tion sum-
  []
 
 
-Overfull \hbox (7.79259pt too wide) in paragraph at lines 2366--2367
+Overfull \hbox (7.79259pt too wide) in paragraph at lines 2495--2496
 []\T1/cmr/bx/n/10.95 Configurable pole pre-ven-tion \T1/cmr/m/n/10.95 via end-p
 oint con-straints (END-POINT,
  []
 
-[60] [61]
+[68] [69]
 Chapter 9.
-[62
+[70
 
-] [63] [64] [65] [66]
-Overfull \hbox (12.41017pt too wide) in paragraph at lines 2641--2642
+] [71] [72] [73] [74]
+Overfull \hbox (12.41017pt too wide) in paragraph at lines 2770--2771
 []\T1/cmr/m/n/10.95 Rationals should dra-mat-i-cally out-per-form poly-no-mial 
 spec-tral meth-
  []
 
-[67] [68]
+[75] [76]
 Chapter 10.
 
-Overfull \hbox (7.06685pt too wide) in paragraph at lines 2687--2689
+Overfull \hbox (7.06685pt too wide) in paragraph at lines 2816--2818
  []\T1/cmr/bx/n/10.95 Smooth Problems---Spectacular Suc-cess:[] \T1/cmr/m/n/10.
 95 For the smooth Pois-son equa-
  []
 
-[69
+[77
 
 ]
-Overfull \hbox (7.32784pt too wide) in paragraph at lines 2722--2723
+Overfull \hbox (7.32784pt too wide) in paragraph at lines 2851--2852
  []\T1/cmr/bx/n/10.95 Oscillatory Problems---Complete Break-down:[] \T1/cmr/m/n
 /10.95 For the os-cil-la-tory Pois-
  []
 
-[70] [71]
-Overfull \hbox (3.60089pt too wide) in paragraph at lines 2817--2818
+[78] [79]
+Overfull \hbox (3.60089pt too wide) in paragraph at lines 2946--2947
  []\T1/cmr/bx/n/10.95 NONNEGATIVE Con-straints (Harm-ful):[] \T1/cmr/m/n/10.95 
 Con-strain-ing all co-ef-fi-cients
  []
 
-[72] [73]
-Overfull \hbox (7.22398pt too wide) in paragraph at lines 2918--2920
+[80] [81]
+Overfull \hbox (7.22398pt too wide) in paragraph at lines 3047--3049
 []\T1/cmr/bx/n/10.95 Implication\T1/cmr/m/n/10.95 : Prob-lem clas-si-fi-ca-tion
  (smooth or not) must pre-cede method
  []
 
-[74]
-Overfull \hbox (5.57498pt too wide) in paragraph at lines 2931--2933
+[82]
+Overfull \hbox (5.57498pt too wide) in paragraph at lines 3060--3062
 []\T1/cmr/m/n/10.95 Applications re-quir-ing high pre-ci-sion (sci-en-tific com
 -put-ing, fi-nan-cial math-
  []
 
-[75] [76] [77] [78]
-Overfull \hbox (16.6455pt too wide) in paragraph at lines 3124--3125
+[83] [84] [85] [86]
+Overfull \hbox (16.6455pt too wide) in paragraph at lines 3253--3254
  []\T1/cmr/bx/n/10.95 Implementation Pri-or-i-ties:[] \T1/cmr/m/n/10.95 Product
 ion-quality ra-tio-nal BVP solvers should
  []
 
 
-Overfull \hbox (4.25746pt too wide) in paragraph at lines 3157--3163
+Overfull \hbox (4.25746pt too wide) in paragraph at lines 3286--3292
 \T1/cmr/m/n/10.95 ods are pow-er-ful but spe-cial-ized tools. They pro-vide ex-
 traor-di-nary accuracy---
  []
 
-[79] [80] [81
+[87] [88] [89
 
 ]
 Appendix A.
-[82
+[90
 
-] [83] [84]
-Overfull \hbox (1.81477pt too wide) in paragraph at lines 3336--3339
+] [91] [92]
+Overfull \hbox (1.81477pt too wide) in paragraph at lines 3465--3468
  []\T1/cmr/bx/n/10.95 Discontinuous prob-lems:[] \T1/cmr/m/n/10.95 Ex-pect re-d
 uced con-ver-gence rates (of-ten $\OML/cmm/m/it/10.95 O\OT1/cmr/m/n/10.95 (\OML
 /cmm/m/it/10.95 h[]\OT1/cmr/m/n/10.95 )$
  []
 
-[85]
+[93]
 Appendix B.
-[86
+[94
 
-] [87]
+] [95]
 Appendix C.
-[88
+[96
 
 ]
-Overfull \hbox (53.06108pt too wide) in paragraph at lines 3418--3418
+Overfull \hbox (53.06108pt too wide) in paragraph at lines 3547--3547
 []\T1/cmtt/m/n/10.95 pdflatex comprehensive_benchmark_report.tex  # Second pass
  for references[] 
  []
 
-(./extended_chapters_clean.tex [89]
+(./extended_chapters_clean.tex [97]
 Appendix D.
-<../figures/solutions/Helmholtz_Sin_k1_solution.pdf, id=1643, 716.27727pt x 426
+<../figures/solutions/Helmholtz_Sin_k1_solution.pdf, id=2475, 716.27727pt x 426
 .65146pt>
 File: ../figures/solutions/Helmholtz_Sin_k1_solution.pdf Graphic file (type pdf
 )
@@ -1502,7 +1501,7 @@ File: ../figures/solutions/Helmholtz_Sin_k1_solution.pdf Graphic file (type pdf
 Package pdftex.def Info: ../figures/solutions/Helmholtz_Sin_k1_solution.pdf  us
 ed on input line 23.
 (pdftex.def)             Requested size: 172.79846pt x 102.92575pt.
-<../figures/solutions/Helmholtz_Exp_k4_solution.pdf, id=1644, 716.28229pt x 426
+<../figures/solutions/Helmholtz_Exp_k4_solution.pdf, id=2476, 716.28229pt x 426
 .65146pt>
 File: ../figures/solutions/Helmholtz_Exp_k4_solution.pdf Graphic file (type pdf
 )
@@ -1510,7 +1509,7 @@ File: ../figures/solutions/Helmholtz_Exp_k4_solution.pdf Graphic file (type pdf
 Package pdftex.def Info: ../figures/solutions/Helmholtz_Exp_k4_solution.pdf  us
 ed on input line 28.
 (pdftex.def)             Requested size: 172.79846pt x 102.92575pt.
-[90
+[98
 
 ]
 
@@ -1525,11 +1524,7 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `math shift' on input line 34.
 
-
-LaTeX Warning: Reference `fig:helmholtz_k1_conv' on page 91 undefined on input 
-line 38.
-
-<../figures/extended_benchmark/Helmholtz_Sin_k1_convergence.pdf, id=1652, 715.9
+<../figures/extended_benchmark/Helmholtz_Sin_k1_convergence.pdf, id=2482, 715.9
 4711pt x 495.92642pt>
 File: ../figures/extended_benchmark/Helmholtz_Sin_k1_convergence.pdf Graphic fi
 le (type pdf)
@@ -1537,10 +1532,10 @@ le (type pdf)
 Package pdftex.def Info: ../figures/extended_benchmark/Helmholtz_Sin_k1_converg
 ence.pdf  used on input line 42.
 (pdftex.def)             Requested size: 323.9978pt x 224.42856pt.
-[91 <../figures/solutions/Helmholtz_Sin_k1_solution.pdf> <../figures/solutions/
+[99 <../figures/solutions/Helmholtz_Sin_k1_solution.pdf> <../figures/solutions/
 Helmholtz_Exp_k4_solution.pdf> <../figures/extended_benchmark/Helmholtz_Sin_k1_
 convergence.pdf>]
-<../figures/extended_benchmark/Helmholtz_Sin_k1_rates.pdf, id=1870, 716.2465pt 
+<../figures/extended_benchmark/Helmholtz_Sin_k1_rates.pdf, id=2698, 716.2465pt 
 x 425.97841pt>
 File: ../figures/extended_benchmark/Helmholtz_Sin_k1_rates.pdf Graphic file (ty
 pe pdf)
@@ -1553,7 +1548,7 @@ Overfull \hbox (16.37485pt too wide) in paragraph at lines 63--63
 []\T1/cmr/bx/n/14.4 Results: Helmholtz Exponential-Oscillatory (H4) 
  []
 
-<../figures/extended_benchmark/Helmholtz_Exp_k4_convergence.pdf, id=1871, 716.1
+<../figures/extended_benchmark/Helmholtz_Exp_k4_convergence.pdf, id=2699, 716.1
 652pt x 495.92642pt>
 File: ../figures/extended_benchmark/Helmholtz_Exp_k4_convergence.pdf Graphic fi
 le (type pdf)
@@ -1561,22 +1556,18 @@ le (type pdf)
 Package pdftex.def Info: ../figures/extended_benchmark/Helmholtz_Exp_k4_converg
 ence.pdf  used on input line 69.
 (pdftex.def)             Requested size: 323.9978pt x 224.36044pt.
-[92 <../figures/extended_benchmark/Helmholtz_Sin_k1_rates.pdf>]
+[100 <../figures/extended_benchmark/Helmholtz_Sin_k1_rates.pdf>]
 Overfull \hbox (7.26678pt too wide) in paragraph at lines 92--93
 []\T1/cmr/m/n/10.95 These re-sults con-firm that ra-tio-nals ex-cel in their in
 -tended do-main: smooth
  []
 
-[93 <../figures/extended_benchmark/Helmholtz_Exp_k4_convergence.pdf>]
+[101 <../figures/extended_benchmark/Helmholtz_Exp_k4_convergence.pdf>]
 Appendix E.
-
-LaTeX Warning: Reference `fig:advdiff_bl_solution' on page 94 undefined on inpu
-t line 125.
-
-[94
+[102
 
 ]
-<../figures/solutions/AdvDiff_Sharp_eps0.001_boundary_layer.pdf, id=2047, 1005.
+<../figures/solutions/AdvDiff_Sharp_eps0.001_boundary_layer.pdf, id=2870, 1005.
 35727pt x 358.15492pt>
 File: ../figures/solutions/AdvDiff_Sharp_eps0.001_boundary_layer.pdf Graphic fi
 le (type pdf)
@@ -1597,7 +1588,7 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `math shift' on input line 134.
 
-<../figures/extended_benchmark/AdvDiff_Sharp_eps0.001_convergence.pdf, id=2048,
+<../figures/extended_benchmark/AdvDiff_Sharp_eps0.001_convergence.pdf, id=2871,
  716.40236pt x 495.92642pt>
 File: ../figures/extended_benchmark/AdvDiff_Sharp_eps0.001_convergence.pdf Grap
 hic file (type pdf)
@@ -1605,8 +1596,8 @@ hic file (type pdf)
 Package pdftex.def Info: ../figures/extended_benchmark/AdvDiff_Sharp_eps0.001_c
 onvergence.pdf  used on input line 148.
 (pdftex.def)             Requested size: 323.9978pt x 224.29234pt.
-[95 <../figures/solutions/AdvDiff_Sharp_eps0.001_boundary_layer.pdf>]
-<../figures/extended_benchmark/AdvDiff_Sharp_eps0.001_rates.pdf, id=2115, 716.2
+[103 <../figures/solutions/AdvDiff_Sharp_eps0.001_boundary_layer.pdf>]
+<../figures/extended_benchmark/AdvDiff_Sharp_eps0.001_rates.pdf, id=2936, 716.2
 7034pt x 425.97841pt>
 File: ../figures/extended_benchmark/AdvDiff_Sharp_eps0.001_rates.pdf Graphic fi
 le (type pdf)
@@ -1614,7 +1605,7 @@ le (type pdf)
 Package pdftex.def Info: ../figures/extended_benchmark/AdvDiff_Sharp_eps0.001_r
 ates.pdf  used on input line 179.
 (pdftex.def)             Requested size: 323.9978pt x 192.6895pt.
- [96 <../figures/extended_benchmark/AdvDiff_Sharp_eps0.001_convergence.pdf>]
+ [104 <../figures/extended_benchmark/AdvDiff_Sharp_eps0.001_convergence.pdf>]
 Overfull \hbox (2.88353pt too wide) in paragraph at lines 199--200
 []\T1/cmr/bx/n/10.95 Global rep-re-sen-ta-tion\T1/cmr/m/n/10.95 : Ra-tio-nals a
 re \T1/cmr/bx/n/10.95 global \T1/cmr/m/n/10.95 ap-prox-i-mants; a bound-
@@ -1627,14 +1618,10 @@ cient re-fine-ment ($\OML/cmm/m/it/10.95 n \OMS/cmsy/m/n/10.95 ^^U \OT1/cmr/m/n
 /10.95 80$ \T1/cmr/m/n/10.95 achieves
  []
 
-[97 <../figures/extended_benchmark/AdvDiff_Sharp_eps0.001_rates.pdf>] [98]
-[99]
+[105 <../figures/extended_benchmark/AdvDiff_Sharp_eps0.001_rates.pdf>] [106]
+[107]
 Appendix F.
-
-LaTeX Warning: Reference `fig:reacdiff_solutions' on page 100 undefined on inpu
-t line 269.
-
-<../figures/solutions/ReacDiff_Exp_c10_solution.pdf, id=2309, 716.27727pt x 426
+<../figures/solutions/ReacDiff_Exp_c10_solution.pdf, id=3123, 716.27727pt x 426
 .65146pt>
 File: ../figures/solutions/ReacDiff_Exp_c10_solution.pdf Graphic file (type pdf
 )
@@ -1642,7 +1629,7 @@ File: ../figures/solutions/ReacDiff_Exp_c10_solution.pdf Graphic file (type pdf
 Package pdftex.def Info: ../figures/solutions/ReacDiff_Exp_c10_solution.pdf  us
 ed on input line 275.
 (pdftex.def)             Requested size: 172.79846pt x 102.92575pt.
-<../figures/solutions/ReacDiff_Polynomial_c4_solution.pdf, id=2310, 716.2465pt 
+<../figures/solutions/ReacDiff_Polynomial_c4_solution.pdf, id=3124, 716.2465pt 
 x 426.65146pt>
 File: ../figures/solutions/ReacDiff_Polynomial_c4_solution.pdf Graphic file (ty
 pe pdf)
@@ -1656,7 +1643,7 @@ Underfull \hbox (badness 2478) in paragraph at lines 282--282
 ex-po-nen-tial
  []
 
-[100
+[108
 
 ]
 
@@ -1667,7 +1654,7 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `math shift' on input line 286.
 
-<../figures/extended_benchmark/ReacDiff_Exp_c10_convergence.pdf, id=2320, 715.9
+<../figures/extended_benchmark/ReacDiff_Exp_c10_convergence.pdf, id=3130, 715.9
 4711pt x 495.92642pt>
 File: ../figures/extended_benchmark/ReacDiff_Exp_c10_convergence.pdf Graphic fi
 le (type pdf)
@@ -1675,7 +1662,7 @@ le (type pdf)
 Package pdftex.def Info: ../figures/extended_benchmark/ReacDiff_Exp_c10_converg
 ence.pdf  used on input line 292.
 (pdftex.def)             Requested size: 323.9978pt x 224.42856pt.
-[101 <../figures/solutions/ReacDiff_Exp_c10_solution.pdf> <../figures/solutions
+[109 <../figures/solutions/ReacDiff_Exp_c10_solution.pdf> <../figures/solutions
 /ReacDiff_Polynomial_c4_solution.pdf> <../figures/extended_benchmark/ReacDiff_E
 xp_c10_convergence.pdf>]
 
@@ -1686,7 +1673,7 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `math shift' on input line 321.
 
-<../figures/extended_benchmark/ReacDiff_Polynomial_c4_convergence.pdf, id=2535,
+<../figures/extended_benchmark/ReacDiff_Polynomial_c4_convergence.pdf, id=3343,
  715.71002pt x 495.92642pt>
 File: ../figures/extended_benchmark/ReacDiff_Polynomial_c4_convergence.pdf Grap
 hic file (type pdf)
@@ -1694,18 +1681,14 @@ hic file (type pdf)
 Package pdftex.def Info: ../figures/extended_benchmark/ReacDiff_Polynomial_c4_c
 onvergence.pdf  used on input line 327.
 (pdftex.def)             Requested size: 323.9978pt x 224.50423pt.
-[102 <../figures/extended_benchmark/ReacDiff_Polynomial_c4_convergence.pdf>]
+[110 <../figures/extended_benchmark/ReacDiff_Polynomial_c4_convergence.pdf>]
 Overfull \hbox (28.76534pt too wide) in paragraph at lines 355--355
 []\T1/cmr/bx/n/14.4 Why Ra-tio-nals Ex-cel Here (vs Advection-Diffusion) 
  []
 
-[103] [104]
+[111] [112]
 Appendix G.
-
-LaTeX Warning: Reference `fig:varcoeff_disc_solution' on page 105 undefined on 
-input line 414.
-
-<../figures/solutions/VarCoeff_Discontinuous_solution.pdf, id=2643, 716.28229pt
+<../figures/solutions/VarCoeff_Discontinuous_solution.pdf, id=3447, 716.28229pt
  x 426.65146pt>
 File: ../figures/solutions/VarCoeff_Discontinuous_solution.pdf Graphic file (ty
 pe pdf)
@@ -1713,10 +1696,10 @@ pe pdf)
 Package pdftex.def Info: ../figures/solutions/VarCoeff_Discontinuous_solution.p
 df  used on input line 418.
 (pdftex.def)             Requested size: 251.9989pt x 150.10495pt.
-[105
+[113
 
 ]
-<../figures/extended_benchmark/VarCoeff_Discontinuous_convergence.pdf, id=2652,
+<../figures/extended_benchmark/VarCoeff_Discontinuous_convergence.pdf, id=3452,
  716.76633pt x 495.92642pt>
 File: ../figures/extended_benchmark/VarCoeff_Discontinuous_convergence.pdf Grap
 hic file (type pdf)
@@ -1724,8 +1707,8 @@ hic file (type pdf)
 Package pdftex.def Info: ../figures/extended_benchmark/VarCoeff_Discontinuous_c
 onvergence.pdf  used on input line 441.
 (pdftex.def)             Requested size: 323.9978pt x 224.17126pt.
- [106 <../figures/solutions/VarCoeff_Discontinuous_solution.pdf>]
-<../figures/extended_benchmark/critical_failures.pdf, id=2737, 1004.35896pt x 4
+ [114 <../figures/solutions/VarCoeff_Discontinuous_solution.pdf>]
+<../figures/extended_benchmark/critical_failures.pdf, id=3534, 1004.35896pt x 4
 45.65128pt>
 File: ../figures/extended_benchmark/critical_failures.pdf Graphic file (type pd
 f)
@@ -1733,19 +1716,15 @@ f)
 Package pdftex.def Info: ../figures/extended_benchmark/critical_failures.pdf  u
 sed on input line 471.
 (pdftex.def)             Requested size: 323.9978pt x 143.76053pt.
- [107 <../figures/extended_benchmark/VarCoeff_Discontinuous_convergence.pdf>] [
-108 <../figures/extended_benchmark/critical_failures.pdf>] [109]
+ [115 <../figures/extended_benchmark/VarCoeff_Discontinuous_convergence.pdf>] [
+116 <../figures/extended_benchmark/critical_failures.pdf>] [117]
 Appendix H.
-
-LaTeX Warning: Reference `tab:convergence_summary' on page 110 undefined on inp
-ut line 550.
-
 
 Overfull \hbox (42.05188pt too wide) in paragraph at lines 556--569
  [][] 
  []
 
-[110
+[118
 
 ]
 File: ../figures/extended_benchmark/Helmholtz_Sin_k1_convergence.pdf Graphic fi
@@ -1767,13 +1746,13 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `math shift' on input line 611.
 
-[111] [112] [113]
+[119] [120] [121]
 Overfull \hbox (1.64093pt too wide) in paragraph at lines 679--680
 []\T1/cmr/m/n/10.95 Rational achieves slightly bet-ter ac-cu-racy (ma-chine pre
 -ci-sion with fewer
  []
 
-[114] [115]
+[122] [123]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `math shift' on input line 781.
@@ -1786,7 +1765,7 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `math shift' on input line 781.
 
-[116]) [117] [118
+[124]) [125] [126
 
 ] (./comprehensive_benchmark_report.aux)
 
@@ -1803,56 +1782,87 @@ hanged.
 
 Package rerunfilecheck Info: Checksums for `comprehensive_benchmark_report.out'
 :
-(rerunfilecheck)             Before: 5CA9328E514D0BBEDFB03A0AB3E1EAF3;8502
-(rerunfilecheck)             After:  9A0CAF42395CCF5A98BA38160412FC78;39428.
+(rerunfilecheck)             Before: 9A0CAF42395CCF5A98BA38160412FC78;39428
+(rerunfilecheck)             After:  81B1BCD036FED29E51A4A6B5E81FF556;39733.
  ) 
 Here is how much of TeX's memory you used:
- 40647 strings out of 476041
- 976368 string characters out of 5793174
+ 40854 strings out of 476041
+ 979401 string characters out of 5793174
  1872388 words of memory out of 6000000
- 59810 multiletter control sequences out of 15000+600000
+ 59969 multiletter control sequences out of 15000+600000
  542416 words of font info for 107 fonts, out of 8000000 for 9000
  1137 hyphenation exceptions out of 8191
  84i,13n,89p,748b,1053s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
-r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/share
-/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texli
-ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts
-/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/
-public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
-amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
-s/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr
-7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></
-usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/sh
-are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/tex
-live/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/te
-xmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dis
-t/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texlive/texmf-dist
-/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texlive/texmf-dist/
-fonts/type1/public/cm-super/sfbx0800.pfb></usr/share/texlive/texmf-dist/fonts/t
-ype1/public/cm-super/sfbx1000.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
-blic/cm-super/sfbx1095.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm
--super/sfbx1200.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/
-sfbx1440.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfbx207
-4.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfbx2488.pfb><
-/usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfrm0600.pfb></usr/sh
-are/texlive/texmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb></usr/share/tex
-live/texmf-dist/fonts/type1/public/cm-super/sfrm0900.pfb></usr/share/texlive/te
-xmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texlive/texmf-dis
-t/fonts/type1/public/cm-super/sfrm1095.pfb></usr/share/texlive/texmf-dist/fonts
-/type1/public/cm-super/sfrm1200.pfb></usr/share/texlive/texmf-dist/fonts/type1/
-public/cm-super/sfrm1728.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
-cm-super/sfti0900.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-supe
-r/sfti1095.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sftt1
-095.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sftt1200.pfb
->
-Output written on comprehensive_benchmark_report.pdf (121 pages, 1300001 bytes)
+
+pdfTeX warning (dest): name{table.caption.140} has been referenced but does not
+ exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{figure.caption.134} has been referenced but does no
+t exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{figure.caption.131} has been referenced but does no
+t exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{figure.caption.128} has been referenced but does no
+t exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{figure.caption.70} has been referenced but does not
+ exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{figure.caption.39} has been referenced but does not
+ exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{figure.caption.36} has been referenced but does not
+ exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{chapter*.118} has been referenced but does not exis
+t, replaced by a fixed one
+
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/
+share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/share/t
+exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/t
+ype1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
+blic/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
+sfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.
+pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texli
+ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/
+fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texlive/texmf-dist/f
+onts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texlive/texmf-dist/fo
+nts/type1/public/cm-super/sfbx0800.pfb></usr/share/texlive/texmf-dist/fonts/typ
+e1/public/cm-super/sfbx1000.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
+ic/cm-super/sfbx1095.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-s
+uper/sfbx1200.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sf
+bx1440.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfbx2074.
+pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfbx2488.pfb></u
+sr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfrm0600.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb></usr/share/texli
+ve/texmf-dist/fonts/type1/public/cm-super/sfrm0900.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texlive/texmf-dist/
+fonts/type1/public/cm-super/sfrm1095.pfb></usr/share/texlive/texmf-dist/fonts/t
+ype1/public/cm-super/sfrm1200.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
+blic/cm-super/sfrm1728.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm
+-super/sfti0900.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/
+sfti1095.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sftt109
+5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sftt1200.pfb>
+Output written on comprehensive_benchmark_report.pdf (129 pages, 1337295 bytes)
 .
 PDF statistics:
- 3306 PDF objects out of 3580 (max. 8388607)
- 1574 compressed objects within 16 object streams
- 686 named destinations out of 1000 (max. 500000)
- 552 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 4086 PDF objects out of 4296 (max. 8388607)
+ 2338 compressed objects within 24 object streams
+ 734 named destinations out of 1000 (max. 500000)
+ 1808 words of extra memory for PDF output out of 10000 (max. 10000000)
 

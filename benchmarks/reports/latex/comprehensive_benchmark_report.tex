@@ -1004,7 +1004,7 @@ The expanded test suite probes different oscillatory and exponential characteris
 
 \textbf{Status:} Special function approximation benchmarks have been executed on all 16 test functions using piecewise cubic polynomial splines and piecewise rational approximants. Mesh refinement studies on 6 resolution levels (4, 8, 16, 32, 64, 128 intervals) provide convergence rate analysis.
 
-\subsection{Methodology}
+\subsection{Methodology Overview}
 
 \begin{itemize}
 \item \textbf{Polynomial method}: Piecewise cubic Hermite splines with $C^1$ continuity
@@ -1014,7 +1014,136 @@ The expanded test suite probes different oscillatory and exponential characteris
 \item \textbf{Mesh sequence}: 4, 8, 16, 32, 64, 128 intervals (DOF = 2n+3 for polynomials, 4n+4 for rationals)
 \end{itemize}
 
+\subsection{Rational Hermite Interpolation Scheme}
+
+The piecewise rational approximants used in this study are constructed via a \textbf{two-point Padé-Hermite interpolation} scheme on each subinterval $[a_i, a_{i+1}]$.
+
+\paragraph{Construction on Each Interval:}
+
+For a target function $f(x)$ on interval $[a, b]$, construct rational approximant:
+\begin{equation}
+r(x) = \frac{P(x)}{Q(x)} = \frac{p_0 + p_1 x + p_2 x^2 + p_3 x^3}{q_0 + q_1 x}
+\end{equation}
+
+\paragraph{Interpolation Conditions:}
+
+Match function and first derivative at \textbf{both endpoints}:
+\begin{align}
+r(a) &= f(a), \quad r'(a) = f'(a) \\
+r(b) &= f(b), \quad r'(b) = f'(b)
+\end{align}
+
+This gives \textbf{4 conditions} for the [3/1] rational approximant.
+
+\paragraph{Degrees of Freedom:}
+
+\begin{itemize}
+\item Cubic numerator $P(x)$: 4 coefficients $(p_0, p_1, p_2, p_3)$
+\item Linear denominator $Q(x)$: 2 coefficients $(q_0, q_1)$
+\item \textbf{Normalization}: Set $q_0 = 1$ (prevents trivial solution $P = Q = 0$)
+\item \textbf{Effective unknowns}: 4 + 1 = 5 per interval
+\end{itemize}
+
+\paragraph{System to Solve:}
+
+After normalization $Q(x) = 1 + q_1 x$, the conditions become:
+\begin{align}
+P(a) &= f(a) Q(a) \\
+P(b) &= f(b) Q(b) \\
+P'(a) &= f'(a) Q(a) + f(a) Q'(a) \\
+P'(b) &= f'(b) Q(b) + f(b) Q'(b)
+\end{align}
+
+This is a \textbf{linear system} in the 5 unknowns $(p_0, p_1, p_2, p_3, q_1)$:
+\begin{equation}
+\begin{bmatrix}
+1 & a & a^2 & a^3 & -f(a) a \\
+1 & b & b^2 & b^3 & -f(b) b \\
+0 & 1 & 2a & 3a^2 & -f'(a) a - f(a) \\
+0 & 1 & 2b & 3b^2 & -f'(b) b - f(b)
+\end{bmatrix}
+\begin{bmatrix}
+p_0 \\ p_1 \\ p_2 \\ p_3 \\ q_1
+\end{bmatrix}
+=
+\begin{bmatrix}
+f(a) \\ f(b) \\ f'(a) \\ f'(b)
+\end{bmatrix}
+\end{equation}
+
+\textbf{Note:} This is an underdetermined system (4 equations, 5 unknowns), typically solved via least squares or by adding a constraint (e.g., minimize $|q_1|$ to keep denominator close to 1).
+
+\paragraph{Derivative Computation:}
+
+First derivatives $f'(x)$ computed via centered finite differences:
+\begin{equation}
+f'(x) \approx \frac{f(x + h) - f(x - h)}{2h}, \quad h = 10^{-7}
+\end{equation}
+
+\paragraph{Piecewise Assembly:}
+
+\begin{enumerate}
+\item Partition domain $[a, b]$ into $n$ subintervals: $a = x_0 < x_1 < \cdots < x_n = b$
+\item On each $[x_i, x_{i+1}]$, construct [3/1] rational via above scheme
+\item \textbf{No continuity enforced} between intervals (piecewise independent construction)
+\item Evaluate piecewise function by determining which interval contains evaluation point
+\end{enumerate}
+
+\paragraph{Key Properties:}
+
+\begin{itemize}
+\item \textbf{Local construction}: Each interval independent (no global coupling)
+\item \textbf{Hermite interpolation}: Matches $f$ and $f'$ at endpoints (similar to cubic Hermite)
+\item \textbf{Potential discontinuity}: $r(x_{i}^+) \neq r(x_{i}^-)$ at interior knots (no $C^0$ continuity enforced)
+\item \textbf{Pole risk}: No explicit pole prevention; denominator can vanish if system ill-conditioned
+\item \textbf{DOF per interval}: 5 (vs cubic Hermite's 4 with shared knots)
+\end{itemize}
+
+\paragraph{Comparison to Polynomial Hermite:}
+
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Feature} & \textbf{Cubic Hermite} & \textbf{[3/1] Rational} \\
+\midrule
+Basis & Polynomial & Rational \\
+Interpolation data & $f, f'$ at endpoints & $f, f'$ at endpoints \\
+Unknowns per interval & 4 coefficients & 5 coefficients \\
+Continuity & $C^1$ (enforced) & $C^{-1}$ (none) \\
+Construction & Linear system & Linear system \\
+Pole pathology & None & Possible \\
+Global DOF & $2n + 2$ & $5n$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\paragraph{Why This Scheme Was Chosen:}
+
+\begin{enumerate}
+\item \textbf{Simplicity}: Linear system (vs nonlinear for higher-order matching)
+\item \textbf{Padé tradition}: Two-point Padé approximation is classical
+\item \textbf{Data availability}: Only requires $f$ and $f'$ (easily computed)
+\item \textbf{Implementation}: Available in gelfgren library as \texttt{PiecewiseRational.from\_function}
+\end{enumerate}
+
+\paragraph{Limitations of This Scheme:}
+
+\begin{enumerate}
+\item \textbf{No continuity}: Piecewise discontinuities waste approximation power
+\item \textbf{Denominator degree limitation}: Linear denominator (deg 1) can only represent real poles, not complex conjugate pairs
+\item \textbf{No pole control}: System doesn't explicitly prevent denominator zeros
+\item \textbf{Overdetermined system resolution}: Least-squares solution may not be unique/optimal
+\end{enumerate}
+
+\textbf{For fair comparison}, one would use:
+\begin{itemize}
+\item [3/2] rational (quadratic denominator) matching $f, f', f''$ at endpoints
+\item Equivalent to quintic Hermite (6 interpolation conditions)
+\item Requires solving nonlinear system (see Section~\ref{sec:dof_fairness} for attempted implementation)
+\end{itemize}
+
 \section{Critical Analysis: DOF Fairness}
+\label{sec:dof_fairness}
 
 \textbf{Important caveat:} The comparison above used cubic Hermite splines vs [3/1] rational approximants. A careful analysis reveals this was \textbf{unfair to the polynomial method}:
 
