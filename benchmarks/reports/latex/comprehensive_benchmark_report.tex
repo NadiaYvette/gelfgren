@@ -1882,6 +1882,127 @@ When extended to piecewise formulations, rational collocation should excel at:
   \end{itemize}
 \end{enumerate}
 
+\subsection{Comparison Against State-of-the-Art Methods}
+\label{sec:future-sota-comparison}
+
+\paragraph{Critical Gap in Current Benchmarks:}
+
+The present study compares rational collocation against \textbf{second-order centered
+finite differences} ($O(h^2)$ convergence), which represents the most basic standard
+method for BVPs. While this establishes that rational collocation achieves spectral
+convergence and validates the implementation, it does not address a fundamental question:
+\textbf{How does rational collocation compare against state-of-the-art high-accuracy
+polynomial methods?}
+
+The dramatic ``2,000,000$\times$ improvement'' reported for smooth problems is
+impressive but potentially misleading, as it compares a spectral-convergence method
+against an $O(h^2)$ baseline. Any spectral method would show similar dramatic
+improvements over basic finite differences on smooth problems.
+
+\paragraph{Missing Comparisons:}
+
+Future work should benchmark rational collocation against competitive high-accuracy methods:
+
+\begin{enumerate}
+\item \textbf{Polynomial Spectral Methods} (Chebyshev/Legendre Collocation)
+  \begin{itemize}
+  \item \textbf{Also achieve spectral convergence} for smooth problems
+  \item Industry standard for high-accuracy smooth BVPs
+  \item \textbf{Direct competitor} to rational collocation
+  \item Implementation note: Current rational solver uses Chebyshev collocation
+    points but does not compare against polynomial Chebyshev spectral methods!
+  \item Expected outcome: Polynomial spectral methods likely competitive for
+    generic smooth problems; rationals may excel for problems with near-poles
+    or sharp gradients
+  \end{itemize}
+
+\item \textbf{High-Order Finite Differences}
+  \begin{itemize}
+  \item 4th-order compact schemes: $O(h^4)$ convergence
+  \item 6th-order schemes: $O(h^6)$ convergence
+  \item Much more competitive than $O(h^2)$ baseline
+  \item Would establish \emph{quantitative} advantage of rational methods over
+    practical high-accuracy polynomial discretizations
+  \end{itemize}
+
+\item \textbf{High-Order Finite Elements}
+  \begin{itemize}
+  \item Cubic elements: $O(h^4)$ with h-refinement
+  \item p-refinement: exponential convergence with polynomial degree increase
+  \item hp-adaptive methods: combine both strategies
+  \item Well-established theory and robust implementations
+  \end{itemize}
+
+\item \textbf{Actual Cubic Splines}
+  \begin{itemize}
+  \item Report mentions cubic splines in theory ($O(h^4)$)
+  \item But \emph{implementation uses finite differences, not splines}
+  \item Should benchmark against true cubic spline collocation
+  \end{itemize}
+\end{enumerate}
+
+\paragraph{Expected Insights from Fair Comparison:}
+
+Comparing rational collocation against spectral and high-order polynomial methods would:
+
+\begin{itemize}
+\item \textbf{Quantify actual advantage}: The ``2M$\times$'' improvement would likely
+  shrink to more modest factors when compared against spectral polynomial methods
+
+\item \textbf{Identify rational method niche}: Clarify when rationals provide
+  genuine advantages beyond what polynomial spectral methods offer
+
+\item \textbf{Characterize near-pole performance}: Test hypothesis that rationals
+  excel for problems with near-singularities or sharp gradients where polynomial
+  spectral methods struggle
+
+\item \textbf{Assess robustness trade-offs}: Polynomial spectral methods offer
+  superior robustness (no spurious poles); quantify accuracy gained vs robustness lost
+
+\item \textbf{Guide hybrid method development}: Inform design of methods combining
+  polynomial spectral robustness with rational near-pole accuracy
+\end{itemize}
+
+\paragraph{Recommended Benchmark Problems:}
+
+\begin{enumerate}
+\item \textbf{Generic smooth BVP}: $-u'' = \pi^2 \sin(\pi x)$ (current)
+  \begin{itemize}
+  \item Expected: Polynomial spectral methods nearly equivalent to rationals
+  \item Would deflate dramatic improvement factor
+  \end{itemize}
+
+\item \textbf{Near-pole problem}: $-u'' = f(x)$ with solution $u(x) = \frac{1}{1+25x^2}$
+  \begin{itemize}
+  \item Runge phenomenon: polynomial interpolation fails
+  \item Rationals should dramatically outperform polynomial spectral methods
+  \item Quantifies genuine rational advantage
+  \end{itemize}
+
+\item \textbf{Boundary layer}: $-\varepsilon u'' + u' = 1$ with small $\varepsilon$
+  \begin{itemize}
+  \item Sharp gradient near boundary
+  \item Tests rational performance on near-singular features
+  \end{itemize}
+
+\item \textbf{Smooth but challenging}: $-u'' = e^{-50(x-0.5)^2}$
+  \begin{itemize}
+  \item Narrow Gaussian forcing
+  \item All methods should converge, but at different rates
+  \end{itemize}
+\end{enumerate}
+
+\paragraph{Implementation Priority:}
+
+This comparison represents \textbf{critical future work} for establishing the true
+value proposition of rational collocation methods. Without comparisons against
+competitive high-accuracy polynomial methods, the current benchmarks risk overstating
+rational method advantages for generic smooth problems while understating advantages
+for problems where rationals genuinely excel (near-poles, boundary layers).
+
+\textbf{Recommendation:} Implement Chebyshev pseudospectral method as next baseline
+before claiming definitive superiority of rational methods for smooth BVPs.
+
 \chapter{Conclusions}
 \label{chap:conclusions}
 
