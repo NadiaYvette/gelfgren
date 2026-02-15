@@ -12,6 +12,25 @@ The Helmholtz equation $-u'' + k^2 u = f(x)$ on $[0,1]$ with boundary conditions
 \item \textbf{H5}: Polynomial solution (tests rational overhead without advantage)
 \end{itemize}
 
+\section{Test Problem Solutions}
+
+Before analyzing convergence results, we first visualize the exact solutions to understand problem characteristics.
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.48\textwidth}
+\centering
+\includegraphics[width=\textwidth]{../figures/solutions/Helmholtz_Sin_k1_solution.pdf}
+\end{minipage}
+\hfill
+\begin{minipage}{0.48\textwidth}
+\centering
+\includegraphics[width=\textwidth]{../figures/solutions/Helmholtz_Exp_k4_solution.pdf}
+\end{minipage}
+\caption{Helmholtz test problem solutions: (left) smooth sine $u(x) = \sin(\pi x)$, (right) exponential-oscillatory $u(x) = e^{-2x}\sin(2\pi x)$. Both are smooth throughout the domain.}
+\label{fig:helmholtz_solutions}
+\end{figure}
+
 \section{Results: Helmholtz $k^2=1$ (H1)}
 
 \subsection{Convergence Plot}
@@ -100,6 +119,17 @@ on $[0,1]$ models convection-dominated transport. The Péclet number $\text{Pe} 
 \item \textbf{AD4}: Interior layer (turning point)
 \item \textbf{AD5}: Smooth advection-dominated (no layer)
 \end{itemize}
+
+\subsection{Visualizing the Boundary Layer}
+
+Figure~\ref{fig:advdiff_bl_solution} shows the sharp exponential boundary layer at $x=0$. The solution drops from 1 to nearly 0 within distance $\varepsilon = 0.001$, creating an extreme gradient that rational methods cannot represent.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{../figures/solutions/AdvDiff_Sharp_eps0.001_boundary_layer.pdf}
+\caption{Sharp boundary layer solution for $\varepsilon=0.001$: (left) full domain showing rapid transition, (right) zoomed view revealing exponentially thin layer of thickness $\sim 0.001$. This extreme localized gradient causes rational methods to fail catastrophically.}
+\label{fig:advdiff_bl_solution}
+\end{figure}
 
 \section{CRITICAL: Sharp Boundary Layer ($\varepsilon = 0.001$)}
 
@@ -234,6 +264,25 @@ on $[0,1]$ models chemical reactions, population dynamics, and damped oscillatio
 \item \textbf{RD5}: Polynomial (no rational advantage)
 \end{itemize}
 
+\subsection{Visualizing Smooth Exponential Solutions}
+
+Unlike advection-diffusion boundary layers, reaction-diffusion solutions are smooth everywhere. Figure~\ref{fig:reacdiff_solutions} shows the exponential growth is moderate and continuous.
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.48\textwidth}
+\centering
+\includegraphics[width=\textwidth]{../figures/solutions/ReacDiff_Exp_c10_solution.pdf}
+\end{minipage}
+\hfill
+\begin{minipage}{0.48\textwidth}
+\centering
+\includegraphics[width=\textwidth]{../figures/solutions/ReacDiff_Polynomial_c4_solution.pdf}
+\end{minipage}
+\caption{Reaction-diffusion solutions: (left) smooth exponential $\sinh(\sqrt{10}x)/\sinh(\sqrt{10})$ with $c=10$, (right) polynomial $x^2(1-x)^2$. Both are smooth with bounded derivatives—ideal for rational approximation.}
+\label{fig:reacdiff_solutions}
+\end{figure}
+
 \section{Results: Exponential Layers ($c = 10$)}
 
 \subsection{Rationals Excel on Smooth Exponentials}
@@ -359,6 +408,17 @@ on $[0,1]$ models diffusion with spatially varying conductivity. The coefficient
 \item \textbf{VC4}: $a(x) = 2 + \sin(20\pi x)$ (rapidly oscillating)
 \item \textbf{VC5}: $a(x) = \sqrt{x + 0.01}$ (near-singular at $x=0$)
 \end{itemize}
+
+\subsection{Visualizing Discontinuous Coefficient Solution}
+
+Figure~\ref{fig:varcoeff_disc_solution} shows the solution with discontinuous coefficient. While $u$ and $u'$ are continuous, the change in slope at $x=0.5$ reflects the coefficient jump. The second derivative $u''$ is discontinuous, creating a fundamental obstacle for rational approximation.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{../figures/solutions/VarCoeff_Discontinuous_solution.pdf}
+\caption{Variable coefficient solution with jump at $x=0.5$: coefficient $a(x)$ jumps from 1 to 10. Solution $u$ and $u'$ are continuous but $u''$ is discontinuous. This non-smoothness causes rational methods to fail catastrophically.}
+\label{fig:varcoeff_disc_solution}
+\end{figure}
 
 \section{CRITICAL: Discontinuous Coefficient}
 

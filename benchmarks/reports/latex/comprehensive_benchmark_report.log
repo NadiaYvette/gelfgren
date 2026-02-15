@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2026.2.13)  15 FEB 2026 15:12
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2026.2.13)  15 FEB 2026 15:28
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1081,7 +1081,7 @@ Overfull \hbox (30.79698pt too wide) in paragraph at lines 607--631
 [18
 
 ] [19]
-<../figures/Smooth_Poisson_sin.pdf, id=1092, 860.4871pt x 352.39017pt>
+<../figures/Smooth_Poisson_sin.pdf, id=1112, 860.4871pt x 352.39017pt>
 File: ../figures/Smooth_Poisson_sin.pdf Graphic file (type pdf)
 <use ../figures/Smooth_Poisson_sin.pdf>
 Package pdftex.def Info: ../figures/Smooth_Poisson_sin.pdf  used on input line 
@@ -1093,7 +1093,7 @@ Overfull \hbox (14.52681pt too wide) in paragraph at lines 695--718
  []
 
 [20 <../figures/Smooth_Poisson_sin.pdf>] [21]
-<../figures/Discontinuous_Poisson.pdf, id=1156, 860.70522pt x 352.39017pt>
+<../figures/Discontinuous_Poisson.pdf, id=1176, 860.70522pt x 352.39017pt>
 File: ../figures/Discontinuous_Poisson.pdf Graphic file (type pdf)
 <use ../figures/Discontinuous_Poisson.pdf>
 Package pdftex.def Info: ../figures/Discontinuous_Poisson.pdf  used on input li
@@ -1118,7 +1118,7 @@ Overfull \hbox (48.97716pt too wide) in paragraph at lines 783--806
  []
 
 [23]
-<../figures/Oscillatory_Poisson_ω=10.0.pdf, id=1225, 860.70522pt x 352.39017pt
+<../figures/Oscillatory_Poisson_ω=10.0.pdf, id=1245, 860.70522pt x 352.39017pt
 >
 File: ../figures/Oscillatory_Poisson_ω=10.0.pdf Graphic file (type pdf)
 <use ../figures/Oscillatory_Poisson_ω=10.0.pdf>
@@ -1178,7 +1178,7 @@ cal vari-a-tions by re-fin-ing mesh,
  []
 
 [36] [37]
-<../figures/degree_strategy_comparison.pdf, id=1391, 1004.2028pt x 715.73146pt>
+<../figures/degree_strategy_comparison.pdf, id=1411, 1004.2028pt x 715.73146pt>
 
 File: ../figures/degree_strategy_comparison.pdf Graphic file (type pdf)
 <use ../figures/degree_strategy_comparison.pdf>
@@ -1356,229 +1356,290 @@ Overfull \hbox (53.06108pt too wide) in paragraph at lines 2851--2851
 
 (./extended_chapters_clean.tex [76]
 Appendix D.
+<../figures/solutions/Helmholtz_Sin_k1_solution.pdf, id=1806, 716.27727pt x 426
+.65146pt>
+File: ../figures/solutions/Helmholtz_Sin_k1_solution.pdf Graphic file (type pdf
+)
+<use ../figures/solutions/Helmholtz_Sin_k1_solution.pdf>
+Package pdftex.def Info: ../figures/solutions/Helmholtz_Sin_k1_solution.pdf  us
+ed on input line 23.
+(pdftex.def)             Requested size: 172.79846pt x 102.92575pt.
+<../figures/solutions/Helmholtz_Exp_k4_solution.pdf, id=1807, 716.28229pt x 426
+.65146pt>
+File: ../figures/solutions/Helmholtz_Exp_k4_solution.pdf Graphic file (type pdf
+)
+<use ../figures/solutions/Helmholtz_Exp_k4_solution.pdf>
+Package pdftex.def Info: ../figures/solutions/Helmholtz_Exp_k4_solution.pdf  us
+ed on input line 28.
+(pdftex.def)             Requested size: 172.79846pt x 102.92575pt.
+[77
+
+]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 15.
+(hyperref)                removing `math shift' on input line 34.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 15.
+(hyperref)                removing `superscript' on input line 34.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 15.
+(hyperref)                removing `math shift' on input line 34.
 
-<../figures/extended_benchmark/Helmholtz_Sin_k1_convergence.pdf, id=1787, 715.9
+<../figures/extended_benchmark/Helmholtz_Sin_k1_convergence.pdf, id=1813, 715.9
 4711pt x 495.92642pt>
 File: ../figures/extended_benchmark/Helmholtz_Sin_k1_convergence.pdf Graphic fi
 le (type pdf)
 <use ../figures/extended_benchmark/Helmholtz_Sin_k1_convergence.pdf>
 Package pdftex.def Info: ../figures/extended_benchmark/Helmholtz_Sin_k1_converg
-ence.pdf  used on input line 23.
+ence.pdf  used on input line 42.
 (pdftex.def)             Requested size: 323.9978pt x 224.42856pt.
-[77
-
-]
-<../figures/extended_benchmark/Helmholtz_Sin_k1_rates.pdf, id=1794, 716.2465pt 
+[78 <../figures/solutions/Helmholtz_Sin_k1_solution.pdf> <../figures/solutions/
+Helmholtz_Exp_k4_solution.pdf> <../figures/extended_benchmark/Helmholtz_Sin_k1_
+convergence.pdf>]
+<../figures/extended_benchmark/Helmholtz_Sin_k1_rates.pdf, id=2029, 716.2465pt 
 x 425.97841pt>
 File: ../figures/extended_benchmark/Helmholtz_Sin_k1_rates.pdf Graphic file (ty
 pe pdf)
 <use ../figures/extended_benchmark/Helmholtz_Sin_k1_rates.pdf>
 Package pdftex.def Info: ../figures/extended_benchmark/Helmholtz_Sin_k1_rates.p
-df  used on input line 39.
+df  used on input line 58.
 (pdftex.def)             Requested size: 323.9978pt x 192.696pt.
- [78 <../figures/extended_benchmark/Helmholtz_Sin_k1_convergence.pdf>]
-Overfull \hbox (16.37485pt too wide) in paragraph at lines 44--44
+
+Overfull \hbox (16.37485pt too wide) in paragraph at lines 63--63
 []\T1/cmr/bx/n/14.4 Results: Helmholtz Exponential-Oscillatory (H4) 
  []
 
-<../figures/extended_benchmark/Helmholtz_Exp_k4_convergence.pdf, id=1880, 716.1
+<../figures/extended_benchmark/Helmholtz_Exp_k4_convergence.pdf, id=2030, 716.1
 652pt x 495.92642pt>
 File: ../figures/extended_benchmark/Helmholtz_Exp_k4_convergence.pdf Graphic fi
 le (type pdf)
 <use ../figures/extended_benchmark/Helmholtz_Exp_k4_convergence.pdf>
 Package pdftex.def Info: ../figures/extended_benchmark/Helmholtz_Exp_k4_converg
-ence.pdf  used on input line 50.
+ence.pdf  used on input line 69.
 (pdftex.def)             Requested size: 323.9978pt x 224.36044pt.
-[79 <../figures/extended_benchmark/Helmholtz_Sin_k1_rates.pdf> <../figures/exte
-nded_benchmark/Helmholtz_Exp_k4_convergence.pdf>]
-Overfull \hbox (7.26678pt too wide) in paragraph at lines 73--74
+[79 <../figures/extended_benchmark/Helmholtz_Sin_k1_rates.pdf>]
+Overfull \hbox (7.26678pt too wide) in paragraph at lines 92--93
 []\T1/cmr/m/n/10.95 These re-sults con-firm that ra-tio-nals ex-cel in their in
 -tended do-main: smooth
  []
 
-[80]
+[80 <../figures/extended_benchmark/Helmholtz_Exp_k4_convergence.pdf>]
 Appendix E.
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 104.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\varepsilon' on input line 104.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 104.
-
 [81
 
 ]
-<../figures/extended_benchmark/AdvDiff_Sharp_eps0.001_convergence.pdf, id=2049,
+<../figures/solutions/AdvDiff_Sharp_eps0.001_boundary_layer.pdf, id=2199, 1005.
+35727pt x 358.15492pt>
+File: ../figures/solutions/AdvDiff_Sharp_eps0.001_boundary_layer.pdf Graphic fi
+le (type pdf)
+<use ../figures/solutions/AdvDiff_Sharp_eps0.001_boundary_layer.pdf>
+Package pdftex.def Info: ../figures/solutions/AdvDiff_Sharp_eps0.001_boundary_l
+ayer.pdf  used on input line 129.
+(pdftex.def)             Requested size: 323.9978pt x 115.42073pt.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 134.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\varepsilon' on input line 134.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 134.
+
+<../figures/extended_benchmark/AdvDiff_Sharp_eps0.001_convergence.pdf, id=2200,
  716.40236pt x 495.92642pt>
 File: ../figures/extended_benchmark/AdvDiff_Sharp_eps0.001_convergence.pdf Grap
 hic file (type pdf)
 <use ../figures/extended_benchmark/AdvDiff_Sharp_eps0.001_convergence.pdf>
 Package pdftex.def Info: ../figures/extended_benchmark/AdvDiff_Sharp_eps0.001_c
-onvergence.pdf  used on input line 118.
+onvergence.pdf  used on input line 148.
 (pdftex.def)             Requested size: 323.9978pt x 224.29234pt.
- [82 <../figures/extended_benchmark/AdvDiff_Sharp_eps0.001_convergence.pdf>]
-<../figures/extended_benchmark/AdvDiff_Sharp_eps0.001_rates.pdf, id=2136, 716.2
+[82 <../figures/solutions/AdvDiff_Sharp_eps0.001_boundary_layer.pdf>]
+<../figures/extended_benchmark/AdvDiff_Sharp_eps0.001_rates.pdf, id=2265, 716.2
 7034pt x 425.97841pt>
 File: ../figures/extended_benchmark/AdvDiff_Sharp_eps0.001_rates.pdf Graphic fi
 le (type pdf)
 <use ../figures/extended_benchmark/AdvDiff_Sharp_eps0.001_rates.pdf>
 Package pdftex.def Info: ../figures/extended_benchmark/AdvDiff_Sharp_eps0.001_r
-ates.pdf  used on input line 149.
+ates.pdf  used on input line 179.
 (pdftex.def)             Requested size: 323.9978pt x 192.6895pt.
-
-Overfull \hbox (2.88353pt too wide) in paragraph at lines 169--170
+ [83 <../figures/extended_benchmark/AdvDiff_Sharp_eps0.001_convergence.pdf>]
+Overfull \hbox (2.88353pt too wide) in paragraph at lines 199--200
 []\T1/cmr/bx/n/10.95 Global rep-re-sen-ta-tion\T1/cmr/m/n/10.95 : Ra-tio-nals a
 re \T1/cmr/bx/n/10.95 global \T1/cmr/m/n/10.95 ap-prox-i-mants; a bound-
  []
 
-[83 <../figures/extended_benchmark/AdvDiff_Sharp_eps0.001_rates.pdf>]
-Overfull \hbox (6.87343pt too wide) in paragraph at lines 176--177
+
+Overfull \hbox (6.87343pt too wide) in paragraph at lines 206--207
 []\T1/cmr/bx/n/10.95 High-order FD\T1/cmr/m/n/10.95 : Can re-solve with suf-fi-
 cient re-fine-ment ($\OML/cmm/m/it/10.95 n \OMS/cmsy/m/n/10.95 ^^U \OT1/cmr/m/n
 /10.95 80$ \T1/cmr/m/n/10.95 achieves
  []
 
-[84] [85]
+[84 <../figures/extended_benchmark/AdvDiff_Sharp_eps0.001_rates.pdf>] [85]
+[86]
 Appendix F.
+<../figures/solutions/ReacDiff_Exp_c10_solution.pdf, id=2451, 716.27727pt x 426
+.65146pt>
+File: ../figures/solutions/ReacDiff_Exp_c10_solution.pdf Graphic file (type pdf
+)
+<use ../figures/solutions/ReacDiff_Exp_c10_solution.pdf>
+Package pdftex.def Info: ../figures/solutions/ReacDiff_Exp_c10_solution.pdf  us
+ed on input line 275.
+(pdftex.def)             Requested size: 172.79846pt x 102.92575pt.
+<../figures/solutions/ReacDiff_Polynomial_c4_solution.pdf, id=2452, 716.2465pt 
+x 426.65146pt>
+File: ../figures/solutions/ReacDiff_Polynomial_c4_solution.pdf Graphic file (ty
+pe pdf)
+<use ../figures/solutions/ReacDiff_Polynomial_c4_solution.pdf>
+Package pdftex.def Info: ../figures/solutions/ReacDiff_Polynomial_c4_solution.p
+df  used on input line 280.
+(pdftex.def)             Requested size: 172.79846pt x 102.93227pt.
+
+Underfull \hbox (badness 2478) in paragraph at lines 282--282
+[]\T1/cmr/m/n/10.95 Figure F.1: |Reaction-diffusion so-lu-tions: (left) smooth 
+ex-po-nen-tial
+ []
+
+[87
+
+]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 237.
+(hyperref)                removing `math shift' on input line 286.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 237.
+(hyperref)                removing `math shift' on input line 286.
 
-<../figures/extended_benchmark/ReacDiff_Exp_c10_convergence.pdf, id=2235, 715.9
+<../figures/extended_benchmark/ReacDiff_Exp_c10_convergence.pdf, id=2458, 715.9
 4711pt x 495.92642pt>
 File: ../figures/extended_benchmark/ReacDiff_Exp_c10_convergence.pdf Graphic fi
 le (type pdf)
 <use ../figures/extended_benchmark/ReacDiff_Exp_c10_convergence.pdf>
 Package pdftex.def Info: ../figures/extended_benchmark/ReacDiff_Exp_c10_converg
-ence.pdf  used on input line 243.
+ence.pdf  used on input line 292.
 (pdftex.def)             Requested size: 323.9978pt x 224.42856pt.
-[86
-
-]
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 272.
-
+[88 <../figures/solutions/ReacDiff_Exp_c10_solution.pdf> <../figures/solutions/
+ReacDiff_Polynomial_c4_solution.pdf> <../figures/extended_benchmark/ReacDiff_Ex
+p_c10_convergence.pdf>]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 272.
+(hyperref)                removing `math shift' on input line 321.
 
-<../figures/extended_benchmark/ReacDiff_Polynomial_c4_convergence.pdf, id=2240,
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 321.
+
+<../figures/extended_benchmark/ReacDiff_Polynomial_c4_convergence.pdf, id=2671,
  715.71002pt x 495.92642pt>
 File: ../figures/extended_benchmark/ReacDiff_Polynomial_c4_convergence.pdf Grap
 hic file (type pdf)
 <use ../figures/extended_benchmark/ReacDiff_Polynomial_c4_convergence.pdf>
 Package pdftex.def Info: ../figures/extended_benchmark/ReacDiff_Polynomial_c4_c
-onvergence.pdf  used on input line 278.
+onvergence.pdf  used on input line 327.
 (pdftex.def)             Requested size: 323.9978pt x 224.50423pt.
-[87 <../figures/extended_benchmark/ReacDiff_Exp_c10_convergence.pdf>]
-Overfull \hbox (28.76534pt too wide) in paragraph at lines 306--306
+[89 <../figures/extended_benchmark/ReacDiff_Polynomial_c4_convergence.pdf>]
+Overfull \hbox (28.76534pt too wide) in paragraph at lines 355--355
 []\T1/cmr/bx/n/14.4 Why Ra-tio-nals Ex-cel Here (vs Advection-Diffusion) 
  []
 
-[88 <../figures/extended_benchmark/ReacDiff_Polynomial_c4_convergence.pdf>]
-[89]
+[90] [91]
 Appendix G.
-[90
+<../figures/solutions/VarCoeff_Discontinuous_solution.pdf, id=2774, 716.28229pt
+ x 426.65146pt>
+File: ../figures/solutions/VarCoeff_Discontinuous_solution.pdf Graphic file (ty
+pe pdf)
+<use ../figures/solutions/VarCoeff_Discontinuous_solution.pdf>
+Package pdftex.def Info: ../figures/solutions/VarCoeff_Discontinuous_solution.p
+df  used on input line 418.
+(pdftex.def)             Requested size: 251.9989pt x 150.10495pt.
+[92
 
 ]
-<../figures/extended_benchmark/VarCoeff_Discontinuous_convergence.pdf, id=2429,
+<../figures/extended_benchmark/VarCoeff_Discontinuous_convergence.pdf, id=2780,
  716.76633pt x 495.92642pt>
 File: ../figures/extended_benchmark/VarCoeff_Discontinuous_convergence.pdf Grap
 hic file (type pdf)
 <use ../figures/extended_benchmark/VarCoeff_Discontinuous_convergence.pdf>
 Package pdftex.def Info: ../figures/extended_benchmark/VarCoeff_Discontinuous_c
-onvergence.pdf  used on input line 381.
+onvergence.pdf  used on input line 441.
 (pdftex.def)             Requested size: 323.9978pt x 224.17126pt.
-<../figures/extended_benchmark/critical_failures.pdf, id=2430, 1004.35896pt x 4
+ [93 <../figures/solutions/VarCoeff_Discontinuous_solution.pdf>]
+<../figures/extended_benchmark/critical_failures.pdf, id=2861, 1004.35896pt x 4
 45.65128pt>
 File: ../figures/extended_benchmark/critical_failures.pdf Graphic file (type pd
 f)
 <use ../figures/extended_benchmark/critical_failures.pdf>
 Package pdftex.def Info: ../figures/extended_benchmark/critical_failures.pdf  u
-sed on input line 411.
+sed on input line 471.
 (pdftex.def)             Requested size: 323.9978pt x 143.76053pt.
- [91 <../figures/extended_benchmark/VarCoeff_Discontinuous_convergence.pdf>] [9
-2 <../figures/extended_benchmark/critical_failures.pdf>] [93]
+ [94 <../figures/extended_benchmark/VarCoeff_Discontinuous_convergence.pdf>] [9
+5 <../figures/extended_benchmark/critical_failures.pdf>] [96]
 Appendix H.
 
-Overfull \hbox (42.05188pt too wide) in paragraph at lines 496--509
+Overfull \hbox (42.05188pt too wide) in paragraph at lines 556--569
  [][] 
  []
 
-[94
+[97
 
 ]
 File: ../figures/extended_benchmark/Helmholtz_Sin_k1_convergence.pdf Graphic fi
 le (type pdf)
 <use ../figures/extended_benchmark/Helmholtz_Sin_k1_convergence.pdf>
 Package pdftex.def Info: ../figures/extended_benchmark/Helmholtz_Sin_k1_converg
-ence.pdf  used on input line 546.
+ence.pdf  used on input line 606.
 (pdftex.def)             Requested size: 323.9978pt x 224.42856pt.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 551.
+(hyperref)                removing `math shift' on input line 611.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 551.
+(hyperref)                removing `superscript' on input line 611.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 551.
+(hyperref)                removing `math shift' on input line 611.
 
-[95] [96] [97]
-Overfull \hbox (1.64093pt too wide) in paragraph at lines 619--620
+[98] [99] [100]
+Overfull \hbox (1.64093pt too wide) in paragraph at lines 679--680
 []\T1/cmr/m/n/10.95 Rational achieves slightly bet-ter ac-cu-racy (ma-chine pre
 -ci-sion with fewer
  []
 
-[98] [99]
+[101] [102]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 721.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\times' on input line 721.
+(hyperref)                removing `math shift' on input line 781.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 721.
+(hyperref)                removing `\times' on input line 781.
 
-[100]) [101] [102
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 781.
+
+[103]) [104] [105
 
 ] (./comprehensive_benchmark_report.aux)
 Package rerunfilecheck Info: File `comprehensive_benchmark_report.out' has not 
 changed.
-(rerunfilecheck)             Checksum: 8AD80704FECA767864046E5C399A1181;33393.
+(rerunfilecheck)             Checksum: 18E925831DF8E9FD115240E093CFC785;34362.
  ) 
 Here is how much of TeX's memory you used:
- 40578 strings out of 476041
- 972610 string characters out of 5793174
+ 40644 strings out of 476041
+ 975549 string characters out of 5793174
  1872388 words of memory out of 6000000
- 59859 multiletter control sequences out of 15000+600000
+ 59907 multiletter control sequences out of 15000+600000
  542416 words of font info for 107 fonts, out of 8000000 for 9000
  1137 hyphenation exceptions out of 8191
  84i,13n,89p,748b,1051s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1616,11 +1677,11 @@ cm-super/sfti0900.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-supe
 r/sfti1095.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sftt1
 095.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sftt1200.pfb
 >
-Output written on comprehensive_benchmark_report.pdf (105 pages, 1061962 bytes)
+Output written on comprehensive_benchmark_report.pdf (108 pages, 1167474 bytes)
 .
 PDF statistics:
- 2948 PDF objects out of 2984 (max. 8388607)
- 1893 compressed objects within 19 object streams
- 580 named destinations out of 1000 (max. 500000)
- 1534 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 3381 PDF objects out of 3580 (max. 8388607)
+ 1985 compressed objects within 20 object streams
+ 591 named destinations out of 1000 (max. 500000)
+ 1596 words of extra memory for PDF output out of 10000 (max. 10000000)
 
