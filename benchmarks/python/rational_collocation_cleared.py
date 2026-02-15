@@ -30,11 +30,16 @@ class RationalCollocationCleared:
     """
     Rational collocation BVP solver using cleared form.
 
-    Solves: -u'' = f(x) on [a,b] with u(a) = alpha, u(b) = beta
+    Solves general 2nd-order BVPs on [a,b]:
+        -ε*u'' + b*u' + c*u + k²*u = f(x)   (constant coefficients)
+        -(a(x)*u')' = f(x)                   (variable coefficient)
+
+    With boundary conditions: u(a) = alpha, u(b) = beta
     Using rational approximant u(x) = P(x)/Q(x)
 
-    Cleared form: Multiply ODE by Q² to eliminate divisions:
-    Q² · P'' - 2Q · Q' · P' + (2Q'² - Q · Q'') · P = -Q³ · f
+    Cleared form: Multiply ODE by Q³ to eliminate divisions:
+    -ε*Q²*P'' + (2ε*Q*Q' + b*Q²)*P' +
+    (ε*Q*Q'' - 2ε*Q'² - b*Q*Q' + (c + k²)*Q²)*P = Q³*f
     """
 
     def __init__(self, f: Callable[[float], float],
@@ -43,7 +48,12 @@ class RationalCollocationCleared:
                  n: int, m: int,
                  num_collocation_points: int = None,
                  q_constraint: QConstraintType = QConstraintType.ENDPOINT,
-                 constraint_epsilon: float = 1e-3):
+                 constraint_epsilon: float = 1e-3,
+                 epsilon: float = 1.0,
+                 b_coeff: float = 0.0,
+                 c_coeff: float = 0.0,
+                 k_squared: float = 0.0,
+                 a_func: Callable[[float], float] = None):
         """
         Parameters
         ----------
@@ -64,6 +74,22 @@ class RationalCollocationCleared:
         constraint_epsilon : float, optional
             Minimum value for constrained Q coefficients
             Default: 1e-3
+        epsilon : float, optional
+            Diffusion coefficient (default 1.0)
+            Operator: -epsilon * u''
+        b_coeff : float, optional
+            Advection coefficient (default 0.0)
+            Operator: +b_coeff * u'
+        c_coeff : float, optional
+            Reaction coefficient (default 0.0)
+            Operator: +c_coeff * u
+        k_squared : float, optional
+            Helmholtz parameter (default 0.0)
+            Operator: +k_squared * u
+        a_func : callable, optional
+            Variable diffusion coefficient a(x) (default None)
+            Operator: -(a(x) * u')'
+            If provided, epsilon is ignored
         """
         self.f = f
         self.a = a
@@ -74,6 +100,11 @@ class RationalCollocationCleared:
         self.m = m
         self.q_constraint = q_constraint
         self.constraint_epsilon = constraint_epsilon
+        self.epsilon = epsilon
+        self.b_coeff = b_coeff
+        self.c_coeff = c_coeff
+        self.k_squared = k_squared
+        self.a_func = a_func
 
         # Determine number of collocation points
         # For cleared form, need k = n + m - 1 for square system
@@ -126,8 +157,13 @@ class RationalCollocationCleared:
         """
         Evaluate residuals for cleared form.
 
-        Cleared form equation at each collocation point:
-        Q² · P'' - 2Q · Q' · P' + (2Q'² - Q · Q'') · P = -Q³ · f
+        General operator: -ε*u'' + b*u' + (c + k²)*u = f
+
+        Cleared form equation (multiply by Q³):
+        -ε*Q²*P'' + (2ε*Q*Q' + b*Q²)*P' +
+        (ε*Q*Q'' - 2ε*Q'² - b*Q*Q' + (c + k²)*Q²)*P = Q³*f
+
+        For variable coefficient -(a(x)*u')' = f, use different formulation.
 
         Plus boundary conditions:
         P(a) = Q(a) · alpha
@@ -160,11 +196,28 @@ class RationalCollocationCleared:
             Qx = BernsteinBasis.derivative(Q_coeffs, xi, self.a, self.b, 1)
             Qxx = BernsteinBasis.derivative(Q_coeffs, xi, self.a, self.b, 2)
 
-            # Cleared form: Q² · P'' - 2Q · Q' · P' + (2Q'² - Q · Q'') · P = -Q³ · f
-            res = (Q**2 * Pxx -
-                   2 * Q * Qx * Px +
-                   (2 * Qx**2 - Q * Qxx) * P +
-                   Q**3 * self.f(xi))
+            if self.a_func is not None:
+                # Variable coefficient case: -(a(x)*u')' = f
+                # Cleared form: -a(x)*[Q²*P'' - 2Q*Q'*P' + (2Q'² - Q*Q'')*P] -
+                #               a'(x)*Q²*[P'*Q - P*Q'] = Q⁴*f
+                a_val = self.a_func(xi)
+                # Approximate a'(x) with finite difference (or could add as parameter)
+                h = 1e-8
+                a_prime = (self.a_func(xi + h) - self.a_func(xi - h)) / (2 * h)
+
+                res = (-a_val * (Q**2 * Pxx - 2 * Q * Qx * Px + (2 * Qx**2 - Q * Qxx) * P) -
+                       a_prime * Q**2 * (Px * Q - P * Qx) -
+                       Q**4 * self.f(xi))
+            else:
+                # General constant coefficient case
+                # -ε*Q²*P'' + (2ε*Q*Q' + b*Q²)*P' +
+                # (ε*Q*Q'' - 2ε*Q'² - b*Q*Q' + (c + k²)*Q²)*P = Q³*f
+                res = (-self.epsilon * Q**2 * Pxx +
+                       (2 * self.epsilon * Q * Qx + self.b_coeff * Q**2) * Px +
+                       (self.epsilon * Q * Qxx - 2 * self.epsilon * Qx**2 -
+                        self.b_coeff * Q * Qx + (self.c_coeff + self.k_squared) * Q**2) * P -
+                       Q**3 * self.f(xi))
+
             residuals.append(res)
 
         return np.array(residuals)
