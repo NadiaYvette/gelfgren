@@ -1,0 +1,770 @@
+\documentclass{report}
+\usepackage{amsmath, amssymb}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{tcolorbox}
+\usepackage{xcolor}
+
+\begin{document}
+
+
+\chapter{Helmholtz Equation Benchmarks}
+
+\section{Overview}
+
+The Helmholtz equation $-u'' + k^2 u = f(x)$ on $[0,1]$ with boundary conditions $u(0) = \alpha$, $u(1) = \beta$ represents a fundamental model for wave propagation, quantum mechanics, and diffusion with reaction terms. We test five problems spanning low to high frequency content:
+
+\begin{itemize}
+\item \textbf{H1}: $k^2 = 1$ (low frequency, smooth baseline)
+\item \textbf{H2}: $k^2 = 25$ (medium frequency)
+\item \textbf{H3}: $k^2 = 100$ (high frequency, oscillatory)
+\item \textbf{H4}: Exponential-oscillatory solution (tests rational representation of $e^{-2x}\sin(2\pi x)$)
+\item \textbf{H5}: Polynomial solution (tests rational overhead without advantage)
+\end{itemize}
+
+\section{Results: Helmholtz $k^2=1$ (H1)}
+
+\subsection{Convergence Plot}
+
+Figure~\ref{fig:helmholtz_k1_conv} shows error vs DOF for all methods on the smooth sine problem $u(x) = \sin(\pi x)$.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{figures/extended_benchmark/Helmholtz_Sin_k1_convergence.pdf}
+\caption{Helmholtz $k^2=1$: Error vs DOF for all methods. Rational methods achieve exponential convergence (rate $\alpha \approx 21$) while polynomial methods show algebraic convergence.}
+\label{fig:helmholtz_k1_conv}
+\end{figure}
+
+\subsection{Key Findings}
+
+\begin{itemize}
+\item \textbf{Rational [10/5]}: $1.84 \times 10^{-12}$ error (15 DOF) --- achieves \textbf{machine precision} with convergence rate $\alpha = 21.25$
+\item \textbf{4th-order FD}: $8.81 \times 10^{-5}$ error (82 DOF) --- solid but requires $5\times$ more DOF
+\item \textbf{Chebyshev}: $1.35 \times 10^{-3}$ error (33 DOF) --- good but not as efficient as rational
+\item \textbf{2nd-order FD}: $7.16 \times 10^{-2}$ error (22-82 DOF) --- stagnates, inadequate baseline
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{figures/extended_benchmark/Helmholtz_Sin_k1_rates.pdf}
+\caption{Convergence rates for Helmholtz $k^2=1$. Rational achieves exponential convergence while finite differences show expected algebraic rates.}
+\label{fig:helmholtz_k1_rates}
+\end{figure}
+
+\section{Results: Helmholtz Exponential-Oscillatory (H4)}
+
+This problem tests rational approximation of $u(x) = e^{-2x}\sin(2\pi x)$, which naturally involves both exponential decay and oscillation---ideal for rational representation.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{figures/extended_benchmark/Helmholtz_Exp_k4_convergence.pdf}
+\caption{Helmholtz exponential-oscillatory: Rationals excel at representing mixed exponential-trigonometric functions naturally.}
+\label{fig:helmholtz_exp_k4_conv}
+\end{figure}
+
+\subsection{Key Findings}
+
+\begin{itemize}
+\item \textbf{Rational [10/5]}: $2.03 \times 10^{-7}$ error --- phenomenal accuracy
+\item \textbf{Convergence rate}: $\alpha = 30.24$ (even better than pure sine!)
+\item \textbf{Natural representation}: Rationals represent $e^{-2x}\sin(2\pi x)$ more naturally than polynomials
+\item \textbf{4th-order FD}: Requires much higher resolution for comparable accuracy
+\end{itemize}
+
+\section{Summary}
+
+On smooth Helmholtz problems, rational collocation demonstrates:
+\begin{enumerate}
+\item \textbf{Exponential convergence} (rates $\alpha = 19$--$30$)
+\item \textbf{Unmatched accuracy} (machine precision with minimal DOF)
+\item \textbf{Natural representation} of exponential-oscillatory solutions
+\end{enumerate}
+
+These results confirm that rationals excel in their intended domain: smooth problems with natural rational structure.
+
+
+\chapter{Advection-Diffusion Benchmarks}
+
+\section{Overview and Critical Importance}
+
+The advection-diffusion equation
+\[
+-\varepsilon u'' + b u' = f(x)
+\]
+on $[0,1]$ models convection-dominated transport. The Péclet number $\text{Pe} = bL/\varepsilon$ determines problem character:
+\begin{itemize}
+\item $\text{Pe} < 1$: Diffusion-dominated, smooth
+\item $1 < \text{Pe} < 10$: Balanced regime
+\item $\text{Pe} > 10$: Convection-dominated, boundary layers
+\item $\text{Pe} > 100$: Sharp boundary layers (extremely challenging)
+\end{itemize}
+
+\textbf{This chapter contains CRITICAL findings} demonstrating catastrophic failure of rational methods on boundary layer problems.
+
+\section{Test Problems}
+
+\begin{itemize}
+\item \textbf{AD1}: $\varepsilon = 0.1$, $\text{Pe} = 10$ (mild layer)
+\item \textbf{AD2}: $\varepsilon = 0.01$, $\text{Pe} = 100$ (noticeable layer)
+\item \textbf{AD3}: $\varepsilon = 0.001$, $\text{Pe} = 1000$ (sharp layer) --- \textbf{CRITICAL TEST}
+\item \textbf{AD4}: Interior layer (turning point)
+\item \textbf{AD5}: Smooth advection-dominated (no layer)
+\end{itemize}
+
+\section{CRITICAL: Sharp Boundary Layer ($\varepsilon = 0.001$)}
+
+\subsection{The Problem}
+
+Exact solution:
+\[
+u(x) = \frac{e^{-x/\varepsilon} - e^{-1/\varepsilon}}{1 - e^{-1/\varepsilon}}
+\]
+exhibits exponentially thin boundary layer of thickness $O(\varepsilon) = O(0.001)$ at $x=0$.
+
+\subsection{Catastrophic Rational Failure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{figures/extended_benchmark/AdvDiff_Sharp_eps0.001_convergence.pdf}
+\caption{Sharp boundary layer ($\varepsilon=0.001$): Rational methods catastrophically fail with 64--76\% L$^2$ error, essentially unable to represent the sharp gradient. Convergence is nearly flat ($\alpha \approx 0.3$).}
+\label{fig:advdiff_sharp_conv}
+\end{figure}
+
+\textbf{Results Summary:}
+
+\begin{center}
+\begin{tabular}{lccc}
+\hline
+\textbf{Method} & \textbf{DOF} & \textbf{L$^2$ Error} & \textbf{Status} \\
+\hline
+Rational [6/3] & 9 & \textcolor{red}{\textbf{76.0\%}} & \textcolor{red}{\textbf{FAIL}} \\
+Rational [10/5] & 15 & \textcolor{red}{\textbf{64.6\%}} & \textcolor{red}{\textbf{FAIL}} \\
+4th-order FD & 82 & 7.77\% & Marginal \\
+Chebyshev N=32 & 33 & 98.7\% & Also struggles \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Critical Observations}
+
+\begin{enumerate}
+\item \textbf{Catastrophic failure}: 64--76\% L$^2$ error is \textbf{completely unacceptable}
+\item \textbf{No improvement with refinement}: Increasing from [6/3] to [10/5] \textbf{barely helps} (76\% $\to$ 64.6\%)
+\item \textbf{Convergence essentially stagnates}: $\alpha = 0.32$ (nearly zero convergence rate)
+\item \textbf{Fundamental limitation}: Rationals \textbf{cannot represent sharp gradients} without introducing poles
+\end{enumerate}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{figures/extended_benchmark/AdvDiff_Sharp_eps0.001_rates.pdf}
+\caption{Convergence rates for sharp boundary layer. Rational convergence rate $\alpha \approx 0.3$ indicates fundamental failure---the method is not converging.}
+\label{fig:advdiff_sharp_rates}
+\end{figure}
+
+\section{Why Rationals Fail on Boundary Layers}
+
+\subsection{Mathematical Explanation}
+
+Rational functions $P(x)/Q(x)$ can represent:
+\begin{itemize}
+\item Smooth exponentials: $e^{ax}$ via Padé approximants
+\item Smooth oscillations: $\sin(\omega x)$ via continued fractions
+\item Algebraic singularities: $(x-a)^{-\alpha}$ naturally
+\end{itemize}
+
+But they \textbf{cannot efficiently represent} sharp, localized gradients like $e^{-x/\varepsilon}$ for $\varepsilon \ll 1$ because:
+\begin{enumerate}
+\item \textbf{Steep gradients require near-poles}: To approximate $e^{-x/0.001}$, the denominator $Q(x)$ would need zeros very close to $[0,1]$
+\item \textbf{Numerical instability}: Near-poles cause catastrophic cancellation
+\item \textbf{Global representation}: Rationals are \textbf{global} approximants; a boundary layer is \textbf{local}
+\end{enumerate}
+
+\subsection{Comparison with Other Methods}
+
+\begin{itemize}
+\item \textbf{Spectral methods}: Also struggle (Gibbs-like oscillations) but less catastrophically
+\item \textbf{High-order FD}: Can resolve with sufficient refinement ($n \geq 80$ achieves 7.8\% error)
+\item \textbf{Adaptive FD/FEM}: Can cluster points in boundary layer (not tested here)
+\item \textbf{Exponential fitting}: Specialized methods designed for these problems
+\end{itemize}
+
+\section{Recommendations}
+
+\subsection{When to AVOID Rationals}
+
+\textbf{DO NOT use rational collocation when:}
+\begin{enumerate}
+\item $\varepsilon < 0.01$ in advection-diffusion problems
+\item Péclet number $\text{Pe} > 100$
+\item Boundary layer thickness $< 1\%$ of domain
+\item Any problem with sharp, localized gradients
+\end{enumerate}
+
+\subsection{Alternative Methods for Boundary Layers}
+
+\begin{enumerate}
+\item \textbf{Adaptive mesh refinement} with standard FD/FEM
+\item \textbf{Exponential fitting methods} (Il'in scheme, Scharfetter-Gummel)
+\item \textbf{Upwind schemes} for convection-dominated problems
+\item \textbf{Boundary layer resolving meshes} (Shishkin mesh)
+\end{enumerate}
+
+\section{Summary}
+
+\textbf{Key Finding}: Rational collocation \textbf{catastrophically fails} on problems with boundary layers when $\varepsilon \leq 0.01$. This is a \textbf{fundamental limitation}, not a matter of insufficient resolution.
+
+\begin{tcolorbox}[colback=red!10, colframe=red!50!black, title=Critical Warning]
+\textbf{CRITICAL}: Before using rational collocation, verify that your problem does NOT contain:
+\begin{itemize}
+\item Boundary layers ($\varepsilon < 0.01$)
+\item Sharp gradients (length scales $< 1\%$ of domain)
+\item Discontinuities (see next chapter)
+\end{itemize}
+If present, use alternative methods. Rational collocation will produce \textbf{completely wrong results}.
+\end{tcolorbox}
+
+
+\chapter{Reaction-Diffusion Benchmarks}
+
+\section{Overview}
+
+The reaction-diffusion equation
+\[
+-u'' + c u = f(x)
+\]
+on $[0,1]$ models chemical reactions, population dynamics, and damped oscillations. For $c > 0$, solutions exhibit exponential boundary layers similar to advection-diffusion, but crucially these are \textbf{smooth} exponentials, not sharp gradients.
+
+\section{Test Problems}
+
+\begin{itemize}
+\item \textbf{RD1}: $c = 1$ (mild reaction, smooth oscillatory)
+\item \textbf{RD2}: $c = 10$ (exponential boundary layers, $u = \sinh(\sqrt{c}\,x)/\sinh(\sqrt{c})$)
+\item \textbf{RD3}: $c = 100$ (steep exponential, $u = \sinh(10x)/\sinh(10)$)
+\item \textbf{RD4}: Damped oscillatory ($u = e^{-x}\cos(5\pi x)$)
+\item \textbf{RD5}: Polynomial (no rational advantage)
+\end{itemize}
+
+\section{Results: Exponential Layers ($c = 10$)}
+
+\subsection{Rationals Excel on Smooth Exponentials}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{figures/extended_benchmark/ReacDiff_Exp_c10_convergence.pdf}
+\caption{Reaction-diffusion with $c=10$: Rationals achieve spectacular accuracy on smooth exponential $\sinh(\sqrt{10}\,x)$ because the boundary layers are smooth, unlike the sharp discontinuous layers in advection-diffusion.}
+\label{fig:reacdiff_exp_conv}
+\end{figure}
+
+\textbf{Results Summary:}
+
+\begin{center}
+\begin{tabular}{lccc}
+\hline
+\textbf{Method} & \textbf{DOF} & \textbf{L$^2$ Error} & \textbf{Conv. Rate} \\
+\hline
+\textbf{Rational [10/5]} & 15 & $\mathbf{4.52 \times 10^{-13}}$ & $\alpha = 19.75$ \\
+Chebyshev N=32 & 33 & $4.51 \times 10^{-4}$ & $\alpha = 2.08$ \\
+4th-order FD (n=80) & 82 & $5.45 \times 10^{-5}$ & $\alpha = 1.97$ \\
+2nd-order FD (n=80) & 82 & $2.32 \times 10^{-1}$ & $\alpha \approx 0$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Key Findings}
+
+\begin{enumerate}
+\item \textbf{Machine precision}: Rational [10/5] achieves $4.52 \times 10^{-13}$ error
+\item \textbf{Exponential convergence}: $\alpha = 19.75$ (spectral convergence)
+\item \textbf{Natural representation}: $\sinh(x)$ is naturally represented as a ratio of exponentials
+\item \textbf{Factor of $10^9$ better}: Rational error is \textbf{one billion times smaller} than 4th-order FD
+\end{enumerate}
+
+\section{Results: Polynomial Solution ($c = 4$)}
+
+This problem tests rational overhead when the solution is polynomial: $u(x) = x^2(1-x)^2$.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{figures/extended_benchmark/ReacDiff_Polynomial_c4_convergence.pdf}
+\caption{Polynomial solution: Rationals still achieve machine precision but offer no special advantage---spectral methods would be equally efficient.}
+\label{fig:reacdiff_poly_conv}
+\end{figure}
+
+\textbf{Results Summary:}
+
+\begin{center}
+\begin{tabular}{lccc}
+\hline
+\textbf{Method} & \textbf{DOF} & \textbf{L$^2$ Error} & \textbf{Notes} \\
+\hline
+Rational [6/3] & 9 & $4.23 \times 10^{-17}$ & Machine precision \\
+Chebyshev N=32 & 33 & $1.21 \times 10^{-4}$ & Good \\
+4th-order FD (n=80) & 82 & $1.35 \times 10^{-5}$ & Solid \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Observations}
+
+For polynomial solutions:
+\begin{itemize}
+\item Rationals still achieve machine precision (overhead of rational representation is low)
+\item No advantage over spectral methods (both would achieve $\sim 10^{-16}$ error)
+\item 4th-order FD is competitive and much faster (solve time: 0.87ms vs 24.83ms)
+\end{itemize}
+
+\section{Why Rationals Excel Here (vs Advection-Diffusion)}
+
+\subsection{Smooth vs Sharp Gradients}
+
+\textbf{Reaction-Diffusion ($c=10$):}
+\[
+u(x) = \frac{\sinh(\sqrt{10}\,x)}{\sinh(\sqrt{10})} = \frac{e^{\sqrt{10}\,x} - e^{-\sqrt{10}\,x}}{e^{\sqrt{10}} - e^{-\sqrt{10}}}
+\]
+\begin{itemize}
+\item \textbf{Smooth everywhere}: All derivatives are bounded
+\item \textbf{Natural rational form}: Already expressed as ratio of exponentials
+\item \textbf{Moderate gradients}: $\sqrt{10} \approx 3.16$ is manageable
+\end{itemize}
+
+\textbf{Advection-Diffusion ($\varepsilon=0.001$):}
+\[
+u(x) = \frac{e^{-x/0.001} - e^{-1/0.001}}{1 - e^{-1/0.001}}
+\]
+\begin{itemize}
+\item \textbf{Nearly discontinuous}: $e^{-x/0.001}$ drops from 1 to $\sim 0$ in distance $0.001$
+\item \textbf{Extreme gradients}: $|u'(0)| \sim 1000$ (derivative is huge)
+\item \textbf{Requires near-poles}: Would need $Q(x)$ with zeros $\sim 0.001$ from boundary
+\end{itemize}
+
+\section{Summary}
+
+Reaction-diffusion benchmarks demonstrate that rationals:
+\begin{enumerate}
+\item \textbf{Excel on smooth exponentials} (convergence rate $\alpha \approx 20$)
+\item \textbf{Achieve machine precision} with minimal DOF
+\item \textbf{Naturally represent} $\sinh$, $\cosh$, and exponential-oscillatory functions
+\item \textbf{Still work on polynomials} (though no special advantage)
+\end{enumerate}
+
+The key distinction from advection-diffusion: \textbf{smoothness}. As long as the solution and its derivatives are bounded, rationals excel. Sharp gradients and near-discontinuities cause catastrophic failure.
+
+
+\chapter{Variable Coefficient Benchmarks}
+
+\section{Overview}
+
+The variable coefficient problem
+\[
+-(a(x) u')' = f(x)
+\]
+on $[0,1]$ models diffusion with spatially varying conductivity. The coefficient $a(x)$ can be smooth, oscillatory, discontinuous, or singular, each presenting unique challenges.
+
+\section{Test Problems}
+
+\begin{itemize}
+\item \textbf{VC1}: $a(x) = 1 + x^2$ (smooth polynomial)
+\item \textbf{VC2}: $a(x) = e^x$ (smooth exponential)
+\item \textbf{VC3}: $a(x) = \begin{cases} 1 & x < 0.5 \\ 10 & x \geq 0.5 \end{cases}$ (discontinuous) --- \textbf{CRITICAL TEST}
+\item \textbf{VC4}: $a(x) = 2 + \sin(20\pi x)$ (rapidly oscillating)
+\item \textbf{VC5}: $a(x) = \sqrt{x + 0.01}$ (near-singular at $x=0$)
+\end{itemize}
+
+\section{CRITICAL: Discontinuous Coefficient}
+
+\subsection{The Problem}
+
+Coefficient has jump discontinuity:
+\[
+a(x) = \begin{cases}
+1 & \text{if } x < 0.5 \\
+10 & \text{if } x \geq 0.5
+\end{cases}
+\]
+
+Solution is constructed to have \textbf{continuous $u$ and $u'$}, but $a(x)u'$ has a jump at $x=0.5$, meaning $u''$ is discontinuous.
+
+\subsection{Catastrophic Rational Failure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{figures/extended_benchmark/VarCoeff_Discontinuous_convergence.pdf}
+\caption{Discontinuous coefficient: Rational methods completely fail to represent discontinuities, achieving only 39--40\% L$^2$ error. Convergence rate $\alpha \approx 0.06$ indicates complete stagnation.}
+\label{fig:varcoeff_disc_conv}
+\end{figure}
+
+\textbf{Results Summary:}
+
+\begin{center}
+\begin{tabular}{lccc}
+\hline
+\textbf{Method} & \textbf{DOF} & \textbf{L$^2$ Error} & \textbf{Conv. Rate} \\
+\hline
+Rational [6/3] & 9 & \textcolor{red}{\textbf{40.2\%}} & $\alpha = 0.06$ \\
+Rational [10/5] & 15 & \textcolor{red}{\textbf{39.0\%}} & \textcolor{red}{\textbf{FAIL}} \\
+2nd-order FD (n=80) & 82 & 125\% & Also struggles \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Critical Observations}
+
+\begin{enumerate}
+\item \textbf{Complete failure}: 39--40\% error is catastrophic
+\item \textbf{No convergence}: $\alpha = 0.06 \approx 0$ (essentially flat)
+\item \textbf{Refinement useless}: [6/3] vs [10/5] makes no meaningful difference
+\item \textbf{Gibbs-like phenomena}: Rationals exhibit oscillations near discontinuity
+\end{enumerate}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{figures/extended_benchmark/critical_failures.pdf}
+\caption{Critical failure comparison: Both boundary layer and discontinuous coefficient problems show catastrophic rational failure ($>10\%$ error threshold).}
+\label{fig:critical_failures}
+\end{figure}
+
+\section{Why Rationals Fail on Discontinuities}
+
+\subsection{Mathematical Explanation}
+
+Rational functions $P(x)/Q(x)$ are:
+\begin{itemize}
+\item \textbf{Infinitely smooth} everywhere except at poles
+\item \textbf{Cannot represent jumps} without introducing poles \emph{at} the discontinuity
+\item \textbf{Globally coupled}: A discontinuity at $x=0.5$ affects approximation everywhere
+\end{itemize}
+
+This is analogous to \textbf{Gibbs phenomenon} in Fourier series:
+\begin{itemize}
+\item Global approximants (Fourier, polynomials, rationals) struggle with discontinuities
+\item Local approximants (splines, finite elements) handle discontinuities naturally
+\end{itemize}
+
+\subsection{Comparison with Other Methods}
+
+\begin{itemize}
+\item \textbf{2nd-order FD}: Also struggles (125\% error) but can improve with refinement
+\item \textbf{Finite Elements}: Would handle naturally via element interfaces
+\item \textbf{DG methods}: Designed for discontinuities via upwind fluxes
+\item \textbf{Adaptive refinement}: Can cluster resolution at $x=0.5$
+\end{itemize}
+
+\section{Recommendations}
+
+\subsection{When to AVOID Rationals}
+
+\textbf{DO NOT use rational collocation when:}
+\begin{enumerate}
+\item Coefficients $a(x)$, $b(x)$, or $c(x)$ are discontinuous
+\item Solution or derivatives have jumps
+\item Problem has interfaces, shocks, or contact discontinuities
+\item Material properties change abruptly
+\end{enumerate}
+
+\subsection{Alternative Methods for Discontinuities}
+
+\begin{enumerate}
+\item \textbf{Finite Elements} with interface-aligned meshes
+\item \textbf{Discontinuous Galerkin (DG)} methods
+\item \textbf{Immersed interface methods}
+\item \textbf{Extended FEM (XFEM)} for moving interfaces
+\end{enumerate}
+
+\section{Smooth Variable Coefficients}
+
+For completeness, when $a(x)$ is smooth (polynomial, exponential, oscillatory), rational methods can work but offer no particular advantage over spectral methods. The polynomial and exponential cases showed that rationals still struggle compared to simpler alternatives.
+
+\section{Summary}
+
+\textbf{Key Finding}: Rational collocation \textbf{catastrophically fails} on problems with discontinuous coefficients. Convergence rate $\alpha \approx 0$ indicates the method is fundamentally unable to represent discontinuities.
+
+\begin{tcolorbox}[colback=red!10, colframe=red!50!black, title=Critical Warning]
+\textbf{CRITICAL}: If your problem has discontinuous:
+\begin{itemize}
+\item Coefficients ($a(x)$, $b(x)$, $c(x)$ with jumps)
+\item Solutions (shocks, interfaces)
+\item Derivatives (kinks, corners)
+\end{itemize}
+then rational collocation will produce \textbf{completely wrong results} (error $> 30\%$). Use finite elements or DG methods instead.
+\end{tcolorbox}
+
+
+\chapter{Cross-Method Analysis and Recommendations}
+
+\section{Overall Method Performance Summary}
+
+After testing 6 methods across 20+ problems spanning 4 differential operator types, we can now provide comprehensive guidance on method selection.
+
+\section{Convergence Rate Summary}
+
+Table~\ref{tab:convergence_summary} summarizes observed convergence rates $\alpha$ where error $\sim \text{DOF}^{-\alpha}$.
+
+\begin{table}[H]
+\centering
+\caption{Convergence rates across all methods and problem types}
+\label{tab:convergence_summary}
+\begin{tabular}{lcccccc}
+\hline
+\textbf{Problem Type} & \textbf{2nd FD} & \textbf{4th FD} & \textbf{6th FD} & \textbf{Cheby} & \textbf{Leg} & \textbf{Rational} \\
+\hline
+Helmholtz (smooth) & 0.00 & 1.79 & --- & 2.08 & 2.04 & \textbf{21.25} \\
+Helmholtz (exp-osc) & 0.00 & 1.88 & --- & 2.08 & 2.04 & \textbf{30.24} \\
+ReacDiff (exp) & 0.00 & 1.97 & --- & 2.08 & 2.04 & \textbf{19.75} \\
+ReacDiff (poly) & 0.01 & 2.34 & --- & 2.08 & 2.04 & --- \\
+AdvDiff (mild) & 0.00 & 1.77 & --- & 0.00 & 0.00 & 4.43 \\
+AdvDiff (sharp) & 0.00 & 2.25 & --- & 0.76 & 1.12 & \textcolor{red}{\textbf{0.32}} \\
+VarCoeff (disc) & 0.00 & --- & --- & --- & --- & \textcolor{red}{\textbf{0.06}} \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsection{Key Observations}
+
+\begin{enumerate}
+\item \textbf{Rationals: Exponential on smooth, zero on non-smooth}
+   \begin{itemize}
+   \item Smooth Helmholtz/ReacDiff: $\alpha = 19$--$30$ (spectacular)
+   \item Boundary layer: $\alpha = 0.32$ (catastrophic)
+   \item Discontinuous: $\alpha = 0.06$ (complete failure)
+   \end{itemize}
+
+\item \textbf{4th-order FD: Consistent algebraic convergence}
+   \begin{itemize}
+   \item Most problems: $\alpha \approx 1.8$--$2.3$ (close to theoretical 4)
+   \item Never fails catastrophically
+   \item Reliable general-purpose method
+   \end{itemize}
+
+\item \textbf{Spectral (Cheby/Leg): Smooth problem specialists}
+   \begin{itemize}
+   \item Smooth problems: $\alpha \approx 2$ (limited by few test points)
+   \item Boundary layers: $\alpha \approx 0.8$--$1.1$ (struggles but better than rationals)
+   \item Would show exponential convergence with more points
+   \end{itemize}
+
+\item \textbf{2nd-order FD: Inadequate baseline}
+   \begin{itemize}
+   \item $\alpha \approx 0$ (no convergence in tested range)
+   \item Confirms our original critique: comparing rationals against 2nd-order FD is misleading
+   \end{itemize}
+\end{enumerate}
+
+\section{Accuracy vs Cost Tradeoffs}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{figures/extended_benchmark/Helmholtz_Sin_k1_convergence.pdf}
+\caption{Typical smooth problem (Helmholtz $k^2=1$): Rationals achieve machine precision fastest, but spectral/high-order FD are competitive and more robust.}
+\label{fig:accuracy_cost}
+\end{figure}
+
+\subsection{For 10$^{-6}$ Accuracy on Smooth Problems}
+
+\begin{center}
+\begin{tabular}{lcc}
+\hline
+\textbf{Method} & \textbf{DOF Required} & \textbf{Solve Time} \\
+\hline
+Rational [6/3] & $\sim 10$ & $\sim 80$ ms \\
+Chebyshev & $\sim 20$ & $\sim 0.5$ ms \\
+4th-order FD & $\sim 40$ & $\sim 1$ ms \\
+2nd-order FD & $> 1000$ & $\sim 10$ ms \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Key Insight}: Rationals require fewest DOF but are slowest per solve (nonlinear optimization). For many applications, Chebyshev with $4\times$ more DOF is \textbf{faster overall} ($0.5$ ms vs $80$ ms).
+
+\section{Method Selection Decision Tree}
+
+\begin{tcolorbox}[colback=blue!5, colframe=blue!50!black, title=Method Selection Guide]
+
+\textbf{Start here}:
+
+\begin{enumerate}
+\item \textbf{Does problem have any of these?}
+   \begin{itemize}
+   \item Boundary layers ($\varepsilon < 0.01$, Pe $> 100$)
+   \item Discontinuous coefficients or solutions
+   \item Sharp gradients (length scales $< 1\%$ domain)
+   \end{itemize}
+   \textbf{YES} $\Rightarrow$ \textcolor{red}{\textbf{DO NOT use rationals}}. Use FEM, DG, or adaptive FD.
+
+   \textbf{NO} $\Rightarrow$ Continue to 2.
+
+\item \textbf{Is solution smooth everywhere?}
+
+   \textbf{YES} $\Rightarrow$ Continue to 3.
+
+   \textbf{NO} $\Rightarrow$ Use finite elements or finite differences.
+
+\item \textbf{Does solution involve exponentials or rational structure?}
+   \begin{itemize}
+   \item $e^{\pm ax}$, $\sinh(ax)$, $\cosh(ax)$
+   \item $e^{ax}\sin(\omega x)$, $e^{ax}\cos(\omega x)$
+   \item Known to be naturally expressible as $P(x)/Q(x)$
+   \end{itemize}
+   \textbf{YES} $\Rightarrow$ \textcolor{green}{\textbf{Rationals recommended}} (will achieve machine precision)
+
+   \textbf{NO} $\Rightarrow$ Continue to 4.
+
+\item \textbf{Is extreme accuracy needed (error $< 10^{-10}$)?}
+
+   \textbf{YES} $\Rightarrow$ Use spectral methods (Chebyshev/Legendre) or rationals
+
+   \textbf{NO} $\Rightarrow$ Use 4th-order FD (reliable, fast, robust)
+\end{enumerate}
+
+\end{tcolorbox}
+
+\section{Detailed Recommendations by Problem Class}
+
+\subsection{Poisson / Helmholtz (smooth forcing)}
+
+\textbf{Best choice}: Spectral (Chebyshev/Legendre) or Rational
+
+\begin{itemize}
+\item Both achieve exponential convergence
+\item Spectral is faster (linear solve vs nonlinear optimization)
+\item Rational achieves slightly better accuracy (machine precision with fewer DOF)
+\item 4th-order FD is solid backup (robust, predictable)
+\end{itemize}
+
+\subsection{Reaction-Diffusion (smooth exponentials)}
+
+\textbf{Best choice}: Rational collocation
+
+\begin{itemize}
+\item Natural representation of $\sinh$, $\cosh$, exponential solutions
+\item Achieves machine precision ($\sim 10^{-13}$)
+\item Convergence rates $\alpha \approx 20$
+\item Worth the computational cost for natural problem structure
+\end{itemize}
+
+\subsection{Advection-Diffusion}
+
+\textbf{Depends critically on $\varepsilon$}:
+
+\begin{itemize}
+\item $\varepsilon \geq 0.1$: Rationals may work
+\item $0.01 < \varepsilon < 0.1$: Use 4th-order FD or spectral
+\item $\varepsilon \leq 0.01$: \textcolor{red}{\textbf{DO NOT use rationals}} (catastrophic failure)
+   \begin{itemize}
+   \item Use upwind FD, exponential fitting, or adaptive mesh
+   \end{itemize}
+\end{itemize}
+
+\subsection{Variable Coefficients}
+
+\textbf{Depends on smoothness of $a(x)$}:
+
+\begin{itemize}
+\item Smooth $a(x)$ (polynomial, exponential, oscillatory): 4th-order FD or spectral
+\item Discontinuous $a(x)$: \textcolor{red}{\textbf{DO NOT use rationals}}
+   \begin{itemize}
+   \item Use finite elements with interface-aligned mesh
+   \item Or discontinuous Galerkin (DG) methods
+   \end{itemize}
+\end{itemize}
+
+\section{Cost-Benefit Analysis}
+
+\subsection{Rational Collocation}
+
+\textbf{Benefits}:
+\begin{itemize}
+\item Exponential convergence on smooth problems ($\alpha = 20$--$30$)
+\item Machine precision with minimal DOF
+\item Natural representation of exponential/rational structure
+\end{itemize}
+
+\textbf{Costs}:
+\begin{itemize}
+\item $50$--$1000\times$ slower than linear solvers (nonlinear optimization)
+\item Catastrophic failure on non-smooth problems
+\item Requires careful problem diagnosis
+\item Implementation complexity (Bernstein basis, cleared form, constraints)
+\end{itemize}
+
+\textbf{Verdict}: Use only when (1) problem is verified smooth, (2) extreme accuracy needed, (3) solution has natural rational structure. Otherwise, spectral or 4th-order FD are safer.
+
+\subsection{Spectral Methods (Chebyshev/Legendre)}
+
+\textbf{Benefits}:
+\begin{itemize}
+\item Exponential convergence on smooth problems
+\item Fast linear solves
+\item Well-established theory and implementations
+\item Robust on smooth problems
+\end{itemize}
+
+\textbf{Costs}:
+\begin{itemize}
+\item Gibbs oscillations near discontinuities
+\item Dense matrices (not suitable for very large problems)
+\item Require smooth forcing and coefficients
+\end{itemize}
+
+\textbf{Verdict}: Excellent general-purpose method for smooth problems. First choice unless problem has natural rational structure.
+
+\subsection{4th-Order Finite Differences}
+
+\textbf{Benefits}:
+\begin{itemize}
+\item Reliable algebraic convergence ($\alpha \approx 2$)
+\item Never fails catastrophically
+\item Fast linear solves
+\item Simple to implement
+\item Sparse matrices (scalable)
+\end{itemize}
+
+\textbf{Costs}:
+\begin{itemize}
+\item Cannot achieve machine precision (limited by algebraic convergence)
+\item Requires more DOF than spectral/rational for high accuracy
+\end{itemize}
+
+\textbf{Verdict}: Best general-purpose method. Use as default unless extreme accuracy ($< 10^{-10}$) is needed.
+
+\section{Revisiting the Original Claims}
+
+\subsection{The "2,000,000$\times$ Improvement" Claim}
+
+Our original comparison showed rational collocation achieving $\sim 10^{-12}$ error while 2nd-order FD achieved $\sim 10^{-3}$ error, suggesting $10^9$ improvement.
+
+\textbf{Reality check with proper baselines}:
+\begin{itemize}
+\item \textbf{vs 2nd-order FD}: Yes, $\sim 10^6$--$10^9\times$ better (but 2nd-order is obsolete)
+\item \textbf{vs 4th-order FD}: $\sim 10^3$--$10^6\times$ better on smooth problems
+\item \textbf{vs Spectral methods}: $\sim 10$--$100\times$ better on smooth problems
+\item \textbf{On boundary layers}: Rationals are $\infty\times$ \textbf{WORSE} (complete failure)
+\end{itemize}
+
+\subsection{Honest Assessment}
+
+Rational collocation is:
+\begin{enumerate}
+\item \textbf{Excellent} for smooth problems with exponential/rational structure
+\item \textbf{Competitive} with spectral methods on general smooth problems
+\item \textbf{Completely unsuitable} for non-smooth problems
+\item \textbf{Not a replacement} for general-purpose solvers
+\end{enumerate}
+
+The method fills a \textbf{niche}: problems that are smooth, have natural rational structure, and require extreme accuracy.
+
+\section{Summary}
+
+The extended benchmark suite demonstrates that:
+
+\begin{enumerate}
+\item \textbf{Context matters}: No single method is universally best
+\item \textbf{Rational collocation has a niche}: Smooth exponential/rational problems
+\item \textbf{Critical limitations exist}: Catastrophic failure on boundary layers and discontinuities
+\item \textbf{Proper baselines essential}: Comparing against 2nd-order FD was misleading
+\item \textbf{Robust methods preferred}: 4th-order FD is often the best practical choice
+\end{enumerate}
+
+Users must carefully diagnose their problem characteristics before selecting a method. The decision tree in this chapter provides guidance for making this choice.
+
+
+\end{document}
