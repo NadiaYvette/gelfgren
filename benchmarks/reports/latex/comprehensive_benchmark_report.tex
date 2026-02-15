@@ -1880,6 +1880,22 @@ When extended to piecewise formulations, rational collocation should excel at:
   \item Polynomial elsewhere for efficiency
   \item Automatic detection of regions requiring rationals
   \end{itemize}
+
+\item \textbf{Expanded BVP Test Suite Beyond Poisson}
+  \begin{itemize}
+  \item \textbf{Current Limitation}: All BVP benchmarks test only $-u'' = f(x)$ with varying forcing functions $f$ (smooth, discontinuous, oscillatory)
+  \item This is essentially ``double indefinite integration'' and misses important characteristics arising from \textbf{different differential operators}, not just different forcing functions
+  \item \textbf{Recommended expansions}:
+    \begin{itemize}
+    \item \textbf{Advection-diffusion}: $-\varepsilon u'' + b u' = f$ with small $\varepsilon$ (boundary layers)
+    \item \textbf{Reaction-diffusion}: $-u'' + c u = f$ with $c > 0$ (exponential solutions)
+    \item \textbf{Variable coefficient diffusion}: $-(a(x)u')' = f$ with varying $a(x)$
+    \item \textbf{Helmholtz equation}: $-u'' + k^2 u = f$ (oscillatory solutions from operator, not forcing)
+    \item \textbf{Singularly perturbed problems}: Multiple scales, turning points, interior layers
+    \item \textbf{Sturm-Liouville problems}: Eigenvalue problems with various weight functions
+    \end{itemize}
+  \item These problems would test how rational methods handle solution behaviors arising from \textbf{differential operator structure} rather than merely integrating forcing functions
+  \end{itemize}
 \end{enumerate}
 
 \subsection{Comparison Against State-of-the-Art Methods}
