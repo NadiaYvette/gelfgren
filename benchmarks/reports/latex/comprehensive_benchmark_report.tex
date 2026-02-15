@@ -1453,17 +1453,97 @@ Q^2 \cdot P'' - 2Q \cdot Q' \cdot P' + (2Q'^2 - Q \cdot Q'') \cdot P = -Q^3 \cdo
 This introduces cubic nonlinearity but avoids numerical instability from division
 operations.
 
-\paragraph{Basis Functions}
-Bernstein polynomials on $[a,b]$ provide numerical stability:
+\paragraph{Choice of Basis Functions: Why Bernstein Polynomials?}
+
+The use of Bernstein polynomials in this implementation is not arbitrary---it emerges
+naturally from the mathematical structure of the piecewise rational approximation problem.
+
+\textbf{From Lagrange-Hermite Interpolation to Bernstein Polynomials:}
+
+In a piecewise rational approximation on a mesh, each rational function $P/Q$ on a
+subinterval $[a,b]$ must satisfy boundary conditions at the endpoints: the numerator
+and denominator must take specified values at $x = a$ and $x = b$. For degree-$n$
+polynomials with value and potentially derivative conditions at two points, this is
+precisely a \textbf{two-point Lagrange-Hermite interpolation problem}.
+
+Traub (1964)\footnote{Traub, J. F. (1964). \textit{On Lagrange-Hermite interpolation}.
+Journal of the Society for Industrial and Applied Mathematics, 12(4), 886--891.}
+developed formulas for solving the two-point Lagrange-Hermite interpolation problem.
+His approach decomposes the interpolation into contributions from each endpoint, which
+naturally connects to Bernstein basis functions:
+\begin{itemize}
+\item The two-point interpolation problem decomposes into contributions from each endpoint
+\item The Bernstein basis functions $B_i^n(t)$ achieve exactly this endpoint decomposition
+\item Each basis function naturally encodes the ``weight'' of the $i$-th control point
+  in the interpolation between the two endpoints
+\end{itemize}
+
+\textbf{Why Degree Elevation is Essential:}
+
+There are two distinct reasons why all polynomials must be expressed in a unified
+Bernstein basis of common degree:
+
+\begin{enumerate}
+\item \textbf{Traub formulas produce mixed degrees}: The solution to the two-point
+Lagrange-Hermite interpolation problem involves \textbf{Bernstein basis functions of
+different degrees appearing in the same expression}. To combine these terms, we need
+degree elevation to a common basis.
+
+\item \textbf{Cleared formulation requires uniform representation}: The cleared
+formulation (Equation~8.1) involves products and derivatives of $P$ and $Q$:
+\[
+Q^2 \cdot P'' - 2Q \cdot Q' \cdot P' + (2Q'^2 - Q \cdot Q'') \cdot P = -Q^3 \cdot f
+\]
+Computing these mixed products $(Q^2 \cdot P'')$, $(Q \cdot Q' \cdot P')$, and
+$(Q'^2 \cdot P)$ efficiently requires all polynomials in a \textbf{single uniform
+Bernstein basis}.
+\end{enumerate}
+
+Farouki and Rajan (1988)\footnote{Farouki, R. T., \& Rajan, V. T. (1988).
+\textit{Algorithms for polynomials in Bernstein form}. Computer Aided Geometric
+Design, 5(1), 1--26.} provided efficient algorithms for \textbf{degree elevation}
+in the Bernstein basis. This allows polynomials of different degrees to be re-expressed
+at a common higher degree:
+\[
+Q_m(x) = \sum_{j=0}^m b_j B_j^m(x) = \sum_{i=0}^n b_i' B_i^n(x)
+\]
+where the elevated coefficients $b_i'$ are computed via explicit formulas involving
+binomial coefficients. This unified representation is essential for the implementation,
+enabling differentiation, evaluation, and constraint handling on a consistent basis.
+
+\textbf{Simplification via Bell Polynomials in the Two-Point Case:}
+
+In the general theory, derivatives and products of Bernstein polynomials involve
+\textbf{Bell polynomials}---combinatorial objects that encode the algebraic structure
+of these operations. However, the \textbf{two-point special case} (interpolation between
+just two endpoints) has remarkable simplifying properties:
+
+The Bell polynomials that appear in the two-point Lagrange-Hermite problem can be
+\textbf{explicitly evaluated in elementary terms}. Rather than needing to work with
+Bell polynomials as computational objects in their own right, they completely reduce
+to closed-form expressions involving only binomial coefficients and powers. This
+means that in the actual implementation, \textbf{Bell polynomials never explicitly
+appear}---they have been analytically eliminated, leaving only elementary arithmetic.
+
+For the cleared formulation's terms $(Q^2 \cdot P'')$, $(Q \cdot Q' \cdot P')$, and
+$(Q'^2 \cdot P)$, this simplification is what makes the two-point formulation
+computationally tractable. The general multipoint case would require working with
+Bell polynomials explicitly, but the two-point case reduces everything to simple
+closed forms.
+
+\paragraph{Bernstein Polynomial Properties}
+
+Bernstein polynomials on $[a,b]$ are defined as:
 \[
 B_i^n(x) = \binom{n}{i} t^i (1-t)^{n-i}, \quad t = \frac{x-a}{b-a}
 \]
 
-Properties:
+Key properties for numerical computation:
 \begin{itemize}
-\item Non-negativity: $B_i^n(t) \geq 0$ for $t \in [0,1]$
-\item Partition of unity: $\sum_{i=0}^n B_i^n(t) = 1$
-\item Endpoint interpolation: $B_i^n(0) = \delta_{i0}$, $B_i^n(1) = \delta_{in}$
+\item \textbf{Non-negativity}: $B_i^n(t) \geq 0$ for $t \in [0,1]$ (enables pole prevention via coefficient constraints)
+\item \textbf{Partition of unity}: $\sum_{i=0}^n B_i^n(t) = 1$ (numerical stability)
+\item \textbf{Endpoint interpolation}: $B_i^n(0) = \delta_{i0}$, $B_i^n(1) = \delta_{in}$ (exact boundary conditions)
+\item \textbf{Convex hull property}: Polynomial lies in convex hull of control points (predictable behavior)
 \end{itemize}
 
 \paragraph{Pole Prevention Strategy}
