@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2026.2.13)  15 FEB 2026 13:51
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2026.2.13)  15 FEB 2026 15:03
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -992,11 +992,11 @@ been already used, duplicate ignored
 <to be read again> 
                    \relax 
 l.122 ... {8.4.3}Conclusion}{46}{subsection.8.4.3}
-                                                  % [2] [3])
+                                                  % [2] [3] [4])
 \tf@toc=\write5
 \openout5 = `comprehensive_benchmark_report.toc'.
 
- [4]
+ [5]
 Chapter 1.
 
 Overfull \hbox (2.59427pt too wide) in paragraph at lines 123--125
@@ -1018,20 +1018,20 @@ cmm/m/it/10.95 u\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 x\OT1/cmr/m/n/10.95 ) =
 
  []
 
-[5
+[6
 
 
-] [6]
+] [7]
 Overfull \vbox (48.33269pt too high) has occurred while \output is active []
 
 
-[7] [8]
+[8] [9]
 Overfull \hbox (12.32372pt too wide) in paragraph at lines 260--261
  []\T1/cmr/bx/n/10.95 For Prac-ti-tion-ers and En-gi-neers:[] \T1/cmr/m/n/10.95
  Fo-cus on prac-ti-cal guid-ance and method
  []
 
-[9] [10]
+[10] [11]
 Overfull \hbox (16.94202pt too wide) in paragraph at lines 329--331
 []\T1/cmr/m/n/10.95 Documents cur-rent ca-pa-bil-i-ties, known
  []
@@ -1046,11 +1046,11 @@ Overfull \hbox (7.14542pt too wide) in paragraph at lines 339--342
 []\T1/cmr/m/n/10.95 Tutorial on read-ing con-ver-gence
  []
 
-[11]
+[12]
 Chapter 2.
-[12
+[13
 
-] [13]
+] [14]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `math shift' on input line 470.
@@ -1067,21 +1067,21 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `math shift' on input line 470.
 
-[14]
+[15]
 Chapter 3.
-[15
+[16
 
-] [16]
+] [17]
 Chapter 4.
 
 Overfull \hbox (30.79698pt too wide) in paragraph at lines 607--631
  [][] 
  []
 
-[17
+[18
 
-] [18]
-<../figures/Smooth_Poisson_sin.pdf, id=745, 860.4871pt x 352.39017pt>
+] [19]
+<../figures/Smooth_Poisson_sin.pdf, id=1092, 860.4871pt x 352.39017pt>
 File: ../figures/Smooth_Poisson_sin.pdf Graphic file (type pdf)
 <use ../figures/Smooth_Poisson_sin.pdf>
 Package pdftex.def Info: ../figures/Smooth_Poisson_sin.pdf  used on input line 
@@ -1092,8 +1092,8 @@ Overfull \hbox (14.52681pt too wide) in paragraph at lines 695--718
  [][] 
  []
 
-[19 <../figures/Smooth_Poisson_sin.pdf>] [20]
-<../figures/Discontinuous_Poisson.pdf, id=810, 860.70522pt x 352.39017pt>
+[20 <../figures/Smooth_Poisson_sin.pdf>] [21]
+<../figures/Discontinuous_Poisson.pdf, id=1156, 860.70522pt x 352.39017pt>
 File: ../figures/Discontinuous_Poisson.pdf Graphic file (type pdf)
 <use ../figures/Discontinuous_Poisson.pdf>
 Package pdftex.def Info: ../figures/Discontinuous_Poisson.pdf  used on input li
@@ -1112,22 +1112,22 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `math shift' on input line 769.
 
-[21 <../figures/Discontinuous_Poisson.pdf>]
+[22 <../figures/Discontinuous_Poisson.pdf>]
 Overfull \hbox (48.97716pt too wide) in paragraph at lines 783--806
  [][] 
  []
 
-[22]
-<../figures/Oscillatory_Poisson_ω=10.0.pdf, id=879, 860.70522pt x 352.39017pt>
-
+[23]
+<../figures/Oscillatory_Poisson_ω=10.0.pdf, id=1225, 860.70522pt x 352.39017pt
+>
 File: ../figures/Oscillatory_Poisson_ω=10.0.pdf Graphic file (type pdf)
 <use ../figures/Oscillatory_Poisson_ω=10.0.pdf>
 Package pdftex.def Info: ../figures/Oscillatory_Poisson_ω=10.0.pdf  used on in
 put line 854.
 (pdftex.def)             Requested size: 360.0pt x 147.38988pt.
- [23] [24 <../figures/Oscillatory_Poisson_ω=10.0.pdf>]
+ [24] [25 <../figures/Oscillatory_Poisson_ω=10.0.pdf>]
 Chapter 5.
-[25
+[26
 
 ]
 Chapter 6.
@@ -1138,9 +1138,9 @@ Overfull \hbox (3.11197pt too wide) in paragraph at lines 882--883
 y by floating-
  []
 
-[26
+[27
 
-] [27]
+] [28]
 Overfull \hbox (0.86458pt too wide) in paragraph at lines 971--975
 \T1/cmr/m/n/10.95 Os-cil-la-tory BVP demon-strates poly-no-mial han-dling high-
 frequency fea-
@@ -1152,21 +1152,21 @@ Overfull \hbox (4.9506pt too wide) in paragraph at lines 980--983
 For smooth, well-behaved
  []
 
-[28]
+[29]
 Overfull \hbox (81.37494pt too wide) in paragraph at lines 1024--1035
  [] 
  []
 
-[29] [30] [31]
+[30] [31] [32]
 Chapter 7.
-[32
+[33
 
-] [33]
+] [34]
 Overfull \hbox (0.48056pt too wide) in paragraph at lines 1188--1196
  [] 
  []
 
-[34]
+[35]
 Overfull \hbox (27.47961pt too wide) in paragraph at lines 1244--1253
  [] 
  []
@@ -1177,8 +1177,8 @@ Overfull \hbox (0.9161pt too wide) in paragraph at lines 1282--1284
 cal vari-a-tions by re-fin-ing mesh,
  []
 
-[35] [36]
-<../figures/degree_strategy_comparison.pdf, id=1045, 1004.2028pt x 715.73146pt>
+[36] [37]
+<../figures/degree_strategy_comparison.pdf, id=1391, 1004.2028pt x 715.73146pt>
 
 File: ../figures/degree_strategy_comparison.pdf Graphic file (type pdf)
 <use ../figures/degree_strategy_comparison.pdf>
@@ -1201,9 +1201,9 @@ Overfull \hbox (2.39467pt too wide) in paragraph at lines 1425--1427
 10.95 = 4$ \T1/cmr/m/n/10.95 rep-re-sents a crit-i-cal threshold---sufficient
  []
 
-[37] [38 <../figures/degree_strategy_comparison.pdf>]
+[38] [39 <../figures/degree_strategy_comparison.pdf>]
 Chapter 8.
-[39
+[40
 
 ]
 Overfull \hbox (10.66255pt too wide) in paragraph at lines 1492--1494
@@ -1211,11 +1211,11 @@ Overfull \hbox (10.66255pt too wide) in paragraph at lines 1492--1494
 on\T1/cmr/m/n/10.95 : The cleared
  []
 
-[40] [41]
+[41] [42]
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[42] [43]
+[43] [44]
 Overfull \hbox (0.16302pt too wide) in paragraph at lines 1706--1708
  []\T1/cmr/bx/n/10.95 Empirical Per-for-mance Com-par-i-son[] \T1/cmr/m/n/10.95
  Com-pre-hen-sive bench-marks com-
@@ -1235,7 +1235,7 @@ Overfull \hbox (111.91486pt too wide) in paragraph at lines 1711--1726
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[44] [45]
+[45] [46]
 Overfull \hbox (8.62096pt too wide) in paragraph at lines 1780--1781
 []\T1/cmtt/m/n/10.95 benchmarks/python/rational_collocation.py\T1/cmr/m/n/10.95
  : Quadratic form solver
@@ -1271,17 +1271,17 @@ Overfull \hbox (7.79259pt too wide) in paragraph at lines 1799--1800
 oint con-straints (END-POINT,
  []
 
-[46] [47]
+[47] [48]
 Chapter 9.
-[48
+[49
 
-] [49] [50] [51] [52]
+] [50] [51] [52] [53]
 Overfull \hbox (12.41017pt too wide) in paragraph at lines 2074--2075
 []\T1/cmr/m/n/10.95 Rationals should dra-mat-i-cally out-per-form poly-no-mial 
 spec-tral meth-
  []
 
-[53] [54]
+[54] [55]
 Chapter 10.
 
 Overfull \hbox (7.06685pt too wide) in paragraph at lines 2120--2122
@@ -1289,7 +1289,7 @@ Overfull \hbox (7.06685pt too wide) in paragraph at lines 2120--2122
 95 For the smooth Pois-son equa-
  []
 
-[55
+[56
 
 ]
 Overfull \hbox (7.32784pt too wide) in paragraph at lines 2155--2156
@@ -1297,25 +1297,25 @@ Overfull \hbox (7.32784pt too wide) in paragraph at lines 2155--2156
 /10.95 For the os-cil-la-tory Pois-
  []
 
-[56] [57]
+[57] [58]
 Overfull \hbox (3.60089pt too wide) in paragraph at lines 2250--2251
  []\T1/cmr/bx/n/10.95 NONNEGATIVE Con-straints (Harm-ful):[] \T1/cmr/m/n/10.95 
 Con-strain-ing all co-ef-fi-cients
  []
 
-[58] [59]
+[59] [60]
 Overfull \hbox (7.22398pt too wide) in paragraph at lines 2351--2353
 []\T1/cmr/bx/n/10.95 Implication\T1/cmr/m/n/10.95 : Prob-lem clas-si-fi-ca-tion
  (smooth or not) must pre-cede method
  []
 
-[60]
+[61]
 Overfull \hbox (5.57498pt too wide) in paragraph at lines 2364--2366
 []\T1/cmr/m/n/10.95 Applications re-quir-ing high pre-ci-sion (sci-en-tific com
 -put-ing, fi-nan-cial math-
  []
 
-[61] [62] [63] [64]
+[62] [63] [64] [65]
 Overfull \hbox (16.6455pt too wide) in paragraph at lines 2557--2558
  []\T1/cmr/bx/n/10.95 Implementation Pri-or-i-ties:[] \T1/cmr/m/n/10.95 Product
 ion-quality ra-tio-nal BVP solvers should
@@ -1327,26 +1327,26 @@ Overfull \hbox (4.25746pt too wide) in paragraph at lines 2590--2596
 traor-di-nary accuracy---
  []
 
-[65] [66] [67
+[66] [67] [68
 
 ]
 Appendix A.
-[68
+[69
 
-] [69] [70]
+] [70] [71]
 Overfull \hbox (1.81477pt too wide) in paragraph at lines 2769--2772
  []\T1/cmr/bx/n/10.95 Discontinuous prob-lems:[] \T1/cmr/m/n/10.95 Ex-pect re-d
 uced con-ver-gence rates (of-ten $\OML/cmm/m/it/10.95 O\OT1/cmr/m/n/10.95 (\OML
 /cmm/m/it/10.95 h[]\OT1/cmr/m/n/10.95 )$
  []
 
-[71]
+[72]
 Appendix B.
-[72
+[73
 
-] [73]
+] [74]
 Appendix C.
-[74
+[75
 
 ]
 Overfull \hbox (53.06108pt too wide) in paragraph at lines 2851--2851
@@ -1354,19 +1354,325 @@ Overfull \hbox (53.06108pt too wide) in paragraph at lines 2851--2851
  for references[] 
  []
 
-[75] [76
+(./extended_chapters_clean.tex [76]
+Appendix D.
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 15.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `superscript' on input line 15.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 15.
+
+
+LaTeX Warning: File `figures/extended_benchmark/Helmholtz_Sin_k1_convergence.pd
+f' not found on input line 23.
+
+
+! Package pdftex.def Error: File `figures/extended_benchmark/Helmholtz_Sin_k1_c
+onvergence.pdf' not found: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.23 ...enchmark/Helmholtz_Sin_k1_convergence.pdf}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+[77
+
+]
+
+LaTeX Warning: File `figures/extended_benchmark/Helmholtz_Sin_k1_rates.pdf' not
+ found on input line 39.
+
+
+! Package pdftex.def Error: File `figures/extended_benchmark/Helmholtz_Sin_k1_r
+ates.pdf' not found: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.39 ...nded_benchmark/Helmholtz_Sin_k1_rates.pdf}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+[78]
+Overfull \hbox (16.37485pt too wide) in paragraph at lines 44--44
+[]\T1/cmr/bx/n/14.4 Results: Helmholtz Exponential-Oscillatory (H4) 
+ []
+
+
+LaTeX Warning: File `figures/extended_benchmark/Helmholtz_Exp_k4_convergence.pd
+f' not found on input line 50.
+
+
+! Package pdftex.def Error: File `figures/extended_benchmark/Helmholtz_Exp_k4_c
+onvergence.pdf' not found: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.50 ...enchmark/Helmholtz_Exp_k4_convergence.pdf}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+[79] [80]
+Overfull \hbox (7.26678pt too wide) in paragraph at lines 73--74
+[]\T1/cmr/m/n/10.95 These re-sults con-firm that ra-tio-nals ex-cel in their in
+-tended do-main: smooth
+ []
+
+[81]
+Appendix E.
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 104.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\varepsilon' on input line 104.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 104.
+
+[82
+
+]
+
+LaTeX Warning: File `figures/extended_benchmark/AdvDiff_Sharp_eps0.001_converge
+nce.pdf' not found on input line 118.
+
+
+! Package pdftex.def Error: File `figures/extended_benchmark/AdvDiff_Sharp_eps0
+.001_convergence.pdf' not found: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.118 ...k/AdvDiff_Sharp_eps0.001_convergence.pdf}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+[83]
+
+LaTeX Warning: File `figures/extended_benchmark/AdvDiff_Sharp_eps0.001_rates.pd
+f' not found on input line 149.
+
+
+! Package pdftex.def Error: File `figures/extended_benchmark/AdvDiff_Sharp_eps0
+.001_rates.pdf' not found: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.149 ...nchmark/AdvDiff_Sharp_eps0.001_rates.pdf}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+[84]
+Overfull \hbox (2.88353pt too wide) in paragraph at lines 169--170
+[]\T1/cmr/bx/n/10.95 Global rep-re-sen-ta-tion\T1/cmr/m/n/10.95 : Ra-tio-nals a
+re \T1/cmr/bx/n/10.95 global \T1/cmr/m/n/10.95 ap-prox-i-mants; a bound-
+ []
+
+[85]
+Overfull \hbox (6.87343pt too wide) in paragraph at lines 176--177
+[]\T1/cmr/bx/n/10.95 High-order FD\T1/cmr/m/n/10.95 : Can re-solve with suf-fi-
+cient re-fine-ment ($\OML/cmm/m/it/10.95 n \OMS/cmsy/m/n/10.95 ^^U \OT1/cmr/m/n
+/10.95 80$ \T1/cmr/m/n/10.95 achieves
+ []
+
+[86] [87]
+Appendix F.
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 237.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 237.
+
+
+LaTeX Warning: File `figures/extended_benchmark/ReacDiff_Exp_c10_convergence.pd
+f' not found on input line 243.
+
+
+! Package pdftex.def Error: File `figures/extended_benchmark/ReacDiff_Exp_c10_c
+onvergence.pdf' not found: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.243 ...nchmark/ReacDiff_Exp_c10_convergence.pdf}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+[88
+
+] [89]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 272.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 272.
+
+
+LaTeX Warning: File `figures/extended_benchmark/ReacDiff_Polynomial_c4_converge
+nce.pdf' not found on input line 278.
+
+
+! Package pdftex.def Error: File `figures/extended_benchmark/ReacDiff_Polynomia
+l_c4_convergence.pdf' not found: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.278 ...k/ReacDiff_Polynomial_c4_convergence.pdf}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+[90]
+Overfull \hbox (28.76534pt too wide) in paragraph at lines 306--306
+[]\T1/cmr/bx/n/14.4 Why Ra-tio-nals Ex-cel Here (vs Advection-Diffusion) 
+ []
+
+[91] [92]
+Appendix G.
+[93
+
+]
+
+LaTeX Warning: File `figures/extended_benchmark/VarCoeff_Discontinuous_converge
+nce.pdf' not found on input line 381.
+
+
+! Package pdftex.def Error: File `figures/extended_benchmark/VarCoeff_Discontin
+uous_convergence.pdf' not found: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.381 ...k/VarCoeff_Discontinuous_convergence.pdf}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+[94]
+
+LaTeX Warning: File `figures/extended_benchmark/critical_failures.pdf' not foun
+d on input line 411.
+
+
+! Package pdftex.def Error: File `figures/extended_benchmark/critical_failures.
+pdf' not found: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.411 ...extended_benchmark/critical_failures.pdf}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+[95] [96] [97]
+Appendix H.
+
+Overfull \hbox (42.05188pt too wide) in paragraph at lines 496--509
+ [][] 
+ []
+
+[98
+
+]
+
+LaTeX Warning: File `figures/extended_benchmark/Helmholtz_Sin_k1_convergence.pd
+f' not found on input line 546.
+
+
+! Package pdftex.def Error: File `figures/extended_benchmark/Helmholtz_Sin_k1_c
+onvergence.pdf' not found: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.546 ...nchmark/Helmholtz_Sin_k1_convergence.pdf}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+[99]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 551.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `superscript' on input line 551.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 551.
+
+[100] [101]
+Overfull \hbox (1.64093pt too wide) in paragraph at lines 619--620
+[]\T1/cmr/m/n/10.95 Rational achieves slightly bet-ter ac-cu-racy (ma-chine pre
+-ci-sion with fewer
+ []
+
+[102] [103]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 721.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\times' on input line 721.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 721.
+
+[104]) [105] [106
 
 ] (./comprehensive_benchmark_report.aux)
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
 Package rerunfilecheck Info: File `comprehensive_benchmark_report.out' has not 
 changed.
-(rerunfilecheck)             Checksum: 05AD27813EE94F90ED3E1577F3710706;20516.
+(rerunfilecheck)             Checksum: 8AD80704FECA767864046E5C399A1181;33393.
  ) 
 Here is how much of TeX's memory you used:
- 40245 strings out of 476041
- 964764 string characters out of 5793174
+ 40820 strings out of 476041
+ 987797 string characters out of 5793174
  1872388 words of memory out of 6000000
- 59701 multiletter control sequences out of 15000+600000
- 541184 words of font info for 103 fonts, out of 8000000 for 9000
+ 60075 multiletter control sequences out of 15000+600000
+ 542416 words of font info for 107 fonts, out of 8000000 for 9000
  1137 hyphenation exceptions out of 8191
  84i,13n,89p,748b,1051s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
@@ -1377,35 +1683,37 @@ mf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dis
 t/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts
 /type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/
 public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
-amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8
-.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><
-/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/sh
-are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/tex
-live/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/te
-xmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texlive/tex
-mf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texlive/texm
-f-dist/fonts/type1/public/cm-super/sfbx0800.pfb></usr/share/texlive/texmf-dist/
-fonts/type1/public/cm-super/sfbx1000.pfb></usr/share/texlive/texmf-dist/fonts/t
-ype1/public/cm-super/sfbx1095.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
-blic/cm-super/sfbx1200.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm
--super/sfbx1440.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/
-sfbx2074.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfbx248
-8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfrm0600.pfb><
-/usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb></usr/sh
-are/texlive/texmf-dist/fonts/type1/public/cm-super/sfrm0900.pfb></usr/share/tex
-live/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texlive/te
-xmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/share/texlive/texmf-dis
-t/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texlive/texmf-dist/fonts
-/type1/public/cm-super/sfrm1728.pfb></usr/share/texlive/texmf-dist/fonts/type1/
-public/cm-super/sfti0900.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
-cm-super/sfti1095.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-supe
-r/sftt1095.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sftt1
-200.pfb>
-Output written on comprehensive_benchmark_report.pdf (79 pages, 804106 bytes).
+amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr
+7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></
+usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/sh
+are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/tex
+live/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dis
+t/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texlive/texmf-dist/
+fonts/type1/public/cm-super/sfbx0800.pfb></usr/share/texlive/texmf-dist/fonts/t
+ype1/public/cm-super/sfbx1000.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
+blic/cm-super/sfbx1095.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm
+-super/sfbx1200.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/
+sfbx1440.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfbx207
+4.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfbx2488.pfb><
+/usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfrm0600.pfb></usr/sh
+are/texlive/texmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb></usr/share/tex
+live/texmf-dist/fonts/type1/public/cm-super/sfrm0900.pfb></usr/share/texlive/te
+xmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texlive/texmf-dis
+t/fonts/type1/public/cm-super/sfrm1095.pfb></usr/share/texlive/texmf-dist/fonts
+/type1/public/cm-super/sfrm1200.pfb></usr/share/texlive/texmf-dist/fonts/type1/
+public/cm-super/sfrm1728.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
+cm-super/sfti0900.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-supe
+r/sfti1095.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sftt1
+095.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sftt1200.pfb
+>
+Output written on comprehensive_benchmark_report.pdf (109 pages, 877084 bytes).
+
 PDF statistics:
- 1690 PDF objects out of 1728 (max. 8388607)
- 1286 compressed objects within 13 object streams
- 420 named destinations out of 1000 (max. 500000)
- 945 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 2269 PDF objects out of 2487 (max. 8388607)
+ 1827 compressed objects within 19 object streams
+ 584 named destinations out of 1000 (max. 500000)
+ 1489 words of extra memory for PDF output out of 10000 (max. 10000000)
 
