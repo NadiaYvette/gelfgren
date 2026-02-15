@@ -216,6 +216,153 @@ def runge_function():
     )
 
 
+# ============================================================================
+# NEW: Expanded Special Functions Suite
+# ============================================================================
+
+def mathieu_ce0_q5():
+    """Mathieu function ce_0(x, q=5) on [0, 2π]"""
+    from scipy.special import mathieu_cem
+    # ce_0(x, 5) - even periodic Mathieu function
+    def func(x):
+        return mathieu_cem(0, 5, x)[0]  # Returns (value, derivative)
+
+    return SpecialFunctionApproximation(
+        func,
+        "Mathieu ce_0(x, q=5)",
+        0.0, 2 * np.pi
+    )
+
+
+def mathieu_se2_q10():
+    """Mathieu function se_2(x, q=10) on [0, 2π]"""
+    from scipy.special import mathieu_sem
+    # se_2(x, 10) - odd periodic Mathieu function
+    def func(x):
+        return mathieu_sem(2, 10, x)[0]
+
+    return SpecialFunctionApproximation(
+        func,
+        "Mathieu se_2(x, q=10)",
+        0.0, 2 * np.pi
+    )
+
+
+def jacobi_sn_k05():
+    """Jacobi elliptic sn(x, k=0.5) on [0, K(0.5)]"""
+    from scipy.special import ellipj, ellipk
+    k = 0.5
+    K_val = ellipk(k**2)  # Complete elliptic integral
+
+    def func(x):
+        return ellipj(x, k**2)[0]  # Returns (sn, cn, dn, ph)
+
+    return SpecialFunctionApproximation(
+        func,
+        "Jacobi sn(x, k=0.5)",
+        0.0, K_val
+    )
+
+
+def jacobi_cn_k09():
+    """Jacobi elliptic cn(x, k=0.9) on [0, K(0.9)]"""
+    from scipy.special import ellipj, ellipk
+    k = 0.9
+    K_val = ellipk(k**2)
+
+    def func(x):
+        return ellipj(x, k**2)[1]  # cn is second component
+
+    return SpecialFunctionApproximation(
+        func,
+        "Jacobi cn(x, k=0.9)",
+        0.0, K_val
+    )
+
+
+def lemniscate_sl():
+    """Lemniscate sl(x) = sn(x, k=1/√2) on [0, ϖ]"""
+    from scipy.special import ellipj, ellipk
+    k = 1.0 / np.sqrt(2.0)
+    K_val = ellipk(k**2)  # ϖ = K(1/2)
+
+    def func(x):
+        return ellipj(x, k**2)[0]
+
+    return SpecialFunctionApproximation(
+        func,
+        "Lemniscate sl(x)",
+        0.0, K_val
+    )
+
+
+def airy_ai_oscillatory():
+    """Airy Ai(x) on [-10, 2] (oscillatory regime)"""
+    from scipy.special import airy
+
+    def func(x):
+        return airy(x)[0]  # Returns (Ai, Ai', Bi, Bi')
+
+    return SpecialFunctionApproximation(
+        func,
+        "Airy Ai(x) oscillatory",
+        -10.0, 2.0
+    )
+
+
+def airy_bi_exponential():
+    """Airy Bi(x) on [-5, 3] (exponential growth regime)"""
+    from scipy.special import airy
+
+    def func(x):
+        return airy(x)[2]  # Bi is third component
+
+    return SpecialFunctionApproximation(
+        func,
+        "Airy Bi(x) exponential",
+        -5.0, 3.0
+    )
+
+
+def bessel_j1():
+    """Bessel J_1(x) on [0, 20]"""
+    from scipy.special import j1
+
+    return SpecialFunctionApproximation(
+        j1,
+        "Bessel J_1(x)",
+        0.0, 20.0
+    )
+
+
+def bessel_j5():
+    """Bessel J_5(x) on [0, 30]"""
+    from scipy.special import jn
+
+    def func(x):
+        return jn(5, x)
+
+    return SpecialFunctionApproximation(
+        func,
+        "Bessel J_5(x)",
+        0.0, 30.0
+    )
+
+
+def bessel_j10():
+    """Bessel J_10(x) on [0, 40]"""
+    from scipy.special import jn
+
+    def func(x):
+        return jn(10, x)
+
+    return SpecialFunctionApproximation(
+        func,
+        "Bessel J_10(x)",
+        0.0, 40.0
+    )
+
+
 def run_convergence_study(problem: SpecialFunctionApproximation,
                           mesh_sizes: List[int]) -> ConvergenceResult:
     """Run convergence study for given function"""
@@ -450,7 +597,7 @@ def main():
     # Define mesh sizes for convergence study
     mesh_sizes = [4, 8, 16, 32, 64, 128]
 
-    # Define problems
+    # Define problems - Basic functions
     problems = [
         exponential_standard(),
         sine_standard(),
@@ -458,6 +605,21 @@ def main():
         error_function_standard(),
         logarithm_standard(),
         runge_function(),
+        # New: Mathieu functions
+        mathieu_ce0_q5(),
+        mathieu_se2_q10(),
+        # New: Jacobi elliptic functions
+        jacobi_sn_k05(),
+        jacobi_cn_k09(),
+        # New: Lemniscate functions
+        lemniscate_sl(),
+        # New: Airy functions
+        airy_ai_oscillatory(),
+        airy_bi_exponential(),
+        # New: Higher-order Bessel
+        bessel_j1(),
+        bessel_j5(),
+        bessel_j10(),
     ]
 
     # Run convergence studies

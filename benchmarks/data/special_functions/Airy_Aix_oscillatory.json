@@ -1,0 +1,187 @@
+{
+  "function_name": "Airy Ai(x) oscillatory",
+  "domain": [
+    -10.0,
+    2.0
+  ],
+  "polynomial_errors": [
+    {
+      "l2_error": 1.0131139714758486,
+      "l_inf_error": 0.6218895503863282,
+      "h1_seminorm_error": 1.8432523840295023,
+      "relative_l2_error": 1.008898292735423,
+      "relative_l_inf_error": 1.160993818235593,
+      "num_intervals": 4,
+      "dof": 7,
+      "mesh_size": 3.0,
+      "method": "polynomial"
+    },
+    {
+      "l2_error": 0.8444230735278438,
+      "l_inf_error": 0.6539058157888796,
+      "h1_seminorm_error": 1.8734594247292093,
+      "relative_l2_error": 0.8409093361801985,
+      "relative_l_inf_error": 1.220764377480818,
+      "num_intervals": 8,
+      "dof": 11,
+      "mesh_size": 1.5,
+      "method": "polynomial"
+    },
+    {
+      "l2_error": 0.05952029075709422,
+      "l_inf_error": 0.08668692039439022,
+      "h1_seminorm_error": 0.2905140376799007,
+      "relative_l2_error": 0.05927262027634554,
+      "relative_l_inf_error": 0.16183416916596668,
+      "num_intervals": 16,
+      "dof": 19,
+      "mesh_size": 0.75,
+      "method": "polynomial"
+    },
+    {
+      "l2_error": 0.007459292756821323,
+      "l_inf_error": 0.01594476673572326,
+      "h1_seminorm_error": 0.06738102994967371,
+      "relative_l2_error": 0.007428253818677244,
+      "relative_l_inf_error": 0.02976698290216228,
+      "num_intervals": 32,
+      "dof": 35,
+      "mesh_size": 0.375,
+      "method": "polynomial"
+    },
+    {
+      "l2_error": 0.0002584638475029267,
+      "l_inf_error": 0.0007662984876180556,
+      "h1_seminorm_error": 0.004658131382770124,
+      "relative_l2_error": 0.0002573883509864791,
+      "relative_l_inf_error": 0.001430588126935354,
+      "num_intervals": 64,
+      "dof": 67,
+      "mesh_size": 0.1875,
+      "method": "polynomial"
+    },
+    {
+      "l2_error": 8.616832360762226e-06,
+      "l_inf_error": 3.241738088721746e-05,
+      "h1_seminorm_error": 0.0003079502436541981,
+      "relative_l2_error": 8.580976772925295e-06,
+      "relative_l_inf_error": 6.051939414332945e-05,
+      "num_intervals": 128,
+      "dof": 131,
+      "mesh_size": 0.09375,
+      "method": "polynomial"
+    }
+  ],
+  "rational_errors": [
+    {
+      "l2_error": 25.32637118998807,
+      "l_inf_error": 169.13594521652286,
+      "h1_seminorm_error": 2986.3280630613995,
+      "relative_l2_error": 25.22098537200135,
+      "relative_l_inf_error": 315.7566913864869,
+      "num_intervals": 4,
+      "dof": 16,
+      "mesh_size": 3.0,
+      "method": "rational"
+    },
+    {
+      "l2_error": 4.787174765178482,
+      "l_inf_error": 36.007915924464456,
+      "h1_seminorm_error": 554.6994514146336,
+      "relative_l2_error": 4.767254804095658,
+      "relative_l_inf_error": 67.22249597196199,
+      "num_intervals": 8,
+      "dof": 32,
+      "mesh_size": 1.5,
+      "method": "rational"
+    },
+    {
+      "l2_error": 0.056707495352826806,
+      "l_inf_error": 0.06925204533657053,
+      "h1_seminorm_error": 0.6241730883441574,
+      "relative_l2_error": 0.05647152922333652,
+      "relative_l_inf_error": 0.12928533127141764,
+      "num_intervals": 16,
+      "dof": 64,
+      "mesh_size": 0.75,
+      "method": "rational"
+    },
+    {
+      "l2_error": 0.5239677600120753,
+      "l_inf_error": 3.6777875080476634,
+      "h1_seminorm_error": 61.60168121810698,
+      "relative_l2_error": 0.5217874724938473,
+      "relative_l_inf_error": 6.865991813136106,
+      "num_intervals": 32,
+      "dof": 128,
+      "mesh_size": 0.375,
+      "method": "rational"
+    },
+    {
+      "l2_error": 0.004780422368999761,
+      "l_inf_error": 0.04319745679217232,
+      "h1_seminorm_error": 0.5670726823230573,
+      "relative_l2_error": 0.004760530505380617,
+      "relative_l_inf_error": 0.08064451359257596,
+      "num_intervals": 64,
+      "dof": 256,
+      "mesh_size": 0.1875,
+      "method": "rational"
+    },
+    {
+      "l2_error": 0.00014449901789920284,
+      "l_inf_error": 0.0009727298416322416,
+      "h1_seminorm_error": 0.01818344217959637,
+      "relative_l2_error": 0.00014389774158190695,
+      "relative_l_inf_error": 0.0018159709103437406,
+      "num_intervals": 128,
+      "dof": 512,
+      "mesh_size": 0.09375,
+      "method": "rational"
+    }
+  ],
+  "convergence_rates": {
+    "polynomial_l2": [
+      0.2627585755740975,
+      3.826512521144782,
+      2.9962708192237093,
+      4.851004446162106,
+      4.906661071475671
+    ],
+    "polynomial_linf": [
+      -0.0724244788030702,
+      2.915196618120707,
+      2.442731339519604,
+      4.37903272321066,
+      4.563067018039431
+    ],
+    "polynomial_relative_l2": [
+      0.26275857557409715,
+      3.826512521144782,
+      2.9962708192237093,
+      4.851004446162106,
+      4.906661071475671
+    ],
+    "rational_l2": [
+      2.4033939992679745,
+      6.399491228202104,
+      -3.20786670266616,
+      6.776196142966717,
+      5.048006499119823
+    ],
+    "rational_linf": [
+      2.231797291304577,
+      9.022241704608797,
+      -5.730837635856458,
+      6.411747939539141,
+      5.472763389594641
+    ],
+    "rational_relative_l2": [
+      2.4033939992679745,
+      6.399491228202104,
+      -3.20786670266616,
+      6.776196142966717,
+      5.048006499119823
+    ]
+  }
+}

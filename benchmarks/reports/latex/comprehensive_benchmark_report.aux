@@ -105,324 +105,349 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {5.1.1}Two Uses of Rational Functions}{27}{subsection.5.1.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {5.2}Special Functions Tested}{28}{section.5.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {5.2.1}Rationale for Expanded Test Suite}{30}{subsection.5.2.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {5.3}Status: Benchmarks Not Yet Executed}{30}{section.5.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.1}Why Function Approximation Was Not Prioritized}{31}{subsection.5.3.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {5.4}Expected Results (Based on Theory)}{31}{section.5.4}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {5.1}{\ignorespaces Predicted special function approximation results (expanded test suite)\relax }}{31}{table.caption.21}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {5.5}Relationship to Extended BVP Benchmarks}{32}{section.5.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {5.6}Recommendation for Future Work}{32}{section.5.6}\protected@file@percent }
-\@writefile{toc}{\contentsline {chapter}{\numberline {6}Analysis of Results}{34}{chapter.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5.3}Benchmark Results}{30}{section.5.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.1}Methodology}{31}{subsection.5.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5.4}Comprehensive Results}{31}{section.5.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.4.1}Key Findings}{31}{subsection.5.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Polynomial Collocation Dominates:}{31}{section*.22}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Rational Methods Show Limited Advantage:}{31}{section*.23}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {5.1}{\ignorespaces Special Function Approximation Results: Polynomial vs Rational at 128 Intervals\relax }}{32}{table.caption.21}\protected@file@percent }
+\newlabel{tab:special_function_results}{{5.1}{32}{Special Function Approximation Results: Polynomial vs Rational at 128 Intervals\relax }{table.caption.21}{}}
+\newlabel{tab:special_function_results@cref}{{[table][1][5]5.1}{[1][31][]32}}
+\@writefile{toc}{\contentsline {paragraph}{Surprising Results vs Theoretical Predictions:}{33}{section*.24}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Why Polynomials Outperform:}{33}{section*.25}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5.5}Visualizations}{33}{section.5.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5.6}Relationship to Extended BVP Benchmarks}{33}{section.5.6}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5.1}{\ignorespaces Exponential $e^x$ convergence: Both methods achieve spectral convergence, rationals slightly better at high refinement (33$\times $ more accurate at 128 intervals).\relax }}{34}{figure.caption.26}\protected@file@percent }
+\newlabel{fig:special_exponential}{{5.1}{34}{Exponential $e^x$ convergence: Both methods achieve spectral convergence, rationals slightly better at high refinement (33$\times $ more accurate at 128 intervals).\relax }{figure.caption.26}{}}
+\newlabel{fig:special_exponential@cref}{{[figure][1][5]5.1}{[1][33][]34}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.2}{\ignorespaces Logarithm $\log (1+x)$ convergence: Rational clear winner (33$\times $ more accurate), both achieve consistent 4$\times $ convergence rate.\relax }}{35}{figure.caption.27}\protected@file@percent }
+\newlabel{fig:special_logarithm}{{5.2}{35}{Logarithm $\log (1+x)$ convergence: Rational clear winner (33$\times $ more accurate), both achieve consistent 4$\times $ convergence rate.\relax }{figure.caption.27}{}}
+\newlabel{fig:special_logarithm@cref}{{[figure][2][5]5.2}{[1][33][]35}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.3}{\ignorespaces Mathieu ce$_0(x, q=5)$ convergence: Polynomial achieves machine precision ($10^{-14}$); rational stagnates at $10^{-12}$ with convergence rate dropping to 1.4.\relax }}{36}{figure.caption.28}\protected@file@percent }
+\newlabel{fig:special_mathieu}{{5.3}{36}{Mathieu ce$_0(x, q=5)$ convergence: Polynomial achieves machine precision ($10^{-14}$); rational stagnates at $10^{-12}$ with convergence rate dropping to 1.4.\relax }{figure.caption.28}{}}
+\newlabel{fig:special_mathieu@cref}{{[figure][3][5]5.3}{[1][33][]36}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.4}{\ignorespaces Bessel $J_{10}(x)$ convergence: Polynomial dramatically superior (29$\times $ more accurate); rational struggles with varying oscillatory frequency.\relax }}{37}{figure.caption.29}\protected@file@percent }
+\newlabel{fig:special_bessel10}{{5.4}{37}{Bessel $J_{10}(x)$ convergence: Polynomial dramatically superior (29$\times $ more accurate); rational struggles with varying oscillatory frequency.\relax }{figure.caption.29}{}}
+\newlabel{fig:special_bessel10@cref}{{[figure][4][5]5.4}{[1][33][]37}}
+\@writefile{toc}{\contentsline {paragraph}{Function Approximation vs BVP Solving:}{38}{section*.30}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Consistent Pattern: Smoothness Matters:}{38}{section*.31}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Unified Lesson:}{38}{section*.32}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5.7}Conclusions from Special Function Study}{39}{section.5.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.7.1}Primary Findings}{39}{subsection.5.7.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.7.2}Implications for Method Selection}{39}{subsection.5.7.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {6}Analysis of Results}{40}{chapter.6}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {6.1}Summary of BVP Results}{34}{section.6.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.1.1}Smooth Poisson Problem}{34}{subsection.6.1.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.1.2}Discontinuous Poisson Problem}{34}{subsection.6.1.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.1.3}Oscillatory Poisson Problem}{35}{subsection.6.1.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {6.2}Summary of Special Function Results}{35}{section.6.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {6.3}Comparative Analysis}{36}{section.6.3}\protected@file@percent }
-\newlabel{sec:comparative}{{6.3}{36}{Comparative Analysis}{section.6.3}{}}
-\newlabel{sec:comparative@cref}{{[section][3][6]6.3}{[1][35][]36}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.3.1}Unified Performance Patterns}{36}{subsection.6.3.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{When Rational Methods Excel:}{36}{section*.22}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{When Polynomial Methods Excel:}{36}{section*.23}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.3.2}Decision Framework}{37}{subsection.6.3.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Primary Decision Criterion: Problem Smoothness}{37}{section*.24}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Accuracy versus Robustness Trade-off}{37}{section*.25}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Computational Cost Considerations}{38}{section*.26}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.3.3}Lessons for Method Development}{38}{subsection.6.3.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{For Rational Method Improvements:}{38}{section*.27}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{For Polynomial Method Improvements:}{39}{section*.28}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Overarching Principle:}{39}{section*.29}\protected@file@percent }
-\@writefile{toc}{\contentsline {chapter}{\numberline {7}Recommendations}{40}{chapter.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6.1}Summary of BVP Results}{40}{section.6.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1.1}Smooth Poisson Problem}{40}{subsection.6.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1.2}Discontinuous Poisson Problem}{40}{subsection.6.1.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1.3}Oscillatory Poisson Problem}{41}{subsection.6.1.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6.2}Summary of Special Function Results}{41}{section.6.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6.3}Comparative Analysis}{42}{section.6.3}\protected@file@percent }
+\newlabel{sec:comparative}{{6.3}{42}{Comparative Analysis}{section.6.3}{}}
+\newlabel{sec:comparative@cref}{{[section][3][6]6.3}{[1][42][]42}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3.1}Unified Performance Patterns}{42}{subsection.6.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{When Rational Methods Excel:}{42}{section*.33}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{When Polynomial Methods Excel:}{43}{section*.34}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3.2}Decision Framework}{43}{subsection.6.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Primary Decision Criterion: Problem Smoothness}{43}{section*.35}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Accuracy versus Robustness Trade-off}{44}{section*.36}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Computational Cost Considerations}{44}{section*.37}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3.3}Lessons for Method Development}{45}{subsection.6.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{For Rational Method Improvements:}{45}{section*.38}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{For Polynomial Method Improvements:}{45}{section*.39}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Overarching Principle:}{45}{section*.40}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {7}Recommendations}{46}{chapter.7}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {7.1}For BVP Solving}{40}{section.7.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Use Rational Collocation When:}{40}{section*.30}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Use Polynomial Finite Differences When:}{40}{section*.31}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{NEVER Use Rational Collocation For:}{40}{section*.32}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {7.2}For Special Function Approximation}{41}{section.7.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Use Polynomial Splines When:}{41}{section*.33}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Use Rational Approximants When:}{41}{section*.34}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {7.3}Pole Prevention Strategies: A Critical Analysis}{41}{section.7.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Available Constraint Types:}{41}{section*.35}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Experimental Results: More Constraints $\neq  $ Better Performance}{42}{section*.36}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Critical Lesson:}{42}{section*.37}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {7.4}Degree Progression Strategies: Fixed vs Balanced Growth}{42}{section.7.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Three Strategies Tested:}{42}{section*.38}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Experimental Results (Smooth Poisson):}{43}{section*.39}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Critical Discovery:}{43}{section*.40}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Why Fixed [n/4] is Superior:}{43}{section*.41}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Recommendation for Smooth Problems:}{43}{section*.42}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.4.1}Comprehensive Convergence Studies}{44}{subsection.7.4.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Balanced [n/m] Strategy ($n \approx 2m$):}{44}{section*.43}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Fixed [n/2] Strategy (one conjugate pair):}{44}{section*.44}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Fixed [n/4] Strategy (two conjugate pairs):}{44}{section*.45}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Visual Comparison:}{45}{section*.46}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Convergence Analysis:}{45}{section*.48}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Practical Implications:}{45}{section*.49}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {7.1}{\ignorespaces Degree progression strategy comparison. \textbf  {Top left:} L$^2$ error vs DOF shows Fixed [n/4] achieving lowest errors. \textbf  {Top right:} L$^\infty $ error exhibits similar behavior. \textbf  {Bottom left:} Error progression by configuration index reveals Fixed [n/2] oscillation vs Fixed [n/4] smooth descent. \textbf  {Bottom right:} Convergence rate $\alpha $ (error $\sim $ DOF$^{-\alpha }$) shows Fixed [n/4] maintaining spectral convergence.\relax }}{46}{figure.caption.47}\protected@file@percent }
-\newlabel{fig:degree_strategy_comparison}{{7.1}{46}{Degree progression strategy comparison. \textbf {Top left:} L$^2$ error vs DOF shows Fixed [n/4] achieving lowest errors. \textbf {Top right:} L$^\infty $ error exhibits similar behavior. \textbf {Bottom left:} Error progression by configuration index reveals Fixed [n/2] oscillation vs Fixed [n/4] smooth descent. \textbf {Bottom right:} Convergence rate $\alpha $ (error $\sim $ DOF$^{-\alpha }$) shows Fixed [n/4] maintaining spectral convergence.\relax }{figure.caption.47}{}}
-\newlabel{fig:degree_strategy_comparison@cref}{{[figure][1][7]7.1}{[1][45][]46}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {8}Implementation Status}{47}{chapter.8}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {7.1}For BVP Solving}{46}{section.7.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Use Rational Collocation When:}{46}{section*.41}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Use Polynomial Finite Differences When:}{46}{section*.42}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{NEVER Use Rational Collocation For:}{46}{section*.43}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {7.2}For Special Function Approximation}{47}{section.7.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Use Polynomial Splines When:}{47}{section*.44}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Use Rational Approximants When:}{47}{section*.45}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {7.3}Pole Prevention Strategies: A Critical Analysis}{47}{section.7.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Available Constraint Types:}{47}{section*.46}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Experimental Results: More Constraints $\neq  $ Better Performance}{48}{section*.47}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Critical Lesson:}{48}{section*.48}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {7.4}Degree Progression Strategies: Fixed vs Balanced Growth}{48}{section.7.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Three Strategies Tested:}{48}{section*.49}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Experimental Results (Smooth Poisson):}{49}{section*.50}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Critical Discovery:}{49}{section*.51}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Why Fixed [n/4] is Superior:}{49}{section*.52}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Recommendation for Smooth Problems:}{49}{section*.53}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.4.1}Comprehensive Convergence Studies}{50}{subsection.7.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Balanced [n/m] Strategy ($n \approx 2m$):}{50}{section*.54}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Fixed [n/2] Strategy (one conjugate pair):}{50}{section*.55}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Fixed [n/4] Strategy (two conjugate pairs):}{50}{section*.56}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Visual Comparison:}{51}{section*.57}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Convergence Analysis:}{51}{section*.59}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Practical Implications:}{51}{section*.60}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {7.1}{\ignorespaces Degree progression strategy comparison. \textbf  {Top left:} L$^2$ error vs DOF shows Fixed [n/4] achieving lowest errors. \textbf  {Top right:} L$^\infty $ error exhibits similar behavior. \textbf  {Bottom left:} Error progression by configuration index reveals Fixed [n/2] oscillation vs Fixed [n/4] smooth descent. \textbf  {Bottom right:} Convergence rate $\alpha $ (error $\sim $ DOF$^{-\alpha }$) shows Fixed [n/4] maintaining spectral convergence.\relax }}{52}{figure.caption.58}\protected@file@percent }
+\newlabel{fig:degree_strategy_comparison}{{7.1}{52}{Degree progression strategy comparison. \textbf {Top left:} L$^2$ error vs DOF shows Fixed [n/4] achieving lowest errors. \textbf {Top right:} L$^\infty $ error exhibits similar behavior. \textbf {Bottom left:} Error progression by configuration index reveals Fixed [n/2] oscillation vs Fixed [n/4] smooth descent. \textbf {Bottom right:} Convergence rate $\alpha $ (error $\sim $ DOF$^{-\alpha }$) shows Fixed [n/4] maintaining spectral convergence.\relax }{figure.caption.58}{}}
+\newlabel{fig:degree_strategy_comparison@cref}{{[figure][1][7]7.1}{[1][51][]52}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {8}Implementation Status}{53}{chapter.8}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {8.1}Overview}{47}{section.8.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {8.2}Implementation Details}{47}{section.8.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Formulation}{47}{section*.50}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Choice of Basis Functions: Why Bernstein Polynomials?}{47}{section*.51}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Bernstein Polynomial Properties}{49}{section*.52}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Pole Prevention Strategy}{49}{section*.53}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Solver}{50}{section*.54}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {8.3}Benchmark Results}{50}{section.8.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Problem 1: Smooth Poisson}{50}{section*.55}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {8.1}{\ignorespaces Smooth Poisson: Rational collocation achieves \textbf  {machine precision}\relax }}{50}{table.caption.56}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {8.2}{\ignorespaces Smooth Trigonometric: Rational collocation shows \textbf  {spectral convergence}\relax }}{51}{table.caption.58}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Problem 2: Smooth Trigonometric}{51}{section*.57}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {8.4}Performance Analysis}{51}{section.8.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Computational Cost}{51}{section*.59}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Accuracy per Degree of Freedom}{51}{section*.60}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{When to Use Rational Collocation}{52}{section*.61}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{When to Use Polynomial FD}{52}{section*.62}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {8.4.1}Comparison: Quadratic vs Cleared Formulations}{52}{subsection.8.4.1}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {8.3}{\ignorespaces Theoretical comparison of rational collocation formulations\relax }}{52}{table.caption.64}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Theoretical Comparison}{52}{table.caption.64}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Empirical Performance Comparison}{52}{section*.65}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {8.4}{\ignorespaces Computational performance: Cleared form is consistently 2-3$\times $ faster\relax }}{53}{table.caption.66}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Accuracy Verification}{53}{section*.67}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Recommendation}{53}{section*.68}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {8.4.2}Files and Documentation}{54}{subsection.8.4.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {8.4.3}Conclusion}{54}{subsection.8.4.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {chapter}{\numberline {9}Future Directions}{56}{chapter.9}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {8.1}Overview}{53}{section.8.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {8.2}Implementation Details}{53}{section.8.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Formulation}{53}{section*.61}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Choice of Basis Functions: Why Bernstein Polynomials?}{53}{section*.62}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Bernstein Polynomial Properties}{55}{section*.63}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Pole Prevention Strategy}{55}{section*.64}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Solver}{56}{section*.65}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {8.3}Benchmark Results}{56}{section.8.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Problem 1: Smooth Poisson}{56}{section*.66}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {8.1}{\ignorespaces Smooth Poisson: Rational collocation achieves \textbf  {machine precision}\relax }}{56}{table.caption.67}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {8.2}{\ignorespaces Smooth Trigonometric: Rational collocation shows \textbf  {spectral convergence}\relax }}{57}{table.caption.69}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Problem 2: Smooth Trigonometric}{57}{section*.68}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {8.4}Performance Analysis}{57}{section.8.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Computational Cost}{57}{section*.70}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Accuracy per Degree of Freedom}{57}{section*.71}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{When to Use Rational Collocation}{58}{section*.72}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{When to Use Polynomial FD}{58}{section*.73}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.4.1}Comparison: Quadratic vs Cleared Formulations}{58}{subsection.8.4.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {8.3}{\ignorespaces Theoretical comparison of rational collocation formulations\relax }}{58}{table.caption.75}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Theoretical Comparison}{58}{table.caption.75}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Empirical Performance Comparison}{58}{section*.76}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {8.4}{\ignorespaces Computational performance: Cleared form is consistently 2-3$\times $ faster\relax }}{59}{table.caption.77}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Accuracy Verification}{59}{section*.78}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Recommendation}{59}{section*.79}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.4.2}Files and Documentation}{60}{subsection.8.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.4.3}Conclusion}{60}{subsection.8.4.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {9}Future Directions}{62}{chapter.9}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {9.1}Rational Collocation: Three Formulations}{56}{section.9.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Formulation 1: Quotient Form (Standard)}{56}{section*.69}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Formulation 2: Cleared Form (Recommended for Stability)}{56}{section*.70}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Formulation 3: Quadratic Form (Recommended for Efficiency)}{57}{section*.71}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {9.2}Implementation Roadmap}{57}{section.9.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {9.2.1}Expected Benefits}{58}{subsection.9.2.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {9.2.2}Other Future Directions}{59}{subsection.9.2.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {9.2.3}Comparison Against State-of-the-Art Methods}{60}{subsection.9.2.3}\protected@file@percent }
-\newlabel{sec:future-sota-comparison}{{9.2.3}{60}{Comparison Against State-of-the-Art Methods}{subsection.9.2.3}{}}
-\newlabel{sec:future-sota-comparison@cref}{{[subsection][3][9,2]9.2.3}{[1][59][]60}}
-\@writefile{toc}{\contentsline {paragraph}{Critical Gap in Current Benchmarks:}{60}{section*.72}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Missing Comparisons:}{60}{section*.73}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Expected Insights from Fair Comparison:}{61}{section*.74}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Recommended Benchmark Problems:}{61}{section*.75}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Implementation Priority:}{62}{section*.76}\protected@file@percent }
-\@writefile{toc}{\contentsline {chapter}{\numberline {10}Conclusions}{63}{chapter.10}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {9.1}Rational Collocation: Three Formulations}{62}{section.9.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Formulation 1: Quotient Form (Standard)}{62}{section*.80}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Formulation 2: Cleared Form (Recommended for Stability)}{62}{section*.81}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Formulation 3: Quadratic Form (Recommended for Efficiency)}{63}{section*.82}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {9.2}Implementation Roadmap}{63}{section.9.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.2.1}Expected Benefits}{64}{subsection.9.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.2.2}Other Future Directions}{65}{subsection.9.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.2.3}Comparison Against State-of-the-Art Methods}{66}{subsection.9.2.3}\protected@file@percent }
+\newlabel{sec:future-sota-comparison}{{9.2.3}{66}{Comparison Against State-of-the-Art Methods}{subsection.9.2.3}{}}
+\newlabel{sec:future-sota-comparison@cref}{{[subsection][3][9,2]9.2.3}{[1][65][]66}}
+\@writefile{toc}{\contentsline {paragraph}{Critical Gap in Current Benchmarks:}{66}{section*.83}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Missing Comparisons:}{66}{section*.84}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Expected Insights from Fair Comparison:}{67}{section*.85}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Recommended Benchmark Problems:}{67}{section*.86}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Implementation Priority:}{68}{section*.87}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {10}Conclusions}{69}{chapter.10}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{chap:conclusions}{{10}{63}{Conclusions}{chapter.10}{}}
-\newlabel{chap:conclusions@cref}{{[chapter][10][]10}{[1][63][]63}}
-\@writefile{toc}{\contentsline {section}{\numberline {10.1}Key Findings}{63}{section.10.1}\protected@file@percent }
-\newlabel{sec:key-findings}{{10.1}{63}{Key Findings}{section.10.1}{}}
-\newlabel{sec:key-findings@cref}{{[section][1][10]10.1}{[1][63][]63}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {10.1.1}Boundary Value Problems: The Dramatic Dichotomy}{63}{subsection.10.1.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Smooth Problems---Spectacular Success:}{63}{section*.77}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Discontinuous Problems---Catastrophic Failure:}{64}{section*.78}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Oscillatory Problems---Complete Breakdown:}{64}{section*.79}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {10.1.2}Special Functions: Domain-Specific Excellence}{64}{subsection.10.1.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Functions with Poles:}{65}{section*.80}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Smooth Functions:}{65}{section*.81}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Near-Singularities:}{65}{section*.82}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {10.1.3}Degree Progression Strategies}{65}{subsection.10.1.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Fixed Denominator [n/4] Strategy:}{65}{section*.83}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Balanced Growth [n/m] Strategy:}{65}{section*.84}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Minimal Poles [n/2] Strategy:}{66}{section*.85}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {10.1.4}Constraint Strategies: Less is More}{66}{subsection.10.1.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{ENDPOINT Constraints (Optimal):}{66}{section*.86}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{NONNEGATIVE Constraints (Harmful):}{66}{section*.87}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {10.2}Contribution to the Field}{66}{section.10.2}\protected@file@percent }
-\newlabel{sec:contribution}{{10.2}{66}{Contribution to the Field}{section.10.2}{}}
-\newlabel{sec:contribution@cref}{{[section][2][10]10.2}{[1][66][]66}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {10.2.1}First Rigorous Benchmarks of TRUE Rational Collocation}{67}{subsection.10.2.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {10.2.2}Quantification of Performance Dichotomy}{67}{subsection.10.2.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {10.2.3}Practical Decision Framework}{67}{subsection.10.2.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {10.2.4}Foundation for Future Development}{68}{subsection.10.2.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {10.3}Lessons Learned}{68}{section.10.3}\protected@file@percent }
-\newlabel{sec:lessons-learned}{{10.3}{68}{Lessons Learned}{section.10.3}{}}
-\newlabel{sec:lessons-learned@cref}{{[section][3][10]10.3}{[1][68][]68}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {10.3.1}Smoothness is Non-Negotiable}{68}{subsection.10.3.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {10.3.2}Spectral Convergence is Transformative}{69}{subsection.10.3.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {10.3.3}Robustness Asymmetry Favors Conservative Selection}{69}{subsection.10.3.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {10.3.4}Constraints Cannot Fix Unsuitable Problems}{69}{subsection.10.3.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {10.3.5}Fixed Denominator Strategy Optimal}{70}{subsection.10.3.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {10.4}Final Recommendations}{70}{section.10.4}\protected@file@percent }
-\newlabel{sec:final-recommendations}{{10.4}{70}{Final Recommendations}{section.10.4}{}}
-\newlabel{sec:final-recommendations@cref}{{[section][4][10]10.4}{[1][70][]70}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {10.4.1}For Practitioners}{70}{subsection.10.4.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Method Selection Decision Tree:}{70}{section*.88}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Implementation Guidelines:}{71}{section*.89}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Warning Signs:}{71}{section*.90}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {10.4.2}For Researchers}{72}{subsection.10.4.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Promising Research Directions:}{72}{section*.91}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Open Questions:}{72}{section*.92}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {10.4.3}For Software Developers}{73}{subsection.10.4.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Implementation Priorities:}{73}{section*.93}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Testing Requirements:}{73}{section*.94}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {10.5}Closing Perspective}{73}{section.10.5}\protected@file@percent }
-\newlabel{sec:closing}{{10.5}{73}{Closing Perspective}{section.10.5}{}}
-\newlabel{sec:closing@cref}{{[section][5][10]10.5}{[1][73][]73}}
-\@writefile{toc}{\contentsline {chapter}{Acknowledgments}{75}{chapter*.95}\protected@file@percent }
-\@writefile{toc}{\contentsline {chapter}{\numberline {A}How to Interpret Results}{76}{appendix.A}\protected@file@percent }
+\newlabel{chap:conclusions}{{10}{69}{Conclusions}{chapter.10}{}}
+\newlabel{chap:conclusions@cref}{{[chapter][10][]10}{[1][69][]69}}
+\@writefile{toc}{\contentsline {section}{\numberline {10.1}Key Findings}{69}{section.10.1}\protected@file@percent }
+\newlabel{sec:key-findings}{{10.1}{69}{Key Findings}{section.10.1}{}}
+\newlabel{sec:key-findings@cref}{{[section][1][10]10.1}{[1][69][]69}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.1.1}Boundary Value Problems: The Dramatic Dichotomy}{69}{subsection.10.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Smooth Problems---Spectacular Success:}{69}{section*.88}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Discontinuous Problems---Catastrophic Failure:}{70}{section*.89}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Oscillatory Problems---Complete Breakdown:}{70}{section*.90}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.1.2}Special Functions: Domain-Specific Excellence}{70}{subsection.10.1.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Functions with Poles:}{71}{section*.91}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Smooth Functions:}{71}{section*.92}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Near-Singularities:}{71}{section*.93}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.1.3}Degree Progression Strategies}{71}{subsection.10.1.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Fixed Denominator [n/4] Strategy:}{71}{section*.94}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Balanced Growth [n/m] Strategy:}{71}{section*.95}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Minimal Poles [n/2] Strategy:}{72}{section*.96}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.1.4}Constraint Strategies: Less is More}{72}{subsection.10.1.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{ENDPOINT Constraints (Optimal):}{72}{section*.97}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{NONNEGATIVE Constraints (Harmful):}{72}{section*.98}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {10.2}Contribution to the Field}{72}{section.10.2}\protected@file@percent }
+\newlabel{sec:contribution}{{10.2}{72}{Contribution to the Field}{section.10.2}{}}
+\newlabel{sec:contribution@cref}{{[section][2][10]10.2}{[1][72][]72}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.2.1}First Rigorous Benchmarks of TRUE Rational Collocation}{73}{subsection.10.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.2.2}Quantification of Performance Dichotomy}{73}{subsection.10.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.2.3}Practical Decision Framework}{73}{subsection.10.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.2.4}Foundation for Future Development}{74}{subsection.10.2.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {10.3}Lessons Learned}{74}{section.10.3}\protected@file@percent }
+\newlabel{sec:lessons-learned}{{10.3}{74}{Lessons Learned}{section.10.3}{}}
+\newlabel{sec:lessons-learned@cref}{{[section][3][10]10.3}{[1][74][]74}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.3.1}Smoothness is Non-Negotiable}{74}{subsection.10.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.3.2}Spectral Convergence is Transformative}{75}{subsection.10.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.3.3}Robustness Asymmetry Favors Conservative Selection}{75}{subsection.10.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.3.4}Constraints Cannot Fix Unsuitable Problems}{75}{subsection.10.3.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.3.5}Fixed Denominator Strategy Optimal}{76}{subsection.10.3.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {10.4}Final Recommendations}{76}{section.10.4}\protected@file@percent }
+\newlabel{sec:final-recommendations}{{10.4}{76}{Final Recommendations}{section.10.4}{}}
+\newlabel{sec:final-recommendations@cref}{{[section][4][10]10.4}{[1][76][]76}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.4.1}For Practitioners}{76}{subsection.10.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Method Selection Decision Tree:}{76}{section*.99}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Implementation Guidelines:}{77}{section*.100}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Warning Signs:}{77}{section*.101}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.4.2}For Researchers}{78}{subsection.10.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Promising Research Directions:}{78}{section*.102}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Open Questions:}{78}{section*.103}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.4.3}For Software Developers}{79}{subsection.10.4.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Implementation Priorities:}{79}{section*.104}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Testing Requirements:}{79}{section*.105}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {10.5}Closing Perspective}{79}{section.10.5}\protected@file@percent }
+\newlabel{sec:closing}{{10.5}{79}{Closing Perspective}{section.10.5}{}}
+\newlabel{sec:closing@cref}{{[section][5][10]10.5}{[1][79][]79}}
+\@writefile{toc}{\contentsline {chapter}{Acknowledgments}{81}{chapter*.106}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {A}How to Interpret Results}{82}{appendix.A}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {A.1}Understanding the Convergence Tables}{76}{section.A.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Reading a table row:}{77}{section*.96}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {A.2}Understanding the Convergence Plots}{77}{section.A.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Panel 1: L² Error vs Mesh Size (log-log)}{77}{section*.97}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Panel 2: Relative L² Error vs Mesh Size}{78}{section*.98}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Panel 3: L² Error vs Degrees of Freedom}{78}{section*.99}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Panel 4: Convergence Rates}{78}{section*.100}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {A.3}Comparing Polynomial vs Rational Methods}{79}{section.A.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {A.4}Special Considerations}{79}{section.A.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Discontinuous problems:}{79}{section*.101}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Near-pole problems:}{79}{section*.102}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Oscillatory problems:}{79}{section*.103}\protected@file@percent }
-\@writefile{toc}{\contentsline {chapter}{\numberline {B}Implementation Details}{80}{appendix.B}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {A.1}Understanding the Convergence Tables}{82}{section.A.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Reading a table row:}{83}{section*.107}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {A.2}Understanding the Convergence Plots}{83}{section.A.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Panel 1: L² Error vs Mesh Size (log-log)}{83}{section*.108}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Panel 2: Relative L² Error vs Mesh Size}{84}{section*.109}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Panel 3: L² Error vs Degrees of Freedom}{84}{section*.110}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Panel 4: Convergence Rates}{84}{section*.111}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {A.3}Comparing Polynomial vs Rational Methods}{85}{section.A.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {A.4}Special Considerations}{85}{section.A.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Discontinuous problems:}{85}{section*.112}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Near-pole problems:}{85}{section*.113}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Oscillatory problems:}{85}{section*.114}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {B}Implementation Details}{86}{appendix.B}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {B.1}Polynomial Spline Solver}{80}{section.B.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {B.2}Rational Approximant Construction}{80}{section.B.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {B.3}Error Computation}{81}{section.B.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {chapter}{\numberline {C}Software Information}{82}{appendix.C}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {B.1}Polynomial Spline Solver}{86}{section.B.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {B.2}Rational Approximant Construction}{86}{section.B.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {B.3}Error Computation}{87}{section.B.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {C}Software Information}{88}{appendix.C}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {C.1}Gelfgren Library}{82}{section.C.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {C.2}Dependencies}{82}{section.C.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {C.3}Reproducibility}{82}{section.C.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {chapter}{\numberline {D}Helmholtz Equation Benchmarks}{84}{appendix.D}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {C.1}Gelfgren Library}{88}{section.C.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {C.2}Dependencies}{88}{section.C.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {C.3}Reproducibility}{88}{section.C.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {D}Helmholtz Equation Benchmarks}{90}{appendix.D}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {D.1}Overview}{84}{section.D.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {D.2}Test Problem Solutions}{84}{section.D.2}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {D.1}{\ignorespaces Helmholtz test problem solutions: (left) smooth sine $u(x) = \sin (\pi x)$, (right) exponential-oscillatory $u(x) = e^{-2x}\sin (2\pi x)$. Both are smooth throughout the domain.\relax }}{85}{figure.caption.104}\protected@file@percent }
-\newlabel{fig:helmholtz_solutions}{{D.1}{85}{Helmholtz test problem solutions: (left) smooth sine $u(x) = \sin (\pi x)$, (right) exponential-oscillatory $u(x) = e^{-2x}\sin (2\pi x)$. Both are smooth throughout the domain.\relax }{figure.caption.104}{}}
-\newlabel{fig:helmholtz_solutions@cref}{{[figure][1][2147483647,4]D.1}{[1][84][]85}}
-\@writefile{toc}{\contentsline {section}{\numberline {D.3}Results: Helmholtz $k^2=1$ (H1)}{85}{section.D.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {D.3.1}Convergence Plot}{85}{subsection.D.3.1}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {D.2}{\ignorespaces Helmholtz $k^2=1$: Error vs DOF for all methods. Rational methods achieve exponential convergence (rate $\alpha \approx 21$) while polynomial methods show algebraic convergence.\relax }}{85}{figure.caption.105}\protected@file@percent }
-\newlabel{fig:helmholtz_k1_conv}{{D.2}{85}{Helmholtz $k^2=1$: Error vs DOF for all methods. Rational methods achieve exponential convergence (rate $\alpha \approx 21$) while polynomial methods show algebraic convergence.\relax }{figure.caption.105}{}}
-\newlabel{fig:helmholtz_k1_conv@cref}{{[figure][2][2147483647,4]D.2}{[1][85][]85}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {D.3.2}Key Findings}{86}{subsection.D.3.2}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {D.3}{\ignorespaces Convergence rates for Helmholtz $k^2=1$. Rational achieves exponential convergence while finite differences show expected algebraic rates.\relax }}{86}{figure.caption.106}\protected@file@percent }
-\newlabel{fig:helmholtz_k1_rates}{{D.3}{86}{Convergence rates for Helmholtz $k^2=1$. Rational achieves exponential convergence while finite differences show expected algebraic rates.\relax }{figure.caption.106}{}}
-\newlabel{fig:helmholtz_k1_rates@cref}{{[figure][3][2147483647,4]D.3}{[1][86][]86}}
-\@writefile{toc}{\contentsline {section}{\numberline {D.4}Results: Helmholtz Exponential-Oscillatory (H4)}{86}{section.D.4}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {D.4}{\ignorespaces Helmholtz exponential-oscillatory: Rationals excel at representing mixed exponential-trigonometric functions naturally.\relax }}{87}{figure.caption.107}\protected@file@percent }
-\newlabel{fig:helmholtz_exp_k4_conv}{{D.4}{87}{Helmholtz exponential-oscillatory: Rationals excel at representing mixed exponential-trigonometric functions naturally.\relax }{figure.caption.107}{}}
-\newlabel{fig:helmholtz_exp_k4_conv@cref}{{[figure][4][2147483647,4]D.4}{[1][86][]87}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {D.4.1}Key Findings}{87}{subsection.D.4.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {D.5}Summary}{87}{section.D.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {chapter}{\numberline {E}Advection-Diffusion Benchmarks}{88}{appendix.E}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {D.1}Overview}{90}{section.D.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {D.2}Test Problem Solutions}{90}{section.D.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {D.1}{\ignorespaces Helmholtz test problem solutions: (left) smooth sine $u(x) = \sin (\pi x)$, (right) exponential-oscillatory $u(x) = e^{-2x}\sin (2\pi x)$. Both are smooth throughout the domain.\relax }}{91}{figure.caption.115}\protected@file@percent }
+\newlabel{fig:helmholtz_solutions}{{D.1}{91}{Helmholtz test problem solutions: (left) smooth sine $u(x) = \sin (\pi x)$, (right) exponential-oscillatory $u(x) = e^{-2x}\sin (2\pi x)$. Both are smooth throughout the domain.\relax }{figure.caption.115}{}}
+\newlabel{fig:helmholtz_solutions@cref}{{[figure][1][2147483647,4]D.1}{[1][90][]91}}
+\@writefile{toc}{\contentsline {section}{\numberline {D.3}Results: Helmholtz $k^2=1$ (H1)}{91}{section.D.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {D.3.1}Convergence Plot}{91}{subsection.D.3.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {D.2}{\ignorespaces Helmholtz $k^2=1$: Error vs DOF for all methods. Rational methods achieve exponential convergence (rate $\alpha \approx 21$) while polynomial methods show algebraic convergence.\relax }}{91}{figure.caption.116}\protected@file@percent }
+\newlabel{fig:helmholtz_k1_conv}{{D.2}{91}{Helmholtz $k^2=1$: Error vs DOF for all methods. Rational methods achieve exponential convergence (rate $\alpha \approx 21$) while polynomial methods show algebraic convergence.\relax }{figure.caption.116}{}}
+\newlabel{fig:helmholtz_k1_conv@cref}{{[figure][2][2147483647,4]D.2}{[1][91][]91}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {D.3.2}Key Findings}{92}{subsection.D.3.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {D.3}{\ignorespaces Convergence rates for Helmholtz $k^2=1$. Rational achieves exponential convergence while finite differences show expected algebraic rates.\relax }}{92}{figure.caption.117}\protected@file@percent }
+\newlabel{fig:helmholtz_k1_rates}{{D.3}{92}{Convergence rates for Helmholtz $k^2=1$. Rational achieves exponential convergence while finite differences show expected algebraic rates.\relax }{figure.caption.117}{}}
+\newlabel{fig:helmholtz_k1_rates@cref}{{[figure][3][2147483647,4]D.3}{[1][92][]92}}
+\@writefile{toc}{\contentsline {section}{\numberline {D.4}Results: Helmholtz Exponential-Oscillatory (H4)}{92}{section.D.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {D.4}{\ignorespaces Helmholtz exponential-oscillatory: Rationals excel at representing mixed exponential-trigonometric functions naturally.\relax }}{93}{figure.caption.118}\protected@file@percent }
+\newlabel{fig:helmholtz_exp_k4_conv}{{D.4}{93}{Helmholtz exponential-oscillatory: Rationals excel at representing mixed exponential-trigonometric functions naturally.\relax }{figure.caption.118}{}}
+\newlabel{fig:helmholtz_exp_k4_conv@cref}{{[figure][4][2147483647,4]D.4}{[1][92][]93}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {D.4.1}Key Findings}{93}{subsection.D.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {D.5}Summary}{93}{section.D.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {E}Advection-Diffusion Benchmarks}{94}{appendix.E}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {E.1}Overview and Critical Importance}{88}{section.E.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {E.2}Test Problems}{88}{section.E.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {E.2.1}Visualizing the Boundary Layer}{89}{subsection.E.2.1}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {E.1}{\ignorespaces Sharp boundary layer solution for $\varepsilon =0.001$: (left) full domain showing rapid transition, (right) zoomed view revealing exponentially thin layer of thickness $\sim 0.001$. This extreme localized gradient causes rational methods to fail catastrophically.\relax }}{89}{figure.caption.108}\protected@file@percent }
-\newlabel{fig:advdiff_bl_solution}{{E.1}{89}{Sharp boundary layer solution for $\varepsilon =0.001$: (left) full domain showing rapid transition, (right) zoomed view revealing exponentially thin layer of thickness $\sim 0.001$. This extreme localized gradient causes rational methods to fail catastrophically.\relax }{figure.caption.108}{}}
-\newlabel{fig:advdiff_bl_solution@cref}{{[figure][1][2147483647,5]E.1}{[1][89][]89}}
-\@writefile{toc}{\contentsline {section}{\numberline {E.3}CRITICAL: Sharp Boundary Layer ($\varepsilon = 0.001$)}{89}{section.E.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {E.3.1}The Problem}{89}{subsection.E.3.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {E.3.2}Catastrophic Rational Failure}{90}{subsection.E.3.2}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {E.2}{\ignorespaces Sharp boundary layer ($\varepsilon =0.001$): Rational methods catastrophically fail with 64--76\% L$^2$ error, essentially unable to represent the sharp gradient. Convergence is nearly flat ($\alpha \approx 0.3$).\relax }}{90}{figure.caption.109}\protected@file@percent }
-\newlabel{fig:advdiff_sharp_conv}{{E.2}{90}{Sharp boundary layer ($\varepsilon =0.001$): Rational methods catastrophically fail with 64--76\% L$^2$ error, essentially unable to represent the sharp gradient. Convergence is nearly flat ($\alpha \approx 0.3$).\relax }{figure.caption.109}{}}
-\newlabel{fig:advdiff_sharp_conv@cref}{{[figure][2][2147483647,5]E.2}{[1][89][]90}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {E.3.3}Critical Observations}{90}{subsection.E.3.3}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {E.3}{\ignorespaces Convergence rates for sharp boundary layer. Rational convergence rate $\alpha \approx 0.3$ indicates fundamental failure---the method is not converging.\relax }}{91}{figure.caption.110}\protected@file@percent }
-\newlabel{fig:advdiff_sharp_rates}{{E.3}{91}{Convergence rates for sharp boundary layer. Rational convergence rate $\alpha \approx 0.3$ indicates fundamental failure---the method is not converging.\relax }{figure.caption.110}{}}
-\newlabel{fig:advdiff_sharp_rates@cref}{{[figure][3][2147483647,5]E.3}{[1][90][]91}}
-\@writefile{toc}{\contentsline {section}{\numberline {E.4}Why Rationals Fail on Boundary Layers}{91}{section.E.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {E.4.1}Mathematical Explanation}{91}{subsection.E.4.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {E.4.2}Comparison with Other Methods}{91}{subsection.E.4.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {E.5}Recommendations}{92}{section.E.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {E.5.1}When to AVOID Rationals}{92}{subsection.E.5.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {E.5.2}Alternative Methods for Boundary Layers}{92}{subsection.E.5.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {E.6}Summary}{92}{section.E.6}\protected@file@percent }
-\@writefile{toc}{\contentsline {chapter}{\numberline {F}Reaction-Diffusion Benchmarks}{94}{appendix.F}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {E.1}Overview and Critical Importance}{94}{section.E.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {E.2}Test Problems}{94}{section.E.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {E.2.1}Visualizing the Boundary Layer}{95}{subsection.E.2.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {E.1}{\ignorespaces Sharp boundary layer solution for $\varepsilon =0.001$: (left) full domain showing rapid transition, (right) zoomed view revealing exponentially thin layer of thickness $\sim 0.001$. This extreme localized gradient causes rational methods to fail catastrophically.\relax }}{95}{figure.caption.119}\protected@file@percent }
+\newlabel{fig:advdiff_bl_solution}{{E.1}{95}{Sharp boundary layer solution for $\varepsilon =0.001$: (left) full domain showing rapid transition, (right) zoomed view revealing exponentially thin layer of thickness $\sim 0.001$. This extreme localized gradient causes rational methods to fail catastrophically.\relax }{figure.caption.119}{}}
+\newlabel{fig:advdiff_bl_solution@cref}{{[figure][1][2147483647,5]E.1}{[1][95][]95}}
+\@writefile{toc}{\contentsline {section}{\numberline {E.3}CRITICAL: Sharp Boundary Layer ($\varepsilon = 0.001$)}{95}{section.E.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {E.3.1}The Problem}{95}{subsection.E.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {E.3.2}Catastrophic Rational Failure}{96}{subsection.E.3.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {E.2}{\ignorespaces Sharp boundary layer ($\varepsilon =0.001$): Rational methods catastrophically fail with 64--76\% L$^2$ error, essentially unable to represent the sharp gradient. Convergence is nearly flat ($\alpha \approx 0.3$).\relax }}{96}{figure.caption.120}\protected@file@percent }
+\newlabel{fig:advdiff_sharp_conv}{{E.2}{96}{Sharp boundary layer ($\varepsilon =0.001$): Rational methods catastrophically fail with 64--76\% L$^2$ error, essentially unable to represent the sharp gradient. Convergence is nearly flat ($\alpha \approx 0.3$).\relax }{figure.caption.120}{}}
+\newlabel{fig:advdiff_sharp_conv@cref}{{[figure][2][2147483647,5]E.2}{[1][95][]96}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {E.3.3}Critical Observations}{96}{subsection.E.3.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {E.3}{\ignorespaces Convergence rates for sharp boundary layer. Rational convergence rate $\alpha \approx 0.3$ indicates fundamental failure---the method is not converging.\relax }}{97}{figure.caption.121}\protected@file@percent }
+\newlabel{fig:advdiff_sharp_rates}{{E.3}{97}{Convergence rates for sharp boundary layer. Rational convergence rate $\alpha \approx 0.3$ indicates fundamental failure---the method is not converging.\relax }{figure.caption.121}{}}
+\newlabel{fig:advdiff_sharp_rates@cref}{{[figure][3][2147483647,5]E.3}{[1][96][]97}}
+\@writefile{toc}{\contentsline {section}{\numberline {E.4}Why Rationals Fail on Boundary Layers}{97}{section.E.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {E.4.1}Mathematical Explanation}{97}{subsection.E.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {E.4.2}Comparison with Other Methods}{97}{subsection.E.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {E.5}Recommendations}{98}{section.E.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {E.5.1}When to AVOID Rationals}{98}{subsection.E.5.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {E.5.2}Alternative Methods for Boundary Layers}{98}{subsection.E.5.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {E.6}Summary}{98}{section.E.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {F}Reaction-Diffusion Benchmarks}{100}{appendix.F}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {F.1}Overview}{94}{section.F.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {F.2}Test Problems}{94}{section.F.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {F.2.1}Visualizing Smooth Exponential Solutions}{94}{subsection.F.2.1}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {F.1}{\ignorespaces Reaction-diffusion solutions: (left) smooth exponential $\sinh (\sqrt  {10}x)/\sinh (\sqrt  {10})$ with $c=10$, (right) polynomial $x^2(1-x)^2$. Both are smooth with bounded derivatives—ideal for rational approximation.\relax }}{95}{figure.caption.111}\protected@file@percent }
-\newlabel{fig:reacdiff_solutions}{{F.1}{95}{Reaction-diffusion solutions: (left) smooth exponential $\sinh (\sqrt {10}x)/\sinh (\sqrt {10})$ with $c=10$, (right) polynomial $x^2(1-x)^2$. Both are smooth with bounded derivatives—ideal for rational approximation.\relax }{figure.caption.111}{}}
-\newlabel{fig:reacdiff_solutions@cref}{{[figure][1][2147483647,6]F.1}{[1][94][]95}}
-\@writefile{toc}{\contentsline {section}{\numberline {F.3}Results: Exponential Layers ($c = 10$)}{95}{section.F.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {F.3.1}Rationals Excel on Smooth Exponentials}{95}{subsection.F.3.1}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {F.2}{\ignorespaces Reaction-diffusion with $c=10$: Rationals achieve spectacular accuracy on smooth exponential $\sinh (\sqrt  {10}\,x)$ because the boundary layers are smooth, unlike the sharp discontinuous layers in advection-diffusion.\relax }}{95}{figure.caption.112}\protected@file@percent }
-\newlabel{fig:reacdiff_exp_conv}{{F.2}{95}{Reaction-diffusion with $c=10$: Rationals achieve spectacular accuracy on smooth exponential $\sinh (\sqrt {10}\,x)$ because the boundary layers are smooth, unlike the sharp discontinuous layers in advection-diffusion.\relax }{figure.caption.112}{}}
-\newlabel{fig:reacdiff_exp_conv@cref}{{[figure][2][2147483647,6]F.2}{[1][95][]95}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {F.3.2}Key Findings}{96}{subsection.F.3.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {F.4}Results: Polynomial Solution ($c = 4$)}{96}{section.F.4}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {F.3}{\ignorespaces Polynomial solution: Rationals still achieve machine precision but offer no special advantage---spectral methods would be equally efficient.\relax }}{96}{figure.caption.113}\protected@file@percent }
-\newlabel{fig:reacdiff_poly_conv}{{F.3}{96}{Polynomial solution: Rationals still achieve machine precision but offer no special advantage---spectral methods would be equally efficient.\relax }{figure.caption.113}{}}
-\newlabel{fig:reacdiff_poly_conv@cref}{{[figure][3][2147483647,6]F.3}{[1][96][]96}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {F.4.1}Observations}{97}{subsection.F.4.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {F.5}Why Rationals Excel Here (vs Advection-Diffusion)}{97}{section.F.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {F.5.1}Smooth vs Sharp Gradients}{97}{subsection.F.5.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {F.6}Summary}{98}{section.F.6}\protected@file@percent }
-\@writefile{toc}{\contentsline {chapter}{\numberline {G}Variable Coefficient Benchmarks}{99}{appendix.G}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {F.1}Overview}{100}{section.F.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {F.2}Test Problems}{100}{section.F.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {F.2.1}Visualizing Smooth Exponential Solutions}{100}{subsection.F.2.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {F.1}{\ignorespaces Reaction-diffusion solutions: (left) smooth exponential $\sinh (\sqrt  {10}x)/\sinh (\sqrt  {10})$ with $c=10$, (right) polynomial $x^2(1-x)^2$. Both are smooth with bounded derivatives—ideal for rational approximation.\relax }}{101}{figure.caption.122}\protected@file@percent }
+\newlabel{fig:reacdiff_solutions}{{F.1}{101}{Reaction-diffusion solutions: (left) smooth exponential $\sinh (\sqrt {10}x)/\sinh (\sqrt {10})$ with $c=10$, (right) polynomial $x^2(1-x)^2$. Both are smooth with bounded derivatives—ideal for rational approximation.\relax }{figure.caption.122}{}}
+\newlabel{fig:reacdiff_solutions@cref}{{[figure][1][2147483647,6]F.1}{[1][100][]101}}
+\@writefile{toc}{\contentsline {section}{\numberline {F.3}Results: Exponential Layers ($c = 10$)}{101}{section.F.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {F.3.1}Rationals Excel on Smooth Exponentials}{101}{subsection.F.3.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {F.2}{\ignorespaces Reaction-diffusion with $c=10$: Rationals achieve spectacular accuracy on smooth exponential $\sinh (\sqrt  {10}\,x)$ because the boundary layers are smooth, unlike the sharp discontinuous layers in advection-diffusion.\relax }}{101}{figure.caption.123}\protected@file@percent }
+\newlabel{fig:reacdiff_exp_conv}{{F.2}{101}{Reaction-diffusion with $c=10$: Rationals achieve spectacular accuracy on smooth exponential $\sinh (\sqrt {10}\,x)$ because the boundary layers are smooth, unlike the sharp discontinuous layers in advection-diffusion.\relax }{figure.caption.123}{}}
+\newlabel{fig:reacdiff_exp_conv@cref}{{[figure][2][2147483647,6]F.2}{[1][101][]101}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {F.3.2}Key Findings}{102}{subsection.F.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {F.4}Results: Polynomial Solution ($c = 4$)}{102}{section.F.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {F.3}{\ignorespaces Polynomial solution: Rationals still achieve machine precision but offer no special advantage---spectral methods would be equally efficient.\relax }}{102}{figure.caption.124}\protected@file@percent }
+\newlabel{fig:reacdiff_poly_conv}{{F.3}{102}{Polynomial solution: Rationals still achieve machine precision but offer no special advantage---spectral methods would be equally efficient.\relax }{figure.caption.124}{}}
+\newlabel{fig:reacdiff_poly_conv@cref}{{[figure][3][2147483647,6]F.3}{[1][102][]102}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {F.4.1}Observations}{103}{subsection.F.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {F.5}Why Rationals Excel Here (vs Advection-Diffusion)}{103}{section.F.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {F.5.1}Smooth vs Sharp Gradients}{103}{subsection.F.5.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {F.6}Summary}{104}{section.F.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {G}Variable Coefficient Benchmarks}{105}{appendix.G}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {G.1}Overview}{99}{section.G.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {G.2}Test Problems}{99}{section.G.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {G.2.1}Visualizing Discontinuous Coefficient Solution}{99}{subsection.G.2.1}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {G.1}{\ignorespaces Variable coefficient solution with jump at $x=0.5$: coefficient $a(x)$ jumps from 1 to 10. Solution $u$ and $u'$ are continuous but $u''$ is discontinuous. This non-smoothness causes rational methods to fail catastrophically.\relax }}{100}{figure.caption.114}\protected@file@percent }
-\newlabel{fig:varcoeff_disc_solution}{{G.1}{100}{Variable coefficient solution with jump at $x=0.5$: coefficient $a(x)$ jumps from 1 to 10. Solution $u$ and $u'$ are continuous but $u''$ is discontinuous. This non-smoothness causes rational methods to fail catastrophically.\relax }{figure.caption.114}{}}
-\newlabel{fig:varcoeff_disc_solution@cref}{{[figure][1][2147483647,7]G.1}{[1][99][]100}}
-\@writefile{toc}{\contentsline {section}{\numberline {G.3}CRITICAL: Discontinuous Coefficient}{100}{section.G.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {G.3.1}The Problem}{100}{subsection.G.3.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {G.3.2}Catastrophic Rational Failure}{101}{subsection.G.3.2}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {G.2}{\ignorespaces Discontinuous coefficient: Rational methods completely fail to represent discontinuities, achieving only 39--40\% L$^2$ error. Convergence rate $\alpha \approx 0.06$ indicates complete stagnation.\relax }}{101}{figure.caption.115}\protected@file@percent }
-\newlabel{fig:varcoeff_disc_conv}{{G.2}{101}{Discontinuous coefficient: Rational methods completely fail to represent discontinuities, achieving only 39--40\% L$^2$ error. Convergence rate $\alpha \approx 0.06$ indicates complete stagnation.\relax }{figure.caption.115}{}}
-\newlabel{fig:varcoeff_disc_conv@cref}{{[figure][2][2147483647,7]G.2}{[1][100][]101}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {G.3.3}Critical Observations}{101}{subsection.G.3.3}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {G.3}{\ignorespaces Critical failure comparison: Both boundary layer and discontinuous coefficient problems show catastrophic rational failure ($>10\%$ error threshold).\relax }}{102}{figure.caption.116}\protected@file@percent }
-\newlabel{fig:critical_failures}{{G.3}{102}{Critical failure comparison: Both boundary layer and discontinuous coefficient problems show catastrophic rational failure ($>10\%$ error threshold).\relax }{figure.caption.116}{}}
-\newlabel{fig:critical_failures@cref}{{[figure][3][2147483647,7]G.3}{[1][101][]102}}
-\@writefile{toc}{\contentsline {section}{\numberline {G.4}Why Rationals Fail on Discontinuities}{102}{section.G.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {G.4.1}Mathematical Explanation}{102}{subsection.G.4.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {G.4.2}Comparison with Other Methods}{102}{subsection.G.4.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {G.5}Recommendations}{103}{section.G.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {G.5.1}When to AVOID Rationals}{103}{subsection.G.5.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {G.5.2}Alternative Methods for Discontinuities}{103}{subsection.G.5.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {G.6}Smooth Variable Coefficients}{103}{section.G.6}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {G.7}Summary}{103}{section.G.7}\protected@file@percent }
-\@writefile{toc}{\contentsline {chapter}{\numberline {H}Cross-Method Analysis and Recommendations}{104}{appendix.H}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {G.1}Overview}{105}{section.G.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {G.2}Test Problems}{105}{section.G.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {G.2.1}Visualizing Discontinuous Coefficient Solution}{105}{subsection.G.2.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {G.1}{\ignorespaces Variable coefficient solution with jump at $x=0.5$: coefficient $a(x)$ jumps from 1 to 10. Solution $u$ and $u'$ are continuous but $u''$ is discontinuous. This non-smoothness causes rational methods to fail catastrophically.\relax }}{106}{figure.caption.125}\protected@file@percent }
+\newlabel{fig:varcoeff_disc_solution}{{G.1}{106}{Variable coefficient solution with jump at $x=0.5$: coefficient $a(x)$ jumps from 1 to 10. Solution $u$ and $u'$ are continuous but $u''$ is discontinuous. This non-smoothness causes rational methods to fail catastrophically.\relax }{figure.caption.125}{}}
+\newlabel{fig:varcoeff_disc_solution@cref}{{[figure][1][2147483647,7]G.1}{[1][105][]106}}
+\@writefile{toc}{\contentsline {section}{\numberline {G.3}CRITICAL: Discontinuous Coefficient}{106}{section.G.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {G.3.1}The Problem}{106}{subsection.G.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {G.3.2}Catastrophic Rational Failure}{107}{subsection.G.3.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {G.2}{\ignorespaces Discontinuous coefficient: Rational methods completely fail to represent discontinuities, achieving only 39--40\% L$^2$ error. Convergence rate $\alpha \approx 0.06$ indicates complete stagnation.\relax }}{107}{figure.caption.126}\protected@file@percent }
+\newlabel{fig:varcoeff_disc_conv}{{G.2}{107}{Discontinuous coefficient: Rational methods completely fail to represent discontinuities, achieving only 39--40\% L$^2$ error. Convergence rate $\alpha \approx 0.06$ indicates complete stagnation.\relax }{figure.caption.126}{}}
+\newlabel{fig:varcoeff_disc_conv@cref}{{[figure][2][2147483647,7]G.2}{[1][106][]107}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {G.3.3}Critical Observations}{107}{subsection.G.3.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {G.3}{\ignorespaces Critical failure comparison: Both boundary layer and discontinuous coefficient problems show catastrophic rational failure ($>10\%$ error threshold).\relax }}{108}{figure.caption.127}\protected@file@percent }
+\newlabel{fig:critical_failures}{{G.3}{108}{Critical failure comparison: Both boundary layer and discontinuous coefficient problems show catastrophic rational failure ($>10\%$ error threshold).\relax }{figure.caption.127}{}}
+\newlabel{fig:critical_failures@cref}{{[figure][3][2147483647,7]G.3}{[1][107][]108}}
+\@writefile{toc}{\contentsline {section}{\numberline {G.4}Why Rationals Fail on Discontinuities}{108}{section.G.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {G.4.1}Mathematical Explanation}{108}{subsection.G.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {G.4.2}Comparison with Other Methods}{108}{subsection.G.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {G.5}Recommendations}{109}{section.G.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {G.5.1}When to AVOID Rationals}{109}{subsection.G.5.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {G.5.2}Alternative Methods for Discontinuities}{109}{subsection.G.5.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {G.6}Smooth Variable Coefficients}{109}{section.G.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {G.7}Summary}{109}{section.G.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {H}Cross-Method Analysis and Recommendations}{110}{appendix.H}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {H.1}Overall Method Performance Summary}{104}{section.H.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {H.2}Convergence Rate Summary}{104}{section.H.2}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {H.1}{\ignorespaces Convergence rates across all methods and problem types\relax }}{104}{table.caption.117}\protected@file@percent }
-\newlabel{tab:convergence_summary}{{H.1}{104}{Convergence rates across all methods and problem types\relax }{table.caption.117}{}}
-\newlabel{tab:convergence_summary@cref}{{[table][1][2147483647,8]H.1}{[1][104][]104}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {H.2.1}Key Observations}{104}{subsection.H.2.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {H.3}Accuracy vs Cost Tradeoffs}{105}{section.H.3}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {H.1}{\ignorespaces Typical smooth problem (Helmholtz $k^2=1$): Rationals achieve machine precision fastest, but spectral/high-order FD are competitive and more robust.\relax }}{105}{figure.caption.118}\protected@file@percent }
-\newlabel{fig:accuracy_cost}{{H.1}{105}{Typical smooth problem (Helmholtz $k^2=1$): Rationals achieve machine precision fastest, but spectral/high-order FD are competitive and more robust.\relax }{figure.caption.118}{}}
-\newlabel{fig:accuracy_cost@cref}{{[figure][1][2147483647,8]H.1}{[1][105][]105}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {H.3.1}For 10$^{-6}$ Accuracy on Smooth Problems}{106}{subsection.H.3.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {H.4}Method Selection Decision Tree}{107}{section.H.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {H.5}Detailed Recommendations by Problem Class}{107}{section.H.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {H.5.1}Poisson / Helmholtz (smooth forcing)}{107}{subsection.H.5.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {H.5.2}Reaction-Diffusion (smooth exponentials)}{108}{subsection.H.5.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {H.5.3}Advection-Diffusion}{108}{subsection.H.5.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {H.5.4}Variable Coefficients}{108}{subsection.H.5.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {H.6}Cost-Benefit Analysis}{109}{section.H.6}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {H.6.1}Rational Collocation}{109}{subsection.H.6.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {H.6.2}Spectral Methods (Chebyshev/Legendre)}{109}{subsection.H.6.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {H.6.3}4th-Order Finite Differences}{110}{subsection.H.6.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {H.7}Revisiting the Original Claims}{110}{section.H.7}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {H.7.1}The "2,000,000$\times $ Improvement" Claim}{110}{subsection.H.7.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {H.7.2}Honest Assessment}{110}{subsection.H.7.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {H.1}Overall Method Performance Summary}{110}{section.H.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {H.2}Convergence Rate Summary}{110}{section.H.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {H.1}{\ignorespaces Convergence rates across all methods and problem types\relax }}{110}{table.caption.128}\protected@file@percent }
+\newlabel{tab:convergence_summary}{{H.1}{110}{Convergence rates across all methods and problem types\relax }{table.caption.128}{}}
+\newlabel{tab:convergence_summary@cref}{{[table][1][2147483647,8]H.1}{[1][110][]110}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {H.2.1}Key Observations}{110}{subsection.H.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {H.3}Accuracy vs Cost Tradeoffs}{111}{section.H.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {H.1}{\ignorespaces Typical smooth problem (Helmholtz $k^2=1$): Rationals achieve machine precision fastest, but spectral/high-order FD are competitive and more robust.\relax }}{111}{figure.caption.129}\protected@file@percent }
+\newlabel{fig:accuracy_cost}{{H.1}{111}{Typical smooth problem (Helmholtz $k^2=1$): Rationals achieve machine precision fastest, but spectral/high-order FD are competitive and more robust.\relax }{figure.caption.129}{}}
+\newlabel{fig:accuracy_cost@cref}{{[figure][1][2147483647,8]H.1}{[1][111][]111}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {H.3.1}For 10$^{-6}$ Accuracy on Smooth Problems}{112}{subsection.H.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {H.4}Method Selection Decision Tree}{113}{section.H.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {H.5}Detailed Recommendations by Problem Class}{113}{section.H.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {H.5.1}Poisson / Helmholtz (smooth forcing)}{113}{subsection.H.5.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {H.5.2}Reaction-Diffusion (smooth exponentials)}{114}{subsection.H.5.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {H.5.3}Advection-Diffusion}{114}{subsection.H.5.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {H.5.4}Variable Coefficients}{114}{subsection.H.5.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {H.6}Cost-Benefit Analysis}{115}{section.H.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {H.6.1}Rational Collocation}{115}{subsection.H.6.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {H.6.2}Spectral Methods (Chebyshev/Legendre)}{115}{subsection.H.6.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {H.6.3}4th-Order Finite Differences}{116}{subsection.H.6.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {H.7}Revisiting the Original Claims}{116}{section.H.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {H.7.1}The "2,000,000$\times $ Improvement" Claim}{116}{subsection.H.7.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {H.7.2}Honest Assessment}{116}{subsection.H.7.2}\protected@file@percent }
 \bibstyle{plain}
-\@writefile{toc}{\contentsline {section}{\numberline {H.8}Summary}{111}{section.H.8}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {H.8}Summary}{117}{section.H.8}\protected@file@percent }
 \bibcite{gelfgren1975}{1}
 \bibcite{traub1964}{2}
 \bibcite{deboor2001}{3}
 \bibcite{baker1996}{4}
 \bibcite{farouki1987}{5}
-\gdef \@abspage@last{115}
+\gdef \@abspage@last{121}
