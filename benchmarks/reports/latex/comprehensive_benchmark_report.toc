@@ -204,63 +204,63 @@
 \contentsline {section}{\numberline {D.3}Results: Helmholtz Exponential-Oscillatory (H4)}{79}{section.D.3}%
 \contentsline {subsection}{\numberline {D.3.1}Key Findings}{80}{subsection.D.3.1}%
 \contentsline {section}{\numberline {D.4}Summary}{80}{section.D.4}%
-\contentsline {chapter}{\numberline {E}Advection-Diffusion Benchmarks}{82}{appendix.E}%
-\contentsline {section}{\numberline {E.1}Overview and Critical Importance}{82}{section.E.1}%
-\contentsline {section}{\numberline {E.2}Test Problems}{82}{section.E.2}%
-\contentsline {section}{\numberline {E.3}CRITICAL: Sharp Boundary Layer ($\varepsilon = 0.001$)}{83}{section.E.3}%
-\contentsline {subsection}{\numberline {E.3.1}The Problem}{83}{subsection.E.3.1}%
-\contentsline {subsection}{\numberline {E.3.2}Catastrophic Rational Failure}{83}{subsection.E.3.2}%
-\contentsline {subsection}{\numberline {E.3.3}Critical Observations}{84}{subsection.E.3.3}%
-\contentsline {section}{\numberline {E.4}Why Rationals Fail on Boundary Layers}{85}{section.E.4}%
-\contentsline {subsection}{\numberline {E.4.1}Mathematical Explanation}{85}{subsection.E.4.1}%
-\contentsline {subsection}{\numberline {E.4.2}Comparison with Other Methods}{86}{subsection.E.4.2}%
-\contentsline {section}{\numberline {E.5}Recommendations}{86}{section.E.5}%
-\contentsline {subsection}{\numberline {E.5.1}When to AVOID Rationals}{86}{subsection.E.5.1}%
-\contentsline {subsection}{\numberline {E.5.2}Alternative Methods for Boundary Layers}{86}{subsection.E.5.2}%
-\contentsline {section}{\numberline {E.6}Summary}{87}{section.E.6}%
-\contentsline {chapter}{\numberline {F}Reaction-Diffusion Benchmarks}{88}{appendix.F}%
-\contentsline {section}{\numberline {F.1}Overview}{88}{section.F.1}%
-\contentsline {section}{\numberline {F.2}Test Problems}{88}{section.F.2}%
-\contentsline {section}{\numberline {F.3}Results: Exponential Layers ($c = 10$)}{89}{section.F.3}%
-\contentsline {subsection}{\numberline {F.3.1}Rationals Excel on Smooth Exponentials}{89}{subsection.F.3.1}%
-\contentsline {subsection}{\numberline {F.3.2}Key Findings}{89}{subsection.F.3.2}%
-\contentsline {section}{\numberline {F.4}Results: Polynomial Solution ($c = 4$)}{90}{section.F.4}%
-\contentsline {subsection}{\numberline {F.4.1}Observations}{91}{subsection.F.4.1}%
-\contentsline {section}{\numberline {F.5}Why Rationals Excel Here (vs Advection-Diffusion)}{91}{section.F.5}%
-\contentsline {subsection}{\numberline {F.5.1}Smooth vs Sharp Gradients}{91}{subsection.F.5.1}%
-\contentsline {section}{\numberline {F.6}Summary}{92}{section.F.6}%
-\contentsline {chapter}{\numberline {G}Variable Coefficient Benchmarks}{93}{appendix.G}%
-\contentsline {section}{\numberline {G.1}Overview}{93}{section.G.1}%
-\contentsline {section}{\numberline {G.2}Test Problems}{93}{section.G.2}%
-\contentsline {section}{\numberline {G.3}CRITICAL: Discontinuous Coefficient}{93}{section.G.3}%
-\contentsline {subsection}{\numberline {G.3.1}The Problem}{93}{subsection.G.3.1}%
-\contentsline {subsection}{\numberline {G.3.2}Catastrophic Rational Failure}{94}{subsection.G.3.2}%
-\contentsline {subsection}{\numberline {G.3.3}Critical Observations}{94}{subsection.G.3.3}%
-\contentsline {section}{\numberline {G.4}Why Rationals Fail on Discontinuities}{95}{section.G.4}%
-\contentsline {subsection}{\numberline {G.4.1}Mathematical Explanation}{95}{subsection.G.4.1}%
-\contentsline {subsection}{\numberline {G.4.2}Comparison with Other Methods}{96}{subsection.G.4.2}%
-\contentsline {section}{\numberline {G.5}Recommendations}{96}{section.G.5}%
-\contentsline {subsection}{\numberline {G.5.1}When to AVOID Rationals}{96}{subsection.G.5.1}%
-\contentsline {subsection}{\numberline {G.5.2}Alternative Methods for Discontinuities}{96}{subsection.G.5.2}%
-\contentsline {section}{\numberline {G.6}Smooth Variable Coefficients}{97}{section.G.6}%
-\contentsline {section}{\numberline {G.7}Summary}{97}{section.G.7}%
-\contentsline {chapter}{\numberline {H}Cross-Method Analysis and Recommendations}{98}{appendix.H}%
-\contentsline {section}{\numberline {H.1}Overall Method Performance Summary}{98}{section.H.1}%
-\contentsline {section}{\numberline {H.2}Convergence Rate Summary}{98}{section.H.2}%
-\contentsline {subsection}{\numberline {H.2.1}Key Observations}{98}{subsection.H.2.1}%
-\contentsline {section}{\numberline {H.3}Accuracy vs Cost Tradeoffs}{100}{section.H.3}%
-\contentsline {subsection}{\numberline {H.3.1}For 10$^{-6}$ Accuracy on Smooth Problems}{100}{subsection.H.3.1}%
-\contentsline {section}{\numberline {H.4}Method Selection Decision Tree}{101}{section.H.4}%
-\contentsline {section}{\numberline {H.5}Detailed Recommendations by Problem Class}{101}{section.H.5}%
-\contentsline {subsection}{\numberline {H.5.1}Poisson / Helmholtz (smooth forcing)}{101}{subsection.H.5.1}%
-\contentsline {subsection}{\numberline {H.5.2}Reaction-Diffusion (smooth exponentials)}{102}{subsection.H.5.2}%
-\contentsline {subsection}{\numberline {H.5.3}Advection-Diffusion}{102}{subsection.H.5.3}%
-\contentsline {subsection}{\numberline {H.5.4}Variable Coefficients}{102}{subsection.H.5.4}%
-\contentsline {section}{\numberline {H.6}Cost-Benefit Analysis}{103}{section.H.6}%
-\contentsline {subsection}{\numberline {H.6.1}Rational Collocation}{103}{subsection.H.6.1}%
-\contentsline {subsection}{\numberline {H.6.2}Spectral Methods (Chebyshev/Legendre)}{103}{subsection.H.6.2}%
-\contentsline {subsection}{\numberline {H.6.3}4th-Order Finite Differences}{104}{subsection.H.6.3}%
-\contentsline {section}{\numberline {H.7}Revisiting the Original Claims}{104}{section.H.7}%
-\contentsline {subsection}{\numberline {H.7.1}The "2,000,000$\times $ Improvement" Claim}{104}{subsection.H.7.1}%
-\contentsline {subsection}{\numberline {H.7.2}Honest Assessment}{104}{subsection.H.7.2}%
-\contentsline {section}{\numberline {H.8}Summary}{105}{section.H.8}%
+\contentsline {chapter}{\numberline {E}Advection-Diffusion Benchmarks}{81}{appendix.E}%
+\contentsline {section}{\numberline {E.1}Overview and Critical Importance}{81}{section.E.1}%
+\contentsline {section}{\numberline {E.2}Test Problems}{81}{section.E.2}%
+\contentsline {section}{\numberline {E.3}CRITICAL: Sharp Boundary Layer ($\varepsilon = 0.001$)}{82}{section.E.3}%
+\contentsline {subsection}{\numberline {E.3.1}The Problem}{82}{subsection.E.3.1}%
+\contentsline {subsection}{\numberline {E.3.2}Catastrophic Rational Failure}{82}{subsection.E.3.2}%
+\contentsline {subsection}{\numberline {E.3.3}Critical Observations}{82}{subsection.E.3.3}%
+\contentsline {section}{\numberline {E.4}Why Rationals Fail on Boundary Layers}{83}{section.E.4}%
+\contentsline {subsection}{\numberline {E.4.1}Mathematical Explanation}{83}{subsection.E.4.1}%
+\contentsline {subsection}{\numberline {E.4.2}Comparison with Other Methods}{84}{subsection.E.4.2}%
+\contentsline {section}{\numberline {E.5}Recommendations}{84}{section.E.5}%
+\contentsline {subsection}{\numberline {E.5.1}When to AVOID Rationals}{84}{subsection.E.5.1}%
+\contentsline {subsection}{\numberline {E.5.2}Alternative Methods for Boundary Layers}{84}{subsection.E.5.2}%
+\contentsline {section}{\numberline {E.6}Summary}{85}{section.E.6}%
+\contentsline {chapter}{\numberline {F}Reaction-Diffusion Benchmarks}{86}{appendix.F}%
+\contentsline {section}{\numberline {F.1}Overview}{86}{section.F.1}%
+\contentsline {section}{\numberline {F.2}Test Problems}{86}{section.F.2}%
+\contentsline {section}{\numberline {F.3}Results: Exponential Layers ($c = 10$)}{87}{section.F.3}%
+\contentsline {subsection}{\numberline {F.3.1}Rationals Excel on Smooth Exponentials}{87}{subsection.F.3.1}%
+\contentsline {subsection}{\numberline {F.3.2}Key Findings}{87}{subsection.F.3.2}%
+\contentsline {section}{\numberline {F.4}Results: Polynomial Solution ($c = 4$)}{88}{section.F.4}%
+\contentsline {subsection}{\numberline {F.4.1}Observations}{88}{subsection.F.4.1}%
+\contentsline {section}{\numberline {F.5}Why Rationals Excel Here (vs Advection-Diffusion)}{89}{section.F.5}%
+\contentsline {subsection}{\numberline {F.5.1}Smooth vs Sharp Gradients}{89}{subsection.F.5.1}%
+\contentsline {section}{\numberline {F.6}Summary}{89}{section.F.6}%
+\contentsline {chapter}{\numberline {G}Variable Coefficient Benchmarks}{90}{appendix.G}%
+\contentsline {section}{\numberline {G.1}Overview}{90}{section.G.1}%
+\contentsline {section}{\numberline {G.2}Test Problems}{90}{section.G.2}%
+\contentsline {section}{\numberline {G.3}CRITICAL: Discontinuous Coefficient}{90}{section.G.3}%
+\contentsline {subsection}{\numberline {G.3.1}The Problem}{90}{subsection.G.3.1}%
+\contentsline {subsection}{\numberline {G.3.2}Catastrophic Rational Failure}{91}{subsection.G.3.2}%
+\contentsline {subsection}{\numberline {G.3.3}Critical Observations}{91}{subsection.G.3.3}%
+\contentsline {section}{\numberline {G.4}Why Rationals Fail on Discontinuities}{92}{section.G.4}%
+\contentsline {subsection}{\numberline {G.4.1}Mathematical Explanation}{92}{subsection.G.4.1}%
+\contentsline {subsection}{\numberline {G.4.2}Comparison with Other Methods}{92}{subsection.G.4.2}%
+\contentsline {section}{\numberline {G.5}Recommendations}{93}{section.G.5}%
+\contentsline {subsection}{\numberline {G.5.1}When to AVOID Rationals}{93}{subsection.G.5.1}%
+\contentsline {subsection}{\numberline {G.5.2}Alternative Methods for Discontinuities}{93}{subsection.G.5.2}%
+\contentsline {section}{\numberline {G.6}Smooth Variable Coefficients}{93}{section.G.6}%
+\contentsline {section}{\numberline {G.7}Summary}{93}{section.G.7}%
+\contentsline {chapter}{\numberline {H}Cross-Method Analysis and Recommendations}{94}{appendix.H}%
+\contentsline {section}{\numberline {H.1}Overall Method Performance Summary}{94}{section.H.1}%
+\contentsline {section}{\numberline {H.2}Convergence Rate Summary}{94}{section.H.2}%
+\contentsline {subsection}{\numberline {H.2.1}Key Observations}{94}{subsection.H.2.1}%
+\contentsline {section}{\numberline {H.3}Accuracy vs Cost Tradeoffs}{95}{section.H.3}%
+\contentsline {subsection}{\numberline {H.3.1}For 10$^{-6}$ Accuracy on Smooth Problems}{96}{subsection.H.3.1}%
+\contentsline {section}{\numberline {H.4}Method Selection Decision Tree}{97}{section.H.4}%
+\contentsline {section}{\numberline {H.5}Detailed Recommendations by Problem Class}{97}{section.H.5}%
+\contentsline {subsection}{\numberline {H.5.1}Poisson / Helmholtz (smooth forcing)}{97}{subsection.H.5.1}%
+\contentsline {subsection}{\numberline {H.5.2}Reaction-Diffusion (smooth exponentials)}{98}{subsection.H.5.2}%
+\contentsline {subsection}{\numberline {H.5.3}Advection-Diffusion}{98}{subsection.H.5.3}%
+\contentsline {subsection}{\numberline {H.5.4}Variable Coefficients}{98}{subsection.H.5.4}%
+\contentsline {section}{\numberline {H.6}Cost-Benefit Analysis}{99}{section.H.6}%
+\contentsline {subsection}{\numberline {H.6.1}Rational Collocation}{99}{subsection.H.6.1}%
+\contentsline {subsection}{\numberline {H.6.2}Spectral Methods (Chebyshev/Legendre)}{99}{subsection.H.6.2}%
+\contentsline {subsection}{\numberline {H.6.3}4th-Order Finite Differences}{100}{subsection.H.6.3}%
+\contentsline {section}{\numberline {H.7}Revisiting the Original Claims}{100}{section.H.7}%
+\contentsline {subsection}{\numberline {H.7.1}The "2,000,000$\times $ Improvement" Claim}{100}{subsection.H.7.1}%
+\contentsline {subsection}{\numberline {H.7.2}Honest Assessment}{100}{subsection.H.7.2}%
+\contentsline {section}{\numberline {H.8}Summary}{101}{section.H.8}%

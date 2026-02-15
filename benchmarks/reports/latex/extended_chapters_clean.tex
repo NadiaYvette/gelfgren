@@ -20,7 +20,7 @@ Figure~\ref{fig:helmholtz_k1_conv} shows error vs DOF for all methods on the smo
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.9\textwidth]{figures/extended_benchmark/Helmholtz_Sin_k1_convergence.pdf}
+\includegraphics[width=0.9\textwidth]{../figures/extended_benchmark/Helmholtz_Sin_k1_convergence.pdf}
 \caption{Helmholtz $k^2=1$: Error vs DOF for all methods. Rational methods achieve exponential convergence (rate $\alpha \approx 21$) while polynomial methods show algebraic convergence.}
 \label{fig:helmholtz_k1_conv}
 \end{figure}
@@ -36,7 +36,7 @@ Figure~\ref{fig:helmholtz_k1_conv} shows error vs DOF for all methods on the smo
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.9\textwidth]{figures/extended_benchmark/Helmholtz_Sin_k1_rates.pdf}
+\includegraphics[width=0.9\textwidth]{../figures/extended_benchmark/Helmholtz_Sin_k1_rates.pdf}
 \caption{Convergence rates for Helmholtz $k^2=1$. Rational achieves exponential convergence while finite differences show expected algebraic rates.}
 \label{fig:helmholtz_k1_rates}
 \end{figure}
@@ -47,7 +47,7 @@ This problem tests rational approximation of $u(x) = e^{-2x}\sin(2\pi x)$, which
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.9\textwidth]{figures/extended_benchmark/Helmholtz_Exp_k4_convergence.pdf}
+\includegraphics[width=0.9\textwidth]{../figures/extended_benchmark/Helmholtz_Exp_k4_convergence.pdf}
 \caption{Helmholtz exponential-oscillatory: Rationals excel at representing mixed exponential-trigonometric functions naturally.}
 \label{fig:helmholtz_exp_k4_conv}
 \end{figure}
@@ -115,7 +115,7 @@ exhibits exponentially thin boundary layer of thickness $O(\varepsilon) = O(0.00
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.9\textwidth]{figures/extended_benchmark/AdvDiff_Sharp_eps0.001_convergence.pdf}
+\includegraphics[width=0.9\textwidth]{../figures/extended_benchmark/AdvDiff_Sharp_eps0.001_convergence.pdf}
 \caption{Sharp boundary layer ($\varepsilon=0.001$): Rational methods catastrophically fail with 64--76\% L$^2$ error, essentially unable to represent the sharp gradient. Convergence is nearly flat ($\alpha \approx 0.3$).}
 \label{fig:advdiff_sharp_conv}
 \end{figure}
@@ -146,7 +146,7 @@ Chebyshev N=32 & 33 & 98.7\% & Also struggles \\
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.9\textwidth]{figures/extended_benchmark/AdvDiff_Sharp_eps0.001_rates.pdf}
+\includegraphics[width=0.9\textwidth]{../figures/extended_benchmark/AdvDiff_Sharp_eps0.001_rates.pdf}
 \caption{Convergence rates for sharp boundary layer. Rational convergence rate $\alpha \approx 0.3$ indicates fundamental failure---the method is not converging.}
 \label{fig:advdiff_sharp_rates}
 \end{figure}
@@ -240,7 +240,7 @@ on $[0,1]$ models chemical reactions, population dynamics, and damped oscillatio
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.9\textwidth]{figures/extended_benchmark/ReacDiff_Exp_c10_convergence.pdf}
+\includegraphics[width=0.9\textwidth]{../figures/extended_benchmark/ReacDiff_Exp_c10_convergence.pdf}
 \caption{Reaction-diffusion with $c=10$: Rationals achieve spectacular accuracy on smooth exponential $\sinh(\sqrt{10}\,x)$ because the boundary layers are smooth, unlike the sharp discontinuous layers in advection-diffusion.}
 \label{fig:reacdiff_exp_conv}
 \end{figure}
@@ -275,7 +275,7 @@ This problem tests rational overhead when the solution is polynomial: $u(x) = x^
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.9\textwidth]{figures/extended_benchmark/ReacDiff_Polynomial_c4_convergence.pdf}
+\includegraphics[width=0.9\textwidth]{../figures/extended_benchmark/ReacDiff_Polynomial_c4_convergence.pdf}
 \caption{Polynomial solution: Rationals still achieve machine precision but offer no special advantage---spectral methods would be equally efficient.}
 \label{fig:reacdiff_poly_conv}
 \end{figure}
@@ -378,7 +378,7 @@ Solution is constructed to have \textbf{continuous $u$ and $u'$}, but $a(x)u'$ h
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.9\textwidth]{figures/extended_benchmark/VarCoeff_Discontinuous_convergence.pdf}
+\includegraphics[width=0.9\textwidth]{../figures/extended_benchmark/VarCoeff_Discontinuous_convergence.pdf}
 \caption{Discontinuous coefficient: Rational methods completely fail to represent discontinuities, achieving only 39--40\% L$^2$ error. Convergence rate $\alpha \approx 0.06$ indicates complete stagnation.}
 \label{fig:varcoeff_disc_conv}
 \end{figure}
@@ -408,7 +408,7 @@ Rational [10/5] & 15 & \textcolor{red}{\textbf{39.0\%}} & \textcolor{red}{\textb
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.9\textwidth]{figures/extended_benchmark/critical_failures.pdf}
+\includegraphics[width=0.9\textwidth]{../figures/extended_benchmark/critical_failures.pdf}
 \caption{Critical failure comparison: Both boundary layer and discontinuous coefficient problems show catastrophic rational failure ($>10\%$ error threshold).}
 \label{fig:critical_failures}
 \end{figure}
@@ -543,7 +543,7 @@ VarCoeff (disc) & 0.00 & --- & --- & --- & --- & \textcolor{red}{\textbf{0.06}} 
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.9\textwidth]{figures/extended_benchmark/Helmholtz_Sin_k1_convergence.pdf}
+\includegraphics[width=0.9\textwidth]{../figures/extended_benchmark/Helmholtz_Sin_k1_convergence.pdf}
 \caption{Typical smooth problem (Helmholtz $k^2=1$): Rationals achieve machine precision fastest, but spectral/high-order FD are competitive and more robust.}
 \label{fig:accuracy_cost}
 \end{figure}
